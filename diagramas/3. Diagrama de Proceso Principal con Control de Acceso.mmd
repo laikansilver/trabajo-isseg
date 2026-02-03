@@ -1,0 +1,64 @@
+flowchart TD
+    Start([Inicio - Usuario Ingresa al Sistema]) --> Login[Login/Autenticación]
+    Login --> ValidateAccess{Validar Acceso<br/>y Permisos}
+    
+    ValidateAccess -->|Acceso Denegado| DenyMsg[Mostrar:<br/>No autorizado para solicitar]
+    DenyMsg --> ViewOnly[Modo Consulta<br/>Solo Lectura]
+    ViewOnly --> EndDeny([Fin])
+    
+    ValidateAccess -->|Acceso Permitido| Choice{Seleccionar Tipo<br/>de Solicitud}
+    
+    Choice -->|Creación de Sistema Nuevo| CheckNewPerm{¿Area permite<br/>sistemas nuevos?}
+    CheckNewPerm -->|No| DenyNew[Mostrar:<br/>Su área no puede<br/>crear sistemas nuevos]
+    DenyNew --> ViewOnly
+    
+    CheckNewPerm -->|Sí| FormNew[Llenar Formulario A:<br/>Solicitud de Sistema Nuevo]
+    
+    Choice -->|Modificación de Sistema Existente| CheckModPerm{¿Area permite<br/>modificaciones?}
+    CheckModPerm -->|No| DenyMod[Mostrar:<br/>Su área no puede<br/>solicitar modificaciones]
+    DenyMod --> ViewOnly
+    
+    CheckModPerm -->|Sí| GetSystems[Cargar Sistemas<br/>disponibles para su Área]
+    GetSystems --> IdentSys[Seleccionar Sistema<br/>de lista filtrada]
+    
+    IdentSys --> FormMod[Llenar Formulario B:<br/>Cuestionario de Modificación]
+    
+    %% Flujo Sistema Nuevo
+    FormNew --> ReviewNew{Revisión ISSEG}
+    ReviewNew -->|Rechazado| RejectNew[Notificar Rechazo<br/>Registrar Motivo]
+    RejectNew --> EndReject([Fin - Solicitud Rechazada])
+    
+    ReviewNew -->|Aprobado| AssignTeam[Asignar Recursos:<br/>- Desarrollador<br/>- Product Manager]
+    AssignTeam --> RequestReq[Solicitar Formulario C:<br/>Requerimientos Detallados]
+    RequestReq --> FillReq[Usuario completa<br/>Formulario C]
+    FillReq --> ValidateReq{Validar Requerimientos}
+    ValidateReq -->|Incompleto/Confuso| ClarifyReq[Solicitar Aclaración]
+    ClarifyReq --> FillReq
+    ValidateReq -->|Completo| StartDev[Iniciar Desarrollo<br/>Crear Ticket en Sistema]
+    StartDev --> RegisterNew[Registrar en BD:<br/>- Proyecto Nuevo<br/>- Equipo Asignado<br/>- Timeline]
+    RegisterNew --> EndSuccess([Fin - Proyecto Iniciado])
+    
+    %% Flujo Modificación
+    FormMod --> ReviewMod{Revisión ISSEG}
+    ReviewMod -->|Rechazado| RejectMod[Notificar Rechazo<br/>Registrar Motivo]
+    RejectMod --> EndRejectMod([Fin - Modificación Rechazada])
+    
+    ReviewMod -->|Información No Clara| Clarify[Solicitar Aclaración<br/>Adicional]
+    Clarify --> FormMod
+    
+    ReviewMod -->|Aprobado| AssignDev[Asignar al Desarrollador<br/>Encargado del Sistema]
+    AssignDev --> CreateModTicket[Crear Ticket de Modificación]
+    CreateModTicket --> RegisterMod[Registrar en BD:<br/>- Historial de Cambios<br/>- Impacto Estimado<br/>- Desarrollador Asignado]
+    RegisterMod --> EndSuccessMod([Fin - Modificación Iniciada])
+    
+    %% Estilos
+    classDef processStyle fill:#e1f5ff,stroke:#0288d1,stroke-width:2px
+    classDef decisionStyle fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    classDef rejectStyle fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef successStyle fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef denyStyle fill:#ffcdd2,stroke:#d32f2f,stroke-width:2px
+    
+    class FormNew,FormMod,IdentSys,FillReq,AssignTeam,AssignDev,RequestReq processStyle
+    class Choice,ReviewNew,ReviewMod,ValidateReq,CheckNewPerm,CheckModPerm,ValidateAccess decisionStyle
+    class RejectNew,RejectMod,DenyMsg,DenyNew,DenyMod denyStyle
+    class EndSuccess,EndSuccessMod successStyle

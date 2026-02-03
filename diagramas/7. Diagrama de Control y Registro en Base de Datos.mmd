@@ -1,0 +1,28 @@
+flowchart LR
+    subgraph Sistema["Sistema de Gestión"]
+        Tickets[Tickets Activos]
+        Projects[Proyectos]
+        Teams[Equipos y Roles]
+    end
+    
+    subgraph BD["Base de Datos - Control"]
+        Hierarchy[Jerarquías<br/>- Áreas<br/>- Responsables<br/>- Prioridades]
+        Collaborators[Colaboradores<br/>- Desarrolladores<br/>- Product Managers<br/>- ISSEG]
+        Uptime[Uptime/Disponibilidad<br/>- Tiempo de actividad<br/>- SLA<br/>- Incidentes]
+        Changes[Historial de Cambios<br/>- Versiones<br/>- Modificaciones<br/>- Responsables]
+        Failures[Registro de Fallas<br/>- Incidentes<br/>- Tiempo de resolución<br/>- Impacto]
+        Users[Control de Usuarios<br/>- Áreas Autorizadas<br/>- Permisos<br/>- Sistemas Visibles]
+    end
+    
+    Tickets --> Hierarchy
+    Tickets --> Collaborators
+    Tickets --> Users
+    Projects --> Uptime
+    Projects --> Changes
+    Projects --> Failures
+    Teams --> Collaborators
+    Teams --> Users
+    
+    style Sistema fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    style BD fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
+    style Users fill:#fff9c4,stroke:#f57f17,stroke-width:2px

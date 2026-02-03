@@ -1,0 +1,30 @@
+flowchart TD
+    Start([Inicio - Usuario Accede al Sistema]) --> Login[Pantalla de Login]
+    Login --> Auth{¿Credenciales Válidas?}
+    
+    Auth -->|No Válidas| AuthFail[Mostrar Error:<br/>Usuario/Contraseña Incorrectos]
+    AuthFail --> Login
+    
+    Auth -->|Válidas| LoadProfile[Cargar Perfil de Usuario:<br/>- Nombre<br/>- Rol<br/>- Área<br/>- Permisos]
+    LoadProfile --> CheckRole{¿Usuario<br/>Autorizado<br/>para Solicitar?}
+    
+    CheckRole -->|No Autorizado| DenyAccess[Mostrar Mensaje:<br/>No tiene permisos<br/>para crear solicitudes]
+    DenyAccess --> ViewOnly[Acceso Solo Lectura:<br/>Consultar estado de<br/>solicitudes existentes]
+    ViewOnly --> End1([Fin - Sesión Limitada])
+    
+    CheckRole -->|Autorizado| LoadSystems[Cargar Sistemas Autorizados<br/>según Área del Usuario]
+    LoadSystems --> Dashboard[Dashboard Principal]
+    Dashboard --> MainMenu{Seleccionar Acción}
+    
+    MainMenu -->|Ver Solicitudes| ViewTickets[Listar mis solicitudes]
+    MainMenu -->|Nueva Solicitud| Choice[¿Tipo de Solicitud?]
+    MainMenu -->|Cerrar Sesión| Logout([Fin - Sesión Cerrada])
+    
+    ViewTickets --> Dashboard
+    
+    style Start fill:#e8f5e9
+    style Auth fill:#fff9c4
+    style CheckRole fill:#fff9c4
+    style DenyAccess fill:#ffebee
+    style LoadSystems fill:#e1f5ff
+    style Dashboard fill:#f3e5f5

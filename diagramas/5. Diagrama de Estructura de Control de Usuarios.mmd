@@ -1,0 +1,25 @@
+graph TD
+    subgraph Usuarios["Tabla: Usuarios"]
+        U1["ID_Usuario<br/>Email<br/>Nombre Completo<br/>Contraseña Hash<br/>Estado Activo/Inactivo"]
+    end
+    
+    subgraph UsuariosArea["Tabla: Usuarios_Autorizados_Área"]
+        UA1["ID_Autorización<br/>ID_Usuario FK<br/>ID_Área FK<br/>Rol_En_Área<br/>Fecha_Asignación<br/>Puede_Solicitar_Nuevo<br/>Puede_Solicitar_Modificación<br/>Activo"]
+    end
+    
+    subgraph Áreas["Tabla: Áreas"]
+        A1["ID_Área<br/>Nombre_Área<br/>Descripción<br/>Responsable<br/>Max_Usuarios_Autorizados"]
+    end
+    
+    subgraph SistemasXÁrea["Tabla: Sistemas_Autorizados_Por_Área"]
+        SA1["ID_Asociación<br/>ID_Sistema FK<br/>ID_Área FK<br/>Puede_Solicitar_Modificación<br/>Puede_Crear_Nuevo_Sistema<br/>Fecha_Autorización"]
+    end
+    
+    U1 --> UsuariosArea
+    UsuariosArea --> Áreas
+    Áreas --> SistemasXÁrea
+    
+    style Usuarios fill:#bbdefb,stroke:#1976d2,stroke-width:2px
+    style UsuariosArea fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+    style Áreas fill:#ffe0b2,stroke:#f57c00,stroke-width:2px
+    style SistemasXÁrea fill:#f8bbd0,stroke:#c2185b,stroke-width:2px

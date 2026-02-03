@@ -1,0 +1,23 @@
+flowchart TD
+    LoadProfile[Usuario Autenticado:<br/>ID_Usuario, Área, Rol] --> QueryPerms[Consultar Tabla:<br/>Usuarios_Autorizados_Área]
+    
+    QueryPerms --> CheckPerm{¿Usuario está<br/>en lista de<br/>autorizados?}
+    
+    CheckPerm -->|No| ReturnDeny[Retornar: ACCESO DENEGADO]
+    ReturnDeny --> LogEvent1[Registrar Intento<br/>de Acceso No Autorizado]
+    LogEvent1 --> NotifyAdmin[Notificar a Admin<br/>intento sospechoso]
+    
+    CheckPerm -->|Sí| ValidatActive{¿Usuario está<br/>Activo?}
+    
+    ValidatActive -->|No| ReturnInactive[Retornar: CUENTA INACTIVA]
+    ReturnInactive --> LogEvent2[Registrar intento<br/>con cuenta inactiva]
+    
+    ValidatActive -->|Sí| LoadAuth[Cargar Permisos:<br/>- Crear Solicitud Nueva<br/>- Modificar Existente<br/>- Ver Sistemas]
+    LoadAuth --> FilterSystems[Obtener lista de<br/>Sistemas visibles<br/>para su Área]
+    FilterSystems --> ReturnGrant[Retornar: ACCESO PERMITIDO<br/>+ Lista de Sistemas]
+    
+    style CheckPerm fill:#fff9c4
+    style ValidatActive fill:#fff9c4
+    style ReturnDeny fill:#ffebee
+    style ReturnGrant fill:#c8e6c9
+    style ReturnInactive fill:#ffebee

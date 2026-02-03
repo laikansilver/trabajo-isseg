@@ -1,0 +1,33 @@
+flowchart LR
+    subgraph Base["Base de Datos"]
+        AllSystems[Todos los Sistemas<br/>en Operación]
+        UserAreas[Usuario Autenticado<br/>Área_ID]
+    end
+    
+    subgraph Filter["Proceso de Filtrado"]
+        Q1{¿Sistema<br/>en Producción?}
+        Q2{¿Area del Usuario<br/>puede modificar<br/>este sistema?}
+        Q3{¿Sistema no está<br/>descontinuado?}
+    end
+    
+    subgraph Result["Resultado"]
+        Allowed[✓ Sistemas Visibles<br/>para el Usuario]
+        Denied[✗ Sistemas Ocultos]
+    end
+    
+    AllSystems --> Q1
+    UserAreas --> Q2
+    Q1 -->|No| Denied
+    Q1 -->|Sí| Q3
+    Q3 -->|No| Denied
+    Q3 -->|Sí| Q2
+    Q2 -->|No| Denied
+    Q2 -->|Sí| Allowed
+    
+    style AllSystems fill:#e1f5ff,stroke:#0288d1
+    style UserAreas fill:#e1f5ff,stroke:#0288d1
+    style Q1 fill:#fff9c4,stroke:#f57f17
+    style Q2 fill:#fff9c4,stroke:#f57f17
+    style Q3 fill:#fff9c4,stroke:#f57f17
+    style Allowed fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    style Denied fill:#ffcdd2,stroke:#d32f2f,stroke-width:2px

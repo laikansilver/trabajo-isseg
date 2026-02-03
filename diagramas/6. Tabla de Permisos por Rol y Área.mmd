@@ -1,0 +1,32 @@
+flowchart TD
+    A["Validación de Permisos:<br/>ID_Usuario + ID_Área"]
+    
+    A --> B["Buscar en Tabla:<br/>Usuarios_Autorizados_Área"]
+    
+    B --> C{¿Existe Registro?}
+    
+    C -->|No| D["ACCESO DENEGADO<br/>Usuario no autorizado<br/>en esta área"]
+    D --> D1["Registrar Intento<br/>No Autorizado en Log"]
+    
+    C -->|Sí| E["Verificar Campos<br/>de Permisos"]
+    E --> E1{¿Puede_Solicitar<br/>Nuevo?}
+    E1 -->|Sí| F1["✓ Permitir Crear<br/>Sistema Nuevo"]
+    E1 -->|No| F2["✗ Bloquear Crear<br/>Sistema Nuevo"]
+    
+    E --> E2{¿Puede_Solicitar<br/>Modificación?}
+    E2 -->|Sí| G1["✓ Permitir Solicitar<br/>Modificación"]
+    E2 -->|No| G2["✗ Bloquear Solicitar<br/>Modificación"]
+    
+    F1 --> H["Mostrar UI<br/>según Permisos"]
+    F2 --> H
+    G1 --> H
+    G2 --> H
+    
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style C fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    style E1 fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    style E2 fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    style D fill:#ffcdd2,stroke:#d32f2f,stroke-width:2px
+    style F1 fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+    style G1 fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+    style H fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px

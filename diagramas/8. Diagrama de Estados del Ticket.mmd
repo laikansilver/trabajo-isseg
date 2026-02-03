@@ -1,0 +1,21 @@
+stateDiagram-v2
+    [*] --> Solicitado: Nueva Solicitud
+    Solicitado --> EnRevisión: Formulario Completo
+    EnRevisión --> Rechazado: No Aprobado
+    EnRevisión --> Aprobado: Aprobado ISSEG
+    EnRevisión --> AclaraciónRequerida: Info Incompleta
+    
+    AclaraciónRequerida --> EnRevisión: Info Actualizada
+    
+    Aprobado --> AsignaciónPendiente: Asignar Recursos
+    AsignaciónPendiente --> Asignado: Equipo Asignado
+    Asignado --> EnDesarrollo: Desarrollo Iniciado
+    EnDesarrollo --> EnPruebas: Desarrollo Completado
+    EnPruebas --> EnDesarrollo: Correcciones Necesarias
+    EnPruebas --> Implementado: Pruebas Exitosas
+    Implementado --> Cerrado: Despliegue Exitoso
+    Implementado --> EnMantenimiento: Sistema en Producción
+    EnMantenimiento --> [*]: Sistema Descontinuado
+    
+    Rechazado --> [*]
+    Cerrado --> [*]
