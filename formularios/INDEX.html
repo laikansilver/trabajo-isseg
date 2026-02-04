@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Formularios - Sistema de Gestión de Tickets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .header-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+        }
+        
+        .formularios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .formulario-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .formulario-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .card-header {
+            padding: 30px;
+            color: white;
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        
+        .card-description {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .meta-item {
+            text-align: center;
+        }
+        
+        .meta-number {
+            font-size: 16px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .meta-label {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+        }
+        
+        .card-features {
+            list-style: none;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .card-features li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .card-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+        }
+        
+        .card-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .card-link:hover {
+            transform: translateX(2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .form-a-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .form-b-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .form-c-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .form-problema-header {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        .info-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .info-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .info-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        
+        .info-text {
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline-item {
+            margin-bottom: 30px;
+            padding-left: 40px;
+            position: relative;
+        }
+        
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+        }
+        
+        .timeline-item:after {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 25px;
+            width: 4px;
+            height: calc(100% + 10px);
+            background: #ddd;
+        }
+        
+        .timeline-item:last-child:after {
+            display: none;
+        }
+        
+        .timeline-content {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-desc {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-info {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>📋 Centro de Formularios</h1>
+            <p>Sistema de Gestión de Tickets y Solicitudes</p>
+            
+            <div class="header-info">
+                <div class="stat">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Formularios</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">115+</div>
+                    <div class="stat-label">Campos Totales</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Flujos Principales</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Casos de Uso</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FORMULARIOS GRID -->
+        <div class="formularios-grid">
+            <!-- FORMULARIO A -->
+            <div class="formulario-card">
+                <div class="card-header form-a-header">📋</div>
+                <div class="card-body">
+                    <div class="card-title">Formulario A: Sistema Nuevo</div>
+                    <div class="card-description">Solicita la creación de un sistema completamente nuevo. Completa tu propuesta con descripción, justificación y beneficios.</div>
+                    
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <div class="meta-number">7</div>
+                            <div class="meta-label">Secciones</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-number">25+</div>
+                            <div class="meta-label">Campos</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-number">15 min</div>
+                            <div class="meta-label">Tiempo</div>
+                        </div>
+                    </div>
+                    
+                    <ul class="card-features">
+                        <li>Información general del solicitante</li>
+                        <li>Descripción del sistema propuesto</li>
+                        <li>Justificación del negocio</li>
+                        <li>Análisis de beneficios y alcance</li>
+                        <li>Timeline y recursos estimados</li>
+                    </ul>
+                    
+                    <a href="01-Formulario-A-Sistema-Nuevo.html" class="card-link">Acceder →</a>
+                </div>
+            </div>
+            
+            <!-- FORMULARIO B -->
+            <div class="formulario-card">
+                <div class="card-header form-b-header">📝</div>
+                <div class="card-body">
+                    <div class="card-title">Formulario B: Modificación</div>
+                    <div class="card-description">Solicita cambios, mejoras o correcciones en sistemas existentes. Indica qué necesitas modificar y por qué.</div>
+                    
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <div class="meta-number">8</div>
+                            <div class="meta-label">Secciones</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-number">25+</div>
+                            <div class="meta-label">Campos</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-number">12 min</div>
+                            <div class="meta-label">Tiempo</div>
+                        </div>
+                    </div>
+                    
+                    <ul class="card-features">
+                        <li>Identificación del cambio solicitado</li>
+                        <li>Descripción detallada del cambio</li>
+                        <li>Análisis de impacto</li>
+                        <li>Detalles técnicos especializados</li>
+                        <li>Workarounds temporales</li>
+                    </ul>
+                    
+                    <a href="02-Formulario-B-Modificacion.html" class="card-link">Acceder →</a>
+                </div>
+            </div>
+            
+            <!-- FORMULARIO C -->
+            <div class="formulario-card">
+                <div class="card-header form-c-header">📊</div>
+                <div class="card-body">
+                    <div class="card-title">Formulario C: Requerimientos</div>
+                    <div class="card-description">Define los requerimientos técnicos y funcionales detallados. Se completa después de aprobación de Formulario A.</div>
+                    
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <div class="meta-number">7</div>
+                            <div class="meta-label">Secciones</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-number">50+</div>
+                            <div class="meta-label">Campos</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-number">30 min</div>
+                            <div class="meta-label">Tiempo</div>
+                        </div>
+                    </div>
+                    
+                    <ul class="card-features">
+                        <li>Información del proyecto</li>
+                        <li>Objetivos y alcance técnico</li>
+                        <li>Actores y roles del sistema</li>
+                        <li>Módulos funcionales</li>
+                        <li>Requerimientos funcionales y no funcionales</li>
+                    </ul>
+                    
+                    <a href="03-Formulario-C-Requerimientos.html" class="card-link">Acceder →</a>
+                </div>
+            </div>
+            
+            <!-- FORMULARIO PROBLEMA -->
+            <div class="formulario-card">
+                <div class="card-header form-problema-header">🚨</div>
+                <div class="card-body">
+                    <div class="card-title">Formulario Problema: Incidencia</div>
+                    <div class="card-description">Reporta bugs, errores o problemas encontrados en sistemas. SLA asignado automáticamente según urgencia.</div>
+                    
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <div class="meta-number">7</div>
+                            <div class="meta-label">Secciones</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-number">20+</div>
+                            <div class="meta-label">Campos</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-number">10 min</div>
+                            <div class="meta-label">Tiempo</div>
+                        </div>
+                    </div>
+                    
+                    <ul class="card-features">
+                        <li>Identificación de la incidencia</li>
+                        <li>Descripción del problema</li>
+                        <li>Pasos para reproducir</li>
+                        <li>Análisis de impacto y urgencia</li>
+                        <li>SLA automático (Crítica/Alta/Media/Baja)</li>
+                    </ul>
+                    
+                    <a href="04-Formulario-Problema-Incidencia.html" class="card-link">Acceder →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FLUJO DE PROCESOS -->
+        <div class="info-section">
+            <h2>🔄 Flujo de Procesos</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">1️⃣ Solicitud Inicial (Formulario A o B)</div>
+                        <div class="timeline-desc">El usuario completa el formulario correspondiente según necesidad: nuevo sistema o modificación</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">2️⃣ Revisión ISSEG</div>
+                        <div class="timeline-desc">El equipo ISSEG revisa la solicitud, valida información y realiza análisis de factibilidad</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">3️⃣ Aprobación y Asignación</div>
+                        <div class="timeline-desc">Si se aprueba, se asignan recursos (PM, Desarrollador, Arquitecto) y se solicita Formulario C</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">4️⃣ Levantamiento Detallado (Formulario C)</div>
+                        <div class="timeline-desc">Se completan requerimientos detallados, módulos, RF, RNF con el equipo asignado</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">5️⃣ Desarrollo e Implementación</div>
+                        <div class="timeline-desc">El equipo desarrolla el sistema/cambio según especificaciones validadas</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">6️⃣ Testing y QA</div>
+                        <div class="timeline-desc">Se ejecutan pruebas según casos definidos, se valida contra RF y RNF</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">7️⃣ Producción (Monitoreo Continuo)</div>
+                        <div class="timeline-desc">Sistema en producción, se monitore uptime, SLA y se reportan problemas con Formulario Problema</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MATRIZ DE COMPARACIÓN -->
+        <div class="info-section">
+            <h2>📊 Matriz Comparativa de Formularios</h2>
+            
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                    <thead>
+                        <tr style="background: #f5f5f5; border-bottom: 2px solid #667eea;">
+                            <th style="padding: 12px; text-align: left; font-weight: 600;">Criterio</th>
+                            <th style="padding: 12px; text-align: center; font-weight: 600;">Formulario A</th>
+                            <th style="padding: 12px; text-align: center; font-weight: 600;">Formulario B</th>
+                            <th style="padding: 12px; text-align: center; font-weight: 600;">Formulario C</th>
+                            <th style="padding: 12px; text-align: center; font-weight: 600;">Formulario Problema</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 12px;">Propósito</td>
+                            <td style="padding: 12px; text-align: center;">Sistema Nuevo</td>
+                            <td style="padding: 12px; text-align: center;">Modificación</td>
+                            <td style="padding: 12px; text-align: center;">Requerimientos</td>
+                            <td style="padding: 12px; text-align: center;">Reportar Bug</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 12px;">Momento de Uso</td>
+                            <td style="padding: 12px; text-align: center;">Inicio</td>
+                            <td style="padding: 12px; text-align: center;">Cualquier momento</td>
+                            <td style="padding: 12px; text-align: center;">Post-aprobación</td>
+                            <td style="padding: 12px; text-align: center;">Cualquier momento</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 12px;">SLA Asignado</td>
+                            <td style="padding: 12px; text-align: center;">Análisis</td>
+                            <td style="padding: 12px; text-align: center;">Análisis</td>
+                            <td style="padding: 12px; text-align: center;">—</td>
+                            <td style="padding: 12px; text-align: center;">Automático</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 12px;">Requiere Aprobación</td>
+                            <td style="padding: 12px; text-align: center;">Sí (ISSEG)</td>
+                            <td style="padding: 12px; text-align: center;">Sí (ISSEG)</td>
+                            <td style="padding: 12px; text-align: center;">—</td>
+                            <td style="padding: 12px; text-align: center;">No (Auto-asignado)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px;">Tiempo Completado</td>
+                            <td style="padding: 12px; text-align: center;">15 min</td>
+                            <td style="padding: 12px; text-align: center;">12 min</td>
+                            <td style="padding: 12px; text-align: center;">30 min</td>
+                            <td style="padding: 12px; text-align: center;">10 min</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- INFO ADICIONAL -->
+        <div class="info-section">
+            <h2>ℹ️ Información Importante</h2>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Campos Obligatorios</div>
+                    <div class="info-text">Todos los campos marcados con asterisco rojo (*) deben completarse obligatoriamente.</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Validación de Datos</div>
+                    <div class="info-text">El sistema valida automáticamente emails, fechas, números y campos de texto.</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">SLA Automático (Problemas)</div>
+                    <div class="info-text">Crítica: 1h respuesta / 4h resolución | Alta: 4h/8h | Media: 8h/16h | Baja: 24h/48h</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Archivos Adjuntos</div>
+                    <div class="info-text">Puedes adjuntar screenshots, videos, documentos y logs (máximo 50MB por envío).</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Confidencialidad</div>
+                    <div class="info-text">Todos los datos son confidenciales y solo accesibles para ISSEG y equipos autorizados.</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">Confirmación de Envío</div>
+                    <div class="info-text">Recibirás un ID de referencia inmediatamente después de enviar el formulario.</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer>
+            <p>© 2026 Sistema de Gestión de Tickets - ISSEG</p>
+            <p>Versión 2.0 | Última actualización: Febrero 4, 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
