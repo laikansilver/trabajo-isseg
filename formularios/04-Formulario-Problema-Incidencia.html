@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Problema: Reportar Incidencia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .form-content {
+            padding: 30px;
+        }
+        
+        .form-section {
+            margin-bottom: 40px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 30px;
+        }
+        
+        .form-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fa709a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #fa709a;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .required {
+            color: #e74c3c;
+            margin-left: 4px;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="date"],
+        input[type="time"],
+        select,
+        textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        input[type="time"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #fa709a;
+            box-shadow: 0 0 0 3px rgba(250, 112, 154, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .urgency-badge {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        
+        .urgency-critica {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef5350;
+        }
+        
+        .urgency-alta {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ff9800;
+        }
+        
+        .urgency-media {
+            background: #fffde7;
+            color: #f57f17;
+            border: 1px solid #fbc02d;
+        }
+        
+        .urgency-baja {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #66bb6a;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .radio-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .radio-item:hover {
+            background: #f9f9f9;
+        }
+        
+        .radio-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            margin-top: 2px;
+        }
+        
+        .radio-item-content {
+            flex: 1;
+        }
+        
+        .radio-item-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .radio-item-desc {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            margin-top: 2px;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .file-upload {
+            border: 2px dashed #fa709a;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .file-upload:hover {
+            background-color: #fff5f7;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 40px;
+        }
+        
+        button {
+            padding: 12px 30px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(250, 112, 154, 0.4);
+        }
+        
+        .btn-reset {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-reset:hover {
+            background: #e0e0e0;
+        }
+        
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        .note-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 5px;
+        }
+        
+        .note-text {
+            color: #856404;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚨 Formulario de Problema</h1>
+            <p>Reportar Incidencia o Error en Sistema</p>
+        </div>
+        
+        <div class="form-content">
+            <div class="note">
+                <div class="note-title">ℹ️ Instrucciones</div>
+                <div class="note-text">
+                    Utiliza este formulario para reportar problemas, errores o bugs encontrados en sistemas en producción. 
+                    Proporciona la información más detallada posible para facilitar la resolución rápida. 
+                    Todos los campos marcados con <span class="required">*</span> son obligatorios.
+                    El SLA será asignado automáticamente según la urgencia.
+                </div>
+            </div>
+            
+            <form id="formularioProblema">
+                <!-- SECCIÓN 1: IDENTIFICACIÓN DEL PROBLEMA -->
+                <div class="form-section">
+                    <h2 class="section-title">1. Identificación del Problema</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="idIncidencia">ID Incidencia <span class="required">*</span></label>
+                            <input type="text" id="idIncidencia" name="idIncidencia" placeholder="INC-2026-0001" readonly>
+                            <div class="help-text">Se genera automáticamente</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaReporte">Fecha y Hora del Reporte <span class="required">*</span></label>
+                            <input type="datetime-local" id="fechaReporte" name="fechaReporte" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reportante">Nombre del Reportante <span class="required">*</span></label>
+                            <input type="text" id="reportante" name="reportante" placeholder="Nombre completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="area">Área/Departamento <span class="required">*</span></label>
+                            <input type="text" id="area" name="area" placeholder="Tu área" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email de Contacto <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="usuario@empresa.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono de Contacto</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="Extensión o celular">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN 2: INFORMACIÓN DEL SISTEMA -->
+                <div class="form-section">
+                    <h2 class="section-title">2. Sistema Afectado</h2>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="sistemaMod">Sistema con Problema <span class="required">*</span></label>
+                            <select id="sistemaMod" name="sistemaMod" required onchange="actualizarVersionYModulo()">
+                                <option value="">-- Seleccionar Sistema --</option>
+                                <option value="SIS001">Sistema de Gestión de Inventario (v1.2)</option>
+                                <option value="SIS002">Portal de Recursos Humanos (v2.1)</option>
+                                <option value="SIS003">Plataforma de Ventas (v3.0)</option>
+                                <option value="SIS004">Sistema de Contabilidad (v1.5)</option>
+                                <option value="SIS005">Aplicación de Logística (v2.3)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="version">Versión del Sistema <span class="required">*</span></label>
+                            <input type="text" id="version" name="version" placeholder="v1.2" readonly>
+                            <div class="help-text">Se llena automáticamente</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="modulo">Módulo Afectado <span class="required">*</span></label>
+                            <select id="modulo" name="modulo" required>
+                                <option value="">-- Seleccionar Módulo --</option>
+                                <option value="FRONTEND">Interfaz/Frontend</option>
+                                <option value="BACKEND">Lógica de Negocio</option>
+                                <option value="BD">Base de Datos</option>
+                                <option value="REPORTES">Reportes</option>
+                                <option value="INTEGRACION">Integración</option>
+                                <option value="RENDIMIENTO">Rendimiento/Performance</option>
+                                <option value="SEGURIDAD">Seguridad</option>
+                                <option value="OTRO">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN 3: DESCRIPCIÓN DEL PROBLEMA -->
+                <div class="form-section">
+                    <h2 class="section-title">3. Descripción del Problema</h2>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="titulo">Título Resumido del Problema <span class="required">*</span></label>
+                            <input type="text" id="titulo" name="titulo" placeholder="Ej: Login no funciona en Firefox" maxlength="100" required>
+                            <div class="help-text">Máximo 100 caracteres - Resumen claro del problema</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="descripcion">Descripción Detallada del Problema <span class="required">*</span></label>
+                            <textarea id="descripcion" name="descripcion" placeholder="Explica qué está sucediendo, qué deberían hacer pero no funciona, etc." maxlength="1000" required></textarea>
+                            <div class="help-text">Máximo 1000 caracteres - Sé lo más específico posible</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="pasos">Pasos para Reproducir el Problema <span class="required">*</span></label>
+                            <textarea id="pasos" name="pasos" placeholder="1. Ir a...&#10;2. Hacer clic en...&#10;3. Ingresar datos...&#10;4. Observar error..." maxlength="1000" required></textarea>
+                            <div class="help-text">Paso a paso para que el equipo reproduce el problema</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN 4: IMPACTO Y URGENCIA -->
+                <div class="form-section">
+                    <h2 class="section-title">4. Impacto y Urgencia</h2>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>Nivel de Urgencia <span class="required">*</span></label>
+                            <div class="radio-group">
+                                <label class="radio-item">
+                                    <input type="radio" name="urgencia" value="CRITICA" required onchange="actualizarSLA()">
+                                    <div class="radio-item-content">
+                                        <div class="radio-item-title">🔴 Crítica - Bloquea operación</div>
+                                        <div class="radio-item-desc">Sistema NO está disponible o funcionamiento crítico está afectado</div>
+                                        <span class="urgency-badge urgency-critica">SLA: 1h respuesta / 4h resolución</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-item">
+                                    <input type="radio" name="urgencia" value="ALTA" required onchange="actualizarSLA()">
+                                    <div class="radio-item-content">
+                                        <div class="radio-item-title">🟠 Alta - Afecta funcionalidad importante</div>
+                                        <div class="radio-item-desc">Usuarios no pueden completar tareas importantes</div>
+                                        <span class="urgency-badge urgency-alta">SLA: 4h respuesta / 8h resolución</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-item">
+                                    <input type="radio" name="urgencia" value="MEDIA" required onchange="actualizarSLA()">
+                                    <div class="radio-item-content">
+                                        <div class="radio-item-title">🟡 Media - Funcionalidad parcial</div>
+                                        <div class="radio-item-desc">Usuarios tienen forma alternativa de hacer su trabajo</div>
+                                        <span class="urgency-badge urgency-media">SLA: 8h respuesta / 16h resolución</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-item">
+                                    <input type="radio" name="urgencia" value="BAJA" required onchange="actualizarSLA()">
+                                    <div class="radio-item-content">
+                                        <div class="radio-item-title">🟢 Baja - Cosmético o mejora</div>
+                                        <div class="radio-item-desc">Problema menor que no impide trabajo, puede esperar</div>
+                                        <span class="urgency-badge urgency-baja">SLA: 24h respuesta / 48h resolución</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="usuariosAfectados">Usuarios Afectados <span class="required">*</span></label>
+                            <select id="usuariosAfectados" name="usuariosAfectados" required>
+                                <option value="">-- Seleccionar --</option>
+                                <option value="1">Solo yo (1 usuario)</option>
+                                <option value="2-5">Pequeño grupo (2-5 usuarios)</option>
+                                <option value="6-20">Grupo (6-20 usuarios)</option>
+                                <option value="21-100">Departamento (21-100 usuarios)</option>
+                                <option value="100+">Empresa completa (100+ usuarios)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="frecuencia">Frecuencia de Ocurrencia <span class="required">*</span></label>
+                            <select id="frecuencia" name="frecuencia" required>
+                                <option value="">-- Seleccionar --</option>
+                                <option value="SIEMPRE">Siempre (100% de las veces)</option>
+                                <option value="FRECUENTE">Frecuente (80-99% de las veces)</option>
+                                <option value="INTERMITENTE">Intermitente (30-79% de las veces)</option>
+                                <option value="RARO">Raro (< 30% de las veces)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN 5: CONTEXTO TÉCNICO -->
+                <div class="form-section">
+                    <h2 class="section-title">5. Contexto Técnico</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="navegador">Navegador/Dispositivo <span class="required">*</span></label>
+                            <input type="text" id="navegador" name="navegador" placeholder="Ej: Chrome 120, Firefox 121, Safari, iPad" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="so">Sistema Operativo <span class="required">*</span></label>
+                            <input type="text" id="so" name="so" placeholder="Ej: Windows 10, macOS 13, Ubuntu 22.04" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="mensajeError">Mensaje de Error (si aplica)</label>
+                            <textarea id="mensajeError" name="mensajeError" placeholder="Copia el mensaje de error exacto que ves"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="observaciones">Observaciones o Comportamiento Esperado</label>
+                            <textarea id="observaciones" name="observaciones" placeholder="Cómo debería funcionar vs cómo está funcionando"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN 6: EVIDENCIA Y ARCHIVOS -->
+                <div class="form-section">
+                    <h2 class="section-title">6. Evidencia</h2>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="archivos">Archivos de Evidencia (Screenshots, Videos, Logs)</label>
+                            <div class="file-upload" onclick="document.getElementById('archivos').click()">
+                                <input type="file" id="archivos" name="archivos" multiple style="display: none;">
+                                <p style="color: #fa709a; font-weight: 600;">📸📹 Arrastra archivos aquí o haz clic</p>
+                                <p style="font-size: 12px; color: #666;">Imágenes, videos, logs (máx 50MB)</p>
+                            </div>
+                            <div class="help-text">Adjunta screenshots del error, videos mostrando el problema, archivos de log, etc.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="informacionAdicional">Información Adicional</label>
+                            <textarea id="informacionAdicional" name="informacionAdicional" placeholder="Cualquier otra información que ayude a resolver el problema"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN 7: CONFIRMACIÓN -->
+                <div class="form-section">
+                    <h2 class="section-title">7. Confirmación</h2>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="confirma" name="confirma" required>
+                                <span style="margin-left: 8px;">He proporcionado la información más precisa y detallada posible <span class="required">*</span></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="contactable" name="contactable" checked>
+                                <span style="margin-left: 8px;">Autorizo ser contactado para obtener más información sobre esta incidencia</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- BOTONES -->
+                <div class="button-group">
+                    <button type="reset" class="btn-reset">🔄 Limpiar Formulario</button>
+                    <button type="submit" class="btn-submit">🚀 Reportar Problema</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-generar ID de incidencia
+        function generarIDIncidencia() {
+            const hoy = new Date();
+            const año = hoy.getFullYear();
+            const numero = Math.floor(Math.random() * 9000) + 1000;
+            document.getElementById('idIncidencia').value = `INC-${año}-${numero}`;
+            
+            // Llenar fecha y hora actual
+            const ahora = new Date();
+            const offset = ahora.getTimezoneOffset() * 60000;
+            const fecha = new Date(ahora - offset).toISOString().slice(0, 16);
+            document.getElementById('fechaReporte').value = fecha;
+        }
+        
+        // Actualizar versión según sistema
+        function actualizarVersionYModulo() {
+            const versiones = {
+                'SIS001': 'v1.2',
+                'SIS002': 'v2.1',
+                'SIS003': 'v3.0',
+                'SIS004': 'v1.5',
+                'SIS005': 'v2.3'
+            };
+            const sistema = document.getElementById('sistemaMod').value;
+            document.getElementById('version').value = versiones[sistema] || '';
+            document.getElementById('modulo').value = '';
+        }
+        
+        // Mostrar SLA según urgencia
+        function actualizarSLA() {
+            const urgencia = document.querySelector('input[name="urgencia"]:checked');
+            if (!urgencia) return;
+            
+            const slas = {
+                'CRITICA': '⏱️ SLA: 1 hora respuesta / 4 horas resolución',
+                'ALTA': '⏱️ SLA: 4 horas respuesta / 8 horas resolución',
+                'MEDIA': '⏱️ SLA: 8 horas respuesta / 16 horas resolución',
+                'BAJA': '⏱️ SLA: 24 horas respuesta / 48 horas resolución'
+            };
+            
+            const sla = slas[urgencia.value];
+            const existente = document.getElementById('slaInfo');
+            if (existente) existente.remove();
+            
+            const div = document.createElement('div');
+            div.id = 'slaInfo';
+            div.style.cssText = 'background: #e8f5e9; padding: 15px; margin: 15px 0; border-left: 4px solid #4caf50; border-radius: 5px;';
+            div.innerHTML = `<strong>${sla}</strong> - Será asignado automáticamente al equipo de soporte`;
+            document.querySelector('.form-section:nth-of-type(3)').appendChild(div);
+        }
+        
+        window.addEventListener('load', generarIDIncidencia);
+        
+        // Validación y envío
+        document.getElementById('formularioProblema').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const urgencia = document.querySelector('input[name="urgencia"]:checked').value;
+            alert('✅ Problema reportado exitosamente!\n\nID Incidencia: ' + document.getElementById('idIncidencia').value + 
+                  '\nUrgencia: ' + urgencia + '\n\nEl equipo de soporte será notificado automáticamente.');
+        });
+    </script>
+</body>
+</html>
