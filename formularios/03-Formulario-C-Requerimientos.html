@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario C: Levantamiento de Requerimientos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .form-content {
+            padding: 30px;
+        }
+        
+        .form-section {
+            margin-bottom: 40px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 30px;
+        }
+        
+        .form-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #00f2fe;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #00f2fe;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .required {
+            color: #e74c3c;
+            margin-left: 4px;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #00f2fe;
+            box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background: #f5f5f5;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        tr:hover {
+            background: #fafafa;
+        }
+        
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        input[type="checkbox"],
+        input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            margin-top: 2px;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .add-row-btn {
+            background: #4facfe;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        .add-row-btn:hover {
+            background: #00f2fe;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 40px;
+        }
+        
+        button {
+            padding: 12px 30px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 242, 254, 0.4);
+        }
+        
+        .btn-reset {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-reset:hover {
+            background: #e0e0e0;
+        }
+        
+        .note {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        .note-title {
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 5px;
+        }
+        
+        .note-text {
+            color: #1565c0;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Formulario C</h1>
+            <p>Levantamiento de Requerimientos Detallado (Post-Aprobación)</p>
+        </div>
+        
+        <div class="form-content">
+            <div class="note">
+                <div class="note-title">ℹ️ Instrucciones</div>
+                <div class="note-text">
+                    Este formulario debe completarse <strong>después de la aprobación ISSEG</strong> del Formulario A. 
+                    Define los requerimientos técnicos, funcionales y no funcionales detallados para el proyecto. 
+                    Todos los campos marcados con <span class="required">*</span> son obligatorios.
+                </div>
+            </div>
+            
+            <form id="formularioC">
+                <!-- SECCIÓN 1: INFORMACIÓN DEL PROYECTO -->
+                <div class="form-section">
+                    <h2 class="section-title">1. Información del Proyecto</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="idProyecto">ID Proyecto <span class="required">*</span></label>
+                            <input type="text" id="idProyecto" name="idProyecto" placeholder="SN-2026-0001" required>
+                            <div class="help-text">Referencia del Formulario A aprobado</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombreSistema">Nombre del Sistema <span class="required">*</span></label>
+                            <input type="text" id="nombreSistema" name="nombreSistema" placeholder="Sistema de Gestión de..." required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pm">Product Manager Asignado <span class="required">*</span></label>
+                            <input type="text" id="pm" name="pm" placeholder="Nombre del PM" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="devLider">Desarrollador Líder <span class="required">*</span></label>
+                            <input type="text" id="devLider" name="devLider" placeholder="Nombre del Desarrollador" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fechaInicio">Fecha de Inicio <span class="required">*</span></label>
+                            <input type="date" id="fechaInicio" name="fechaInicio" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="responsable">Responsable de Requerimientos <span class="required">*</span></label>
+                            <input type="text" id="responsable" name="responsable" placeholder="Nombre completo" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN 2: OBJETIVOS Y ALCANCE -->
+                <div class="form-section">
+                    <h2 class="section-title">2. Objetivos y Alcance Técnico</h2>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="objetivoGeneral">Objetivo General del Sistema <span class="required">*</span></label>
+                            <textarea id="objetivoGeneral" name="objetivoGeneral" placeholder="Meta principal del sistema" maxlength="500" required></textarea>
+                            <div class="help-text">Máximo 500 caracteres</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="objetivosEspecificos">Objetivos Específicos <span class="required">*</span></label>
+                            <textarea id="objetivosEspecificos" name="objetivosEspecificos" placeholder="1. Automatizar proceso X&#10;2. Reducir tiempo de Y&#10;3. Mejorar Z" maxlength="1000" required></textarea>
+                            <div class="help-text">Máximo 1000 caracteres - Lista numerada de objetivos concretos</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="alcanceFuncional">Alcance Funcional (Qué SÍ incluye) <span class="required">*</span></label>
+                            <textarea id="alcanceFuncional" name="alcanceFuncional" placeholder="- Gestión de usuarios&#10;- Registro de datos&#10;- Generación de reportes" maxlength="1000" required></textarea>
+                            <div class="help-text">Máximo 1000 caracteres</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="futraAlcance">Fuera de Alcance (Qué NO incluye) <span class="required">*</span></label>
+                            <textarea id="futraAlcance" name="futraAlcance" placeholder="- Integración con sistema X&#10;- Móvil app&#10;- Analytics avanzado" maxlength="1000" required></textarea>
+                            <div class="help-text">Máximo 1000 caracteres - Importante para clarificar límites</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN 3: ACTORES Y ROLES -->
+                <div class="form-section">
+                    <h2 class="section-title">3. Actores y Roles del Sistema</h2>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>Tabla de Roles <span class="required">*</span></label>
+                            <div class="table-responsive">
+                                <table id="tablasRoles">
+                                    <thead>
+                                        <tr>
+                                            <th>Rol</th>
+                                            <th>Descripción</th>
+                                            <th>Permisos Generales</th>
+                                            <th>Cant. Usuarios</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="text" placeholder="Ej: Administrador" class="rol"></td>
+                                            <td><input type="text" placeholder="Descripción del rol" class="desc"></td>
+                                            <td><input type="text" placeholder="CRUD, config, etc" class="permisos"></td>
+                                            <td><input type="number" placeholder="2-3" class="cantidad" min="1"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" placeholder="Ej: Usuario Operativo" class="rol"></td>
+                                            <td><input type="text" placeholder="Descripción" class="desc"></td>
+                                            <td><input type="text" placeholder="Crear, consultar, editar" class="permisos"></td>
+                                            <td><input type="number" placeholder="50+" class="cantidad" min="1"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="add-row-btn" onclick="agregarFila('tablasRoles')">+ Agregar Rol</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN 4: MÓDULOS FUNCIONALES -->
+                <div class="form-section">
+                    <h2 class="section-title">4. Módulos Funcionales</h2>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>Listado de Módulos <span class="required">*</span></label>
+                            <div class="table-responsive">
+                                <table id="tablasModulos">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre Módulo</th>
+                                            <th>Descripción</th>
+                                            <th>Prioridad</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="text" placeholder="Ej: Gestión de Usuarios" class="modulo"></td>
+                                            <td><input type="text" placeholder="Descripción funcional" class="desc"></td>
+                                            <td>
+                                                <select class="prioridad">
+                                                    <option value="">-- Seleccionar --</option>
+                                                    <option value="critico">Crítico (MVP)</option>
+                                                    <option value="importante">Importante</option>
+                                                    <option value="deseable">Deseable</option>
+                                                </select>
+                                            </td>
+                                            <td><button type="button" class="add-row-btn" style="width:100%; margin:0" onclick="this.parentElement.parentElement.remove()">Eliminar</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="add-row-btn" onclick="agregarFilaModulo('tablasModulos')">+ Agregar Módulo</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN 5: REQUERIMIENTOS FUNCIONALES -->
+                <div class="form-section">
+                    <h2 class="section-title">5. Requerimientos Funcionales</h2>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>Requerimientos Funcionales (RF) <span class="required">*</span></label>
+                            <div class="table-responsive">
+                                <table id="tablasRF">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Descripción</th>
+                                            <th>Prioridad</th>
+                                            <th>Módulo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="text" placeholder="RF-001" class="id" style="width:70px;"></td>
+                                            <td><input type="text" placeholder="El sistema debe permitir..." class="descripcion"></td>
+                                            <td>
+                                                <select class="prioridad" style="width:100px;">
+                                                    <option value="">-- --</option>
+                                                    <option value="critica">Crítica</option>
+                                                    <option value="alta">Alta</option>
+                                                    <option value="media">Media</option>
+                                                </select>
+                                            </td>
+                                            <td><input type="text" placeholder="Módulo" class="modulo" style="width:120px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" placeholder="RF-002" class="id" style="width:70px;"></td>
+                                            <td><input type="text" placeholder="El sistema debe generar..." class="descripcion"></td>
+                                            <td>
+                                                <select class="prioridad" style="width:100px;">
+                                                    <option value="">-- --</option>
+                                                    <option value="critica">Crítica</option>
+                                                    <option value="alta">Alta</option>
+                                                    <option value="media">Media</option>
+                                                </select>
+                                            </td>
+                                            <td><input type="text" placeholder="Reportes" class="modulo" style="width:120px;"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="add-row-btn" onclick="agregarFilaRF('tablasRF')">+ Agregar RF (Mínimo 10)</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="reglasNegocio">Reglas de Negocio <span class="required">*</span></label>
+                            <textarea id="reglasNegocio" name="reglasNegocio" placeholder="- Solo admin puede crear usuarios&#10;- El precio debe ser > 0&#10;- Máximo 100 registros por lote" maxlength="1500" required></textarea>
+                            <div class="help-text">Validaciones, cálculos, restricciones - Máximo 1500 caracteres</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN 6: REQUERIMIENTOS NO FUNCIONALES -->
+                <div class="form-section">
+                    <h2 class="section-title">6. Requerimientos No Funcionales</h2>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="rendimiento">Rendimiento <span class="required">*</span></label>
+                            <textarea id="rendimiento" name="rendimiento" placeholder="Tiempo de respuesta esperado, usuarios concurrentes, etc." required></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="seguridad">Seguridad <span class="required">*</span></label>
+                            <textarea id="seguridad" name="seguridad" placeholder="Encriptación, autenticación, autorización, etc."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="escalabilidad">Escalabilidad <span class="required">*</span></label>
+                            <textarea id="escalabilidad" name="escalabilidad" placeholder="Capacidad de crecimiento, numero de usuarios futuro, etc."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="disponibilidad">Disponibilidad/SLA <span class="required">*</span></label>
+                            <textarea id="disponibilidad" name="disponibilidad" placeholder="99.9% uptime, horarios de mantenimiento, etc."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="compatibilidad">Compatibilidad <span class="required">*</span></label>
+                            <textarea id="compatibilidad" name="compatibilidad" placeholder="Navegadores, sistemas operativos, dispositivos, etc."></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN 7: DOCUMENTO DE SOPORTE -->
+                <div class="form-section">
+                    <h2 class="section-title">7. Documentación y Soporte</h2>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="notas">Notas Técnicas Adicionales</label>
+                            <textarea id="notas" name="notas" placeholder="Consideraciones especiales, dependencias técnicas, riesgos conocidos, etc."></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- BOTONES -->
+                <div class="button-group">
+                    <button type="reset" class="btn-reset">🔄 Limpiar Formulario</button>
+                    <button type="submit" class="btn-submit">✅ Enviar Requerimientos</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        function agregarFila(tableId) {
+            const table = document.getElementById(tableId);
+            const newRow = table.insertRow();
+            const cells = newRow.insertCells(4);
+            cells[0].innerHTML = '<input type="text" placeholder="Ej: Supervisor" class="rol">';
+            cells[1].innerHTML = '<input type="text" placeholder="Descripción" class="desc">';
+            cells[2].innerHTML = '<input type="text" placeholder="Permisos" class="permisos">';
+            cells[3].innerHTML = '<input type="number" placeholder="Cant" class="cantidad" min="1">';
+        }
+        
+        function agregarFilaModulo(tableId) {
+            const table = document.getElementById(tableId);
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td><input type="text" placeholder="Nombre Módulo" class="modulo"></td>
+                <td><input type="text" placeholder="Descripción" class="desc"></td>
+                <td>
+                    <select class="prioridad">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="critico">Crítico (MVP)</option>
+                        <option value="importante">Importante</option>
+                        <option value="deseable">Deseable</option>
+                    </select>
+                </td>
+                <td><button type="button" class="add-row-btn" style="width:100%; margin:0" onclick="this.parentElement.parentElement.remove()">Eliminar</button></td>
+            `;
+        }
+        
+        function agregarFilaRF(tableId) {
+            const table = document.getElementById(tableId);
+            const lastId = table.rows.length;
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td><input type="text" placeholder="RF-00${lastId}" class="id" style="width:70px;"></td>
+                <td><input type="text" placeholder="Descripción del requerimiento" class="descripcion"></td>
+                <td>
+                    <select class="prioridad" style="width:100px;">
+                        <option value="">-- --</option>
+                        <option value="critica">Crítica</option>
+                        <option value="alta">Alta</option>
+                        <option value="media">Media</option>
+                    </select>
+                </td>
+                <td><input type="text" placeholder="Módulo" class="modulo" style="width:120px;"></td>
+            `;
+        }
+        
+        // Validación al enviar
+        document.getElementById('formularioC').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const rfCount = document.getElementById('tablasRF').rows.length - 1;
+            if (rfCount < 10) {
+                alert('⚠️ Debes agregar al menos 10 Requerimientos Funcionales (actualmente tienes ' + rfCount + ')');
+                return;
+            }
+            alert('✅ Requerimientos enviados exitosamente!\n\nID Proyecto: ' + document.getElementById('idProyecto').value);
+        });
+    </script>
+</body>
+</html>
