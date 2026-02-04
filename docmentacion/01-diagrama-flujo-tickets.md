@@ -1,270 +1,104 @@
 # Sistema de Gestión de Tickets de Desarrollo - Diagrama de Flujo
 
-## 1. Diagrama de Autenticación y Control de Acceso
+## 0. Mapa Único Integral (Inicio Sesión → Autenticación → Área → Permisos → Sistemas → 3 Tipos Solicitudes → Registros)
 
 ```mermaid
 flowchart TD
-    Start([Inicio - Usuario Accede al Sistema]) --> Login[Pantalla de Login]
-    Login --> Auth{¿Credenciales Válidas?}
-    
-    Auth -->|No Válidas| AuthFail[Mostrar Error:<br/>Usuario/Contraseña Incorrectos]
+    Start([INICIO SISTEMA]) --> Login[Pantalla de Inicio de Sesión]
+    Login --> Auth{¿Credenciales válidas?}
+    Auth -->|No| AuthFail[Error: Usuario/Contraseña inválidos<br/>Registrar intento fallido]
     AuthFail --> Login
-    
-    Auth -->|Válidas| LoadProfile[Cargar Perfil de Usuario:<br/>- Nombre<br/>- Rol<br/>- Área<br/>- Permisos]
-    LoadProfile --> CheckRole{¿Usuario<br/>Autorizado<br/>para Solicitar?}
-    
-    CheckRole -->|No Autorizado| DenyAccess[Mostrar Mensaje:<br/>No tiene permisos<br/>para crear solicitudes]
-    DenyAccess --> ViewOnly[Acceso Solo Lectura:<br/>Consultar estado de<br/>solicitudes existentes]
-    ViewOnly --> End1([Fin - Sesión Limitada])
-    
-    CheckRole -->|Autorizado| LoadSystems[Cargar Sistemas Autorizados<br/>según Área del Usuario]
-    LoadSystems --> Dashboard[Dashboard Principal]
-    Dashboard --> MainMenu{Seleccionar Acción}
-    
-    MainMenu -->|Ver Solicitudes| ViewTickets[Listar mis solicitudes]
-    MainMenu -->|Nueva Solicitud| Choice[¿Tipo de Solicitud?]
-    MainMenu -->|Cerrar Sesión| Logout([Fin - Sesión Cerrada])
-    
-    ViewTickets --> Dashboard
-    
-```
+    Auth -->|Sí| LoadUser[Cargar Usuario:<br/>ID, Nombre, Email, Rol, Área]
 
----
+    LoadUser --> CheckArea{¿Usuario activo en el área?}
+    CheckArea -->|No| DenyArea[Acceso solo lectura<br/>Registrar intento no autorizado]
+    DenyArea --> ViewReadOnly[Modo Consulta:<br/>Ver solicitudes existentes]
+    ViewReadOnly --> EndReadOnly([Fin - Sesión limitada])
 
-## 2. Diagrama de Validación de Permisos de Área
+    CheckArea -->|Sí| LoadPerms[Cargar Permisos del Área:<br/>Crear Sistema Nuevo?<br/>Solicitar Modificación?<br/>Reportar Problema?]
+    LoadPerms --> FilterSystems[Filtrar Sistemas Autorizados<br/>para esta Área]
+    FilterSystems --> Dashboard[Dashboard Principal<br/>- Mis Solicitudes<br/>- Mis Sistemas<br/>- Incidencias Abiertas]
 
-```mermaid
-flowchart TD
-    LoadProfile[Usuario Autenticado:<br/>ID_Usuario, Área, Rol] --> QueryPerms[Consultar Tabla:<br/>Usuarios_Autorizados_Área]
+    Dashboard --> Action{¿Seleccionar Acción?}
     
-    QueryPerms --> CheckPerm{¿Usuario está<br/>en lista de<br/>autorizados?}
-    
-    CheckPerm -->|No| ReturnDeny[Retornar: ACCESO DENEGADO]
-    ReturnDeny --> LogEvent1[Registrar Intento<br/>de Acceso No Autorizado]
-    LogEvent1 --> NotifyAdmin[Notificar a Admin<br/>intento sospechoso]
-    
-    CheckPerm -->|Sí| ValidatActive{¿Usuario está<br/>Activo?}
-    
-    ValidatActive -->|No| ReturnInactive[Retornar: CUENTA INACTIVA]
-    ReturnInactive --> LogEvent2[Registrar intento<br/>con cuenta inactiva]
-    
-    ValidatActive -->|Sí| LoadAuth[Cargar Permisos:<br/>- Crear Solicitud Nueva<br/>- Modificar Existente<br/>- Ver Sistemas]
-    LoadAuth --> FilterSystems[Obtener lista de<br/>Sistemas visibles<br/>para su Área]
-    FilterSystems --> ReturnGrant[Retornar: ACCESO PERMITIDO<br/>+ Lista de Sistemas]
-    
-```
+    %% OPCIÓN 1: Crear Sistema Nuevo
+    Action -->|Crear Sistema Nuevo| CheckNewPerm{¿Permiso de crear<br/>sistema nuevo?}
+    CheckNewPerm -->|No| DenyNew[No autorizado para crear<br/>sistemas nuevos]
+    DenyNew --> Dashboard
+    CheckNewPerm -->|Sí| FormNewSys[Llenar Formulario A:<br/>- Nombre Sistema<br/>- Justificación<br/>- Alcance<br/>- Beneficios<br/>- Área responsable]
+    FormNewSys --> ReviewNewSys{Revisión ISSEG}
+    ReviewNewSys -->|Rechazado| RejectNew[Notificar rechazo<br/>Guardar motivo]
+    RejectNew --> Dashboard
+    ReviewNewSys -->|Aprobado| AssignNewTeam[Asignar Recursos:<br/>- Desarrollador<br/>- Product Manager<br/>- Arquitecto]
+    AssignNewTeam --> RequestReq[Solicitar Formulario C:<br/>Requerimientos Detallados]
+    RequestReq --> FormReq[Usuario completa<br/>Requerimientos técnicos]
+    FormReq --> ValidateReq{Requerimientos<br/>completos?}
+    ValidateReq -->|No| ClarifyReq[Solicitar aclaración]
+    ClarifyReq --> FormReq
+    ValidateReq -->|Sí| CreateNewSys[Crear Sistema en BD<br/>Estado: Planeación]
+    CreateNewSys --> RegisterNewSys[REGISTRAR en Base de Datos:<br/>Tabla: Sistemas<br/>- ID_Sistema<br/>- Nombre<br/>- Área_Responsable<br/>- Estado = Planeación<br/>- Fecha_Creación<br/>- Versión = 1.0<br/>- Tiempo_Actividad = 0]
+    RegisterNewSys --> RegisterNewSysAudit[REGISTRAR AUDITORÍA:<br/>Tabla: Audit_Sistemas_Nuevos<br/>- Usuario_Solicitante<br/>- Fecha_Solicitud<br/>- Equipo_Asignado<br/>- Timeline_Estimado]
+    RegisterNewSysAudit --> EndNewSys([Fin - Sistema Nuevo Creado])
 
----
-
-## 3. Diagrama de Proceso Principal con Control de Acceso
-
-```mermaid
-flowchart TD
-    Start([Inicio - Usuario Ingresa al Sistema]) --> Login[Login/Autenticación]
-    Login --> ValidateAccess{Validar Acceso<br/>y Permisos}
-    
-    ValidateAccess -->|Acceso Denegado| DenyMsg[Mostrar:<br/>No autorizado para solicitar]
-    DenyMsg --> ViewOnly[Modo Consulta<br/>Solo Lectura]
-    ViewOnly --> EndDeny([Fin])
-    
-    ValidateAccess -->|Acceso Permitido| Choice{Seleccionar Tipo<br/>de Solicitud}
-    
-    Choice -->|Creación de Sistema Nuevo| CheckNewPerm{¿Area permite<br/>sistemas nuevos?}
-    CheckNewPerm -->|No| DenyNew[Mostrar:<br/>Su área no puede<br/>crear sistemas nuevos]
-    DenyNew --> ViewOnly
-    
-    CheckNewPerm -->|Sí| FormNew[Llenar Formulario A:<br/>Solicitud de Sistema Nuevo]
-    
-    Choice -->|Modificación de Sistema Existente| CheckModPerm{¿Area permite<br/>modificaciones?}
-    CheckModPerm -->|No| DenyMod[Mostrar:<br/>Su área no puede<br/>solicitar modificaciones]
-    DenyMod --> ViewOnly
-    
-    CheckModPerm -->|Sí| GetSystems[Cargar Sistemas<br/>disponibles para su Área]
-    GetSystems --> IdentSys[Seleccionar Sistema<br/>de lista filtrada]
-    
-    IdentSys --> FormMod[Llenar Formulario B:<br/>Cuestionario de Modificación]
-    
-    %% Flujo Sistema Nuevo
-    FormNew --> ReviewNew{Revisión ISSEG}
-    ReviewNew -->|Rechazado| RejectNew[Notificar Rechazo<br/>Registrar Motivo]
-    RejectNew --> EndReject([Fin - Solicitud Rechazada])
-    
-    ReviewNew -->|Aprobado| AssignTeam[Asignar Recursos:<br/>- Desarrollador<br/>- Product Manager]
-    AssignTeam --> RequestReq[Solicitar Formulario C:<br/>Requerimientos Detallados]
-    RequestReq --> FillReq[Usuario completa<br/>Formulario C]
-    FillReq --> ValidateReq{Validar Requerimientos}
-    ValidateReq -->|Incompleto/Confuso| ClarifyReq[Solicitar Aclaración]
-    ClarifyReq --> FillReq
-    ValidateReq -->|Completo| StartDev[Iniciar Desarrollo<br/>Crear Ticket en Sistema]
-    StartDev --> RegisterNew[Registrar en BD:<br/>- Proyecto Nuevo<br/>- Equipo Asignado<br/>- Timeline]
-    RegisterNew --> EndSuccess([Fin - Proyecto Iniciado])
-    
-    %% Flujo Modificación
+    %% OPCIÓN 2: Solicitar Modificación
+    Action -->|Modificar Sistema Existente| CheckModPerm{¿Permiso de<br/>modificación?}
+    CheckModPerm -->|No| DenyMod[No autorizado para<br/>solicitar modificaciones]
+    DenyMod --> Dashboard
+    CheckModPerm -->|Sí| GetSystems[Cargar Sistemas Autorizados<br/>para área del usuario]
+    GetSystems --> SelSys[Seleccionar Sistema<br/>de lista filtrada]
+    SelSys --> FormMod[Llenar Formulario B:<br/>- Sistema a modificar<br/>- Tipo cambio<br/>- Descripción cambio<br/>- Razón<br/>- Impacto estimado]
     FormMod --> ReviewMod{Revisión ISSEG}
-    ReviewMod -->|Rechazado| RejectMod[Notificar Rechazo<br/>Registrar Motivo]
-    RejectMod --> EndRejectMod([Fin - Modificación Rechazada])
-    
-    ReviewMod -->|Información No Clara| Clarify[Solicitar Aclaración<br/>Adicional]
-    Clarify --> FormMod
-    
-    ReviewMod -->|Aprobado| AssignDev[Asignar al Desarrollador<br/>Encargado del Sistema]
-    AssignDev --> CreateModTicket[Crear Ticket de Modificación]
-    CreateModTicket --> RegisterMod[Registrar en BD:<br/>- Historial de Cambios<br/>- Impacto Estimado<br/>- Desarrollador Asignado]
-    RegisterMod --> EndSuccessMod([Fin - Modificación Iniciada])
-    
+    ReviewMod -->|Rechazado| RejectMod[Notificar rechazo]
+    RejectMod --> Dashboard
+    ReviewMod -->|No clara| ClarifyMod[Solicitar aclaración]
+    ClarifyMod --> FormMod
+    ReviewMod -->|Aprobado| AssignModDev[Asignar Desarrollador<br/>Encargado del Sistema]
+    AssignModDev --> CreateModTicket[Crear Ticket de Modificación]
+    CreateModTicket --> RegisterMod[REGISTRAR MODIFICACIÓN en BD:<br/>Tabla: Historial_Cambios<br/>- ID_Sistema<br/>- Número_Versión++<br/>- Descripción_Cambio<br/>- Usuario_Responsable<br/>- Fecha_Cambio<br/>- Estado = En Desarrollo<br/>- Tiempo_Inicio]
+    RegisterMod --> RegisterModAudit[REGISTRAR AUDITORÍA:<br/>Tabla: Audit_Modificaciones<br/>- Qué cambió<br/>- Quién lo cambió<br/>- Cuándo<br/>- Impacto real vs estimado]
+    RegisterModAudit --> EndMod([Fin - Modificación Iniciada])
+
+    %% OPCIÓN 3: Reportar Problema / Incidencia
+    Action -->|Reportar Problema| CheckIssuePerm{¿Permiso de<br/>reportar problema?}
+    CheckIssuePerm -->|No| DenyIssue[No autorizado para<br/>reportar problemas]
+    DenyIssue --> Dashboard
+    CheckIssuePerm -->|Sí| GetSysIssue[Cargar Sistemas Autorizados<br/>para área del usuario]
+    GetSysIssue --> SelSysIssue[Seleccionar Sistema<br/>con problema]
+    SelSysIssue --> FormIssue[Llenar Formulario Problema:<br/>- Sistema afectado<br/>- Descripción problema<br/>- Urgencia: Crítica/Alta/Media/Baja<br/>- Módulo afectado<br/>- Usuarios impactados<br/>- Pasos para reproducir]
+    FormIssue --> DefSLA[Definir SLA según Urgencia:<br/>Crítica: 1 hora<br/>Alta: 4 horas<br/>Media: 8 horas<br/>Baja: 24 horas]
+    DefSLA --> ReviewIssue{Revisión ISSEG}
+    ReviewIssue -->|Rechazado| RejectIssue[Notificar rechazo<br/>Guardar motivo]
+    RejectIssue --> Dashboard
+    ReviewIssue -->|Aprobado| AssignIssue[Asignar Responsable<br/>según urgencia]
+    AssignIssue --> StartSLA[Iniciar Reloj de SLA]
+    StartSLA --> RegisterIssue[REGISTRAR INCIDENCIA en BD:<br/>Tabla: Problemas_Reportados<br/>- ID_Incidencia<br/>- ID_Sistema<br/>- Usuario_Reportante<br/>- Urgencia<br/>- Descripción<br/>- Estado = Abierto<br/>- Fecha_Reporte<br/>- Tiempo_Respuesta_SLA<br/>- Responsable_Asignado]
+    RegisterIssue --> RegisterIssueTiempo[REGISTRAR TIEMPO:<br/>Tabla: Control_Incidencias<br/>- Fecha_Inicio<br/>- Tiempo_Respuesta: 0<br/>- Tiempo_Resolución: 0<br/>- Estado_Actual = Abierto]
+    RegisterIssueTiempo --> EndIssue([Fin - Problema Registrado])
+
+    %% OPCIÓN 4: Ver Solicitudes
+    Action -->|Ver Mis Solicitudes| ViewTickets[Dashboard Detallado:<br/>- Nuevos Sistemas (estado)<br/>- Modificaciones (versión actual)<br/>- Problemas (tiempo transcurrido)]
+    ViewTickets --> Dashboard
+
+    %% OPCIÓN 5: Cerrar Sesión
+    Action -->|Cerrar Sesión| SaveSession[Guardar estado sesión]
+    SaveSession --> Logout([Fin - Sesión Cerrada])
+
+    style Start fill:#90EE90,stroke:#228B22,stroke-width:3px
+    style EndNewSys fill:#87CEEB,stroke:#00008B,stroke-width:2px
+    style EndMod fill:#87CEEB,stroke:#00008B,stroke-width:2px
+    style EndIssue fill:#87CEEB,stroke:#00008B,stroke-width:2px
+    style RegisterNewSys fill:#FFB6C1,stroke:#8B008B,stroke-width:2px
+    style RegisterMod fill:#FFB6C1,stroke:#8B008B,stroke-width:2px
+    style RegisterIssue fill:#FFB6C1,stroke:#8B008B,stroke-width:2px
+    style Dashboard fill:#FFFFE0,stroke:#DAA520,stroke-width:2px
 ```
 
 ---
 
-## 4. Diagrama de Filtrado de Sistemas por Área
+## Diagramas Complementarios
 
-```mermaid
-flowchart LR
-    subgraph Base["Base de Datos"]
-        AllSystems[Todos los Sistemas<br/>en Operación]
-        UserAreas[Usuario Autenticado<br/>Área_ID]
-    end
-    
-    subgraph Filter["Proceso de Filtrado"]
-        Q1{¿Sistema<br/>en Producción?}
-        Q2{¿Area del Usuario<br/>puede modificar<br/>este sistema?}
-        Q3{¿Sistema no está<br/>descontinuado?}
-    end
-    
-    subgraph Result["Resultado"]
-        Allowed[✓ Sistemas Visibles<br/>para el Usuario]
-        Denied[✗ Sistemas Ocultos]
-    end
-    
-    AllSystems --> Q1
-    UserAreas --> Q2
-    Q1 -->|No| Denied
-    Q1 -->|Sí| Q3
-    Q3 -->|No| Denied
-    Q3 -->|Sí| Q2
-    Q2 -->|No| Denied
-    Q2 -->|Sí| Allowed
-    
-```
-
----
-
-## 5. Diagrama de Estructura de Control de Usuarios
-
-```mermaid
-graph TD
-    subgraph Usuarios["Tabla: Usuarios"]
-        U1["ID_Usuario<br/>Email<br/>Nombre Completo<br/>Contraseña Hash<br/>Estado Activo/Inactivo"]
-    end
-    
-    subgraph UsuariosArea["Tabla: Usuarios_Autorizados_Área"]
-        UA1["ID_Autorización<br/>ID_Usuario FK<br/>ID_Área FK<br/>Rol_En_Área<br/>Fecha_Asignación<br/>Puede_Solicitar_Nuevo<br/>Puede_Solicitar_Modificación<br/>Activo"]
-    end
-    
-    subgraph Áreas["Tabla: Áreas"]
-        A1["ID_Área<br/>Nombre_Área<br/>Descripción<br/>Responsable<br/>Max_Usuarios_Autorizados"]
-    end
-    
-    subgraph SistemasXÁrea["Tabla: Sistemas_Autorizados_Por_Área"]
-        SA1["ID_Asociación<br/>ID_Sistema FK<br/>ID_Área FK<br/>Puede_Solicitar_Modificación<br/>Puede_Crear_Nuevo_Sistema<br/>Fecha_Autorización"]
-    end
-    
-    U1 --> UsuariosArea
-    UsuariosArea --> Áreas
-    Áreas --> SistemasXÁrea
-    
-```
-
----
-
-## 6. Tabla de Permisos por Rol y Área
-
-```mermaid
-flowchart TD
-    A["Validación de Permisos:<br/>ID_Usuario + ID_Área"]
-    
-    A --> B["Buscar en Tabla:<br/>Usuarios_Autorizados_Área"]
-    
-    B --> C{¿Existe Registro?}
-    
-    C -->|No| D["ACCESO DENEGADO<br/>Usuario no autorizado<br/>en esta área"]
-    D --> D1["Registrar Intento<br/>No Autorizado en Log"]
-    
-    C -->|Sí| E["Verificar Campos<br/>de Permisos"]
-    E --> E1{¿Puede_Solicitar<br/>Nuevo?}
-    E1 -->|Sí| F1["✓ Permitir Crear<br/>Sistema Nuevo"]
-    E1 -->|No| F2["✗ Bloquear Crear<br/>Sistema Nuevo"]
-    
-    E --> E2{¿Puede_Solicitar<br/>Modificación?}
-    E2 -->|Sí| G1["✓ Permitir Solicitar<br/>Modificación"]
-    E2 -->|No| G2["✗ Bloquear Solicitar<br/>Modificación"]
-    
-    F1 --> H["Mostrar UI<br/>según Permisos"]
-    F2 --> H
-    G1 --> H
-    G2 --> H
-        
-```
-
----
-
-## Diagrama de Control y Registro en Base de Datos
-
-```mermaid
-flowchart LR
-    subgraph Sistema["Sistema de Gestión"]
-        Tickets[Tickets Activos]
-        Projects[Proyectos]
-        Teams[Equipos y Roles]
-    end
-    
-    subgraph BD["Base de Datos - Control"]
-        Hierarchy[Jerarquías<br/>- Áreas<br/>- Responsables<br/>- Prioridades]
-        Collaborators[Colaboradores<br/>- Desarrolladores<br/>- Product Managers<br/>- ISSEG]
-        Uptime[Uptime/Disponibilidad<br/>- Tiempo de actividad<br/>- SLA<br/>- Incidentes]
-        Changes[Historial de Cambios<br/>- Versiones<br/>- Modificaciones<br/>- Responsables]
-        Failures[Registro de Fallas<br/>- Incidentes<br/>- Tiempo de resolución<br/>- Impacto]
-        Users[Control de Usuarios<br/>- Áreas Autorizadas<br/>- Permisos<br/>- Sistemas Visibles]
-    end
-    
-    Tickets --> Hierarchy
-    Tickets --> Collaborators
-    Tickets --> Users
-    Projects --> Uptime
-    Projects --> Changes
-    Projects --> Failures
-    Teams --> Collaborators
-    Teams --> Users
-    
-```
-
----
-
-## Diagrama de Estados del Ticket
-
-```mermaid
-stateDiagram-v2
-    [*] --> Solicitado: Nueva Solicitud
-    Solicitado --> EnRevisión: Formulario Completo
-    EnRevisión --> Rechazado: No Aprobado
-    EnRevisión --> Aprobado: Aprobado ISSEG
-    EnRevisión --> AclaraciónRequerida: Info Incompleta
-    
-    AclaraciónRequerida --> EnRevisión: Info Actualizada
-    
-    Aprobado --> AsignaciónPendiente: Asignar Recursos
-    AsignaciónPendiente --> Asignado: Equipo Asignado
-    Asignado --> EnDesarrollo: Desarrollo Iniciado
-    EnDesarrollo --> EnPruebas: Desarrollo Completado
-    EnPruebas --> EnDesarrollo: Correcciones Necesarias
-    EnPruebas --> Implementado: Pruebas Exitosas
-    Implementado --> Cerrado: Despliegue Exitoso
-    Implementado --> EnMantenimiento: Sistema en Producción
-    EnMantenimiento --> [*]: Sistema Descontinuado
-    
-    Rechazado --> [*]
-    Cerrado --> [*]
-```
+### Nota Importante
+El **Mapa Único Integral (Sección 0)** es el diagrama principal que contiene el flujo completo desde el login hasta todas las acciones. Las siguientes secciones son diagramas complementarios que detallan partes específicas del flujo.
 
 ## Leyenda y Descripción de Procesos
 
