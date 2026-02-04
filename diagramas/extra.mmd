@@ -1,0 +1,46 @@
+flowchart TD
+    Start([Inicio]) --> Login[Pantalla de Inicio de Sesión]
+    Login --> Auth{¿Credenciales válidas?}
+    Auth -->|No| AuthFail[Error: Usuario/Contraseña inválidos]
+    AuthFail --> Login
+    Auth -->|Sí| LoadUser[Cargar Usuario + Rol + Área]
+
+    LoadUser --> CheckArea{¿Usuario autorizado en el área?}
+    CheckArea -->|No| DenyArea[Acceso solo lectura + Registro de intento]
+    DenyArea --> ViewReadOnly[Consultar estado de solicitudes existentes]S
+    ViewReadOnly --> EndReadOnly([Fin - Sesión limitada])
+
+    CheckArea -->|Sí| LoadPerms[Cargar permisos del área]
+    LoadPerms --> FilterSystems[Filtrar sistemas visibles por área]
+    FilterSystems --> Dashboard[Dashboard: lista de sistemas autorizados]
+
+    Dashboard --> Action{¿Qué desea hacer?}
+    Action -->|Solicitar modificación| ModFlow[Seleccionar sistema autorizado]
+    Action -->|Reportar problema| IssueFlow[Seleccionar sistema autorizado]
+    Action -->|Ver solicitudes| ViewTickets[Listar mis solicitudes]
+    Action -->|Cerrar sesión| Logout([Fin - Sesión cerrada])
+
+    %% Flujo Modificación
+    ModFlow --> CheckMod{¿Permiso de modificación?}
+    CheckMod -->|No| DenyMod[No autorizado para modificar]
+    DenyMod --> Dashboard
+    CheckMod -->|Sí| FormMod[Llenar Formulario B]
+    FormMod --> ReviewMod{Revisión ISSEG}
+    ReviewMod -->|Rechazado| RejectMod[Notificar rechazo]
+    ReviewMod -->|Aprobado| AssignDev[Asignar desarrollador]
+    AssignDev --> RegisterMod[Registrar cambio + ticket]
+    RegisterMod --> EndMod([Fin - Modificación iniciada])
+
+    %% Flujo Reporte de Problema
+    IssueFlow --> CheckIssue{¿Permiso de reporte?}
+    CheckIssue -->|No| DenyIssue[No autorizado para reportar]
+    DenyIssue --> Dashboard
+    CheckIssue -->|Sí| FormIssue[Llenar Formulario de problema]
+    FormIssue --> ReviewIssue{Revisión ISSEG}
+    ReviewIssue -->|Rechazado| RejectIssue[Notificar rechazo]
+    ReviewIssue -->|Aprobado| AssignIssue[Asignar responsable]
+    AssignIssue --> RegisterIssue[Registrar incidencia + SLA]
+    RegisterIssue --> EndIssue([Fin - Problema registrado])
+
+    %% Consulta
+    ViewTickets --> Dashboard
