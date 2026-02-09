@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISSEG - Visualización Formularios y Flujos</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* FORMULARIOS */
+        .formularios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .formulario-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .formulario-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        }
+
+        .formulario-card.form-a {
+            border-top: 5px solid #667eea;
+        }
+
+        .formulario-card.form-b {
+            border-top: 5px solid #f093fb;
+        }
+
+        .formulario-card.form-c {
+            border-top: 5px solid #4facfe;
+        }
+
+        .formulario-card.form-problema {
+            border-top: 5px solid #fa709a;
+        }
+
+        .form-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .form-icon {
+            font-size: 2em;
+        }
+
+        .form-header h3 {
+            margin: 0;
+            font-size: 1.3em;
+        }
+
+        .form-header p {
+            color: #666;
+            margin: 5px 0 0 0;
+            font-size: 0.9em;
+        }
+
+        .form-field {
+            margin: 12px 0;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .form-field:last-child {
+            border-bottom: none;
+        }
+
+        .field-label {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95em;
+        }
+
+        .field-type {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            color: #666;
+            margin-left: 8px;
+        }
+
+        .field-required {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .field-info {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 4px;
+        }
+
+        .form-stats {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            font-size: 0.9em;
+        }
+
+        .stat {
+            padding: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            color: #333;
+            font-size: 1.2em;
+        }
+
+        /* FLUJOS */
+        .flow-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+
+        .flow-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+
+        .step-number.form-a {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .step-number.form-b {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .step-number.form-c {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .step-number.problema {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .step-content {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .step-title {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .step-description {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .step-status {
+            background: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .status-aprobar {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-rechazar {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-implementar {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-auto {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        /* MATRIZ DECISIÓN */
+        .decision-matrix {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .decision-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .decision-question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .decision-question h4 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .decision-answers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .answer-box {
+            border: 2px solid #f0f0f0;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .answer-box:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .answer-label {
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        .answer-result {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .answer-box.yes .answer-label {
+            color: #27ae60;
+        }
+
+        .answer-box.no .answer-label {
+            color: #e74c3c;
+        }
+
+        /* COMPARATIVA */
+        .comparativa-table {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid #ddd;
+            color: #333;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        tr:hover {
+            background: #f8f9ff;
+        }
+
+        .form-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* LEGEND */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+            font-size: 0.95em;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+        }
+
+        .legend-color.a {
+            background: #667eea;
+        }
+
+        .legend-color.b {
+            background: #f093fb;
+        }
+
+        .legend-color.c {
+            background: #4facfe;
+        }
+
+        .legend-color.problema {
+            background: #fa709a;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                width: 100%;
+            }
+
+            .form-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .decision-answers {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Sistema ISSEG</h1>
+            <p>Visualización de Formularios y Flujos de Trabajo</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('formularios')">📝 Formularios</button>
+            <button class="tab-btn" onclick="switchTab('flujos')">🔄 Flujos</button>
+            <button class="tab-btn" onclick="switchTab('decision')">🎯 Matriz Decisión</button>
+            <button class="tab-btn" onclick="switchTab('comparativa')">📊 Comparativa</button>
+        </div>
+
+        <!-- TAB 1: FORMULARIOS -->
+        <div id="formularios" class="tab-content active">
+            <div class="formularios-grid">
+                <!-- FORMULARIO A -->
+                <div class="formulario-card form-a">
+                    <div class="form-header">
+                        <div class="form-icon">🆕</div>
+                        <div>
+                            <h3>Formulario A</h3>
+                            <p>Sistema Nuevo</p>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">ID Solicitud <span class="field-type">Auto</span></div>
+                        <div class="field-info">SN-2026-XXXX (Auto-generado)</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Nombre Completo <span class="field-required">*</span></div>
+                        <div class="field-type">Texto</div>
+                        <div class="field-info">Quien solicita el sistema</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Área <span class="field-required">*</span></div>
+                        <div class="field-type">Lista</div>
+                        <div class="field-info">Departamento del solicitante</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Email <span class="field-required">*</span></div>
+                        <div class="field-type">Email</div>
+                        <div class="field-info">Para comunicación</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Nombre Sistema <span class="field-required">*</span></div>
+                        <div class="field-type">Texto</div>
+                        <div class="field-info">Máx 100 caracteres</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Tipo Sistema <span class="field-required">*</span></div>
+                        <div class="field-type">Radio</div>
+                        <div class="field-info">Web / Desktop / Mobile / API / Hybrid</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Descripción <span class="field-required">*</span></div>
+                        <div class="field-type">Textarea</div>
+                        <div class="field-info">Máx 500 caracteres</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Justificación <span class="field-required">*</span></div>
+                        <div class="field-type">Textarea</div>
+                        <div class="field-info">Por qué se necesita. Máx 1000 caracteres</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Beneficios Esperados <span class="field-required">*</span></div>
+                        <div class="field-type">Checkbox</div>
+                        <div class="field-info">Ahorro tiempo, reducción errores, automatización, cumplimiento, mejora servicio, reducción costos</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Usuarios Estimados <span class="field-required">*</span></div>
+                        <div class="field-type">Número</div>
+                        <div class="field-info">Cantidad de usuarios que usarán el sistema</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Presupuesto <span class="field-required">No</span></div>
+                        <div class="field-type">Número</div>
+                        <div class="field-info">Estimado en USD</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Aprobación Jefe Directo <span class="field-required">*</span></div>
+                        <div class="field-type">Checkbox</div>
+                        <div class="field-info">Este campo es OBLIGATORIO</div>
+                    </div>
+
+                    <div class="form-stats">
+                        <div class="stat">
+                            <div class="stat-label">Secciones</div>
+                            <div class="stat-value">7</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Campos Totales</div>
+                            <div class="stat-value">25+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Tiempo Estimado</div>
+                            <div class="stat-value">15-20 min</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Requiere Aprobación</div>
+                            <div class="stat-value" style="color: #27ae60;">✓ SÍ</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FORMULARIO B -->
+                <div class="formulario-card form-b">
+                    <div class="form-header">
+                        <div class="form-icon">🔧</div>
+                        <div>
+                            <h3>Formulario B</h3>
+                            <p>Modificación</p>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">ID Modificación <span class="field-type">Auto</span></div>
+                        <div class="field-info">MOD-2026-XXXX (Auto-generado)</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Sistema <span class="field-required">*</span></div>
+                        <div class="field-type">Lista</div>
+                        <div class="field-info">Seleccionar sistema existente</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Versión Actual <span class="field-type">Auto</span></div>
+                        <div class="field-info">Se auto-completa al seleccionar sistema</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Tipo de Cambio <span class="field-required">*</span></div>
+                        <div class="field-type">Radio</div>
+                        <div class="field-info">Nueva funcionalidad, corrección, mejora, interfaz, integración, seguridad, otro</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Descripción <span class="field-required">*</span></div>
+                        <div class="field-type">Textarea</div>
+                        <div class="field-info">Detalle del cambio. Máx 1000 chars</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Módulos Afectados <span class="field-required">*</span></div>
+                        <div class="field-type">Checkbox</div>
+                        <div class="field-info">Frontend, Backend, BD, Reportes, Integraciones, Seguridad</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Razón del Cambio <span class="field-required">*</span></div>
+                        <div class="field-type">Textarea</div>
+                        <div class="field-info">Por qué es necesario este cambio</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Urgencia <span class="field-required">*</span></div>
+                        <div class="field-type">Radio</div>
+                        <div class="field-info">Inmediata / Alta / Media / Baja</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Impacto en Operación <span class="field-required">*</span></div>
+                        <div class="field-type">Radio</div>
+                        <div class="field-info">Crítico / Alto / Medio / Bajo</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Usuarios Afectados <span class="field-required">*</span></div>
+                        <div class="field-type">Número</div>
+                        <div class="field-info">Cuántos usuarios impacta el cambio</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">¿Requiere Migración? <span class="field-required">*</span></div>
+                        <div class="field-type">Radio</div>
+                        <div class="field-info">No / Parcial / Completa</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">¿Requiere Capacitación? <span class="field-required">*</span></div>
+                        <div class="field-type">Radio</div>
+                        <div class="field-info">No / Básica / Completa</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">¿Existe Workaround? <span class="field-required">*</span></div>
+                        <div class="field-type">Radio</div>
+                        <div class="field-info">Solución temporal mientras se resuelve</div>
+                    </div>
+
+                    <div class="form-stats">
+                        <div class="stat">
+                            <div class="stat-label">Secciones</div>
+                            <div class="stat-value">8</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Campos Totales</div>
+                            <div class="stat-value">25+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Tiempo Estimado</div>
+                            <div class="stat-value">12-15 min</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Requiere Aprobación</div>
+                            <div class="stat-value" style="color: #27ae60;">✓ SÍ</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FORMULARIO C -->
+                <div class="formulario-card form-c">
+                    <div class="form-header">
+                        <div class="form-icon">📐</div>
+                        <div>
+                            <h3>Formulario C</h3>
+                            <p>Requerimientos</p>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">ID Proyecto <span class="field-required">*</span></div>
+                        <div class="field-info">Referencia del Formulario A aprobado (SN-2026-XXXX)</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Product Manager <span class="field-required">*</span></div>
+                        <div class="field-type">Texto</div>
+                        <div class="field-info">PM responsable del proyecto</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Objetivo General <span class="field-required">*</span></div>
+                        <div class="field-type">Textarea</div>
+                        <div class="field-info">Meta principal del sistema. Máx 500 chars</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Objetivos Específicos <span class="field-required">*</span></div>
+                        <div class="field-type">Textarea</div>
+                        <div class="field-info">Objetivos concretos. Máx 1000 chars</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Alcance Funcional <span class="field-required">*</span></div>
+                        <div class="field-type">Textarea</div>
+                        <div class="field-info">Qué SÍ incluye el sistema</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Fuera de Alcance <span class="field-required">*</span></div>
+                        <div class="field-type">Textarea</div>
+                        <div class="field-info">Qué NO incluye el sistema</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Tabla de Roles <span class="field-required">*</span></div>
+                        <div class="field-type">Tabla Dinámica</div>
+                        <div class="field-info">Rol, Descripción, Permisos, Cantidad de Usuarios</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Tabla de Módulos <span class="field-required">*</span></div>
+                        <div class="field-type">Tabla Dinámica</div>
+                        <div class="field-info">Nombre, Descripción, Prioridad, Dependencias</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Requerimientos Funcionales <span class="field-required">*</span></div>
+                        <div class="field-type">Tabla Dinámica</div>
+                        <div class="field-info">Mínimo 10 RF: ID, Descripción, Prioridad, Criterio de Aceptación</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Requerimientos No Funcionales <span class="field-required">*</span></div>
+                        <div class="field-type">Tabla</div>
+                        <div class="field-info">Rendimiento, Seguridad, Escalabilidad, Disponibilidad, Compatibilidad</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Reglas de Negocio <span class="field-required">*</span></div>
+                        <div class="field-type">Textarea</div>
+                        <div class="field-info">Validaciones, cálculos, restricciones</div>
+                    </div>
+
+                    <div class="form-stats">
+                        <div class="stat">
+                            <div class="stat-label">Secciones</div>
+                            <div class="stat-value">7</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Campos Totales</div>
+                            <div class="stat-value">50+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Tiempo Estimado</div>
+                            <div class="stat-value">30-45 min</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Aprobación</div>
+                            <div class="stat-value" style="color: #f39c12;">⚠ Validación PM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FORMULARIO PROBLEMA -->
+                <div class="formulario-card form-problema">
+                    <div class="form-header">
+                        <div class="form-icon">🚨</div>
+                        <div>
+                            <h3>Formulario Problema</h3>
+                            <p>Incidencias</p>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">ID Incidencia <span class="field-type">Auto</span></div>
+                        <div class="field-info">INC-2026-XXXX (Auto-generado)</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Fecha y Hora <span class="field-required">*</span></div>
+                        <div class="field-type">Fecha/Hora</div>
+                        <div class="field-info">Cuándo se detectó el problema</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Nombre Reportante <span class="field-required">*</span></div>
+                        <div class="field-type">Texto</div>
+                        <div class="field-info">Persona que reporta el problema</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Área <span class="field-required">*</span></div>
+                        <div class="field-type">Lista</div>
+                        <div class="field-info">Departamento del reportante</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Email <span class="field-required">*</span></div>
+                        <div class="field-type">Email</div>
+                        <div class="field-info">Para comunicaciones de seguimiento</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Sistema Afectado <span class="field-required">*</span></div>
+                        <div class="field-type">Lista</div>
+                        <div class="field-info">Seleccionar de sistemas registrados</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Título Resumido <span class="field-required">*</span></div>
+                        <div class="field-type">Texto</div>
+                        <div class="field-info">Resumen de una línea. Máx 100 chars</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Descripción <span class="field-required">*</span></div>
+                        <div class="field-type">Textarea</div>
+                        <div class="field-info">¿Qué está pasando? Máx 1000 chars</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Pasos para Reproducir <span class="field-required">*</span></div>
+                        <div class="field-type">Textarea</div>
+                        <div class="field-info">Instrucciones paso a paso</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Urgencia <span class="field-required">*</span></div>
+                        <div class="field-type">Radio</div>
+                        <div class="field-info">Crítica 🔴 / Alta 🟠 / Media 🟡 / Baja 🟢</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">SLA Automático <span class="field-type">Auto</span></div>
+                        <div class="field-info">Se calcula automáticamente según urgencia</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Usuarios Afectados <span class="field-required">*</span></div>
+                        <div class="field-type">Número</div>
+                        <div class="field-info">Cantidad de usuarios impactados</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Comportamiento Esperado <span class="field-required">*</span></div>
+                        <div class="field-type">Textarea</div>
+                        <div class="field-info">¿Qué debería pasar?</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Archivos Adjuntos <span class="field-required">No</span></div>
+                        <div class="field-type">Upload</div>
+                        <div class="field-info">Screenshots, videos, logs (JPG, PNG, TXT)</div>
+                    </div>
+
+                    <div class="form-stats">
+                        <div class="stat">
+                            <div class="stat-label">Secciones</div>
+                            <div class="stat-value">7</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Campos Totales</div>
+                            <div class="stat-value">20+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Tiempo Estimado</div>
+                            <div class="stat-value">10-15 min</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Requiere Aprobación</div>
+                            <div class="stat-value" style="color: #e74c3c;">✗ NO</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color a"></div>
+                    <span><strong>Form A:</strong> Sistema Nuevo</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color b"></div>
+                    <span><strong>Form B:</strong> Modificación</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color c"></div>
+                    <span><strong>Form C:</strong> Requerimientos</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color problema"></div>
+                    <span><strong>Formulario Problema:</strong> Incidencias</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: FLUJOS -->
+        <div id="flujos" class="tab-content">
+            <!-- DIAGRAMA GENERAL -->
+            <div class="flow-container">
+                <div class="flow-title">🗺️ Diagrama General del Sistema Completo</div>
+                <p style="color: #666; margin-bottom: 20px;">Este diagrama muestra cómo interactúan todos los flujos desde la autenticación hasta el cierre. Haz clic en las pestañas abajo para ver cada flujo en detalle.</p>
+                
+                <div class="mermaid">
+graph TD
+    subgraph Login["AUTENTICACION"]
+        L1["Usuario accede"]
+        L2{"Credenciales validas?"}
+        L3["Cargar Usuario Area Permisos"]
+        L4{"Autorizado en area?"}
+        L5["Solo lectura"]
+        L6["Cargar sistemas"]
+        
+        L1 --> L2
+        L2 -->|No| L3A["Error Reintentar"]
+        L3A --> L1
+        L2 -->|Si| L3
+        L3 --> L4
+        L4 -->|No| L5
+        L4 -->|Si| L6
+    end
+    
+    subgraph Dashboard["DASHBOARD PRINCIPAL"]
+        D1["Ver Solicitudes Sistemas Incidencias"]
+        D2{"Seleccionar Accion"}
+        
+        L6 --> D1
+        L5 --> D1
+        D1 --> D2
+    end
+    
+    subgraph FlujoCracion["FLUJO 1: CREAR SISTEMA NUEVO"]
+        FC1{"Permiso crear sistema nuevo?"}
+        FC2["Llenar Formulario A"]
+        FC3{"Revision ISSEG"}
+        FC4["Rechazo Motivo"]
+        FC5["Asignar Equipo"]
+        FC6["Solicitar Formulario C"]
+        FC7["Usuario completa Requerimientos"]
+        FC8{"Validar Requerimientos?"}
+        FC9["Crear en BD Tabla Sistemas"]
+        FC10["AUDITORIA"]
+        FC11["Uptime inicial"]
+        FC12["Sistema Creado"]
+        
+        D2 -->|Crear Sistema| FC1
+        FC1 -->|No| DA["No autorizado"]
+        DA --> D1
+        FC1 -->|Si| FC2
+        FC2 --> FC3
+        FC3 -->|Rechazado| FC4
+        FC4 --> D1
+        FC3 -->|Aprobado| FC5
+        FC5 --> FC6
+        FC6 --> FC7
+        FC7 --> FC8
+        FC8 -->|Incompleto| FC7
+        FC8 -->|Completo| FC9
+        FC9 --> FC10
+        FC10 --> FC11
+        FC11 --> FC12
+    end
+    
+    subgraph FlujoModificacion["FLUJO 2: MODIFICACION"]
+        FM1{"Permiso modificar?"}
+        FM2["Seleccionar Sistema"]
+        FM3["Llenar Formulario B"]
+        FM4{"Revision ISSEG"}
+        FM5["Rechazo"]
+        FM6["Asignar Desarrollador"]
+        FM7["Crear Ticket"]
+        FM8["REGISTRAR Historial_Cambios"]
+        FM9["AUDITORIA"]
+        FM10["Modificacion Iniciada"]
+        
+        D2 -->|Modificar| FM1
+        FM1 -->|No| DA2["No autorizado"]
+        DA2 --> D1
+        FM1 -->|Si| FM2
+        FM2 --> FM3
+        FM3 --> FM4
+        FM4 -->|Rechazado| FM5
+        FM5 --> D1
+        FM4 -->|Aprobado| FM6
+        FM6 --> FM7
+        FM7 --> FM8
+        FM8 --> FM9
+        FM9 --> FM10
+    end
+    
+    subgraph FlujoProblema["FLUJO 3: REPORTAR PROBLEMA"]
+        FP1{"Permiso reportar?"}
+        FP2["Seleccionar Sistema"]
+        FP3["Llenar Formulario Problema"]
+        FP4["Definir SLA segun Urgencia"]
+        FP5{"Revision ISSEG"}
+        FP6["Rechazo"]
+        FP7["Asignar Responsable"]
+        FP8["Iniciar Reloj SLA"]
+        FP9["REGISTRAR Problemas_Reportados"]
+        FP10["CONTROL Control_Incidencias"]
+        FP11["ALERTAS SLA"]
+        FP12["Problema Registrado"]
+        
+        D2 -->|Reportar| FP1
+        FP1 -->|No| DA3["No autorizado"]
+        DA3 --> D1
+        FP1 -->|Si| FP2
+        FP2 --> FP3
+        FP3 --> FP4
+        FP4 --> FP5
+        FP5 -->|Rechazado| FP6
+        FP6 --> D1
+        FP5 -->|Aprobado| FP7
+        FP7 --> FP8
+        FP8 --> FP9
+        FP9 --> FP10
+        FP10 --> FP11
+        FP11 --> FP12
+    end
+    
+    style Login fill:#E8F4F8,stroke:#0288D1,stroke-width:3px
+    style Dashboard fill:#FFF9E6,stroke:#F57C00,stroke-width:3px
+    style FlujoCracion fill:#E8F5E9,stroke:#388E3C,stroke-width:3px
+    style FlujoModificacion fill:#F3E5F5,stroke:#7B1FA2,stroke-width:3px
+    style FlujoProblema fill:#FFEBEE,stroke:#C62828,stroke-width:3px
+    
+    style FC12 fill:#C8E6C9,stroke:#2E7D32,stroke-width:2px
+    style FM10 fill:#E1BEE7,stroke:#6A1B9A,stroke-width:2px
+    style FP12 fill:#EF9A9A,stroke:#B71C1C,stroke-width:2px
+</div>
+            </div>
+
+            <!-- FLUJO 1: SISTEMA NUEVO -->
+            <div class="flow-container">
+                <div class="flow-title">🆕 Flujo 1: Sistema Nuevo (Formulario A → Formulario C → Desarrollo)</div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h4 style="color: #333; margin-bottom: 10px;">📋 Descripción del Flujo</h4>
+                    <p style="color: #666; line-height: 1.6;">
+                        Este flujo se utiliza cuando un usuario necesita un <strong>sistema completamente nuevo</strong> que no existe en la organización. 
+                        Es el proceso más largo porque incluye análisis, aprobación, levantamiento detallado de requerimientos y desarrollo completo.
+                        El flujo asegura que cada sistema nuevo esté justificado, documentado y aprobado antes de invertir recursos.
+                    </p>
+                    <p style="color: #666; line-height: 1.6; margin-top: 10px;">
+                        <strong>Ejemplo:</strong> Un área de Recursos Humanos necesita un nuevo sistema de evaluación de desempeño porque actualmente 
+                        no existe ninguna solución automatizada y lo hacen en papel.
+                    </p>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number form-a">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Solicitud Inicial (Formulario A)</div>
+                        <div class="step-description">
+                            <strong>Quién:</strong> Usuario solicitante + Aprobación del Jefe Directo<br>
+                            <strong>Qué hace:</strong> Completa Formulario A (25+ campos) incluyendo: justificación del negocio, problema que resuelve, 
+                            beneficios esperados, usuarios estimados, presupuesto aproximado, y aprobación del jefe.<br>
+                            <strong>Sistema:</strong> Genera ID automático SN-2026-XXXX y registra en BD: Audit_Sistemas_Nuevos<br>
+                            <strong>Tiempo:</strong> 15-20 minutos
+                        </div>
+                    </div>
+                    <div class="step-status status-aprobar">En Revisión</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number form-a">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Revisión Técnica y de Negocio (ISSEG)</div>
+                        <div class="step-description">
+                            <strong>Quién:</strong> Equipo ISSEG (Director + PM + Arquitecto)<br>
+                            <strong>Qué analiza:</strong><br>
+                            • Viabilidad técnica: ¿Es posible construirlo?<br>
+                            • Viabilidad presupuestaria: ¿Hay recursos?<br>
+                            • Alineación estratégica: ¿Apoya los objetivos de la organización?<br>
+                            • Duplicidad: ¿Ya existe algo similar que se pueda reutilizar?<br>
+                            • Priorización: ¿Qué tan urgente/crítico es?<br>
+                            <strong>Tiempo:</strong> 3-5 días hábiles
+                        </div>
+                    </div>
+                    <div class="step-status status-aprobar">Decisión Crítica</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number form-a">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Decisión: Aprobación o Rechazo</div>
+                        <div class="step-description">
+                            <strong>✅ Si APRUEBA:</strong> Se asigna equipo y continúa al paso 4<br>
+                            <strong>❌ Si RECHAZA:</strong> Se documenta el motivo (ej: no hay presupuesto, no es prioridad, existe alternativa) 
+                            y se notifica al solicitante con recomendaciones. El proceso termina aquí.<br>
+                            <strong>⚠️ Si REQUIERE MÁS INFO:</strong> Se solicitan aclaraciones al solicitante y se repite el paso 2.<br>
+                            <strong>BD:</strong> Estado actualizado en Audit_Sistemas_Nuevos (Aprobado/Rechazado/Pendiente)
+                        </div>
+                    </div>
+                    <div class="step-status status-rechazar">Punto de Decisión</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number form-c">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Asignación de Equipo y Formulario C</div>
+                        <div class="step-description">
+                            <strong>Quién:</strong> ISSEG asigna: Product Manager (PM), Desarrollador Líder, Arquitecto (si aplica)<br>
+                            <strong>Qué hace:</strong> PM se reúne con el usuario solicitante para completar Formulario C (levantamiento de requerimientos detallados)<br>
+                            <strong>Formulario C incluye:</strong><br>
+                            • Objetivos específicos del sistema<br>
+                            • Tabla de roles y permisos de usuarios<br>
+                            • Módulos funcionales con prioridades<br>
+                            • Mínimo 10 Requerimientos Funcionales (RF) con criterios de aceptación<br>
+                            • Requerimientos No Funcionales (rendimiento, seguridad, escalabilidad, etc.)<br>
+                            • Reglas de negocio y validaciones<br>
+                            <strong>Tiempo:</strong> 1-2 semanas de levantamiento + documentación
+                        </div>
+                    </div>
+                    <div class="step-status status-implementar">En Documentación</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number form-c">5</div>
+                    <div class="step-content">
+                        <div class="step-title">Validación de Requerimientos</div>
+                        <div class="step-description">
+                            <strong>Quién:</strong> PM + Usuario + Arquitecto Técnico<br>
+                            <strong>Qué valida:</strong><br>
+                            • Requerimientos completos y sin ambigüedad<br>
+                            • Mínimo 10 RF documentados con criterios de aceptación claros<br>
+                            • RNF definidos (tiempos de respuesta, concurrencia, seguridad)<br>
+                            • Diagrama de arquitectura (componentes, integraciones)<br>
+                            • Estimación de esfuerzo (story points o horas)<br>
+                            <strong>Si incompleto:</strong> Regresa al paso 4 para completar<br>
+                            <strong>Si completo:</strong> Se firma documento de requerimientos y se avanza
+                        </div>
+                    </div>
+                    <div class="step-status status-implementar">Validación</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number form-c">6</div>
+                    <div class="step-content">
+                        <div class="step-title">Desarrollo e Implementación</div>
+                        <div class="step-description">
+                            <strong>Quién:</strong> Equipo de Desarrollo (Frontend, Backend, QA, DevOps)<br>
+                            <strong>Actividades:</strong><br>
+                            • Sprint Planning y división en tareas<br>
+                            • Desarrollo iterativo con demos periódicas al usuario<br>
+                            • Testing: unitario, integración, UAT (User Acceptance Testing)<br>
+                            • Configuración de ambientes (Dev, QA, Staging, Producción)<br>
+                            • Preparación de documentación técnica y de usuario<br>
+                            • Capacitación a usuarios finales<br>
+                            <strong>Registro en BD:</strong> Se crea registro en tabla Sistemas con versión 1.0, estado "Desarrollo"<br>
+                            <strong>Tiempo:</strong> 2-6 meses (depende de complejidad)
+                        </div>
+                    </div>
+                    <div class="step-status status-implementar">En Desarrollo</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number form-c">7</div>
+                    <div class="step-content">
+                        <div class="step-title">Despliegue a Producción y Cierre</div>
+                        <div class="step-description">
+                            <strong>Actividades finales:</strong><br>
+                            • Despliegue a ambiente de producción<br>
+                            • Monitoreo intensivo los primeros días (24/7)<br>
+                            • Soporte hiper-atento a usuarios durante el Go-Live<br>
+                            • Actualización en BD: Estado cambia a "Producción", Fecha Go-Live registrada<br>
+                            • Tabla Uptime_Sistema: Inicia tracking de disponibilidad (objetivo 99.9%)<br>
+                            • Auditoría completa en Audit_Sistemas_Nuevos: cierre del proyecto con métricas<br>
+                            • Handover del sistema a equipo de soporte/mantenimiento<br>
+                            • Lecciones aprendidas documentadas<br>
+                            <strong>✅ Sistema operativo y en producción</strong>
+                        </div>
+                    </div>
+                    <div class="step-status status-auto">✅ Completado</div>
+                </div>
+
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 10px; margin-top: 20px; border-left: 5px solid #4caf50;">
+                    <h4 style="color: #2e7d32; margin-bottom: 10px;">📊 Resumen del Flujo 1</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; color: #666;">
+                        <div><strong>Pasos Totales:</strong> 7 pasos</div>
+                        <div><strong>Tiempo Total:</strong> 2-6 meses</div>
+                        <div><strong>Formularios:</strong> Form A + Form C</div>
+                        <div><strong>Aprobaciones:</strong> Jefe + ISSEG</div>
+                        <div><strong>Tablas BD:</strong> Sistemas, Audit_Sistemas_Nuevos, Uptime_Sistema</div>
+                        <div><strong>ID Generado:</strong> SN-YYYY-XXXX</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FLUJO 2: MODIFICACIÓN -->
+            <div class="flow-container">
+                <div class="flow-title">🔧 Flujo 2: Modificación de Sistema (Formulario B → Implementación)</div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h4 style="color: #333; margin-bottom: 10px;">📋 Descripción del Flujo</h4>
+                    <p style="color: #666; line-height: 1.6;">
+                        Este flujo se usa cuando un <strong>sistema ya existe</strong> pero necesita cambios, mejoras o nuevas funcionalidades. 
+                        Es más rápido que crear un sistema nuevo porque la infraestructura base ya está funcionando. 
+                        El flujo incluye análisis de impacto para asegurar que los cambios no afecten negativamente a los usuarios actuales.
+                    </p>
+                    <p style="color: #666; line-height: 1.6; margin-top: 10px;">
+                        <strong>Ejemplo:</strong> El sistema de nómina ya existe y funciona, pero necesita agregar un nuevo módulo para 
+                        calcular bonos por desempeño. Es una modificación al sistema existente, no un sistema nuevo.
+                    </p>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number form-b">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Solicitud de Modificación (Formulario B)</div>
+                        <div class="step-description">
+                            <strong>Quién:</strong> Usuario que necesita el cambio<br>
+                            <strong>Qué hace:</strong> Completa Formulario B (25+ campos) especificando:<br>
+                            • Sistema a modificar (dropdown con sistemas existentes)<br>
+                            • Tipo de cambio (nueva funcionalidad, corrección, mejora, interfaz, integración, seguridad)<br>
+                            • Descripción detallada del cambio solicitado<br>
+                            • Módulos afectados (Frontend, Backend, BD, Reportes, Integraciones, Seguridad)<br>
+                            • Razón del cambio y situación actual vs deseada<br>
+                            • Urgencia e Impacto en la operación<br>
+                            <strong>Sistema:</strong> Genera ID MOD-2026-XXXX, auto-completa versión actual del sistema<br>
+                            <strong>Tiempo:</strong> 12-15 minutos
+                        </div>
+                    </div>
+                    <div class="step-status status-aprobar">En Revisión</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number form-b">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Análisis de Impacto (ISSEG)</div>
+                        <div class="step-description">
+                            <strong>Quién:</strong> Equipo técnico ISSEG + PM del sistema<br>
+                            <strong>Qué analiza:</strong><br>
+                            • <strong>Usuarios afectados:</strong> ¿Cuántos usuarios tendrán impacto? ¿Positivo o negativo?<br>
+                            • <strong>Módulos impactados:</strong> ¿Qué partes del sistema hay que tocar?<br>
+                            • <strong>Otros sistemas:</strong> ¿Afecta integraciones con SAP, CRM, etc.?<br>
+                            • <strong>Migración de datos:</strong> ¿Hay que migrar información existente?<br>
+                            • <strong>Capacitación:</strong> ¿Los usuarios necesitan entrenamiento en el cambio?<br>
+                            • <strong>Esfuerzo técnico:</strong> Horas/días de desarrollo estimados<br>
+                            • <strong>Riesgos:</strong> ¿Qué puede salir mal? Plan de contingencia<br>
+                            <strong>Tiempo:</strong> 1-3 días hábiles
+                        </div>
+                    </div>
+                    <div class="step-status status-aprobar">Análisis</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number form-b">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Asignación Automática de SLA</div>
+                        <div class="step-description">
+                            <strong>Sistema asigna SLA según la urgencia seleccionada:</strong><br>
+                            • 🔴 <strong>CRÍTICA:</strong> Respuesta en 1 hora, Resolución en 4 horas<br>
+                            &nbsp;&nbsp;&nbsp;(Sistema caído, pérdida de datos, impacto severo en negocio)<br>
+                            • 🟠 <strong>ALTA:</strong> Respuesta en 4 horas, Resolución en 8 horas<br>
+                            &nbsp;&nbsp;&nbsp;(Afecta operación diaria, workaround temporal disponible)<br>
+                            • 🟡 <strong>MEDIA:</strong> Respuesta en 8 horas, Resolución en 16 horas<br>
+                            &nbsp;&nbsp;&nbsp;(Mejora importante pero no urgente)<br>
+                            • 🟢 <strong>BAJA:</strong> Respuesta en 24 horas, Resolución en 48 horas<br>
+                            &nbsp;&nbsp;&nbsp;(Optimización, mejora cosmética)<br>
+                            <strong>BD:</strong> SLA registrado en tabla SLA_Definiciones, contador inicia automáticamente
+                        </div>
+                    </div>
+                    <div class="step-status status-implementar">SLA Activado</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number form-b">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Revisión y Decisión ISSEG</div>
+                        <div class="step-description">
+                            <strong>Quién:</strong> Responsable ISSEG + PM del sistema<br>
+                            <strong>Decisiones posibles:</strong><br>
+                            • ✅ <strong>APRUEBA:</strong> Se asigna desarrollador y continúa (paso 5)<br>
+                            • ❌ <strong>RECHAZA:</strong> Motivos comunes: no alineado a roadmap, duplica funcionalidad existente, 
+                            requiere refactorización mayor. Se notifica al solicitante con alternativas<br>
+                            • ⚠️ <strong>POSPONE:</strong> Se agrega al backlog para siguiente sprint/release<br>
+                            • ❓ <strong>REQUIERE MÁS INFO:</strong> Solicita aclaraciones al usuario (regresa a paso 1)<br>
+                            <strong>BD:</strong> Estado actualizado en Audit_Modificaciones
+                        </div>
+                    </div>
+                    <div class="step-status status-rechazar">Punto de Decisión</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number form-b">5</div>
+                    <div class="step-content">
+                        <div class="step-title">Asignación y Desarrollo</div>
+                        <div class="step-description">
+                            <strong>Quién:</strong> Desarrollador asignado + QA<br>
+                            <strong>Actividades:</strong><br>
+                            • Crear ticket en sistema de gestión (Jira, Azure DevOps, etc.) con ID MOD-2026-XXXX<br>
+                            • Análisis técnico detallado: qué archivos/componentes tocar<br>
+                            • Desarrollo del cambio en rama de feature<br>
+                            • Unit testing y validación local<br>
+                            • Code review por par técnico<br>
+                            • Despliegue a ambiente QA para testing<br>
+                            • Testing de regresión: asegurar que no se rompe funcionalidad existente<br>
+                            • Migración de datos en QA (si aplica)<br>
+                            <strong>BD:</strong> Registro en Historial_Cambios con estado "En Desarrollo", incremento de versión (v3.2 → v3.3)<br>
+                            <strong>Tiempo:</strong> Variable según SLA (horas para crítica, días/semanas para baja)
+                        </div>
+                    </div>
+                    <div class="step-status status-implementar">En Desarrollo</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number form-b">6</div>
+                    <div class="step-content">
+                        <div class="step-title">Despliegue a Producción y Cierre</div>
+                        <div class="step-description">
+                            <strong>Actividades de despliegue:</strong><br>
+                            • Plan de despliegue: ¿Cuándo? ¿Horario de menor impacto?<br>
+                            • Comunicación a usuarios afectados (notificación 24-48h antes)<br>
+                            • Backup completo de producción antes del cambio<br>
+                            • Despliegue en horario acordado (usualmente fines de semana o noche)<br>
+                            • Migración de datos en producción (si aplica)<br>
+                            • Smoke testing post-despliegue: validar que todo funcione<br>
+                            • Rollback plan listo por si algo falla<br>
+                            • Capacitación a usuarios (si el cambio lo requiere)<br>
+                            • Monitoreo intensivo primeras 24-48 horas<br>
+                            <strong>BD:</strong><br>
+                            • Historial_Cambios: Estado "Producción", fecha despliegue, versión actualizada<br>
+                            • Audit_Modificaciones: Cierre con métricas (tiempo real vs estimado, issues encontrados)<br>
+                            • Si hubo problemas: registro en Problemas_Reportados vinculado a MOD-ID<br>
+                            <strong>✅ Modificación completada y en producción</strong>
+                        </div>
+                    </div>
+                    <div class="step-status status-auto">✅ Completado</div>
+                </div>
+
+                <div style="background: #f3e5f5; padding: 20px; border-radius: 10px; margin-top: 20px; border-left: 5px solid #9c27b0;">
+                    <h4 style="color: #6a1b9a; margin-bottom: 10px;">📊 Resumen del Flujo 2</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; color: #666;">
+                        <div><strong>Pasos Totales:</strong> 6 pasos</div>
+                        <div><strong>Tiempo Total:</strong> 1-4 semanas</div>
+                        <div><strong>Formularios:</strong> Form B únicamente</div>
+                        <div><strong>Aprobaciones:</strong> ISSEG</div>
+                        <div><strong>Tablas BD:</strong> Historial_Cambios, Audit_Modificaciones, SLA_Definiciones</div>
+                        <div><strong>ID Generado:</strong> MOD-YYYY-XXXX</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FLUJO 3: PROBLEMA -->
+            <div class="flow-container">
+                <div class="flow-title">🚨 Flujo 3: Resolución de Incidencias (Formulario Problema → Resolución)</div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h4 style="color: #333; margin-bottom: 10px;">📋 Descripción del Flujo</h4>
+                    <p style="color: #666; line-height: 1.6;">
+                        Este flujo se activa cuando un <strong>sistema en producción está fallando, tiene errores o bugs</strong>. 
+                        Es el flujo más ágil y automatizado porque requiere respuesta rápida. No necesita aprobación manual ya que 
+                        un sistema roto debe ser atendido de inmediato. El SLA se asigna automáticamente según la urgencia.
+                    </p>
+                    <p style="color: #666; line-height: 1.6; margin-top: 10px;">
+                        <strong>Ejemplo:</strong> Los usuarios no pueden acceder al sistema de nómina (error 500), o un cálculo 
+                        de impuestos está dando resultados incorrectos. Son problemas que necesitan resolución inmediata.
+                    </p>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number problema">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Reporte de Incidencia (Formulario Problema)</div>
+                        <div class="step-description">
+                            <strong>Quién:</strong> Cualquier usuario afectado<br>
+                            <strong>Qué reporta:</strong> Completa Formulario Problema (20+ campos) incluyendo:<br>
+                            • Sistema afectado y módulo específico<br>
+                            • Título resumido del problema (100 chars max)<br>
+                            • Descripción detallada: ¿Qué está mal?<br>
+                            • Pasos para reproducir el problema (fundamental para el equipo técnico)<br>
+                            • Urgencia seleccionada: Crítica 🔴 / Alta 🟠 / Media 🟡 / Baja 🟢<br>
+                            • Usuarios afectados (cantidad estimada)<br>
+                            • Comportamiento esperado vs comportamiento actual<br>
+                            • Contexto técnico: navegador, SO, dispositivo<br>
+                            • Mensaje de error (copiar exactamente si aparece)<br>
+                            • Archivos adjuntos: screenshots, videos, logs<br>
+                            <strong>Sistema:</strong> Genera ID automático INC-2026-XXXX, timestamp de reporte<br>
+                            <strong>NO requiere aprobación del jefe</strong> (por ser problema operativo urgente)<br>
+                            <strong>Tiempo:</strong> 10-15 minutos
+                        </div>
+                    </div>
+                    <div class="step-status status-auto">Reportado</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number problema">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Asignación Automática de SLA</div>
+                        <div class="step-description">
+                            <strong>Sistema asigna SLA automáticamente según urgencia:</strong><br>
+                            • 🔴 <strong>CRÍTICA:</strong> Respuesta 1h / Resolución 4h<br>
+                            &nbsp;&nbsp;&nbsp;Uso: Sistema completamente caído, pérdida de datos, transacciones bloqueadas, 
+                            impacto financiero directo<br>
+                            • 🟠 <strong>ALTA:</strong> Respuesta 4h / Resolución 8h<br>
+                            &nbsp;&nbsp;&nbsp;Uso: Funcionalidad importante no disponible, afecta operación diaria, 
+                            muchos usuarios impactados<br>
+                            • 🟡 <strong>MEDIA:</strong> Respuesta 8h / Resolución 16h<br>
+                            &nbsp;&nbsp;&nbsp;Uso: Error en funcionalidad secundaria, workaround disponible, 
+                            impacto limitado<br>
+                            • 🟢 <strong>BAJA:</strong> Respuesta 24h / Resolución 48h<br>
+                            &nbsp;&nbsp;&nbsp;Uso: Error cosmético, funcionalidad poco usada, sin impacto operativo<br>
+                            <strong>BD:</strong> Registro en SLA_Definiciones, contador SLA inicia automáticamente, 
+                            badge visual asignado
+                        </div>
+                    </div>
+                    <div class="step-status status-auto">SLA Activado</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number problema">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Notificación Automática y Asignación</div>
+                        <div class="step-description">
+                            <strong>Sistema ejecuta automáticamente:</strong><br>
+                            • 📧 Email inmediato al equipo técnico (lista de distribución según sistema)<br>
+                            • 📱 Si es CRÍTICA: SMS/llamada al responsable de guardia<br>
+                            • 🔔 Notificación push en app móvil del equipo<br>
+                            • 📊 Aparece en dashboard de ISSEG con badge de urgencia<br>
+                            • ⏱️ Contador SLA visible en tiempo real (cuenta regresiva)<br>
+                            • 🤖 Asignación automática según reglas:<br>
+                            &nbsp;&nbsp;&nbsp;- Sistema de nómina → Equipo A<br>
+                            &nbsp;&nbsp;&nbsp;- Sistema de ventas → Equipo B<br>
+                            &nbsp;&nbsp;&nbsp;- Si Crítica y fuera de horario → Guardia 24/7<br>
+                            <strong>BD:</strong> Registro en Control_Incidencias con timestamp de inicio<br>
+                            <strong>Tiempo:</strong> < 1 minuto (todo automático)
+                        </div>
+                    </div>
+                    <div class="step-status status-auto">Asignado Automático</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number problema">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Diagnóstico e Investigación</div>
+                        <div class="step-description">
+                            <strong>Quién:</strong> Equipo técnico asignado (Desarrollador + DevOps)<br>
+                            <strong>Actividades de diagnóstico:</strong><br>
+                            • Revisar evidencia adjunta (screenshots, videos, logs)<br>
+                            • Reproducir el problema en ambiente QA/Staging siguiendo pasos reportados<br>
+                            • Revisar logs del servidor: errores, excepciones, stack traces<br>
+                            • Revisar monitoreo: CPU, memoria, disco, red (¿hay recursos agotados?)<br>
+                            • Revisar logs de BD: queries lentos, deadlocks, errores de conexión<br>
+                            • Revisar cambios recientes: ¿se desplegó algo nuevo?<br>
+                            • Identificar causa raíz del problema<br>
+                            • Actualizar ticket con hallazgos cada 30-60 minutos (transparencia al usuario)<br>
+                            <strong>BD:</strong> Actualización de estado en Problemas_Reportados: "En Diagnóstico"<br>
+                            <strong>Tiempo:</strong> Variable (15 min - 2 horas según complejidad)
+                        </div>
+                    </div>
+                    <div class="step-status status-implementar">En Investigación</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number problema">5</div>
+                    <div class="step-content">
+                        <div class="step-title">Resolución e Implementación del Fix</div>
+                        <div class="step-description">
+                            <strong>Actividades de resolución:</strong><br>
+                            • Desarrollar el fix (código, configuración, query, etc.)<br>
+                            • Testing local del fix<br>
+                            • Despliegue a QA y validación<br>
+                            • Si es CRÍTICA: despliegue directo a producción (con backup previo)<br>
+                            • Si es Alta/Media/Baja: esperar ventana de despliegue programada<br>
+                            • Rollback plan listo por si el fix empeora las cosas<br>
+                            • Monitoreo post-despliegue: verificar que el problema está resuelto<br>
+                            • Comunicación al usuario reportante: "Fix desplegado, favor validar"<br>
+                            <strong>BD:</strong><br>
+                            • Problemas_Reportados: Estado "En Resolución" → "Resuelto"<br>
+                            • Historial_Cambios: Registro del hotfix con versión patch (v3.2.0 → v3.2.1)<br>
+                            • Control_Incidencias: Tiempo de resolución real registrado<br>
+                            <strong>Tiempo:</strong> Variable según SLA (1-48 horas)
+                        </div>
+                    </div>
+                    <div class="step-status status-implementar">En Resolución</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number problema">6</div>
+                    <div class="step-content">
+                        <div class="step-title">Verificación, Cierre y Post-Mortem</div>
+                        <div class="step-description">
+                            <strong>Verificación:</strong><br>
+                            • Usuario reportante valida que el problema está resuelto ✅<br>
+                            • Si NO está resuelto: regresa al paso 4 (reabrir incidencia)<br>
+                            • Si está resuelto: se procede al cierre<br>
+                            <strong>Actividades de cierre:</strong><br>
+                            • BD: Estado final "Cerrado" en Problemas_Reportados<br>
+                            • Control_Incidencias: Métricas finales:<br>
+                            &nbsp;&nbsp;&nbsp;- Tiempo respuesta real vs SLA (¿se cumplió?)<br>
+                            &nbsp;&nbsp;&nbsp;- Tiempo resolución real vs SLA<br>
+                            &nbsp;&nbsp;&nbsp;- Si no cumplió SLA: registro en Alertas_SLA para análisis gerencial<br>
+                            • Encuesta de satisfacción al usuario (1-5 estrellas)<br>
+                            <strong>Post-Mortem (si fue Crítica):</strong><br>
+                            • Reunión de equipo para análisis de causa raíz<br>
+                            • ¿Por qué pasó? ¿Cómo prevenirlo?<br>
+                            • Plan de acción: mejoras al proceso, monitoreo, alertas<br>
+                            • Documentación de lecciones aprendidas<br>
+                            • Si fue error humano: reforzar capacitación<br>
+                            • Si fue falta de monitoreo: implementar alertas proactivas<br>
+                            <strong>✅ Incidencia cerrada y aprendizaje capturado</strong>
+                        </div>
+                    </div>
+                    <div class="step-status status-auto">✅ Cerrado</div>
+                </div>
+
+                <div style="background: #ffebee; padding: 20px; border-radius: 10px; margin-top: 20px; border-left: 5px solid #f44336;">
+                    <h4 style="color: #c62828; margin-bottom: 10px;">📊 Resumen del Flujo 3</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; color: #666;">
+                        <div><strong>Pasos Totales:</strong> 6 pasos</div>
+                        <div><strong>Tiempo Total:</strong> 1h - 48h (según SLA)</div>
+                        <div><strong>Formularios:</strong> Form Problema únicamente</div>
+                        <div><strong>Aprobaciones:</strong> Ninguna (automático)</div>
+                        <div><strong>Tablas BD:</strong> Problemas_Reportados, Control_Incidencias, SLA_Definiciones, Alertas_SLA</div>
+                        <div><strong>ID Generado:</strong> INC-YYYY-XXXX</div>
+                    </div>
+                    <div style="margin-top: 15px; padding: 15px; background: white; border-radius: 8px;">
+                        <strong>⚠️ Características Especiales del Flujo 3:</strong><br>
+                        • Totalmente automatizado (sin aprobaciones manuales)<br>
+                        • SLA visual con contador en tiempo real<br>
+                        • Notificaciones automáticas multi-canal<br>
+                        • Asignación inteligente por sistema<br>
+                        • Escalación automática si no se cumple SLA<br>
+                        • Post-mortem obligatorio para incidencias críticas
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: MATRIZ DECISIÓN -->
+        <div id="decision" class="tab-content">
+            <div class="decision-matrix">
+                <div class="decision-title">🎯 Matriz de Decisión: ¿Cuál Formulario Usar?</div>
+
+                <div class="decision-question">
+                    <h4>❓ Pregunta 1: ¿Ya existe un sistema para esta funcionalidad?</h4>
+                    <div class="decision-answers">
+                        <div class="answer-box no">
+                            <div class="answer-label">❌ NO</div>
+                            <div class="answer-result">👉 Usa <strong>FORMULARIO A</strong><br>(Sistema Nuevo)</div>
+                        </div>
+                        <div class="answer-box yes">
+                            <div class="answer-label">✅ SÍ</div>
+                            <div class="answer-result">👉 Ve a Pregunta 2</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="decision-question">
+                    <h4>❓ Pregunta 2: ¿Está fallando o reportando un error el sistema?</h4>
+                    <div class="decision-answers">
+                        <div class="answer-box yes">
+                            <div class="answer-label">✅ SÍ</div>
+                            <div class="answer-result">👉 Usa <strong>FORMULARIO PROBLEMA</strong><br>(Incidencia/Bug)</div>
+                        </div>
+                        <div class="answer-box no">
+                            <div class="answer-label">❌ NO</div>
+                            <div class="answer-result">👉 Ve a Pregunta 3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="decision-question">
+                    <h4>❓ Pregunta 3: ¿Necesitas cambiar/mejorar el sistema existente?</h4>
+                    <div class="decision-answers">
+                        <div class="answer-box yes">
+                            <div class="answer-label">✅ SÍ</div>
+                            <div class="answer-result">👉 Usa <strong>FORMULARIO B</strong><br>(Modificación)</div>
+                        </div>
+                        <div class="answer-box no">
+                            <div class="answer-label">❌ NO</div>
+                            <div class="answer-result">👉 No se requiere formulario<br>Revisar documentación existente</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="decision-question">
+                    <h4>❓ Pregunta 4: ¿Fue APROBADO tu Formulario A?</h4>
+                    <div class="decision-answers">
+                        <div class="answer-box yes">
+                            <div class="answer-label">✅ SÍ</div>
+                            <div class="answer-result">👉 Continúa con <strong>FORMULARIO C</strong><br>(Detallar Requerimientos)</div>
+                        </div>
+                        <div class="answer-box no">
+                            <div class="answer-label">❌ NO</div>
+                            <div class="answer-result">👉 Esperar aprobación<br>O revisar si necesitas Form B</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: COMPARATIVA -->
+        <div id="comparativa" class="tab-content">
+            <div class="comparativa-table">
+                <h2 style="margin-bottom: 20px; color: #333;">📊 Comparativa de Formularios</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>📝 Formulario A<br>Sistema Nuevo</th>
+                            <th>🔧 Formulario B<br>Modificación</th>
+                            <th>📐 Formulario C<br>Requerimientos</th>
+                            <th>🚨 Formulario Problema<br>Incidencias</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ID Generado</strong></td>
+                            <td>SN-2026-XXXX</td>
+                            <td>MOD-2026-XXXX</td>
+                            <td>Sin ID</td>
+                            <td>INC-2026-XXXX</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Propósito</strong></td>
+                            <td>Solicitar nuevo sistema</td>
+                            <td>Cambiar sistema existente</td>
+                            <td>Detalle de requerimientos</td>
+                            <td>Reportar errores/bugs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cuándo Usar</strong></td>
+                            <td>No existe solución</td>
+                            <td>Ya existe el sistema</td>
+                            <td>Post-aprobación Form A</td>
+                            <td>Sistema fallando</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Secciones</strong></td>
+                            <td style="text-align: center;">7</td>
+                            <td style="text-align: center;">8</td>
+                            <td style="text-align: center;">7</td>
+                            <td style="text-align: center;">7</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Campos Totales</strong></td>
+                            <td style="text-align: center;">25+</td>
+                            <td style="text-align: center;">25+</td>
+                            <td style="text-align: center;">50+</td>
+                            <td style="text-align: center;">20+</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tiempo Completar</strong></td>
+                            <td style="text-align: center;">15-20 min</td>
+                            <td style="text-align: center;">12-15 min</td>
+                            <td style="text-align: center;">30-45 min</td>
+                            <td style="text-align: center;">10-15 min</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Requiere Aprobación</strong></td>
+                            <td style="color: #27ae60; font-weight: bold;">✅ SÍ (ISSEG)</td>
+                            <td style="color: #27ae60; font-weight: bold;">✅ SÍ (ISSEG)</td>
+                            <td style="color: #f39c12; font-weight: bold;">⚠️ Validación PM</td>
+                            <td style="color: #e74c3c; font-weight: bold;">❌ NO</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SLA/Seguimiento</strong></td>
+                            <td>Por aprobación</td>
+                            <td>Por urgencia</td>
+                            <td>N/A</td>
+                            <td>🔴🟠🟡🟢 Automático</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Paso Siguiente</strong></td>
+                            <td>Form C (si aprueba)</td>
+                            <td>Implementación</td>
+                            <td>Desarrollo</td>
+                            <td>Resolución técnica</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Responsables</strong></td>
+                            <td>Usuario + Jefe</td>
+                            <td>Usuario + Jefe</td>
+                            <td>PM + Dev + Usuario</td>
+                            <td>Equipo Técnico</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tabla BD Principal</strong></td>
+                            <td>Sistemas</td>
+                            <td>Historial_Cambios</td>
+                            <td>Documento (Wiki)</td>
+                            <td>Problemas_Reportados</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="margin-top: 30px; background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                    <h3 style="margin-bottom: 15px; color: #333;">📌 Notas Importantes</h3>
+                    <ul style="color: #666;">
+                        <li><strong>Formulario A:</strong> Es el punto de entrada para nuevos sistemas. Debe incluir aprobación del jefe directo antes de ir a ISSEG.</li>
+                        <li><strong>Formulario B:</strong> Se puede enviar múltiples veces para el mismo sistema. Cada modificación genera un MOD-ID único.</li>
+                        <li><strong>Formulario C:</strong> Solo se completa si Form A fue aprobado. Responsabilidad de PM + Dev team.</li>
+                        <li><strong>Formulario Problema:</strong> Es automático, sin aprobación. SLA se asigna en tiempo real según urgencia.</li>
+                        <li><strong>Todos los formularios generan auditoría permanente en la BD.</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>📋 Sistema ISSEG v2.0 | Visualización Interactiva de Formularios y Flujos | Febrero 2026</p>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            // Ocultar todos los tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Remover active de todos los botones
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Mostrar el tab seleccionado
+            document.getElementById(tabName).classList.add('active');
+
+            // Marcar botón como activo
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
