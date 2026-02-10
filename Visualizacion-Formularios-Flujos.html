@@ -816,12 +816,6 @@
                     </div>
 
                     <div class="form-field">
-                        <div class="field-label">Presupuesto <span class="field-required">No</span></div>
-                        <div class="field-type">Número</div>
-                        <div class="field-info">Estimado en USD</div>
-                    </div>
-
-                    <div class="form-field">
                         <div class="field-label">Aprobación Jefe Directo <span class="field-required">*</span></div>
                         <div class="field-type">Checkbox</div>
                         <div class="field-info">Este campo es OBLIGATORIO</div>
@@ -1202,13 +1196,7 @@
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
                     <h4 style="color: #333; margin-bottom: 10px;">📋 Descripción del Flujo</h4>
                     <p style="color: #666; line-height: 1.6;">
-                        Este flujo se utiliza cuando un usuario necesita un <strong>sistema completamente nuevo</strong> que no existe en la organización. 
-                        Es el proceso más largo porque incluye análisis, aprobación, levantamiento detallado de requerimientos y desarrollo completo.
-                        El flujo asegura que cada sistema nuevo esté justificado, documentado y aprobado antes de invertir recursos.
-                    </p>
-                    <p style="color: #666; line-height: 1.6; margin-top: 10px;">
-                        <strong>Ejemplo:</strong> Un área de Recursos Humanos necesita un nuevo sistema de evaluación de desempeño porque actualmente 
-                        no existe ninguna solución automatizada y lo hacen en papel.
+                        Se utiliza cuando se necesita un <strong>sistema completamente nuevo</strong> que no existe en la organización.
                     </p>
                 </div>
 
@@ -1217,11 +1205,9 @@
                     <div class="step-content">
                         <div class="step-title">Solicitud Inicial (Formulario A)</div>
                         <div class="step-description">
-                            <strong>Quién:</strong> Usuario solicitante + Aprobación del Jefe Directo<br>
-                            <strong>Qué hace:</strong> Completa Formulario A (25+ campos) incluyendo: justificación del negocio, problema que resuelve, 
-                            beneficios esperados, usuarios estimados, presupuesto aproximado, y aprobación del jefe.<br>
-                            <strong>Sistema:</strong> Genera ID automático SN-2026-XXXX y registra en BD: Audit_Sistemas_Nuevos<br>
-                            <strong>Tiempo:</strong> 15-20 minutos
+                            <strong>Quién:</strong> Usuario solicitante + Jefe Directo<br>
+                            <strong>Qué hace:</strong> Completa Formulario A con justificación, beneficios, usuarios estimados y aprobación.<br>
+                            <strong>Sistema:</strong> Genera ID automático SN-2026-XXXX
                         </div>
                     </div>
                     <div class="step-status status-aprobar">En Revisión</div>
@@ -1232,14 +1218,8 @@
                     <div class="step-content">
                         <div class="step-title">Revisión Técnica y de Negocio (ISSEG)</div>
                         <div class="step-description">
-                            <strong>Quién:</strong> Equipo ISSEG (Director + PM + Arquitecto)<br>
-                            <strong>Qué analiza:</strong><br>
-                            • Viabilidad técnica: ¿Es posible construirlo?<br>
-                            • Viabilidad presupuestaria: ¿Hay recursos?<br>
-                            • Alineación estratégica: ¿Apoya los objetivos de la organización?<br>
-                            • Duplicidad: ¿Ya existe algo similar que se pueda reutilizar?<br>
-                            • Priorización: ¿Qué tan urgente/crítico es?<br>
-                            <strong>Tiempo:</strong> 3-5 días hábiles
+                            <strong>Quién:</strong> Equipo ISSEG<br>
+                            <strong>Qué analiza:</strong> Viabilidad técnica, disponibilidad de recursos, alineación estratégica y priorización.
                         </div>
                     </div>
                     <div class="step-status status-aprobar">Decisión Crítica</div>
@@ -1250,11 +1230,9 @@
                     <div class="step-content">
                         <div class="step-title">Decisión: Aprobación o Rechazo</div>
                         <div class="step-description">
-                            <strong>✅ Si APRUEBA:</strong> Se asigna equipo y continúa al paso 4<br>
-                            <strong>❌ Si RECHAZA:</strong> Se documenta el motivo (ej: no hay presupuesto, no es prioridad, existe alternativa) 
-                            y se notifica al solicitante con recomendaciones. El proceso termina aquí.<br>
-                            <strong>⚠️ Si REQUIERE MÁS INFO:</strong> Se solicitan aclaraciones al solicitante y se repite el paso 2.<br>
-                            <strong>BD:</strong> Estado actualizado en Audit_Sistemas_Nuevos (Aprobado/Rechazado/Pendiente)
+                            <strong>✅ Aprueba:</strong> Se asigna equipo y continúa<br>
+                            <strong>❌ Rechaza:</strong> Se documenta el motivo y notifica al solicitante<br>
+                            <strong>⚠️ Más info:</strong> Se solicitan aclaraciones
                         </div>
                     </div>
                     <div class="step-status status-rechazar">Punto de Decisión</div>
@@ -1265,16 +1243,8 @@
                     <div class="step-content">
                         <div class="step-title">Asignación de Equipo y Formulario C</div>
                         <div class="step-description">
-                            <strong>Quién:</strong> ISSEG asigna: Product Manager (PM), Desarrollador Líder, Arquitecto (si aplica)<br>
-                            <strong>Qué hace:</strong> PM se reúne con el usuario solicitante para completar Formulario C (levantamiento de requerimientos detallados)<br>
-                            <strong>Formulario C incluye:</strong><br>
-                            • Objetivos específicos del sistema<br>
-                            • Tabla de roles y permisos de usuarios<br>
-                            • Módulos funcionales con prioridades<br>
-                            • Mínimo 10 Requerimientos Funcionales (RF) con criterios de aceptación<br>
-                            • Requerimientos No Funcionales (rendimiento, seguridad, escalabilidad, etc.)<br>
-                            • Reglas de negocio y validaciones<br>
-                            <strong>Tiempo:</strong> 1-2 semanas de levantamiento + documentación
+                            <strong>Quién:</strong> PM + Usuario<br>
+                            <strong>Qué hace:</strong> Completa Formulario C con requerimientos detallados, roles, permisos, módulos funcionales y reglas de negocio.
                         </div>
                     </div>
                     <div class="step-status status-implementar">En Documentación</div>
@@ -1285,15 +1255,9 @@
                     <div class="step-content">
                         <div class="step-title">Validación de Requerimientos</div>
                         <div class="step-description">
-                            <strong>Quién:</strong> PM + Usuario + Arquitecto Técnico<br>
-                            <strong>Qué valida:</strong><br>
-                            • Requerimientos completos y sin ambigüedad<br>
-                            • Mínimo 10 RF documentados con criterios de aceptación claros<br>
-                            • RNF definidos (tiempos de respuesta, concurrencia, seguridad)<br>
-                            • Diagrama de arquitectura (componentes, integraciones)<br>
-                            • Estimación de esfuerzo (story points o horas)<br>
-                            <strong>Si incompleto:</strong> Regresa al paso 4 para completar<br>
-                            <strong>Si completo:</strong> Se firma documento de requerimientos y se avanza
+                            <strong>Quién:</strong> PM + Usuario + Arquitecto<br>
+                            <strong>Qué valida:</strong> Requerimientos completos, diagramas de arquitectura, y estimación de esfuerzo.<br>
+                            <strong>Si incompleto:</strong> Regresa al paso anterior
                         </div>
                     </div>
                     <div class="step-status status-implementar">Validación</div>
@@ -1304,16 +1268,9 @@
                     <div class="step-content">
                         <div class="step-title">Desarrollo e Implementación</div>
                         <div class="step-description">
-                            <strong>Quién:</strong> Equipo de Desarrollo (Frontend, Backend, QA, DevOps)<br>
-                            <strong>Actividades:</strong><br>
-                            • Sprint Planning y división en tareas<br>
-                            • Desarrollo iterativo con demos periódicas al usuario<br>
-                            • Testing: unitario, integración, UAT (User Acceptance Testing)<br>
-                            • Configuración de ambientes (Dev, QA, Staging, Producción)<br>
-                            • Preparación de documentación técnica y de usuario<br>
-                            • Capacitación a usuarios finales<br>
-                            <strong>Registro en BD:</strong> Se crea registro en tabla Sistemas con versión 1.0, estado "Desarrollo"<br>
-                            <strong>Tiempo:</strong> 2-6 meses (depende de complejidad)
+                            <strong>Quién:</strong> Equipo de Desarrollo<br>
+                            <strong>Actividades:</strong> Desarrollo iterativo, testing, configuración de ambientes, documentación y capacitación.<br>
+                            <strong>Registro:</strong> Versión 1.0, estado "Desarrollo"
                         </div>
                     </div>
                     <div class="step-status status-implementar">En Desarrollo</div>
@@ -1324,15 +1281,7 @@
                     <div class="step-content">
                         <div class="step-title">Despliegue a Producción y Cierre</div>
                         <div class="step-description">
-                            <strong>Actividades finales:</strong><br>
-                            • Despliegue a ambiente de producción<br>
-                            • Monitoreo intensivo los primeros días (24/7)<br>
-                            • Soporte hiper-atento a usuarios durante el Go-Live<br>
-                            • Actualización en BD: Estado cambia a "Producción", Fecha Go-Live registrada<br>
-                            • Tabla Uptime_Sistema: Inicia tracking de disponibilidad (objetivo 99.9%)<br>
-                            • Auditoría completa en Audit_Sistemas_Nuevos: cierre del proyecto con métricas<br>
-                            • Handover del sistema a equipo de soporte/mantenimiento<br>
-                            • Lecciones aprendidas documentadas<br>
+                            <strong>Actividades:</strong> Despliegue a producción, monitoreo, soporte intensivo, tracking de disponibilidad.<br>
                             <strong>✅ Sistema operativo y en producción</strong>
                         </div>
                     </div>
@@ -1374,16 +1323,9 @@
                     <div class="step-content">
                         <div class="step-title">Solicitud de Modificación (Formulario B)</div>
                         <div class="step-description">
-                            <strong>Quién:</strong> Usuario que necesita el cambio<br>
-                            <strong>Qué hace:</strong> Completa Formulario B (25+ campos) especificando:<br>
-                            • Sistema a modificar (dropdown con sistemas existentes)<br>
-                            • Tipo de cambio (nueva funcionalidad, corrección, mejora, interfaz, integración, seguridad)<br>
-                            • Descripción detallada del cambio solicitado<br>
-                            • Módulos afectados (Frontend, Backend, BD, Reportes, Integraciones, Seguridad)<br>
-                            • Razón del cambio y situación actual vs deseada<br>
-                            • Urgencia e Impacto en la operación<br>
-                            <strong>Sistema:</strong> Genera ID MOD-2026-XXXX, auto-completa versión actual del sistema<br>
-                            <strong>Tiempo:</strong> 12-15 minutos
+                            <strong>Quién:</strong> Usuario solicitante<br>
+                            <strong>Qué hace:</strong> Completa Formulario B especificando sistema, tipo de cambio, descripción, módulos afectados y urgencia.<br>
+                            <strong>Sistema:</strong> Genera ID MOD-2026-XXXX
                         </div>
                     </div>
                     <div class="step-status status-aprobar">En Revisión</div>
@@ -1394,16 +1336,8 @@
                     <div class="step-content">
                         <div class="step-title">Análisis de Impacto (ISSEG)</div>
                         <div class="step-description">
-                            <strong>Quién:</strong> Equipo técnico ISSEG + PM del sistema<br>
-                            <strong>Qué analiza:</strong><br>
-                            • <strong>Usuarios afectados:</strong> ¿Cuántos usuarios tendrán impacto? ¿Positivo o negativo?<br>
-                            • <strong>Módulos impactados:</strong> ¿Qué partes del sistema hay que tocar?<br>
-                            • <strong>Otros sistemas:</strong> ¿Afecta integraciones con SAP, CRM, etc.?<br>
-                            • <strong>Migración de datos:</strong> ¿Hay que migrar información existente?<br>
-                            • <strong>Capacitación:</strong> ¿Los usuarios necesitan entrenamiento en el cambio?<br>
-                            • <strong>Esfuerzo técnico:</strong> Horas/días de desarrollo estimados<br>
-                            • <strong>Riesgos:</strong> ¿Qué puede salir mal? Plan de contingencia<br>
-                            <strong>Tiempo:</strong> 1-3 días hábiles
+                            <strong>Quién:</strong> Equipo técnico ISSEG<br>
+                            <strong>Qué analiza:</strong> Usuarios afectados, módulos impactados, integraciones, esfuerzo técnico y riesgos.
                         </div>
                     </div>
                     <div class="step-status status-aprobar">Análisis</div>
@@ -1414,16 +1348,11 @@
                     <div class="step-content">
                         <div class="step-title">Asignación Automática de SLA</div>
                         <div class="step-description">
-                            <strong>Sistema asigna SLA según la urgencia seleccionada:</strong><br>
-                            • 🔴 <strong>CRÍTICA:</strong> Respuesta en 1 hora, Resolución en 4 horas<br>
-                            &nbsp;&nbsp;&nbsp;(Sistema caído, pérdida de datos, impacto severo en negocio)<br>
-                            • 🟠 <strong>ALTA:</strong> Respuesta en 4 horas, Resolución en 8 horas<br>
-                            &nbsp;&nbsp;&nbsp;(Afecta operación diaria, workaround temporal disponible)<br>
-                            • 🟡 <strong>MEDIA:</strong> Respuesta en 8 horas, Resolución en 16 horas<br>
-                            &nbsp;&nbsp;&nbsp;(Mejora importante pero no urgente)<br>
-                            • 🟢 <strong>BAJA:</strong> Respuesta en 24 horas, Resolución en 48 horas<br>
-                            &nbsp;&nbsp;&nbsp;(Optimización, mejora cosmética)<br>
-                            <strong>BD:</strong> SLA registrado en tabla SLA_Definiciones, contador inicia automáticamente
+                            <strong>SLA según urgencia:</strong><br>
+                            🔴 <strong>CRÍTICA:</strong> 1h respuesta, 4h resolución<br>
+                            🟠 <strong>ALTA:</strong> 4h respuesta, 8h resolución<br>
+                            🟡 <strong>MEDIA:</strong> 8h respuesta, 16h resolución<br>
+                            🟢 <strong>BAJA:</strong> 24h respuesta, 48h resolución
                         </div>
                     </div>
                     <div class="step-status status-implementar">SLA Activado</div>
@@ -1434,14 +1363,8 @@
                     <div class="step-content">
                         <div class="step-title">Revisión y Decisión ISSEG</div>
                         <div class="step-description">
-                            <strong>Quién:</strong> Responsable ISSEG + PM del sistema<br>
-                            <strong>Decisiones posibles:</strong><br>
-                            • ✅ <strong>APRUEBA:</strong> Se asigna desarrollador y continúa (paso 5)<br>
-                            • ❌ <strong>RECHAZA:</strong> Motivos comunes: no alineado a roadmap, duplica funcionalidad existente, 
-                            requiere refactorización mayor. Se notifica al solicitante con alternativas<br>
-                            • ⚠️ <strong>POSPONE:</strong> Se agrega al backlog para siguiente sprint/release<br>
-                            • ❓ <strong>REQUIERE MÁS INFO:</strong> Solicita aclaraciones al usuario (regresa a paso 1)<br>
-                            <strong>BD:</strong> Estado actualizado en Audit_Modificaciones
+                            <strong>Quién:</strong> Responsable ISSEG<br>
+                            <strong>Decisiones:</strong> Aprobar, Rechazar, Posponer o Solicitar más información.
                         </div>
                     </div>
                     <div class="step-status status-rechazar">Punto de Decisión</div>
@@ -1452,18 +1375,9 @@
                     <div class="step-content">
                         <div class="step-title">Asignación y Desarrollo</div>
                         <div class="step-description">
-                            <strong>Quién:</strong> Desarrollador asignado + QA<br>
-                            <strong>Actividades:</strong><br>
-                            • Crear ticket en sistema de gestión (Jira, Azure DevOps, etc.) con ID MOD-2026-XXXX<br>
-                            • Análisis técnico detallado: qué archivos/componentes tocar<br>
-                            • Desarrollo del cambio en rama de feature<br>
-                            • Unit testing y validación local<br>
-                            • Code review por par técnico<br>
-                            • Despliegue a ambiente QA para testing<br>
-                            • Testing de regresión: asegurar que no se rompe funcionalidad existente<br>
-                            • Migración de datos en QA (si aplica)<br>
-                            <strong>BD:</strong> Registro en Historial_Cambios con estado "En Desarrollo", incremento de versión (v3.2 → v3.3)<br>
-                            <strong>Tiempo:</strong> Variable según SLA (horas para crítica, días/semanas para baja)
+                            <strong>Quién:</strong> Desarrollador + QA<br>
+                            <strong>Actividades:</strong> Desarrollo, testing, code review, validación en QA y testing de regresión.<br>
+                            <strong>Registro:</strong> Historial_Cambios, incremento de versión
                         </div>
                     </div>
                     <div class="step-status status-implementar">En Desarrollo</div>
@@ -1474,20 +1388,7 @@
                     <div class="step-content">
                         <div class="step-title">Despliegue a Producción y Cierre</div>
                         <div class="step-description">
-                            <strong>Actividades de despliegue:</strong><br>
-                            • Plan de despliegue: ¿Cuándo? ¿Horario de menor impacto?<br>
-                            • Comunicación a usuarios afectados (notificación 24-48h antes)<br>
-                            • Backup completo de producción antes del cambio<br>
-                            • Despliegue en horario acordado (usualmente fines de semana o noche)<br>
-                            • Migración de datos en producción (si aplica)<br>
-                            • Smoke testing post-despliegue: validar que todo funcione<br>
-                            • Rollback plan listo por si algo falla<br>
-                            • Capacitación a usuarios (si el cambio lo requiere)<br>
-                            • Monitoreo intensivo primeras 24-48 horas<br>
-                            <strong>BD:</strong><br>
-                            • Historial_Cambios: Estado "Producción", fecha despliegue, versión actualizada<br>
-                            • Audit_Modificaciones: Cierre con métricas (tiempo real vs estimado, issues encontrados)<br>
-                            • Si hubo problemas: registro en Problemas_Reportados vinculado a MOD-ID<br>
+                            <strong>Actividades:</strong> Backup, despliegue en horario acordado, migración de datos, capacitación y monitoreo.<br>
                             <strong>✅ Modificación completada y en producción</strong>
                         </div>
                     </div>
@@ -1514,13 +1415,7 @@
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
                     <h4 style="color: #333; margin-bottom: 10px;">📋 Descripción del Flujo</h4>
                     <p style="color: #666; line-height: 1.6;">
-                        Este flujo se activa cuando un <strong>sistema en producción está fallando, tiene errores o bugs</strong>. 
-                        Es el flujo más ágil y automatizado porque requiere respuesta rápida. No necesita aprobación manual ya que 
-                        un sistema roto debe ser atendido de inmediato. El SLA se asigna automáticamente según la urgencia.
-                    </p>
-                    <p style="color: #666; line-height: 1.6; margin-top: 10px;">
-                        <strong>Ejemplo:</strong> Los usuarios no pueden acceder al sistema de nómina (error 500), o un cálculo 
-                        de impuestos está dando resultados incorrectos. Son problemas que necesitan resolución inmediata.
+                        Se activa cuando un <strong>sistema en producción tiene errores o bugs</strong>. Es el flujo más ágil porque requiere respuesta rápida.
                     </p>
                 </div>
 
@@ -1530,20 +1425,8 @@
                         <div class="step-title">Reporte de Incidencia (Formulario Problema)</div>
                         <div class="step-description">
                             <strong>Quién:</strong> Cualquier usuario afectado<br>
-                            <strong>Qué reporta:</strong> Completa Formulario Problema (20+ campos) incluyendo:<br>
-                            • Sistema afectado y módulo específico<br>
-                            • Título resumido del problema (100 chars max)<br>
-                            • Descripción detallada: ¿Qué está mal?<br>
-                            • Pasos para reproducir el problema (fundamental para el equipo técnico)<br>
-                            • Urgencia seleccionada: Crítica 🔴 / Alta 🟠 / Media 🟡 / Baja 🟢<br>
-                            • Usuarios afectados (cantidad estimada)<br>
-                            • Comportamiento esperado vs comportamiento actual<br>
-                            • Contexto técnico: navegador, SO, dispositivo<br>
-                            • Mensaje de error (copiar exactamente si aparece)<br>
-                            • Archivos adjuntos: screenshots, videos, logs<br>
-                            <strong>Sistema:</strong> Genera ID automático INC-2026-XXXX, timestamp de reporte<br>
-                            <strong>NO requiere aprobación del jefe</strong> (por ser problema operativo urgente)<br>
-                            <strong>Tiempo:</strong> 10-15 minutos
+                            <strong>Qué reporta:</strong> Sistema afectado, descripción del problema, pasos para reproducirlo, urgencia y evidencias.<br>
+                            <strong>Sistema:</strong> Genera ID INC-2026-XXXX
                         </div>
                     </div>
                     <div class="step-status status-auto">Reportado</div>
@@ -1554,20 +1437,11 @@
                     <div class="step-content">
                         <div class="step-title">Asignación Automática de SLA</div>
                         <div class="step-description">
-                            <strong>Sistema asigna SLA automáticamente según urgencia:</strong><br>
-                            • 🔴 <strong>CRÍTICA:</strong> Respuesta 1h / Resolución 4h<br>
-                            &nbsp;&nbsp;&nbsp;Uso: Sistema completamente caído, pérdida de datos, transacciones bloqueadas, 
-                            impacto financiero directo<br>
-                            • 🟠 <strong>ALTA:</strong> Respuesta 4h / Resolución 8h<br>
-                            &nbsp;&nbsp;&nbsp;Uso: Funcionalidad importante no disponible, afecta operación diaria, 
-                            muchos usuarios impactados<br>
-                            • 🟡 <strong>MEDIA:</strong> Respuesta 8h / Resolución 16h<br>
-                            &nbsp;&nbsp;&nbsp;Uso: Error en funcionalidad secundaria, workaround disponible, 
-                            impacto limitado<br>
-                            • 🟢 <strong>BAJA:</strong> Respuesta 24h / Resolución 48h<br>
-                            &nbsp;&nbsp;&nbsp;Uso: Error cosmético, funcionalidad poco usada, sin impacto operativo<br>
-                            <strong>BD:</strong> Registro en SLA_Definiciones, contador SLA inicia automáticamente, 
-                            badge visual asignado
+                            <strong>SLA automático por urgencia:</strong><br>
+                            🔴 <strong>CRÍTICA:</strong> 1h respuesta / 4h resolución<br>
+                            🟠 <strong>ALTA:</strong> 4h respuesta / 8h resolución<br>
+                            🟡 <strong>MEDIA:</strong> 8h respuesta / 16h resolución<br>
+                            🟢 <strong>BAJA:</strong> 24h respuesta / 48h resolución
                         </div>
                     </div>
                     <div class="step-status status-auto">SLA Activado</div>
@@ -1578,18 +1452,7 @@
                     <div class="step-content">
                         <div class="step-title">Notificación Automática y Asignación</div>
                         <div class="step-description">
-                            <strong>Sistema ejecuta automáticamente:</strong><br>
-                            • 📧 Email inmediato al equipo técnico (lista de distribución según sistema)<br>
-                            • 📱 Si es CRÍTICA: SMS/llamada al responsable de guardia<br>
-                            • 🔔 Notificación push en app móvil del equipo<br>
-                            • 📊 Aparece en dashboard de ISSEG con badge de urgencia<br>
-                            • ⏱️ Contador SLA visible en tiempo real (cuenta regresiva)<br>
-                            • 🤖 Asignación automática según reglas:<br>
-                            &nbsp;&nbsp;&nbsp;- Sistema de nómina → Equipo A<br>
-                            &nbsp;&nbsp;&nbsp;- Sistema de ventas → Equipo B<br>
-                            &nbsp;&nbsp;&nbsp;- Si Crítica y fuera de horario → Guardia 24/7<br>
-                            <strong>BD:</strong> Registro en Control_Incidencias con timestamp de inicio<br>
-                            <strong>Tiempo:</strong> < 1 minuto (todo automático)
+                            <strong>Sistema ejecuta:</strong> Notificación al equipo técnico, asignación automática según reglas y activación de contador SLA en tiempo real.
                         </div>
                     </div>
                     <div class="step-status status-auto">Asignado Automático</div>
@@ -1600,18 +1463,8 @@
                     <div class="step-content">
                         <div class="step-title">Diagnóstico e Investigación</div>
                         <div class="step-description">
-                            <strong>Quién:</strong> Equipo técnico asignado (Desarrollador + DevOps)<br>
-                            <strong>Actividades de diagnóstico:</strong><br>
-                            • Revisar evidencia adjunta (screenshots, videos, logs)<br>
-                            • Reproducir el problema en ambiente QA/Staging siguiendo pasos reportados<br>
-                            • Revisar logs del servidor: errores, excepciones, stack traces<br>
-                            • Revisar monitoreo: CPU, memoria, disco, red (¿hay recursos agotados?)<br>
-                            • Revisar logs de BD: queries lentos, deadlocks, errores de conexión<br>
-                            • Revisar cambios recientes: ¿se desplegó algo nuevo?<br>
-                            • Identificar causa raíz del problema<br>
-                            • Actualizar ticket con hallazgos cada 30-60 minutos (transparencia al usuario)<br>
-                            <strong>BD:</strong> Actualización de estado en Problemas_Reportados: "En Diagnóstico"<br>
-                            <strong>Tiempo:</strong> Variable (15 min - 2 horas según complejidad)
+                            <strong>Quién:</strong> Equipo técnico<br>
+                            <strong>Actividades:</strong> Revisar evidencias, reproducir el problema, revisar logs, identificar causa raíz.
                         </div>
                     </div>
                     <div class="step-status status-implementar">En Investigación</div>
@@ -1622,20 +1475,8 @@
                     <div class="step-content">
                         <div class="step-title">Resolución e Implementación del Fix</div>
                         <div class="step-description">
-                            <strong>Actividades de resolución:</strong><br>
-                            • Desarrollar el fix (código, configuración, query, etc.)<br>
-                            • Testing local del fix<br>
-                            • Despliegue a QA y validación<br>
-                            • Si es CRÍTICA: despliegue directo a producción (con backup previo)<br>
-                            • Si es Alta/Media/Baja: esperar ventana de despliegue programada<br>
-                            • Rollback plan listo por si el fix empeora las cosas<br>
-                            • Monitoreo post-despliegue: verificar que el problema está resuelto<br>
-                            • Comunicación al usuario reportante: "Fix desplegado, favor validar"<br>
-                            <strong>BD:</strong><br>
-                            • Problemas_Reportados: Estado "En Resolución" → "Resuelto"<br>
-                            • Historial_Cambios: Registro del hotfix con versión patch (v3.2.0 → v3.2.1)<br>
-                            • Control_Incidencias: Tiempo de resolución real registrado<br>
-                            <strong>Tiempo:</strong> Variable según SLA (1-48 horas)
+                            <strong>Actividades:</strong> Desarrollar fix, testing, despliegue según urgencia, monitoreo post-despliegue.<br>
+                            <strong>Registro:</strong> Historial_Cambios, versión patch actualizada
                         </div>
                     </div>
                     <div class="step-status status-implementar">En Resolución</div>
@@ -1646,25 +1487,9 @@
                     <div class="step-content">
                         <div class="step-title">Verificación, Cierre y Post-Mortem</div>
                         <div class="step-description">
-                            <strong>Verificación:</strong><br>
-                            • Usuario reportante valida que el problema está resuelto ✅<br>
-                            • Si NO está resuelto: regresa al paso 4 (reabrir incidencia)<br>
-                            • Si está resuelto: se procede al cierre<br>
-                            <strong>Actividades de cierre:</strong><br>
-                            • BD: Estado final "Cerrado" en Problemas_Reportados<br>
-                            • Control_Incidencias: Métricas finales:<br>
-                            &nbsp;&nbsp;&nbsp;- Tiempo respuesta real vs SLA (¿se cumplió?)<br>
-                            &nbsp;&nbsp;&nbsp;- Tiempo resolución real vs SLA<br>
-                            &nbsp;&nbsp;&nbsp;- Si no cumplió SLA: registro en Alertas_SLA para análisis gerencial<br>
-                            • Encuesta de satisfacción al usuario (1-5 estrellas)<br>
-                            <strong>Post-Mortem (si fue Crítica):</strong><br>
-                            • Reunión de equipo para análisis de causa raíz<br>
-                            • ¿Por qué pasó? ¿Cómo prevenirlo?<br>
-                            • Plan de acción: mejoras al proceso, monitoreo, alertas<br>
-                            • Documentación de lecciones aprendidas<br>
-                            • Si fue error humano: reforzar capacitación<br>
-                            • Si fue falta de monitoreo: implementar alertas proactivas<br>
-                            <strong>✅ Incidencia cerrada y aprendizaje capturado</strong>
+                            <strong>Verificación:</strong> Usuario valida la resolución.<br>
+                            <strong>Cierre:</strong> Registro de métricas, cumplimiento de SLA y encuesta de satisfacción.<br>
+                            <strong>✅ Incidencia cerrada</strong>
                         </div>
                     </div>
                     <div class="step-status status-auto">✅ Cerrado</div>
