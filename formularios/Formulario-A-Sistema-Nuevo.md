@@ -18,15 +18,15 @@
 |-------|------|-------------|-------------|
 | Nombre del Sistema | Texto (100 chars) | Sí | Nombre descriptivo y claro |
 | Tipo de Sistema | Lista | Sí | Web, Escritorio, Móvil, API, Híbrido |
-| Descripción General | Textarea (500 chars) | Sí | ¿Qué hace el sistema? |
-| Problema que Resuelve | Textarea (500 chars) | Sí | Situación actual problemática |
+| Descripción General | Textarea | Sí | Qué hace el sistema |
+| Problema que Resuelve | Textarea | Sí | Situación actual |
 
 ## Justificación y Alcance
 
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| Justificación del Negocio | Textarea (1000 chars) | Sí | Por qué es necesario este sistema |
-| Beneficios Esperados | Checkbox múltiple | Sí | Ahorro tiempo, reducción errores, automatización, cumplimiento normativo, mejora servicio, reducción costos |
+| Justificación del Negocio | Textarea | Sí | Por qué es necesario |
+| Beneficios Esperados | Checkbox múltiple | Sí | Ahorro tiempo, automatización, mejora servicio |
 | Usuarios Finales Estimados | Número | Sí | Cantidad aproximada de usuarios |
 | Áreas Involucradas | Checkbox múltiple | Sí | RRHH, Finanzas, Operaciones, Ventas, Logística |
 | Prioridad del Negocio | Radio button | Sí | Crítica, Alta, Media, Baja |
@@ -45,9 +45,8 @@
 
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| Fecha Límite Deseada | Fecha | No | Cuándo se necesita en operación |
-| Presupuesto Estimado | Número + Moneda | No | Recursos financieros disponibles |
-| Recursos Humanos Disponibles | Textarea | No | Personal de área que puede apoyar |
+| Fecha Límite Deseada | Fecha | No | Cuándo se necesita |
+| Recursos Humanos Disponibles | Textarea | No | Personal disponible |
 
 ## Documentación Adicional
 
@@ -67,7 +66,5 @@
 ---
 
 ## Resumen
-- **Total de Secciones:** 7
-- **Total de Campos:** 25+
-- **Tiempo estimado:** 15-20 minutos
+- **Total de Campos:** 11
 - **Requiere Aprobación:** Sí (Revisión ISSEG)

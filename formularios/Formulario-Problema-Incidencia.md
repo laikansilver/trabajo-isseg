@@ -26,9 +26,9 @@
 
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| Título Resumido | Texto (100 chars) | Sí | Resumen de una línea del problema |
-| Descripción Detallada | Textarea (1000 chars) | Sí | ¿Qué está pasando? ¿Qué comportamiento es incorrecto? |
-| Pasos para Reproducir | Textarea (500 chars) | Sí | Instrucciones paso a paso para reproducir |
+| Título Resumido | Texto | Sí | Resumen breve |
+| Descripción Detallada | Textarea | Sí | Qué está pasando |
+| Pasos para Reproducir | Textarea | Sí | Pasos para reproducir |
 | ¿Se puede reproducir? | Radio | Sí | Siempre / A veces / No se puede reproducir |
 
 ## Impacto y Urgencia
@@ -58,9 +58,9 @@
 | Sistema Operativo | Texto | Sí | Windows 11, macOS 14.2, Ubuntu 22.04, Android |
 | Memoria Disponible | Texto | No | Ej: 8GB RAM |
 | Conexión a Internet | Texto | No | Wifi / Fibra / Móvil |
-| Mensaje de Error | Textarea (500 chars) | No | Si hay error, copiar exactamente |
-| Código de Error | Texto | No | Ej: ERROR-500, ERR_CONNECTION_REFUSED |
-| Comportamiento Esperado | Textarea (500 chars) | Sí | ¿Qué debería pasar? |
+| Mensaje de Error | Textarea | No | Error exacto |
+| Código de Error | Texto | No | Código de error |
+| Comportamiento Esperado | Textarea | Sí | Qué debería pasar |
 
 ## Evidencia y Anexos
 
@@ -82,12 +82,9 @@
 ---
 
 ## Resumen
-- **Total de Secciones:** 7
-- **Total de Campos:** 20+ (campos simples y automáticos)
-- **Tiempo estimado:** 10-15 minutos
+- **Total de Campos:** 14
 - **Requiere Aprobación:** No
-- **SLA Automático:** Sí (calculado por urgencia)
-- **Notificación Automática:** Sí (al equipo técnico)
+- **SLA Automático:** Sí (por urgencia)
 
 ## Notas
 - El ID se genera automáticamente al guardar

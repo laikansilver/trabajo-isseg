@@ -16,8 +16,8 @@
 
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| Tipo de Modificación | Radio button | Sí | Nueva funcionalidad, Corrección de error, Mejora de rendimiento, Cambio de interfaz, Integración, Seguridad, Otro |
-| Descripción Detallada | Textarea (1000 chars) | Sí | Explicación clara del cambio solicitado |
+| Tipo de Modificación | Radio button | Sí | Nueva funcionalidad, Corrección, Mejora, Integración |
+| Descripción Detallada | Textarea | Sí | Detalle del cambio |
 | Módulos Afectados | Checkbox múltiple | Sí | Frontend, Backend, Base de Datos, Reportes, Integraciones, Seguridad |
 
 ## Análisis de Necesidad
@@ -69,8 +69,6 @@
 ---
 
 ## Resumen
-- **Total de Secciones:** 8
-- **Total de Campos:** 25+
-- **Tiempo estimado:** 12-15 minutos
+- **Total de Campos:** 13
 - **Requiere Aprobación:** Sí (Revisión ISSEG)
-- **SLA:** Según urgencia seleccionada
+- **SLA:** Según urgencia

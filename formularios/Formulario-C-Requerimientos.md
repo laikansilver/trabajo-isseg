@@ -17,10 +17,10 @@
 
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| Objetivo General del Sistema | Textarea (500 chars) | Sí | Meta principal del sistema |
-| Objetivos Específicos | Textarea (1000 chars) | Sí | Lista numerada de objetivos concretos |
-| Alcance Funcional (Qué SÍ incluye) | Textarea (1000 chars) | Sí | Qué sí incluye el sistema |
-| Fuera de Alcance (Qué NO incluye) | Textarea (1000 chars) | Sí | Qué NO incluye el sistema (clarificar límites) |
+| Objetivo General del Sistema | Textarea | Sí | Meta principal |
+| Objetivos Específicos | Textarea | Sí | Objetivos concretos |
+| Alcance Funcional (Qué SÍ incluye) | Textarea | Sí | Qué incluye |
+| Fuera de Alcance (Qué NO incluye) | Textarea | Sí | Qué NO incluye |
 
 ## Actores y Roles del Sistema
 
@@ -81,20 +81,13 @@ Validaciones, cálculos, restricciones que debe implementar el sistema:
 
 | Categoría | Descripción | Métrica |
 |-----------|-------------|---------|
-| **Rendimiento** | Tiempo de respuesta esperado, usuarios concurrentes | < 2 segundos, 500 usuarios concurrentes |
-| **Seguridad** | Encriptación, autenticación, autorización | SSL/TLS, OAuth 2.0, RBAC |
-| **Escalabilidad** | Capacidad de crecimiento | Soportar 10x usuarios en 2 años |
-| **Disponibilidad/SLA** | Uptime esperado, horarios mantenimiento | 99.9% uptime |
-| **Compatibilidad** | Navegadores, sistemas operativos | Chrome, Firefox, Safari, Edge; Windows, macOS, Linux |
-| **Usabilidad** | Interfaz intuitiva, accesibilidad | WCAG 2.1 Level AA |
-| **Mantenibilidad** | Documentación, soporte técnico | Documentación completa, API documentada |
-| **Backup/Recuperación** | Estrategia de datos | Backup diario, RTO < 4h |
+| **Rendimiento** | Tiempo de respuesta | < 2 segundos |
+| **Seguridad** | Encriptación, autenticación | SSL/TLS, OAuth 2.0 |
+| **Disponibilidad** | Uptime esperado | 99.9% uptime |
 
 ---
 
 ## Resumen
-- **Total de Secciones:** 7
-- **Total de Campos:** 50+ (incluye tablas dinámicas)
-- **Tiempo estimado:** 30-45 minutos
-- **Requiere Aprobación:** No (pero requiere validación con PM)
-- **Mínimo Requerido:** 10 Requerimientos Funcionales
+- **Total de Campos:** 11
+- **Requiere Aprobación:** PM
+- **Mínimo:** 10 Requerimientos Funcionales

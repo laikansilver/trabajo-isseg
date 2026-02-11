@@ -9,13 +9,11 @@
 | Aspecto | Form A: Sistema Nuevo | Form B: Modificación | Form C: Requerimientos | Form Problema |
 |--------|----------------------|----------------------|----------------------|---------------|
 | **ID Auto** | SN-YYYY-NNNN | MOD-YYYY-NNNN | Sin ID | INC-YYYY-NNNN |
-| **Propósito** | Solicitar nuevo sistema | Solicitar cambios en sistema existente | Detallar requerimientos post-aprobación | Reportar errores/bugs |
-| **Secciones** | 7 | 8 | 7 | 7 |
-| **Campos Totales** | 25+ | 25+ | 50+ | 20+ |
-| **Tiempo Completar** | 15-20 min | 12-15 min | 30-45 min | 10-15 min |
-| **Requiere Aprobación** | **SÍ (ISSEG)** | **SÍ (ISSEG)** | No (validación PM) | **No** |
-| **SLA/Seguimiento** | Por aprobación | Por urgencia | N/A | **Automático por urgencia** |
-| **Paso Siguiente** | Form C (si aprueba) | Implementación | Desarrollo | Resolución técnica |
+| **Propósito** | Solicitar nuevo sistema | Solicitar cambios | Detallar requerimientos | Reportar errores |
+| **Campos Totales** | 11 | 13 | 11 | 14 |
+| **Requiere Aprobación** | **SÍ (ISSEG)** | **SÍ (ISSEG)** | PM | **No** |
+| **SLA** | Por aprobación | Por urgencia | N/A | **Automático** |
+| **Paso Siguiente** | Form C (si aprueba) | Implementación | Desarrollo | Resolución |
 
 ---
 
@@ -35,14 +33,14 @@
 
 ### Campos Principales:
 1. **Información General** - Quién solicita, cuándo, contacto
-2. **Descripción del Sistema** - Nombre, tipo, problema que resuelve
-3. **Justificación** - Por qué, beneficios esperados
-4. **Alcance Preliminar** - Funcionalidades, integraciones, plataforma
-5. **Recursos y Timeline** - Presupuesto, deadline, personas
-6. **Documentación** - Archivos, aclaraciones adicionales
+2. **Descripción del Sistema** - Nombre, tipo, qué resuelve
+3. **Justificación** - Por qué, beneficios
+4. **Alcance Preliminar** - Funcionalidades, plataforma
+5. **Recursos y Timeline** - Deadline, personal
+6. **Documentación** - Archivos adicionales
 7. **Aprobaciones** - Firma del jefe
 
-**Información a Recolectar:** 25+ campos (datos operacionales + justificación empresarial)
+**Información a Recolectar:** 11 campos principales
 
 ---
 
@@ -68,10 +66,10 @@
 3. **Análisis de Necesidad** - Razón, situación actual vs deseada
 4. **Análisis de Impacto** - Urgencia, usuarios afectados, migración necesaria
 5. **Detalles Técnicos** - Especificación de desarrollo
-6. **Contexto y Referencias** - Ticket de error, documentación
-7. **Soluciones Temporales** - Workaround disponible (mientras se resuelve)
+6. **Contexto y Referencias** - Documentación
+7. **Soluciones Temporales** - Workaround
 
-**Información a Recolectar:** 25+ campos (datos de cambio + análisis de impacto)
+**Información a Recolectar:** 13 campos principales
 
 ---
 
@@ -96,11 +94,11 @@
 2. **Objetivos y Alcance** - Qué sí y qué no incluye
 3. **Actores y Roles** - Quiénes usan qué (tabla dinámica)
 4. **Módulos Funcionales** - Desglose de componentes
-5. **Requerimientos Funcionales (RF)** - Mínimo 10 RF específicos con criterios de aceptación
-6. **Reglas de Negocio** - Validaciones, restricciones, cálculos
-7. **Requerimientos No Funcionales (RNF)** - Rendimiento, seguridad, escalabilidad, SLA
+5. **Requerimientos Funcionales (RF)** - Mínimo 10 RF con criterios
+6. **Reglas de Negocio** - Validaciones
+7. **Requerimientos No Funcionales (RNF)** - Rendimiento, seguridad, SLA
 
-**Información a Recolectar:** 50+ campos (especificación técnica detallada)
+**Información a Recolectar:** 11 campos principales
 
 ---
 
@@ -124,10 +122,10 @@
 3. **Descripción** - Qué está mal, pasos para reproducir
 4. **Impacto y Urgencia** - Cuántos afectados, SLA automático
 5. **Contexto Técnico** - Navegador, SO, mensaje de error
-6. **Evidencia** - Screenshots, videos, logs
-7. **Confirmación** - Autorización para contacto de seguimiento
+6. **Evidencia** - Screenshots, logs
+7. **Confirmación** - Autorización de contacto
 
-**Información a Recolectar:** 20+ campos (datos técnicos + contexto del error)
+**Información a Recolectar:** 14 campos principales
 
 ---
 
@@ -213,7 +211,7 @@
 
 ### Gerente/Jefe Directo
 - [ ] ¿Revisé y valido la necesidad?
-- [ ] ¿Tengo presupuesto para esto? (solo Form A y B)
+- [ ] ¿Tengo aprobación del jefe? (solo Form A y B)
 - [ ] ¿Puedo aprobar el cambio?
 - [ ] ¿Informo a mi equipo si es aprobado?
 
