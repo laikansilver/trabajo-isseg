@@ -8,7 +8,7 @@ TAMAÑO TOTAL: 160+ KB
 DIAGRAMAS MERMAID: 30+ diagramas
 QUERIES SQL: 25+ scripts listos
 CÓDIGO DE EJEMPLO: React, Python, SQL completo
-TABLAS DE ESPECIFICACIÓN: 50+ tablas técnicas
+TABLAS DE ESPECIFICACIÓN: 40+ tablas técnicas
 ```
 
 ---
@@ -34,12 +34,14 @@ TABLAS DE ESPECIFICACIÓN: 50+ tablas técnicas
 ### 2. 02-formularios-estructurados.md (18 KB)
 **Especificación Completa de Formularios**
 ```
-✓ Formulario A: Sistema Nuevo (30 campos)
+✓ Formulario A: Sistema Nuevo (11 campos)
   - Info general, justificación, alcance, recursos
-✓ Formulario B: Modificación (35 campos)
+✓ Formulario B: Modificación (13 campos)
   - Descripción, impacto, análisis, urgencia
-✓ Formulario C: Requerimientos Detallados (50 campos)
-  - Módulos, casos de uso, modelo datos, integraciones
+✓ Formulario C: Requerimientos Detallados (11 campos)
+  - Módulos, casos de uso, modelo datos
+✓ Formulario Problema: Incidencias (14 campos)
+  - Reporte de bugs y errores
 ✓ Validaciones por formulario
 ✓ Workflow de aprobaciones
 ```
@@ -167,7 +169,6 @@ TABLAS DE ESPECIFICACIÓN: 50+ tablas técnicas
 ✓ Métricas de éxito
 ✓ Dependencias externas
 ✓ Entregables finales
-✓ Presupuesto estimado
 ```
 👥 Para: Project Managers, Ejecutivos
 
@@ -179,7 +180,7 @@ TABLAS DE ESPECIFICACIÓN: 50+ tablas técnicas
 ```
 1. Lee: Resumen Ejecutivo (06) → 10 min
 2. Mira: Diagramas flujo (01) primeras secciones → 10 min
-3. Revisa: Presupuesto (09) → 5 min
+3. Revisa: Recursos y timeline (09) → 5 min
 4. Toma decisión: Aprobar/rechazar → 5 min
 ```
 
@@ -243,7 +244,7 @@ FRONTEND:
 ### Alcance de Documentación
 ```
 Diagramas Mermaid:         32
-Tablas de especificación:  50+
+Tablas de especificación:  40+
 Queries SQL:               25+
 Endpoints API:             15+
 Código de ejemplo:         5+ snippets
@@ -264,7 +265,7 @@ Riesgos identificados:     8
 □ Arquitecto valida diseño (01, 04, 05)
 □ DBA revisa BD (04)
 □ Project Manager valida timeline (09)
-□ Ejecutivo aprueba presupuesto
+□ Ejecutivo aprueba recursos
 → DECISIÓN: SÍ o NO
 ```
 

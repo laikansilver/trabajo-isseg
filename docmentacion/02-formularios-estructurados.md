@@ -42,9 +42,8 @@
 ### Sección 5: Recursos y Timeline
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| **Fecha Límite Deseada** | Fecha | No | Cuándo se necesita en operación |
-| **Presupuesto Estimado** | Numérico + Moneda | No | Recursos financieros disponibles |
-| **Recursos Humanos Disponibles** | Texto | No | Personal de área que puede apoyar |
+| **Fecha Límite Deseada** | Fecha | No | Cuándo se necesita |
+| **Recursos Humanos Disponibles** | Texto | No | Personal disponible |
 
 ### Sección 6: Documentación Adicional
 | Campo | Tipo | Obligatorio | Descripción |
@@ -272,7 +271,7 @@
 |-------|------|-------------|-------------|
 | **Riesgos Identificados** | Tabla dinámica | Sí | Riesgo / Probabilidad / Impacto / Mitigación |
 | **Restricciones Técnicas** | Texto largo | No | Limitaciones tecnológicas o de infraestructura |
-| **Restricciones de Negocio** | Texto largo | No | Presupuesto, tiempo, recursos humanos |
+| **Restricciones de Negocio** | Texto largo | No | Tiempo, equipo, recursos humanos |
 
 ### Sección 15: Anexos y Documentación de Soporte
 | Campo | Tipo | Obligatorio | Descripción |

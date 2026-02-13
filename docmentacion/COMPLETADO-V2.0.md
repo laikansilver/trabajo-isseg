@@ -24,7 +24,7 @@
 ║  💡 Queries SQL:           30+ listos                    ║
 ║  🎯 Casos de test:         40+                           ║
 ║  ⏰ Timeline:              6 semanas                      ║
-║  💰 Presupuesto:           $284,250                      ║
+∥  💼 Recursos:           Equipo 8-10 personas              ∥
 ║                                                            ║
 ╚════════════════════════════════════════════════════════════╝
 ```
@@ -271,7 +271,7 @@ Total: 16 archivos, 251.8 KB
 1. Lee este documento (5 min)
 2. Lee 06-resumen-ejecutivo.md (10 min)
 3. Lee 09-matriz-implementacion.md (5 min)
-✅ Aprueba presupuesto y timeline
+✅ Aprueba recursos y timeline
 ```
 
 ### Para Arquitecto (2 horas)
@@ -329,7 +329,7 @@ Total: 16 archivos, 251.8 KB
 
 ### Implementación
 - [x] Timeline 6 semanas
-- [x] Presupuesto $284K
+- [x] Recursos: Equipo 8-10 personas
 - [x] Matriz RACI
 - [x] Plan de testing (40+ casos)
 - [x] Gestión de riesgos (8 riesgos)

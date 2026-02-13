@@ -500,7 +500,7 @@ POST-LANZAMIENTO (Mes 1):
 
 1. **Aprobación Ejecutiva** (1 semana)
    - Presentar diagramas y arquitectura
-   - Obtener presupuesto y recursos
+   - Asignar recursos y equipo
 
 2. **Setup de Infraestructura** (1 semana)
    - Servidores

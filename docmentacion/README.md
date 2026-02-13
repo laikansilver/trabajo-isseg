@@ -5,7 +5,7 @@
 **Fecha de Entrega:** 3 de febrero de 2026  
 **Documentación Total:** 168 KB en 10 archivos  
 **Diagramas:** 32+ diagramas Mermaid.js  
-**Especificaciones:** 50+ tablas técnicas  
+**Especificaciones:** 40+ tablas técnicas  
 **Código de Ejemplo:** Listo para implementar  
 
 ---
@@ -144,7 +144,6 @@
 - Métricas de éxito
 - Dependencias externas
 - Entregables finales
-- Presupuesto estimado
 
 ---
 
@@ -168,9 +167,10 @@
 - Validación multi-nivel
 
 ### ✅ Formularios
-- Formulario A: Crear sistema (30 campos)
-- Formulario B: Modificar sistema (35 campos)
-- Formulario C: Requerimientos (50 campos)
+- Formulario A: Crear sistema (11 campos)
+- Formulario B: Modificar sistema (13 campos)
+- Formulario C: Requerimientos (11 campos)
+- Formulario Problema: Incidencias (14 campos)
 - Validaciones completas
 - Workflow de aprobación
 
@@ -417,7 +417,7 @@ Esta documentación te ahorra:
 ### ESTA SEMANA (1 día)
 - [ ] Meeting de aprobación
 - [ ] Decisión go/no-go
-- [ ] Asignación de presupuesto
+- [ ] Asignación de recursos
 
 ### PRÓXIMA SEMANA (5 días)
 - [ ] Kick-off del proyecto

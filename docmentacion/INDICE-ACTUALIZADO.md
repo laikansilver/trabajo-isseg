@@ -147,7 +147,7 @@ Para: Ejecutivos, Gerentes
 - Matriz 11 features
 - Timeline semanal
 - RACI matrix
-- Presupuesto: $284K
+- Recursos requeridos
 - 8 riesgos + mitigaciones
 
 ---
@@ -158,7 +158,7 @@ Para: Ejecutivos, Gerentes
 1. Este índice (2 min)
 2. [06-resumen-ejecutivo.md](06-resumen-ejecutivo.md) (10 min)
 3. [09-matriz-implementacion.md](09-matriz-implementacion.md) (3 min)
-✅ Aprueba presupuesto y timeline
+✅ Aprueba recursos y timeline
 
 ### 🏗️ ARQUITECTO (90 minutos)
 1. [01-diagrama-flujo-tickets.md](01-diagrama-flujo-tickets.md) Sección 0 (15 min)
@@ -234,7 +234,7 @@ Para: Ejecutivos, Gerentes
 - [x] 30+ queries SQL
 - [x] 3 formularios (115 campos totales)
 - [x] Timeline 6 semanas
-- [x] Presupuesto estimado
+- [x] Recursos requeridos
 - [x] Plan de testing
 - [x] Matriz RACI
 
@@ -291,7 +291,7 @@ CÓDIGO:
 ## 🚀 PRÓXIMOS PASOS
 
 ### Esta Semana
-- [x] Ejecutivo aprueba presupuesto (lee archivo 06, 09)
+- [x] Ejecutivo aprueba recursos (lee archivo 06, 09)
 - [x] Arquitecto valida diseño (lee archivos 01, 04, 10, 11)
 - [x] DBA planifica implementación (lee archivos 04, 10, 11)
 

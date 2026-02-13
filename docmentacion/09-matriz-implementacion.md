@@ -6,7 +6,7 @@
 PROYECTO: Sistema de Gestión de Tickets de Desarrollo con Control de Acceso
 DURACIÓN: 6 semanas
 EQUIPO: 8-10 personas (Backend 2, Frontend 2, QA 1, DBA 1, DevOps 1, PM 1)
-PRESUPUESTO: Pequeño (desarrollo interno) a Mediano (cloud hosting)
+RECURSOS: Desarrollo interno + cloud hosting
 COMPLEJIDAD: Media (autenticación + BD relacional)
 RIESGO: Bajo (arquitectura probada)
 IMPACTO: Alto (centraliza todas las solicitudes)
@@ -341,7 +341,7 @@ COMERCIALES:
 ```
 PRE-REQUISITOS PARA INICIAR:
 □ Aprobación ejecutiva
-□ Presupuesto asignado
+□ Recursos asignados
 □ Equipo confirmado
 □ Infraestructura disponible
 □ Acceso a datos de usuarios existentes
@@ -414,24 +414,26 @@ Después de Estable:
 
 ---
 
-## Presupuesto Estimado
+## Recursos Requeridos
 
-| Item | Cantidad | Unitario | Total |
-|------|----------|----------|-------|
-| **Equipo** | | | |
-| Salarios (6 personas × 6 semanas) | 1,440 horas | $150/h | $216,000 |
-| **Infraestructura** | | | |
-| Servidores cloud (3 meses) | 3 | $2,000/mes | $6,000 |
-| Base de datos managed | 3 meses | $500/mes | $1,500 |
-| Herramientas software | Licencias | - | $2,000 |
-| **Training & Documentation** | | | |
-| Capacitación (4 sesiones) | 100 personas | $200 | $20,000 |
-| Documentación | 1 set | $5,000 | $5,000 |
-| **Contingency (15%)** | | | $33,750 |
-| **────────────────────────────** | | | **───────** |
-| **TOTAL** | | | **$284,250** |
+### Equipo de Desarrollo
+| Rol | Cantidad | Dedicación |
+|-----|----------|-------------|
+| Backend Developer | 2 | 6 semanas |
+| Frontend Developer | 2 | 6 semanas |
+| DBA | 1 | 4 semanas |
+| QA Tester | 1 | 3 semanas |
 
-*Nota: Este es un presupuesto de desarrollo interno. Con outsourcing podría variar significativamente.*
+### Infraestructura
+- Servidores cloud (3 meses)
+- Base de datos managed
+- Herramientas de desarrollo
+- Licencias software necesarias
+
+### Capacitación
+- 4 sesiones de capacitación para usuarios
+- Documentación completa del sistema
+- Guías de usuario y manuales
 
 ---
 

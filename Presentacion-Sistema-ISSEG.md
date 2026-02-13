@@ -174,7 +174,7 @@ los compromisos de tiempo de servicio establecidos con los usuarios. -->
 ✅ **Qué** sistema necesita (nombre, tipo, descripción)  
 ✅ **Por qué** lo necesita (justificación, beneficios)  
 ✅ **Para qué** (alcance, funcionalidades, usuarios)  
-✅ **Recursos** (presupuesto, timeline, personas)  
+✅ **Recursos** (timeline, equipo disponible)  
 ✅ **Aprobación** del jefe directo
 
 ---
@@ -206,9 +206,9 @@ los compromisos de tiempo de servicio establecidos con los usuarios. -->
 │     • Integraciones necesarias                  │
 │     • Plataforma (Web/Desktop/Mobile)           │
 │                                                 │
-│  5️⃣ Recursos y Timeline (3 campos)              │
+│  5️⃣ Recursos y Timeline (2 campos)              │
 │     • Fecha límite                              │
-│     • Presupuesto estimado                      │
+│     • Recursos humanos disponibles              │
 │                                                 │
 │  6️⃣ Documentación (2 campos)                    │
 │     • Archivos adjuntos                         │
@@ -280,11 +280,11 @@ los compromisos de tiempo de servicio establecidos con los usuarios. -->
 - 💻 **Equipo de Desarrollo** (técnicos)
 - 🏢 **Usuario de Negocio** (define necesidades)
 
-### Documentación que Genera (50+ campos):
+### Documentación que Genera (11 campos):
 ✅ Especificación técnica completa  
 ✅ Roles y permisos de usuarios  
 ✅ **Mínimo 10 Requerimientos Funcionales (RF)**  
-✅ Requerimientos No Funcionales (RNF): rendimiento, seguridad, escalabilidad  
+✅ Requerimientos No Funcionales (RNF): rendimiento, seguridad  
 ✅ Reglas de negocio y validaciones  
 ✅ Módulos y dependencias
 
@@ -695,7 +695,7 @@ los compromisos de tiempo de servicio establecidos con los usuarios. -->
 ✅ Visibilidad de todas las solicitudes de su área  
 ✅ Aprobaciones digitales con trazabilidad  
 ✅ Reportes ejecutivos de proyectos  
-✅ Mejor asignación de presupuesto  
+✅ Mejor asignación de recursos  
 
 ### 💻 **Equipo ISSEG**
 ✅ Centralización de solicitudes (no más emails/llamadas)  
@@ -765,7 +765,7 @@ los compromisos de tiempo de servicio establecidos con los usuarios. -->
 | **DevOps** | 25% | Infraestructura, CI/CD, monitoreo |
 | **Capacitador** | 50% (temporal) | Training, documentación de usuario |
 
-### 💰 Presupuesto Estimado
+### � Recursos Requeridos
 - **Desarrollo:** 6 meses x equipo
 - **Infraestructura:** Servidor, BD, almacenamiento
 - **Licencias:** Herramientas de desarrollo, monitoreo
@@ -803,7 +803,7 @@ los compromisos de tiempo de servicio establecidos con los usuarios. -->
 ### 🚀 **Próximos Pasos Inmediatos:**
 
 1. **Aprobación** de la propuesta
-2. **Asignación** de equipo y presupuesto
+2. **Asignación** de equipo y recursos
 3. **Inicio** de desarrollo (Fase 1)
 4. **Piloto** en 2 meses
 
@@ -928,7 +928,6 @@ Acceso: Interno (red empresarial)
 5️⃣ RECURSOS Y TIMELINE
 
 Fecha Límite: 30/06/2026 (cierre fiscal Q2)
-Presupuesto Estimado: $80,000 USD
 Recursos Humanos: 1 usuario tiempo completo para levantamiento
 
 ---

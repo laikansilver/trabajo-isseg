@@ -45,7 +45,6 @@ CREATE TABLE Áreas (
     Max_Usuarios_Autorizados INT DEFAULT 5,
     Puede_Crear_Sistemas_Nuevos BOOLEAN DEFAULT TRUE,
     Puede_Solicitar_Modificaciones BOOLEAN DEFAULT TRUE,
-    Presupuesto_Anual DECIMAL(12,2),
     Fecha_Creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
     Estado ENUM('Activo', 'Inactivo') DEFAULT 'Activo',
     FOREIGN KEY (ID_Responsable) REFERENCES Usuarios(ID_Usuario)
@@ -56,7 +55,6 @@ CREATE TABLE Áreas (
 - Define las áreas/departamentos de la institución
 - Control de cuántos usuarios autorizados por área
 - Permisos a nivel de área (crear sistemas, solicitar modificaciones)
-- Presupuesto asociado para control de costos
 
 ---
 

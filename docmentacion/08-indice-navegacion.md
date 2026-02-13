@@ -28,16 +28,20 @@
 
 **Contenido:**
 - ✅ Formulario A: Solicitud de Sistema Nuevo
-  - 7 secciones, 30+ campos
+  - 11 campos principales
   - Información general, justificación, alcance, recursos, aprobaciones
   
 - ✅ Formulario B: Cuestionario de Modificación
-  - 8 secciones, 35+ campos
+  - 13 campos principales
   - Descripción, análisis de impacto, detalles técnicos, revisión
   
 - ✅ Formulario C: Levantamiento de Requerimientos Detallado
-  - 15 secciones, 50+ campos técnicos
-  - Módulos, casos de uso, modelo de datos, integraciones
+  - 11 campos principales
+  - Módulos, casos de uso, requerimientos funcionales
+  
+- ✅ Formulario Problema: Reporte de Incidencias
+  - 14 campos principales
+  - Descripción, impacto, evidencias
   
 - ✅ Tabla de validaciones para cada formulario
 - ✅ Workflow de aprobaciones
@@ -174,7 +178,7 @@
 1. Lee: **Resumen Ejecutivo** (5-10 min)
 2. Mira: Diagramas en **01-diagrama-flujo** (10 min)
 3. Revisa: Timeline de implementación en **Resumen**
-4. Toma decisión: Aprobación y presupuesto
+4. Toma decisión: Aprobación y recursos
 
 ### Si eres **Product Manager**
 1. Lee: **02-Formularios** (estructura de solicitudes)
