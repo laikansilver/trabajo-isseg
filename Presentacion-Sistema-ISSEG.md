@@ -976,24 +976,5 @@ ESTADO: Pendiente de Revisión ISSEG
 
 ---
 
-# ANEXO C: Contactos Útiles
-
-## Equipo ISSEG
-
-| Nombre | Rol | Email | Ext |
-|--------|-----|-------|-----|
-| TBD | Director ISSEG | director.isseg@empresa.com | 1000 |
-| TBD | Product Manager | pm.isseg@empresa.com | 1100 |
-| TBD | Líder Técnico | tech.lead@empresa.com | 1200 |
-| TBD | Soporte Usuario | soporte@empresa.com | 1500 |
-
-## Soporte por Tipo de Consulta
-
-- **¿Qué formulario usar?** → soporte@empresa.com
-- **Problemas técnicos** → tech.lead@empresa.com
-- **Solicitudes urgentes** → director.isseg@empresa.com
-- **Capacitación** → training@empresa.com
-
----
 
 **FIN DE LA PRESENTACIÓN**
