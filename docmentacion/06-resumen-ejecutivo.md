@@ -169,14 +169,7 @@ SOLICITUDES
 - Otros usuarios pueden ver estado desde dashboard
 
 **Implementación:**
-```sql
--- Validación en la BD
-SELECT COUNT(*) FROM Usuarios_Autorizados_Área 
-WHERE ID_Área = ? 
-  AND Puede_Solicitar_Nuevo = TRUE 
-  AND Activo = TRUE
--- Debe retornar máximo 1
-```
+Validación en la BD para verificar que solo existe un usuario autorizado por área con permiso de solicitar nuevo.
 
 ### 2. Múltiples Usuarios para Modificaciones
 **Justificación:**
@@ -278,59 +271,6 @@ WHERE ID_Área = ?
 ---
 
 ## Configuración de Ejemplo (Variables de Entorno)
-
-```bash
-# BASE DE DATOS
-DB_HOST=localhost
-DB_PORT=3306
-DB_NAME=tickets_sistema
-DB_USER=app_user
-DB_PASSWORD=secure_password_here
-
-# AUTENTICACIÓN
-JWT_SECRET=tu_llave_secreta_super_larga_y_aleatoria
-JWT_EXPIRES_IN=3600  # 1 hora
-REFRESH_TOKEN_EXPIRES_IN=604800  # 7 días
-PASSWORD_HASH_ALGO=argon2  # bcrypt o argon2
-
-# 2FA (Opcional)
-TOTP_ENABLED=false
-TOTP_WINDOW=1
-
-# SEGURIDAD
-CAPTCHA_SECRET_KEY=tu_clave_secreta_recaptcha
-ALLOWED_DOMAINS=institución.com
-ENABLE_CORS=true
-CORS_ORIGIN=https://tickets.institución.com
-
-# SESIONES
-SESSION_TIMEOUT_MINUTES=30
-INACTIVITY_TIMEOUT_MINUTES=15
-MAX_SESSIONS_PER_USER=3
-
-# NOTIFICACIONES
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=notificaciones@institución.com
-SMTP_PASSWORD=app_password_here
-SMTP_FROM=Sistema Tickets <notificaciones@institución.com>
-
-# LOGGING
-LOG_LEVEL=info
-LOG_FILE=/var/log/tickets/app.log
-AUDIT_LOG_FILE=/var/log/tickets/audit.log
-
-# CACHE
-CACHE_BACKEND=redis  # redis o memcached
-REDIS_HOST=localhost
-REDIS_PORT=6379
-CACHE_TTL_MINUTES=30
-
-# MONITOREO
-SENTRY_DSN=tu_dsn_sentry
-ENABLE_METRICS=true
-METRICS_PORT=9090
-```
 
 ---
 

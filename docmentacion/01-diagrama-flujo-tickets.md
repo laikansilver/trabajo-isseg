@@ -162,57 +162,15 @@ Cada usuario ve **solo** los sistemas para los cuales su área tiene autorizaci�
 
 ### Validar si usuario puede solicitar
 
-```sql
-SELECT 
-    u.ID_Usuario,
-    u.Nombre,
-    ua.ID_Área,
-    a.Nombre_Área,
-    ua.Puede_Solicitar_Nuevo,
-    ua.Puede_Solicitar_Modificación,
-    ua.Activo
-FROM Usuarios u
-JOIN Usuarios_Autorizados_Área ua ON u.ID_Usuario = ua.ID_Usuario
-JOIN Áreas a ON ua.ID_Área = a.ID_Área
-WHERE u.ID_Usuario = @ID_Usuario AND ua.Activo = 1;
-```
-
 ### Obtener sistemas visibles para un usuario
-
-```sql
-SELECT DISTINCT
-    s.ID_Sistema,
-    s.Nombre_Sistema,
-    s.Tipo_Sistema,
-    s.Estado_Actual,
-    saa.Puede_Solicitar_Modificación
-FROM Sistemas s
-JOIN Sistemas_Autorizados_Por_Área saa ON s.ID_Sistema = saa.ID_Sistema
-JOIN Usuarios_Autorizados_Área ua ON saa.ID_Área = ua.ID_Área
-WHERE ua.ID_Usuario = @ID_Usuario
-  AND ua.Activo = 1
-  AND saa.Activo = 1
-  AND s.Estado_Actual IN ('Producción', 'Mantenimiento')
-ORDER BY s.Nombre_Sistema;
-```
 
 ### Registrar intento de acceso no autorizado
 
-```sql
-INSERT INTO Audit_Acceso_No_Autorizado (
-    ID_Usuario,
-    Timestamp,
-    Tipo_Intento,
-    IP_Origen,
-    Motivo_Denegación,
-    Acción_Tomada
-)
-VALUES (
-    @ID_Usuario,
-    NOW(),
-    'SOLICITUD_FORMULARIO',
-    @IP,
-    'Usuario no autorizado en área solicitante',
-    'ACCESO DENEGADO - REGISTRADO'
-);
+Se registra el intento de acceso no autorizado con:
+- ID de usuario
+- Timestamp
+- Tipo de intento
+- IP de origen
+- Motivo de denegación
+- Acción tomada (ACCESO DENEGADO - REGISTRADO)
 ```

@@ -202,36 +202,15 @@ Usuario → Selecciona Sistema → Describe Problema → Define Urgencia
 ## 💡 EJEMPLOS DE CONSULTAS DISPONIBLES
 
 ### Ejemplo 1: ¿Cuántos sistemas se crearon en enero?
-```sql
-SELECT COUNT(*) FROM Sistemas 
-WHERE MONTH(Fecha_Creacion) = 1 AND YEAR(Fecha_Creacion) = 2026;
-```
 → Respuesta directa del archivo 10
 
 ### Ejemplo 2: ¿Qué versión tiene cada sistema?
-```sql
-SELECT s.Nombre_Sistema, s.Versión_Actual 
-FROM Sistemas s ORDER BY s.Nombre_Sistema;
-```
 → Puede traerse de Sistemas + Historial_Cambios
 
 ### Ejemplo 3: ¿Incidencias sin resolver con SLA vencido?
-```sql
-SELECT pr.ID_Incidencia, pr.Urgencia, 
-TIMEDIFF(NOW(), pr.Fecha_Límite_Resolución) as Tiempo_Vencido
-FROM Problemas_Reportados pr
-WHERE pr.Estado_Actual != 'Cerrado' 
-AND pr.Fecha_Límite_Resolución < NOW();
-```
 → Genera alertas automáticas
 
 ### Ejemplo 4: ¿Uptime del mes?
-```sql
-SELECT s.Nombre_Sistema, u.Uptime_Porcentaje 
-FROM Uptime_Sistema u
-JOIN Sistemas s ON u.ID_Sistema = s.ID_Sistema
-WHERE MONTH(u.Fecha_Inicio) = MONTH(NOW());
-```
 → Para dashboard ejecutivo
 
 ---

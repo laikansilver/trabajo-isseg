@@ -28,40 +28,12 @@
 
 ### 2.1 Tabla: Jerarquía de Proyectos
 
-```sql
-CREATE TABLE Jerarquia_Proyectos (
-    ID_Jerarquia INT PRIMARY KEY AUTO_INCREMENT,
-    ID_Proyecto VARCHAR(20) FOREIGN KEY,
-    Nivel_Jerarquico INT, -- 1=Crítico, 2=Secundario, 3=Soporte
-    Area_Negocio VARCHAR(100),
-    Subarea VARCHAR(100),
-    Responsable_Area VARCHAR(100),
-    Email_Responsable VARCHAR(100),
-    Fecha_Asignacion DATETIME,
-    Notas TEXT
-);
-```
-
 **Campos para Dashboard:**
 - Organigrama visual de dependencias
 - Filtro por jerarquía
 - Contactos rápidos
 
 ### 2.2 Tabla: Colaboradores del Proyecto
-
-```sql
-CREATE TABLE Colaboradores_Proyecto (
-    ID_Colaboracion INT PRIMARY KEY AUTO_INCREMENT,
-    ID_Proyecto VARCHAR(20) FOREIGN KEY,
-    ID_Usuario INT FOREIGN KEY,
-    Rol_En_Proyecto ENUM('Desarrollador Líder', 'Desarrollador', 'Product Manager', 
-                          'Tester', 'DevOps', 'ISSEG Supervisor'),
-    Porcentaje_Dedicacion DECIMAL(5,2), -- % de tiempo dedicado
-    Fecha_Asignacion DATETIME,
-    Fecha_Desasignacion DATETIME NULL,
-    Estado ENUM('Activo', 'Inactivo')
-);
-```
 
 **Campos para Dashboard:**
 - Listado de equipo actual
@@ -70,59 +42,12 @@ CREATE TABLE Colaboradores_Proyecto (
 
 ### 2.3 Tabla: Historial de Cambios y Versiones
 
-```sql
-CREATE TABLE Historial_Cambios (
-    ID_Cambio INT PRIMARY KEY AUTO_INCREMENT,
-    ID_Proyecto VARCHAR(20) FOREIGN KEY,
-    ID_Ticket_Modificacion VARCHAR(20) FOREIGN KEY NULL,
-    Version_Anterior VARCHAR(20),
-    Version_Nueva VARCHAR(20),
-    Tipo_Cambio ENUM('Nueva Funcionalidad', 'Corrección Bug', 'Mejora Rendimiento', 
-                      'Refactorización', 'Actualización Dependencias', 'Seguridad'),
-    Descripcion_Cambio TEXT,
-    Archivos_Modificados TEXT, -- JSON o lista separada por comas
-    Desarrollador_Responsable VARCHAR(100),
-    Fecha_Cambio DATETIME,
-    Fecha_Deploy DATETIME,
-    Ambiente_Deploy ENUM('Desarrollo', 'QA', 'Staging', 'Producción'),
-    Horas_Desarrollo DECIMAL(6,2),
-    Requirio_Rollback BOOLEAN,
-    Notas_Tecnicas TEXT
-);
-```
-
 **Campos para Dashboard:**
 - Timeline de evolución
 - Frecuencia de cambios
 - Tipo de modificaciones predominantes
 
 ### 2.4 Tabla: Registro de Fallas e Incidentes
-
-```sql
-CREATE TABLE Registro_Fallas (
-    ID_Falla INT PRIMARY KEY AUTO_INCREMENT,
-    ID_Proyecto VARCHAR(20) FOREIGN KEY,
-    Fecha_Ocurrencia DATETIME,
-    Fecha_Deteccion DATETIME,
-    Severidad ENUM('Crítica', 'Alta', 'Media', 'Baja'),
-    Tipo_Falla ENUM('Caída del Sistema', 'Error Funcional', 'Lentitud', 
-                     'Error de Integración', 'Pérdida de Datos', 'Seguridad'),
-    Descripcion_Falla TEXT,
-    Usuario_Reportante VARCHAR(100),
-    Modulo_Afectado VARCHAR(100),
-    Usuarios_Impactados INT,
-    Tiempo_Inactividad_Minutos INT,
-    Desarrollador_Asignado VARCHAR(100),
-    Fecha_Resolucion DATETIME NULL,
-    Tiempo_Resolucion_Minutos INT NULL,
-    Causa_Raiz TEXT,
-    Solucion_Aplicada TEXT,
-    Estado ENUM('Abierta', 'En Análisis', 'En Corrección', 'Resuelta', 'Cerrada'),
-    Requirio_Hotfix BOOLEAN,
-    Version_Hotfix VARCHAR(20) NULL,
-    Costo_Estimado_Impacto DECIMAL(10,2) NULL
-);
-```
 
 **Campos para Dashboard:**
 - MTBF (Mean Time Between Failures)
@@ -132,34 +57,7 @@ CREATE TABLE Registro_Fallas (
 
 ### 2.5 Tabla: Métricas de Uptime y Disponibilidad
 
-```sql
-CREATE TABLE Metricas_Uptime (
-    ID_Metrica INT PRIMARY KEY AUTO_INCREMENT,
-    ID_Proyecto VARCHAR(20) FOREIGN KEY,
-    Fecha_Registro DATE,
-    Hora_Inicio TIME,
-    Hora_Fin TIME,
-    Estado ENUM('Activo', 'Inactivo', 'Mantenimiento Programado'),
-    Minutos_Disponible INT,
-    Minutos_Inactivo INT,
-    Minutos_Mantenimiento INT,
-    Uptime_Porcentaje DECIMAL(5,2),
-    Incidentes_Relacionados TEXT, -- IDs de fallas
-    Notas TEXT
-);
-```
-
 **Cálculo de Uptime Mensual:**
-```sql
-SELECT 
-    ID_Proyecto,
-    MONTH(Fecha_Registro) as Mes,
-    (SUM(Minutos_Disponible) / 
-     (SUM(Minutos_Disponible) + SUM(Minutos_Inactivo))) * 100 AS Uptime_Real
-FROM Metricas_Uptime
-WHERE Estado != 'Mantenimiento Programado'
-GROUP BY ID_Proyecto, MONTH(Fecha_Registro);
-```
 
 ---
 
@@ -311,86 +209,14 @@ Ana Torres:    ████████████████ 65%
 ## 4. Consultas SQL Útiles para el Dashboard
 
 ### Query 1: Proyectos con Uptime Bajo el SLA
-```sql
-SELECT 
-    p.ID_Proyecto,
-    p.Nombre_Sistema,
-    p.SLA_Uptime,
-    p.Uptime_Real,
-    (p.SLA_Uptime - p.Uptime_Real) AS Diferencia,
-    p.Area_Responsable,
-    p.Desarrollador_Lider
-FROM Inventario_Proyectos p
-WHERE p.Uptime_Real < p.SLA_Uptime
-  AND p.Estado_Actual = 'Producción'
-ORDER BY Diferencia DESC;
-```
 
 ### Query 2: Top 10 Proyectos con Más Fallas (Últimos 30 días)
-```sql
-SELECT 
-    p.Nombre_Sistema,
-    COUNT(f.ID_Falla) AS Total_Fallas,
-    SUM(CASE WHEN f.Severidad = 'Crítica' THEN 1 ELSE 0 END) AS Fallas_Criticas,
-    AVG(f.Tiempo_Resolucion_Minutos) AS MTTR_Promedio,
-    SUM(f.Usuarios_Impactados) AS Usuarios_Totales_Impactados
-FROM Inventario_Proyectos p
-LEFT JOIN Registro_Fallas f ON p.ID_Proyecto = f.ID_Proyecto
-WHERE f.Fecha_Ocurrencia >= DATE_SUB(NOW(), INTERVAL 30 DAY)
-GROUP BY p.ID_Proyecto
-ORDER BY Total_Fallas DESC
-LIMIT 10;
-```
 
 ### Query 3: Histórico de Cambios por Tipo (Últimos 3 meses)
-```sql
-SELECT 
-    p.Nombre_Sistema,
-    h.Tipo_Cambio,
-    COUNT(*) AS Cantidad,
-    SUM(h.Horas_Desarrollo) AS Horas_Totales
-FROM Historial_Cambios h
-JOIN Inventario_Proyectos p ON h.ID_Proyecto = p.ID_Proyecto
-WHERE h.Fecha_Cambio >= DATE_SUB(NOW(), INTERVAL 3 MONTH)
-GROUP BY p.ID_Proyecto, h.Tipo_Cambio
-ORDER BY p.Nombre_Sistema, Cantidad DESC;
-```
 
 ### Query 4: MTBF y MTTR por Proyecto
-```sql
-SELECT 
-    p.Nombre_Sistema,
-    COUNT(f.ID_Falla) AS Total_Fallas,
-    ROUND(
-        (TIMESTAMPDIFF(HOUR, MIN(f.Fecha_Ocurrencia), MAX(f.Fecha_Ocurrencia)) / 
-         NULLIF(COUNT(f.ID_Falla) - 1, 0))
-    , 2) AS MTBF_Horas,
-    ROUND(AVG(f.Tiempo_Resolucion_Minutos), 2) AS MTTR_Minutos
-FROM Inventario_Proyectos p
-LEFT JOIN Registro_Fallas f ON p.ID_Proyecto = f.ID_Proyecto
-WHERE f.Fecha_Ocurrencia >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
-  AND f.Estado = 'Cerrada'
-GROUP BY p.ID_Proyecto
-HAVING Total_Fallas > 0;
-```
 
 ### Query 5: Carga de Trabajo por Desarrollador
-```sql
-SELECT 
-    c.ID_Usuario,
-    u.Nombre AS Desarrollador,
-    COUNT(DISTINCT c.ID_Proyecto) AS Proyectos_Activos,
-    SUM(c.Porcentaje_Dedicacion) AS Carga_Total_Porcentaje,
-    COUNT(t.ID_Ticket) AS Tickets_Asignados,
-    SUM(t.Horas_Estimadas) AS Horas_Comprometidas
-FROM Colaboradores_Proyecto c
-JOIN Usuarios u ON c.ID_Usuario = u.ID_Usuario
-LEFT JOIN Tickets t ON t.Desarrollador_Asignado = u.Nombre AND t.Estado NOT IN ('Cerrado', 'Cancelado')
-WHERE c.Estado = 'Activo'
-  AND c.Rol_En_Proyecto IN ('Desarrollador Líder', 'Desarrollador')
-GROUP BY c.ID_Usuario
-ORDER BY Carga_Total_Porcentaje DESC;
-```
 
 ---
 

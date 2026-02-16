@@ -316,18 +316,6 @@ TABLA: Control_Incidencias (UPDATE FINAL)
 
 ### 1. ¿Cuál es el estado actual de cada sistema?
 
-```sql
-SELECT 
-    ID_Sistema,
-    Nombre_Sistema,
-    Estado_Actual,
-    Versión_Actual,
-    Uptime_Porcentaje,
-    Última_Actualización
-FROM Sistemas
-ORDER BY Nombre_Sistema;
-```
-
 **Respuesta en columnas:**
 - Sistema A: En Producción, v2.3.1, 99.5% uptime
 - Sistema B: En Desarrollo, v1.0.0, 0% (nuevo)
@@ -335,19 +323,6 @@ ORDER BY Nombre_Sistema;
 ---
 
 ### 2. ¿Qué modificaciones se hicieron a un sistema?
-
-```sql
-SELECT 
-    Número_Versión,
-    Descripción_Cambio,
-    Tipo_Cambio,
-    Fecha_Solicitud,
-    Fecha_Implementación,
-    Usuario_Desarrollador
-FROM Historial_Cambios
-WHERE ID_Sistema = @ID_Sistema
-ORDER BY Fecha_Solicitud DESC;
-```
 
 **Respuesta:**
 - v2.3.1: "Bugfix - Error en reporte mensual" - 2026-02-01
@@ -357,89 +332,17 @@ ORDER BY Fecha_Solicitud DESC;
 
 ### 3. ¿Incidencias sin resolver con SLA crítico?
 
-```sql
-SELECT 
-    pr.ID_Incidencia,
-    pr.Urgencia,
-    s.Nombre_Sistema,
-    pr.Descripción_Problema,
-    TIMESTAMPDIFF(MINUTE, pr.Fecha_Reporte, NOW()) as Minutos_Abierto,
-    pr.Fecha_Límite_Resolución,
-    CASE 
-        WHEN TIMESTAMPDIFF(MINUTE, pr.Fecha_Reporte, NOW()) > 240 
-        THEN '⚠️ SLA VIOLADO'
-        ELSE 'En tiempo'
-    END as Estado
-FROM Problemas_Reportados pr
-JOIN Sistemas s ON pr.ID_Sistema = s.ID_Sistema
-WHERE pr.Estado_Actual != 'Cerrado' AND pr.Urgencia = 'Crítica'
-ORDER BY pr.Fecha_Reporte ASC;
-```
-
 ---
 
 ### 4. ¿Desempeño de SLA del mes?
-
-```sql
-SELECT 
-    pr.Urgencia,
-    COUNT(*) as Total,
-    SUM(CASE WHEN pr.Tiempo_SLA_Respuesta_OK THEN 1 ELSE 0 END) as Respuesta_OK,
-    SUM(CASE WHEN pr.Tiempo_SLA_Resolución_OK THEN 1 ELSE 0 END) as Resolución_OK,
-    ROUND(100.0 * SUM(CASE WHEN pr.Tiempo_SLA_Respuesta_OK THEN 1 ELSE 0 END) / COUNT(*), 1) as '%_Respuesta_OK',
-    ROUND(100.0 * SUM(CASE WHEN pr.Tiempo_SLA_Resolución_OK THEN 1 ELSE 0 END) / COUNT(*), 1) as '%_Resolución_OK'
-FROM Problemas_Reportados pr
-WHERE YEAR(pr.Fecha_Reporte) = YEAR(CURDATE())
-  AND MONTH(pr.Fecha_Reporte) = MONTH(CURDATE())
-GROUP BY pr.Urgencia
-ORDER BY FIELD(pr.Urgencia, 'Crítica', 'Alta', 'Media', 'Baja');
-```
 
 ---
 
 ### 5. ¿Uptime mensual de sistema específico?
 
-```sql
-SELECT 
-    s.Nombre_Sistema,
-    u.Fecha_Inicio,
-    u.Fecha_Fin,
-    u.Uptime_Porcentaje,
-    u.Número_Incidentes_Afectadores,
-    CASE 
-        WHEN u.Uptime_Porcentaje >= 99.9 THEN '✅ Excelente'
-        WHEN u.Uptime_Porcentaje >= 99.0 THEN '✓ Bueno'
-        WHEN u.Uptime_Porcentaje >= 95.0 THEN '⚠️ Aceptable'
-        ELSE '❌ Crítico'
-    END as Calificación
-FROM Uptime_Sistema u
-JOIN Sistemas s ON u.ID_Sistema = s.ID_Sistema
-WHERE YEAR(u.Fecha_Inicio) = YEAR(CURDATE())
-  AND MONTH(u.Fecha_Inicio) = MONTH(CURDATE())
-ORDER BY u.Uptime_Porcentaje DESC;
-```
-
 ---
 
 ## Índices Críticos Creados
-
-```sql
--- Para búsquedas rápidas
-CREATE INDEX idx_sistemas_area ON Sistemas(Área_Responsable);
-CREATE INDEX idx_sistemas_estado ON Sistemas(Estado_Actual);
-
-CREATE INDEX idx_cambios_sistema ON Historial_Cambios(ID_Sistema);
-CREATE INDEX idx_cambios_estado ON Historial_Cambios(Estado_Cambio);
-CREATE INDEX idx_cambios_fecha ON Historial_Cambios(Fecha_Solicitud);
-
-CREATE INDEX idx_problemas_sistema ON Problemas_Reportados(ID_Sistema);
-CREATE INDEX idx_problemas_urgencia ON Problemas_Reportados(Urgencia);
-CREATE INDEX idx_problemas_estado ON Problemas_Reportados(Estado_Actual);
-CREATE INDEX idx_problemas_sla ON Problemas_Reportados(Tiempo_SLA_Respuesta_OK, Tiempo_SLA_Resolución_OK);
-
-CREATE INDEX idx_uptime_sistema ON Uptime_Sistema(ID_Sistema, Fecha_Inicio);
-CREATE INDEX idx_alertas_sla ON Alertas_SLA(ID_Incidencia, Tipo_Alerta);
-```
 
 ---
 

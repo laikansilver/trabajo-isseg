@@ -432,21 +432,6 @@ M:N = Muchos a muchos
 ```
 
 ### En Código
-```sql
--- Comentarios en SQL
-
-TABLA_NOMBRE
-├── Columna_Tipo
-├── ID_FK → Referencia
-└── Índice
-
-CREATE TABLE -- Crear tabla
-ALTER TABLE -- Modificar tabla
-SELECT -- Consulta
-INSERT -- Insertar
-UPDATE -- Actualizar
-DELETE -- Eliminar
-```
 
 ---
 
