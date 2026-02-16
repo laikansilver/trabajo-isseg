@@ -818,11 +818,6 @@ los compromisos de tiempo de servicio establecidos con los usuarios. -->
 - 📊 Diagramas de flujo en `/documentacion/*.md`
 - 🗄️ Esquema de BD en `/documentacion/05-esquema-base-datos.md`
 
-**Equipo ISSEG:**
-- 📧 Email: isseg@empresa.com
-- 📞 Ext: 1234
-
----
 
 **¡Gracias por su atención!**
 
@@ -836,7 +831,7 @@ los compromisos de tiempo de servicio establecidos con los usuarios. -->
 
 ## Ejemplo Real: Sistema de Gestión de Inventario
 
-```markdown
+``` markdown
 ═══════════════════════════════════════════════════════
 FORMULARIO A: SOLICITUD DE SISTEMA NUEVO
 ═══════════════════════════════════════════════════════
@@ -981,24 +976,5 @@ ESTADO: Pendiente de Revisión ISSEG
 
 ---
 
-# ANEXO C: Contactos Útiles
-
-## Equipo ISSEG
-
-| Nombre | Rol | Email | Ext |
-|--------|-----|-------|-----|
-| TBD | Director ISSEG | director.isseg@empresa.com | 1000 |
-| TBD | Product Manager | pm.isseg@empresa.com | 1100 |
-| TBD | Líder Técnico | tech.lead@empresa.com | 1200 |
-| TBD | Soporte Usuario | soporte@empresa.com | 1500 |
-
-## Soporte por Tipo de Consulta
-
-- **¿Qué formulario usar?** → soporte@empresa.com
-- **Problemas técnicos** → tech.lead@empresa.com
-- **Solicitudes urgentes** → director.isseg@empresa.com
-- **Capacitación** → training@empresa.com
-
----
 
 **FIN DE LA PRESENTACIÓN**
