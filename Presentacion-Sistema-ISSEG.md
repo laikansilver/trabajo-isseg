@@ -831,7 +831,8 @@ los compromisos de tiempo de servicio establecidos con los usuarios. -->
 
 ## Ejemplo Real: Sistema de Gestión de Inventario
 
-```markdown
+```
+markdown
 ═══════════════════════════════════════════════════════
 FORMULARIO A: SOLICITUD DE SISTEMA NUEVO
 ═══════════════════════════════════════════════════════
