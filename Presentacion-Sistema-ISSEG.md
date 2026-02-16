@@ -818,11 +818,6 @@ los compromisos de tiempo de servicio establecidos con los usuarios. -->
 - 📊 Diagramas de flujo en `/documentacion/*.md`
 - 🗄️ Esquema de BD en `/documentacion/05-esquema-base-datos.md`
 
-**Equipo ISSEG:**
-- 📧 Email: isseg@empresa.com
-- 📞 Ext: 1234
-
----
 
 **¡Gracias por su atención!**
 
