@@ -758,13 +758,19 @@
 
                     <div class="form-field">
                         <div class="field-label">ID Solicitud <span class="field-type">Auto</span></div>
-                        <div class="field-info">SN-2026-XXXX (Auto-generado)</div>
+                        <div class="field-info">SN-2026-XXXX (NO visible en formulario, solo al consultar)</div>
                     </div>
 
                     <div class="form-field">
-                        <div class="field-label">Nombre Completo <span class="field-required">*</span></div>
+                        <div class="field-label">Nombre(s) <span class="field-required">*</span></div>
                         <div class="field-type">Texto</div>
-                        <div class="field-info">Quien solicita el sistema</div>
+                        <div class="field-info">Nombre del solicitante</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Apellidos <span class="field-required">*</span></div>
+                        <div class="field-type">Texto</div>
+                        <div class="field-info">Apellidos del solicitante</div>
                     </div>
 
                     <div class="form-field">
@@ -780,15 +786,33 @@
                     </div>
 
                     <div class="form-field">
+                        <div class="field-label">Tipo de Contacto <span class="field-required">*</span></div>
+                        <div class="field-type">Lista</div>
+                        <div class="field-info">Teléfono o Celular</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Número de Contacto <span class="field-required">*</span></div>
+                        <div class="field-type">Teléfono</div>
+                        <div class="field-info">Número telefónico</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Extensión</div>
+                        <div class="field-type">Texto</div>
+                        <div class="field-info">Solo si aplica</div>
+                    </div>
+
+                    <div class="form-field">
                         <div class="field-label">Nombre Sistema <span class="field-required">*</span></div>
                         <div class="field-type">Texto</div>
                         <div class="field-info">Máx 100 caracteres</div>
                     </div>
 
                     <div class="form-field">
-                        <div class="field-label">Tipo Sistema <span class="field-required">*</span></div>
+                        <div class="field-label">Tipo Sistema Web <span class="field-required">*</span></div>
                         <div class="field-type">Radio</div>
-                        <div class="field-info">Web / Desktop / Mobile / API / Hybrid</div>
+                        <div class="field-info">Web Interna / Web Pública / Portal / Sistema Gestión / API</div>
                     </div>
 
                     <div class="form-field">
@@ -816,6 +840,12 @@
                     </div>
 
                     <div class="form-field">
+                        <div class="field-label">Áreas Beneficiadas <span class="field-required">*</span></div>
+                        <div class="field-type">Radio + Checkbox</div>
+                        <div class="field-info">Solo área solicitante / Toda institución / Varias áreas</div>
+                    </div>
+
+                    <div class="form-field">
                         <div class="field-label">Aprobación Jefe Directo <span class="field-required">*</span></div>
                         <div class="field-type">Checkbox</div>
                         <div class="field-info">Obligatorio</div>
@@ -824,7 +854,7 @@
                     <div class="form-stats">
                         <div class="stat">
                             <div class="stat-label">Campos</div>
-                            <div class="stat-value">11</div>
+                            <div class="stat-value">15</div>
                         </div>
                         <div class="stat">
                             <div class="stat-label">Aprobación</div>
@@ -845,18 +875,49 @@
 
                     <div class="form-field">
                         <div class="field-label">ID Modificación <span class="field-type">Auto</span></div>
-                        <div class="field-info">MOD-2026-XXXX (Auto-generado)</div>
+                        <div class="field-info">MOD-2026-XXXX (NO visible en formulario, solo al consultar)</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Nombre(s) <span class="field-required">*</span></div>
+                        <div class="field-type">Texto</div>
+                        <div class="field-info">Nombre del solicitante</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Apellidos <span class="field-required">*</span></div>
+                        <div class="field-type">Texto</div>
+                        <div class="field-info">Apellidos del solicitante</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Email <span class="field-required">*</span></div>
+                        <div class="field-type">Email</div>
+                        <div class="field-info">Para comunicación</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Tipo de Contacto <span class="field-required">*</span></div>
+                        <div class="field-type">Lista</div>
+                        <div class="field-info">Teléfono o Celular</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Número de Contacto <span class="field-required">*</span></div>
+                        <div class="field-type">Teléfono</div>
+                        <div class="field-info">Número telefónico</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Extensión</div>
+                        <div class="field-type">Texto</div>
+                        <div class="field-info">Solo si aplica</div>
                     </div>
 
                     <div class="form-field">
                         <div class="field-label">Sistema <span class="field-required">*</span></div>
                         <div class="field-type">Lista</div>
-                        <div class="field-info">Seleccionar sistema existente</div>
-                    </div>
-
-                    <div class="form-field">
-                        <div class="field-label">Versión Actual <span class="field-type">Auto</span></div>
-                        <div class="field-info">Se auto-completa al seleccionar sistema</div>
+                        <div class="field-info">Solo sistemas del área (sin mostrar versiones)</div>
                     </div>
 
                     <div class="form-field">
@@ -916,13 +977,13 @@
                     <div class="form-field">
                         <div class="field-label">¿Existe Workaround? <span class="field-required">*</span></div>
                         <div class="field-type">Radio</div>
-                        <div class="field-info">Solución temporal</div>
+                        <div class="field-info">Sí (con descripción y cómo usarlo) / No</div>
                     </div>
 
                     <div class="form-stats">
                         <div class="stat">
                             <div class="stat-label">Campos</div>
-                            <div class="stat-value">13</div>
+                            <div class="stat-value">16</div>
                         </div>
                         <div class="stat">
                             <div class="stat-label">Aprobación</div>
@@ -943,11 +1004,41 @@
 
                     <div class="form-field">
                         <div class="field-label">ID Proyecto <span class="field-required">*</span></div>
-                        <div class="field-info">Referencia del Formulario A aprobado (SN-2026-XXXX)</div>
+                        <div class="field-info">Referencia del Formulario A aprobado (NO visible en formulario)</div>
                     </div>
 
                     <div class="form-field">
-                        <div class="field-label">Product Manager <span class="field-required">*</span></div>
+                        <div class="field-label">Nombre(s) del Product Manager <span class="field-required">*</span></div>
+                        <div class="field-type">Texto (Auto)</div>
+                        <div class="field-info">Desde asignación ISSEG</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Apellidos del Product Manager <span class="field-required">*</span></div>
+                        <div class="field-type">Texto (Auto)</div>
+                        <div class="field-info">Desde asignación ISSEG</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Nombre(s) del Desarrollador Líder <span class="field-required">*</span></div>
+                        <div class="field-type">Texto (Auto)</div>
+                        <div class="field-info">Desde asignación ISSEG</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Apellidos del Desarrollador Líder <span class="field-required">*</span></div>
+                        <div class="field-type">Texto (Auto)</div>
+                        <div class="field-info">Desde asignación ISSEG</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Nombre(s) del Responsable <span class="field-required">*</span></div>
+                        <div class="field-type">Texto</div>
+                        <div class="field-info">Usuario del área</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Apellidos del Responsable <span class="field-required">*</span></div>
                         <div class="field-type">Texto</div>
                         <div class="field-info">PM responsable del proyecto</div>
                     </div>
@@ -1030,19 +1121,25 @@
 
                     <div class="form-field">
                         <div class="field-label">ID Incidencia <span class="field-type">Auto</span></div>
-                        <div class="field-info">INC-2026-XXXX (Auto-generado)</div>
+                        <div class="field-info">INC-2026-XXXX (NO visible en formulario, solo al consultar)</div>
                     </div>
 
                     <div class="form-field">
-                        <div class="field-label">Fecha y Hora <span class="field-required">*</span></div>
-                        <div class="field-type">Fecha/Hora</div>
-                        <div class="field-info">Cuándo se detectó el problema</div>
+                        <div class="field-label">Fecha <span class="field-required">*</span></div>
+                        <div class="field-type">Fecha</div>
+                        <div class="field-info">Cuándo se detectó el problema (solo día, sin hora)</div>
                     </div>
 
                     <div class="form-field">
-                        <div class="field-label">Nombre Reportante <span class="field-required">*</span></div>
+                        <div class="field-label">Nombre(s) del Reportante <span class="field-required">*</span></div>
                         <div class="field-type">Texto</div>
-                        <div class="field-info">Persona que reporta el problema</div>
+                        <div class="field-info">Nombre de quien reporta</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Apellidos del Reportante <span class="field-required">*</span></div>
+                        <div class="field-type">Texto</div>
+                        <div class="field-info">Apellidos de quien reporta</div>
                     </div>
 
                     <div class="form-field">
@@ -1058,9 +1155,27 @@
                     </div>
 
                     <div class="form-field">
+                        <div class="field-label">Tipo de Contacto <span class="field-required">*</span></div>
+                        <div class="field-type">Lista</div>
+                        <div class="field-info">Teléfono o Celular</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Número de Contacto <span class="field-required">*</span></div>
+                        <div class="field-type">Teléfono</div>
+                        <div class="field-info">Número telefónico</div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="field-label">Extensión</div>
+                        <div class="field-type">Texto</div>
+                        <div class="field-info">Solo si aplica</div>
+                    </div>
+
+                    <div class="form-field">
                         <div class="field-label">Sistema Afectado <span class="field-required">*</span></div>
                         <div class="field-type">Lista</div>
-                        <div class="field-info">Seleccionar de sistemas registrados</div>
+                        <div class="field-info">Solo sistemas del área (sin mostrar versiones)</div>
                     </div>
 
                     <div class="form-field">
@@ -1113,7 +1228,7 @@
                     <div class="form-stats">
                         <div class="stat">
                             <div class="stat-label">Campos</div>
-                            <div class="stat-value">14</div>
+                            <div class="stat-value">17</div>
                         </div>
                         <div class="stat">
                             <div class="stat-label">Aprobación</div>
@@ -1180,7 +1295,7 @@
                     </div>
                     <div class="step-status status-aprobar">En Revisión</div>
                 </div>
-
+ 
                 <div class="flow-step">
                     <div class="step-number form-a">2</div>
                     <div class="step-content">

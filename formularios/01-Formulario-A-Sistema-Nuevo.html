@@ -52,6 +52,7 @@
             margin-bottom: 40px;
             border-bottom: 2px solid #f0f0f0;
             padding-bottom: 30px;
+            animation: fadeIn 0.3s ease-in;
         }
         
         .form-section:last-child {
@@ -93,6 +94,7 @@
         .required {
             color: #e74c3c;
             margin-left: 4px;
+            font-weight: bold;
         }
         
         input[type="text"],
@@ -153,6 +155,38 @@
             color: #666;
             margin-top: 5px;
             font-style: italic;
+        }
+        
+        /* Mejoras visuales para agrupación de campos */
+        .form-group input[placeholder*="Ej:"],
+        .form-group input[placeholder*="Apellido"] {
+            background-color: #fafafa;
+        }
+        
+        .form-group input:focus {
+            background-color: white;
+        }
+        
+        /* Indicador visual sutil para campos relacionados (nombres) */
+        .form-group label[for*="nombre"],
+        .form-group label[for*="apellido"] {
+            color: #555;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Separador visual entre grupos de campos */
+        .form-row + .form-row {
+            margin-top: 15px;
         }
         
         .file-upload {
@@ -223,17 +257,172 @@
             font-size: 14px;
         }
         
-        @media (max-width: 768px) {
+        /* Responsive Design - Mobile First */
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                border-radius: 5px;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .header p {
+                font-size: 13px;
+            }
+            
+            .form-content {
+                padding: 20px 15px;
+            }
+            
+            .form-section {
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+            }
+            
+            .section-title {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            
             .form-row {
                 grid-template-columns: 1fr;
+                gap: 15px;
+                margin-bottom: 15px;
+            }
+            
+            label {
+                font-size: 13px;
+            }
+            
+            input[type="text"],
+            input[type="email"],
+            input[type="number"],
+            input[type="date"],
+            input[type="tel"],
+            select,
+            textarea {
+                padding: 10px;
+                font-size: 16px; /* Evita zoom automático en iOS */
+            }
+            
+            textarea {
+                min-height: 80px;
             }
             
             .button-group {
-                flex-direction: column;
+                flex-direction: column-reverse;
+                gap: 10px;
             }
             
             button {
                 width: 100%;
+                padding: 14px 20px;
+                font-size: 16px;
+            }
+            
+            .note {
+                padding: 12px;
+            }
+            
+            .note-title {
+                font-size: 13px;
+            }
+            
+            .note-text {
+                font-size: 13px;
+            }
+        }
+        
+        /* Tablet */
+        @media (min-width: 577px) and (max-width: 992px) {
+            body {
+                padding: 15px;
+            }
+            
+            .container {
+                border-radius: 8px;
+            }
+            
+            .header {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .form-content {
+                padding: 25px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            
+            .button-group {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            button {
+                min-width: 150px;
+            }
+        }
+        
+        /* Desktop Grande */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1200px;
+            }
+            
+            .form-content {
+                padding: 40px 50px;
+            }
+            
+            .form-row {
+                gap: 25px;
+            }
+        }
+        
+        /* Mejoras de accesibilidad y usabilidad */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            
+            .button-group {
+                display: none;
+            }
+            
+            .header {
+                background: #667eea;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
         }
     </style>
@@ -260,12 +449,10 @@
                 <div class="form-section">
                     <h2 class="section-title">1. Información General</h2>
                     
+                    <!-- ID oculto, solo visible al consultar la solicitud -->
+                    <input type="hidden" id="idSolicitud" name="idSolicitud">
+                    
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="idSolicitud">ID Solicitud <span class="required">*</span></label>
-                            <input type="text" id="idSolicitud" name="idSolicitud" placeholder="SN-2026-0001" readonly>
-                            <div class="help-text">Se genera automáticamente</div>
-                        </div>
                         <div class="form-group">
                             <label for="fechaSolicitud">Fecha de Solicitud <span class="required">*</span></label>
                             <input type="date" id="fechaSolicitud" name="fechaSolicitud" required>
@@ -274,8 +461,19 @@
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="solicitante">Nombre Completo <span class="required">*</span></label>
-                            <input type="text" id="solicitante" name="solicitante" placeholder="Ej: Juan Pérez García" required>
+                            <label for="nombre">Nombre(s) <span class="required">*</span></label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidoPaterno">Apellido Paterno <span class="required">*</span></label>
+                            <input type="text" id="apellidoPaterno" name="apellidoPaterno" placeholder="Ej: Pérez" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="apellidoMaterno">Apellido Materno <span class="required">*</span></label>
+                            <input type="text" id="apellidoMaterno" name="apellidoMaterno" placeholder="Ej: García" required>
                         </div>
                         <div class="form-group">
                             <label for="cargo">Cargo/Posición <span class="required">*</span></label>
@@ -304,8 +502,24 @@
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="telefono">Teléfono/Extensión <span class="required">*</span></label>
-                            <input type="tel" id="telefono" name="telefono" placeholder="Ej: 3124567890" required>
+                            <label for="tipoContacto">Tipo de Contacto <span class="required">*</span></label>
+                            <select id="tipoContacto" name="tipoContacto" required>
+                                <option value="">-- Seleccionar --</option>
+                                <option value="TELEFONO">Teléfono</option>
+                                <option value="CELULAR">Celular</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="numeroContacto">Número <span class="required">*</span></label>
+                            <input type="tel" id="numeroContacto" name="numeroContacto" placeholder="Ej: 3124567890" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="extension">Extensión (Opcional)</label>
+                            <input type="text" id="extension" name="extension" placeholder="Ej: 1234">
+                            <div class="help-text">Solo si aplica</div>
                         </div>
                     </div>
                 </div>
@@ -324,14 +538,14 @@
                     
                     <div class="form-row full">
                         <div class="form-group">
-                            <label for="tipoSistema">Tipo de Sistema <span class="required">*</span></label>
+                            <label for="tipoSistema">Tipo de Sistema Web <span class="required">*</span></label>
                             <select id="tipoSistema" name="tipoSistema" required>
                                 <option value="">-- Seleccionar Tipo --</option>
-                                <option value="WEB">Aplicación Web</option>
-                                <option value="ESCRITORIO">Aplicación Escritorio</option>
-                                <option value="MOVIL">Aplicación Móvil</option>
-                                <option value="API">API/Servicio</option>
-                                <option value="HIBRIDO">Híbrido (Combinación)</option>
+                                <option value="WEB_INTERNA">Aplicación Web Interna</option>
+                                <option value="WEB_PUBLICA">Aplicación Web Pública</option>
+                                <option value="WEB_PORTAL">Portal Web</option>
+                                <option value="WEB_SISTEMA">Sistema Web de Gestión</option>
+                                <option value="WEB_API">API/Servicio Web</option>
                             </select>
                         </div>
                     </div>
@@ -429,7 +643,27 @@
                     
                     <div class="form-row full">
                         <div class="form-group">
-                            <label>Áreas Involucradas <span class="required">*</span></label>
+                            <label>Áreas Beneficiadas <span class="required">*</span></label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" id="soloArea" name="alcanceAreas" value="solo_area" required onclick="ocultarAreasMultiples()">
+                                    <label for="soloArea">Solo el área que lo solicita</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="todaInstitucion" name="alcanceAreas" value="toda_institucion" required onclick="ocultarAreasMultiples()">
+                                    <label for="todaInstitucion">Toda la institución</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="variasAreas" name="alcanceAreas" value="varias_areas" required onclick="mostrarAreasMultiples()">
+                                    <label for="variasAreas">Varias áreas específicas</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row full" id="areasMultiplesDiv" style="display: none;">
+                        <div class="form-group">
+                            <label>Seleccione las áreas beneficiadas:</label>
                             <div class="checkbox-group">
                                 <div class="checkbox-item">
                                     <input type="checkbox" id="area1" name="areasInvolucradas" value="rrhh">
@@ -501,17 +735,9 @@
                     </div>
                 </div>
                 
-                <!-- SECCIÓN 5: RECURSOS Y TIMELINE -->
+                <!-- SECCIÓN 5: RECURSOS -->
                 <div class="form-section">
-                    <h2 class="section-title">5. Recursos y Timeline</h2>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="fechaLimite">Fecha Límite Deseada</label>
-                            <input type="date" id="fechaLimite" name="fechaLimite">
-                            <div class="help-text">Cuándo se necesita</div>
-                        </div>
-                    </div>
+                    <h2 class="section-title">5. Recursos</h2>
                     
                     <div class="form-row full">
                         <div class="form-group">
@@ -560,10 +786,20 @@
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="nombreJefe">Nombre Jefe de Área</label>
-                            <input type="text" id="nombreJefe" name="nombreJefe" placeholder="Nombre del jefe autorizado">
+                            <label for="nombreJefe">Nombre(s) Jefe de Área</label>
+                            <input type="text" id="nombreJefe" name="nombreJefe" placeholder="Nombre del jefe">
                         </div>
                         <div class="form-group">
+                            <label for="apellidoPaternoJefe">Apellido Paterno Jefe de Área</label>
+                            <input type="text" id="apellidoPaternoJefe" name="apellidoPaternoJefe" placeholder="Apellido paterno">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="apellidoMaternoJefe">Apellido Materno Jefe de Área</label>
+                            <input type="text" id="apellidoMaternoJefe" name="apellidoMaternoJefe" placeholder="Apellido materno">
+                        </div>
                             <label for="emailJefe">Email Jefe de Área</label>
                             <input type="email" id="emailJefe" name="emailJefe" placeholder="email@empresa.com">
                         </div>
@@ -580,13 +816,24 @@
     </div>
     
     <script>
-        // Auto-generar ID de solicitud
+        // Auto-generar ID de solicitud (oculto)
         function generarIDSolicitud() {
             const hoy = new Date();
             const año = hoy.getFullYear();
             const numero = Math.floor(Math.random() * 9000) + 1000;
             document.getElementById('idSolicitud').value = `SN-${año}-${numero}`;
             document.getElementById('fechaSolicitud').valueAsDate = hoy;
+        }
+        
+        // Mostrar/ocultar áreas múltiples
+        function mostrarAreasMultiples() {
+            document.getElementById('areasMultiplesDiv').style.display = 'block';
+        }
+        
+        function ocultarAreasMultiples() {
+            document.getElementById('areasMultiplesDiv').style.display = 'none';
+            // Desmarcar todos los checkboxes
+            document.querySelectorAll('#areasMultiplesDiv input[type="checkbox"]').forEach(cb => cb.checked = false);
         }
         
         // Llenar la fecha de hoy al cargar

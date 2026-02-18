@@ -6,19 +6,22 @@
 
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| ID Incidencia | Texto (Auto) | Automático | Generado automáticamente: INC-YYYY-NNNN |
-| Fecha y Hora del Problema | Fecha/Hora | Sí | Cuándo se detectó el problema |
-| Nombre Completo del Reportante | Texto | Sí | Persona que reporta |
+| ID Incidencia | Texto (Auto) | Automático | Generado automáticamente: INC-YYYY-NNNN (NO visible en formulario, solo al consultar) |
+| Fecha del Problema | Fecha | Sí | Cuándo se detectó el problema (solo día, sin hora) |
+| Nombre(s) del Reportante | Texto | Sí | Nombre de la persona que reporta |
+| Apellido Paterno del Reportante | Texto | Sí | Apellido paterno de la persona que reporta |
+| Apellido Materno del Reportante | Texto | Sí | Apellido materno de la persona que reporta |
 | Área/Departamento | Lista | Sí | Seleccionar de catálogo |
 | Email del Reportante | Email | Sí | Para comunicaciones de seguimiento |
-| Teléfono | Teléfono | No | Contacto alterno |
+| Tipo de Contacto | Lista | No | Teléfono o Celular |
+| Número de Contacto | Teléfono | No | Número telefónico |
+| Extensión | Texto | No | Solo si aplica |
 
 ## Sistema Afectado
 
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| Sistema | Lista | Sí | Dropdown con sistemas registrados en ISSEG |
-| Versión del Sistema | Texto (Auto) | Automático | Se auto-completa según sistema seleccionado |
+| Sistema | Lista | Sí | Dropdown con sistemas a los que el área tiene acceso (sin mostrar versiones) |
 | Módulo Afectado | Texto | Sí | ¿Qué módulo tiene el problema? |
 | URL/Pantalla Afectada | Texto | No | Ruta exacta donde ocurre el problema |
 
@@ -36,19 +39,11 @@
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
 | Nivel de Urgencia | Radio | Sí | **Crítica** / **Alta** / **Media** / **Baja** |
-| **SLA Automático** | Calculado | Automático | Se calcula según urgencia (ver tabla abajo) |
 | Cantidad de Usuarios Afectados | Número | Sí | ¿Cuántos usuarios están impactados? |
 | ¿Impacta el Negocio? | Radio | Sí | Sí / No / Parcialmente |
 | Frecuencia del Problema | Radio | Sí | Contínuo / Intermitente / Una sola vez |
 
-**Tabla SLA Automática (por Urgencia):**
-
-| Urgencia | Color Badge | Respuesta | Resolución |
-|----------|-------------|-----------|-----------|
-| Crítica 🔴 | Rojo | 1 hora | 4 horas |
-| Alta 🟠 | Naranja | 4 horas | 8 horas |
-| Media 🟡 | Amarillo | 8 horas | 16 horas |
-| Baja 🟢 | Verde | 24 horas | 48 horas |
+**Nota sobre Urgencia:** El sistema asignará automáticamente al equipo de soporte según el nivel de urgencia seleccionado.
 
 ## Contexto Técnico
 

@@ -188,9 +188,10 @@ los compromisos de tiempo de servicio establecidos con los usuarios. -->
 │  FORMULARIO A: SISTEMA NUEVO                    │
 ├─────────────────────────────────────────────────┤
 │                                                 │
-│  1️⃣ Información General (7 campos)              │
-│     • ID: SN-2026-XXXX (automático)             │
-│     • Nombre, Área, Email, Teléfono             │
+│  1️⃣ Información General (10 campos)             │
+│     • ID: SN-2026-XXXX (no visible)            │
+│     • Nombre(s), Apellidos, Área, Email        │
+│     • Tipo Contacto, Número, Extensión        │
 │                                                 │
 │  2️⃣ Descripción del Sistema (4 campos)          │
 │     • Nombre sistema, Tipo                      │
@@ -200,14 +201,14 @@ los compromisos de tiempo de servicio establecidos con los usuarios. -->
 │     • Beneficios esperados                      │
 │     • Prioridad: Crítica/Alta/Media/Baja        │
 │     • Usuarios estimados                        │
+│     • Áreas beneficiadas (radio + checkbox)     │
 │                                                 │
 │  4️⃣ Alcance Preliminar (4 campos)               │
 │     • Funcionalidades principales               │
 │     • Integraciones necesarias                  │
 │     • Plataforma (Web/Desktop/Mobile)           │
 │                                                 │
-│  5️⃣ Recursos y Timeline (2 campos)              │
-│     • Fecha límite                              │
+│  5️⃣ Recursos (1 campo)                          │
 │     • Recursos humanos disponibles              │
 │                                                 │
 │  6️⃣ Documentación (2 campos)                    │
@@ -843,18 +844,22 @@ FECHA: 05/02/2026 10:45 AM
 
 1️⃣ INFORMACIÓN GENERAL
 
-Nombre Completo: María Fernández López
+Nombre(s): María
+Apellido Paterno: Fernández
+Apellido Materno: López
 Cargo: Jefa de Almacén
 Área: Logística
 Email: mfernandez@empresa.com
-Teléfono: 555-1234
+Tipo de Contacto: Teléfono
+Número: 555-1234
+Extensión: 102
 
 ---
 
 2️⃣ DESCRIPCIÓN DEL SISTEMA
 
 Nombre del Sistema: Sistema de Gestión de Inventario (SGI)
-Tipo: Web Application
+Tipo: Sistema Web de Gestión
 
 Descripción General:
 Sistema web para controlar entradas, salidas y stock de

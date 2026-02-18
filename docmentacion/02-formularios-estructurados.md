@@ -5,13 +5,17 @@
 ### Sección 1: Información General
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| **ID Solicitud** | Texto (Auto) | Sí | Generado automáticamente: SN-YYYY-NNNN |
-| **Fecha de Solicitud** | Fecha | Sí | Fecha automática de creación |
-| **Solicitante** | Texto | Sí | Nombre completo del solicitante |
+| **ID Solicitud** | Texto (Auto) | Sí | Generado automáticamente: SN-YYYY-NNNN (NO visible en formulario, solo al consultar solicitud) |
+| **Fecha de Solicitud** | Fecha | Sí | Fecha automática de creación (solo día, sin hora) |
+| **Nombre(s)** | Texto | Sí | Nombre del solicitante |
+| **Apellido Paterno** | Texto | Sí | Apellido paterno del solicitante |
+| **Apellido Materno** | Texto | Sí | Apellido materno del solicitante |
 | **Área/Departamento** | Lista desplegable | Sí | Área que solicita el sistema |
 | **Cargo** | Texto | Sí | Puesto del solicitante |
 | **Email de Contacto** | Email | Sí | Correo institucional |
-| **Teléfono/Extensión** | Texto | Sí | Contacto directo |
+| **Tipo de Contacto** | Lista | Sí | Teléfono o Celular |
+| **Número de Contacto** | Teléfono | Sí | Número telefónico |
+| **Extensión** | Texto | No | Solo si aplica |
 
 ### Sección 2: Descripción del Sistema
 | Campo | Tipo | Obligatorio | Descripción |
@@ -27,7 +31,7 @@
 | **Justificación del Negocio** | Texto largo (1000 chars) | Sí | Por qué es necesario este sistema |
 | **Beneficios Esperados** | Checkbox múltiple + Texto | Sí | Ahorro de tiempo, reducción de errores, automatización, cumplimiento normativo, mejora de servicio, etc. |
 | **Usuarios Finales Estimados** | Numérico | Sí | Cantidad aproximada de usuarios |
-| **Áreas Involucradas** | Checkbox múltiple | Sí | Departamentos que utilizarán el sistema |
+| **Áreas Beneficiadas** | Radio + Checkbox | Sí | Solo el área solicitante / Toda la institución / Varias áreas específicas (seleccionar) |
 | **Prioridad del Negocio** | Radio button | Sí | Crítica / Alta / Media / Baja |
 | **Criticidad** | Radio button | Sí | Esencial para operación / Mejora de proceso / Optimización |
 
@@ -39,10 +43,9 @@
 | **Plataforma Preferida** | Lista desplegable | Sí | Web, Windows, Linux, Android, iOS, Multiplataforma |
 | **Acceso Esperado** | Radio button | Sí | Interno (red local) / Externo (internet) / Ambos |
 
-### Sección 5: Recursos y Timeline
+### Sección 5: Recursos
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| **Fecha Límite Deseada** | Fecha | No | Cuándo se necesita |
 | **Recursos Humanos Disponibles** | Texto | No | Personal disponible |
 
 ### Sección 6: Documentación Adicional
@@ -64,13 +67,17 @@
 ### Sección 1: Identificación
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| **ID Modificación** | Texto (Auto) | Sí | Generado: MOD-YYYY-NNNN |
-| **Fecha de Solicitud** | Fecha | Sí | Automática |
-| **Sistema a Modificar** | Lista desplegable | Sí | Selección de inventario de sistemas |
-| **Versión Actual** | Texto (Auto) | Sí | Se llena automáticamente según sistema |
-| **Solicitante** | Texto | Sí | Nombre completo |
+| **ID Modificación** | Texto (Auto) | Sí | Generado: MOD-YYYY-NNNN (NO visible en formulario, solo al consultar) |
+| **Fecha de Solicitud** | Fecha | Sí | Automática (solo día, sin hora) |
+| **Sistema a Modificar** | Lista desplegable | Sí | Solo muestra sistemas a los que el área tiene acceso (sin mostrar versiones) |
+| **Nombre(s)** | Texto | Sí | Nombre del solicitante |
+| **Apellido Paterno** | Texto | Sí | Apellido paterno del solicitante |
+| **Apellido Materno** | Texto | Sí | Apellido materno del solicitante |
 | **Área/Departamento** | Texto (Auto) | Sí | Desde perfil de usuario |
 | **Email de Contacto** | Email | Sí | Correo institucional |
+| **Tipo de Contacto** | Lista | Sí | Teléfono o Celular |
+| **Número de Contacto** | Teléfono | Sí | Número telefónico |
+| **Extensión** | Texto | No | Solo si aplica |
 
 ### Sección 2: Descripción del Cambio
 | Campo | Tipo | Obligatorio | Descripción |
@@ -110,14 +117,14 @@
 |-------|------|-------------|-------------|
 | **Ticket de Error Relacionado** | Texto | No | Si es corrección, número de ticket |
 | **Evidencia del Problema** | Upload | No | Screenshots, logs, videos |
-| **Fecha Límite** | Fecha | No | Cuándo se requiere el cambio |
 | **Horario Preferido de Implementación** | Texto | No | Para minimizar impacto operativo |
 
 ### Sección 7: Alternativas y Workarounds
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
 | **¿Existe solución temporal?** | Radio button | Sí | Sí / No |
-| **Descripción de Workaround** | Texto largo | Condicional | Si existe, describir la solución temporal |
+| **Descripción de la Solución Temporal** | Texto largo | Condicional | Si existe, describir cuál es la solución temporal |
+| **¿Cómo se utiliza?** | Texto largo | Condicional | Indicar los pasos o instrucciones para utilizar la solución temporal (ayuda a optimizar la modificación) |
 | **Comentarios Adicionales** | Texto largo | No | Información complementaria |
 
 ### Sección 8: Revisión ISSEG
@@ -135,12 +142,18 @@
 ### Sección 1: Información del Proyecto
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| **ID Proyecto** | Texto (Auto) | Sí | Referencia al ticket aprobado |
+| **ID Proyecto** | Texto (Auto) | Sí | Referencia al ticket aprobado (NO visible en formulario, solo al consultar) |
 | **Nombre del Sistema** | Texto (Auto) | Sí | Desde Formulario A |
-| **Product Manager Asignado** | Texto (Auto) | Sí | Desde asignación ISSEG |
-| **Desarrollador Líder** | Texto (Auto) | Sí | Desde asignación ISSEG |
-| **Fecha de Inicio** | Fecha | Sí | Fecha de levantamiento |
-| **Responsable de Requerimientos** | Texto | Sí | Usuario de área que define necesidades |
+| **Nombre(s) del Product Manager** | Texto (Auto) | Sí | Desde asignación ISSEG |
+| **Apellido Paterno del Product Manager** | Texto (Auto) | Sí | Desde asignación ISSEG |
+| **Apellido Materno del Product Manager** | Texto (Auto) | Sí | Desde asignación ISSEG |
+| **Nombre(s) del Desarrollador Líder** | Texto (Auto) | Sí | Desde asignación ISSEG |
+| **Apellido Paterno del Desarrollador Líder** | Texto (Auto) | Sí | Desde asignación ISSEG |
+| **Apellido Materno del Desarrollador Líder** | Texto (Auto) | Sí | Desde asignación ISSEG |
+| **Fecha de Inicio** | Fecha | Sí | Fecha de levantamiento (solo día) |
+| **Nombre(s) del Responsable** | Texto | Sí | Usuario de área que define necesidades |
+| **Apellido Paterno del Responsable** | Texto | Sí | Apellido paterno del responsable |
+| **Apellido Materno del Responsable** | Texto | Sí | Apellido materno del responsable |
 
 ### Sección 2: Objetivos y Alcance Técnico
 | Campo | Tipo | Obligatorio | Descripción |
@@ -183,14 +196,16 @@
 ### Sección 5: Requerimientos Funcionales
 **Tabla de RF:** (Usar formato estándar IEEE)
 
-| ID | Descripción del Requerimiento | Prioridad | Módulo | Criterio de Aceptación |
-|----|------------------------------|-----------|--------|----------------------|
-| RF-001 | El sistema debe permitir registro de usuarios con email único | Crítica | Usuarios | Usuario creado y email de confirmación enviado |
-| RF-002 | El sistema debe generar reporte PDF de actividades | Alta | Reportes | PDF generado con datos correctos en < 5 seg |
+**Nota:** Los IDs se asignan automáticamente y NO se muestran en el formulario. Solo son visibles al consultar.
+
+| ID | Descripción del Requerimiento | Prioridad | Módulo |
+|----|------------------------------|-----------|--------|
+| RF-001 (auto) | El sistema debe permitir registro de usuarios con email único | Crítica | Usuarios |
+| RF-002 (auto) | El sistema debe generar reporte PDF de actividades | Alta | Reportes |
 
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| **Requerimientos Funcionales** | Tabla dinámica | Sí | Mínimo 10 RF principales |
+| **Requerimientos Funcionales** | Tabla dinámica | Sí | Mínimo 10 RF principales (IDs auto-asignados, no visibles) |
 | **Reglas de Negocio** | Texto largo | Sí | Validaciones, cálculos, restricciones |
 
 ### Sección 6: Requerimientos No Funcionales

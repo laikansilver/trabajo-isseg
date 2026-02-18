@@ -52,6 +52,7 @@
             margin-bottom: 40px;
             border-bottom: 2px solid #f0f0f0;
             padding-bottom: 30px;
+            animation: fadeIn 0.3s ease-in;
         }
         
         .form-section:last-child {
@@ -93,6 +94,7 @@
         .required {
             color: #e74c3c;
             margin-left: 4px;
+            font-weight: bold;
         }
         
         input[type="text"],
@@ -153,6 +155,38 @@
             color: #666;
             margin-top: 5px;
             font-style: italic;
+        }
+        
+        /* Mejoras visuales para agrupación de campos */
+        .form-group input[placeholder*="Ej:"],
+        .form-group input[placeholder*="Apellido"] {
+            background-color: #fafafa;
+        }
+        
+        .form-group input:focus {
+            background-color: white;
+        }
+        
+        /* Indicador visual sutil para campos relacionados (nombres) */
+        .form-group label[for*="nombre"],
+        .form-group label[for*="apellido"] {
+            color: #555;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Separador visual entre grupos de campos */
+        .form-row + .form-row {
+            margin-top: 15px;
         }
         
         .file-upload {
@@ -223,17 +257,170 @@
             font-size: 14px;
         }
         
-        @media (max-width: 768px) {
+        /* Responsive Design - Mobile First */
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                border-radius: 5px;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .header p {
+                font-size: 13px;
+            }
+            
+            .form-content {
+                padding: 20px 15px;
+            }
+            
+            .form-section {
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+            }
+            
+            .section-title {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            
             .form-row {
                 grid-template-columns: 1fr;
+                gap: 15px;
+                margin-bottom: 15px;
+            }
+            
+            label {
+                font-size: 13px;
+            }
+            
+            input[type="text"],
+            input[type="email"],
+            input[type="number"],
+            input[type="date"],
+            input[type="tel"],
+            select,
+            textarea {
+                padding: 10px;
+                font-size: 16px;
+            }
+            
+            textarea {
+                min-height: 80px;
             }
             
             .button-group {
-                flex-direction: column;
+                flex-direction: column-reverse;
+                gap: 10px;
             }
             
             button {
                 width: 100%;
+                padding: 14px 20px;
+                font-size: 16px;
+            }
+            
+            .note {
+                padding: 12px;
+            }
+            
+            .note-title {
+                font-size: 13px;
+            }
+            
+            .note-text {
+                font-size: 13px;
+            }
+        }
+        
+        /* Tablet */
+        @media (min-width: 577px) and (max-width: 992px) {
+            body {
+                padding: 15px;
+            }
+            
+            .container {
+                border-radius: 8px;
+            }
+            
+            .header {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .form-content {
+                padding: 25px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            
+            .button-group {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            button {
+                min-width: 150px;
+            }
+        }
+        
+        /* Desktop Grande */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1200px;
+            }
+            
+            .form-content {
+                padding: 40px 50px;
+            }
+            
+            .form-row {
+                gap: 25px;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            
+            .button-group {
+                display: none;
+            }
+            
+            .header {
+                background: #f5576c;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
         }
     </style>
@@ -260,41 +447,46 @@
                 <div class="form-section">
                     <h2 class="section-title">1. Identificación</h2>
                     
+                    <!-- ID oculto, solo visible al consultar la solicitud -->
+                    <input type="hidden" id="idModificacion" name="idModificacion">
+                    
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="idModificacion">ID Modificación <span class="required">*</span></label>
-                            <input type="text" id="idModificacion" name="idModificacion" placeholder="MOD-2026-0001" readonly>
-                            <div class="help-text">Se genera automáticamente</div>
-                        </div>
                         <div class="form-group">
                             <label for="fechaSolicitud">Fecha de Solicitud <span class="required">*</span></label>
                             <input type="date" id="fechaSolicitud" name="fechaSolicitud" required>
                         </div>
                     </div>
                     
-                    <div class="form-row">
+                    <div class="form-row full">
                         <div class="form-group">
                             <label for="sistemaMod">Sistema a Modificar <span class="required">*</span></label>
                             <select id="sistemaMod" name="sistemaMod" required>
                                 <option value="">-- Seleccionar Sistema --</option>
-                                <option value="SIS001">Sistema de Gestión de Inventario (v1.2)</option>
-                                <option value="SIS002">Portal de Recursos Humanos (v2.1)</option>
-                                <option value="SIS003">Plataforma de Ventas (v3.0)</option>
-                                <option value="SIS004">Sistema de Contabilidad (v1.5)</option>
-                                <option value="SIS005">Aplicación de Logística (v2.3)</option>
+                                <option value="SIS001">Sistema de Gestión de Inventario</option>
+                                <option value="SIS002">Portal de Recursos Humanos</option>
+                                <option value="SIS003">Plataforma de Ventas</option>
+                                <option value="SIS004">Sistema de Contabilidad</option>
+                                <option value="SIS005">Aplicación de Logística</option>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="versionActual">Versión Actual <span class="required">*</span></label>
-                            <input type="text" id="versionActual" name="versionActual" placeholder="Ej: v1.2.1" readonly>
-                            <div class="help-text">Se llena automáticamente</div>
+                            <div class="help-text">Solo se muestran sistemas a los que su área tiene acceso</div>
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="solicitante">Nombre del Solicitante <span class="required">*</span></label>
-                            <input type="text" id="solicitante" name="solicitante" placeholder="Nombre completo" required>
+                            <label for="nombre">Nombre(s) del Solicitante <span class="required">*</span></label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidoPaterno">Apellido Paterno <span class="required">*</span></label>
+                            <input type="text" id="apellidoPaterno" name="apellidoPaterno" placeholder="Apellido paterno" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="apellidoMaterno">Apellido Materno <span class="required">*</span></label>
+                            <input type="text" id="apellidoMaterno" name="apellidoMaterno" placeholder="Apellido materno" required>
                         </div>
                         <div class="form-group">
                             <label for="area">Área/Departamento <span class="required">*</span></label>
@@ -306,6 +498,29 @@
                         <div class="form-group">
                             <label for="email">Email de Contacto <span class="required">*</span></label>
                             <input type="email" id="email" name="email" placeholder="usuario@empresa.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tipoContacto">Tipo de Contacto <span class="required">*</span></label>
+                            <select id="tipoContacto" name="tipoContacto" required>
+                                <option value="">-- Seleccionar --</option>
+                                <option value="TELEFONO">Teléfono</option>
+                                <option value="CELULAR">Celular</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="numeroContacto">Número <span class="required">*</span></label>
+                            <input type="tel" id="numeroContacto" name="numeroContacto" placeholder="Ej: 3124567890" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="extension">Extensión (Opcional)</label>
+                            <input type="text" id="extension" name="extension" placeholder="Ej: 1234">
+                            <div class="help-text">Solo si aplica</div>
                         </div>
                     </div>
                 </div>
@@ -520,10 +735,6 @@
                             <label for="ticketError">Ticket de Error Relacionado</label>
                             <input type="text" id="ticketError" name="ticketError" placeholder="Si es corrección, número de ticket">
                         </div>
-                        <div class="form-group">
-                            <label for="fechaLimite">Fecha Límite Deseada</label>
-                            <input type="date" id="fechaLimite" name="fechaLimite">
-                        </div>
                     </div>
                     
                     <div class="form-row full">
@@ -567,8 +778,17 @@
                     
                     <div class="form-row full" id="workaroundText" style="display: none;">
                         <div class="form-group">
-                            <label for="descripcionWorkaround">Descripción del Workaround</label>
-                            <textarea id="descripcionWorkaround" name="descripcionWorkaround" placeholder="Describe la solución temporal"></textarea>
+                            <label for="descripcionWorkaround">Descripción de la Solución Temporal <span class="required">*</span></label>
+                            <textarea id="descripcionWorkaround" name="descripcionWorkaround" placeholder="Explica cuál es la solución temporal" maxlength="500"></textarea>
+                            <div class="help-text">Describe brevemente la solución temporal que se está usando actualmente</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row full" id="workaroundInstrucciones" style="display: none;">
+                        <div class="form-group">
+                            <label for="comoUsarWorkaround">¿Cómo se utiliza? <span class="required">*</span></label>
+                            <textarea id="comoUsarWorkaround" name="comoUsarWorkaround" placeholder="Indica los pasos o instrucciones para utilizar la solución temporal" maxlength="1000"></textarea>
+                            <div class="help-text">Esto ayudará a entender mejor el proceso y optimizar la modificación</div>
                         </div>
                     </div>
                     
@@ -590,7 +810,7 @@
     </div>
     
     <script>
-        // Auto-generar ID de modificación
+        // Auto-generar ID de modificación (oculto)
         function generarIDModificacion() {
             const hoy = new Date();
             const año = hoy.getFullYear();
@@ -601,25 +821,32 @@
         
         // Mostrar/Ocultar campo de workaround
         function mostrarWorkaround() {
-            document.getElementById('workaroundText').style.display = 'grid';
+            document.getElementById('workaroundText').style.display = 'block';
+            document.getElementById('workaroundInstrucciones').style.display = 'block';
+            document.getElementById('descripcionWorkaround').required = true;
+            document.getElementById('comoUsarWorkaround').required = true;
         }
         
         function ocultarWorkaround() {
             document.getElementById('workaroundText').style.display = 'none';
+            document.getElementById('workaroundInstrucciones').style.display = 'none';
             document.getElementById('descripcionWorkaround').value = '';
+            document.getElementById('comoUsarWorkaround').value = '';
+            document.getElementById('descripcionWorkaround').required = false;
+            document.getElementById('comoUsarWorkaround').required = false;
         }
         
-        // Cambiar versión actual según sistema seleccionado
-        document.getElementById('sistemaMod').addEventListener('change', function() {
-            const versiones = {
-                'SIS001': 'v1.2',
-                'SIS002': 'v2.1',
-                'SIS003': 'v3.0',
-                'SIS004': 'v1.5',
-                'SIS005': 'v2.3'
-            };
-            document.getElementById('versionActual').value = versiones[this.value] || '';
-        });
+        // Cambiar versión actual según sistema seleccionado (ya no se muestra en UI)
+        // document.getElementById('sistemaMod').addEventListener('change', function() {
+        //     const versiones = {
+        //         'SIS001': 'v1.2',
+        //         'SIS002': 'v2.1',
+        //         'SIS003': 'v3.0',
+        //         'SIS004': 'v1.5',
+        //         'SIS005': 'v2.3'
+        //     };
+        //     document.getElementById('versionActual').value = versiones[this.value] || '';
+        // });
         
         window.addEventListener('load', generarIDModificacion);
         

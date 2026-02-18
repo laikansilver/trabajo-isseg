@@ -6,12 +6,18 @@
 
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| ID Proyecto | Texto | Sí | Referencia del Formulario A aprobado (SN-2026-XXXX) |
+| ID Proyecto | Texto | Sí | Referencia del Formulario A aprobado (SN-2026-XXXX) - NO visible en formulario, solo al consultar |
 | Nombre del Sistema | Texto | Sí | Desde Formulario A |
-| Product Manager Asignado | Texto | Sí | Nombre del PM responsable |
-| Desarrollador Líder | Texto | Sí | Nombre del Dev Lead |
-| Fecha de Inicio | Fecha | Sí | Fecha de levantamiento |
-| Responsable de Requerimientos | Texto | Sí | Usuario de área que define necesidades |
+| Nombre(s) del Product Manager | Texto | Sí | Nombre del PM responsable |
+| Apellido Paterno del Product Manager | Texto | Sí | Apellido paterno del PM |
+| Apellido Materno del Product Manager | Texto | Sí | Apellido materno del PM |
+| Nombre(s) del Desarrollador Líder | Texto | Sí | Nombre del Dev Lead |
+| Apellido Paterno del Desarrollador Líder | Texto | Sí | Apellido paterno del Dev Lead |
+| Apellido Materno del Desarrollador Líder | Texto | Sí | Apellido materno del Dev Lead |
+| Fecha de Inicio | Fecha | Sí | Fecha de levantamiento (solo día) |
+| Nombre(s) del Responsable | Texto | Sí | Usuario de área que define necesidades |
+| Apellido Paterno del Responsable | Texto | Sí | Apellido paterno del responsable |
+| Apellido Materno del Responsable | Texto | Sí | Apellido materno del responsable |
 
 ## Objetivos y Alcance Técnico
 
@@ -58,12 +64,14 @@
 
 **Mínimo 10 RF obligatorios**
 
-| ID | Descripción | Prioridad | Módulo | Criterio de Aceptación |
-|----|-------------|-----------|--------|----------------------|
-| RF-001 | El sistema debe permitir registro de usuarios con email único | Crítica | Usuarios | Usuario creado, email confirmado |
-| RF-002 | El sistema debe generar reporte PDF de actividades | Alta | Reportes | PDF generado en < 5 seg |
-| RF-003 | El sistema debe validar integridad de datos | Crítica | BD | Validaciones ejecutadas correctamente |
-| ... | ... | ... | ... | ... |
+**Nota:** Los IDs se asignan automáticamente y NO se muestran en el formulario. Solo son visibles al consultar.
+
+| ID | Descripción | Prioridad | Módulo |
+|----|-------------|-----------|--------|
+| RF-001 (auto) | El sistema debe permitir registro de usuarios con email único | Crítica | Usuarios |
+| RF-002 (auto) | El sistema debe generar reporte PDF de actividades | Alta | Reportes |
+| RF-003 (auto) | El sistema debe validar integridad de datos | Crítica | BD |
+| ... | ... | ... | ... |
 
 ## Reglas de Negocio
 

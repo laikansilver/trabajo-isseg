@@ -52,6 +52,7 @@
             margin-bottom: 40px;
             border-bottom: 2px solid #f0f0f0;
             padding-bottom: 30px;
+            animation: fadeIn 0.3s ease-in;
         }
         
         .form-section:last-child {
@@ -93,6 +94,7 @@
         .required {
             color: #e74c3c;
             margin-left: 4px;
+            font-weight: bold;
         }
         
         input[type="text"],
@@ -229,6 +231,38 @@
             font-style: italic;
         }
         
+        /* Mejoras visuales para agrupación de campos */
+        .form-group input[placeholder*="Ej:"],
+        .form-group input[placeholder*="Apellido"] {
+            background-color: #fafafa;
+        }
+        
+        .form-group input:focus {
+            background-color: white;
+        }
+        
+        /* Indicador visual sutil para campos relacionados (nombres) */
+        .form-group label[for*="nombre"],
+        .form-group label[for*="apellido"] {
+            color: #555;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Separador visual entre grupos de campos */
+        .form-row + .form-row {
+            margin-top: 15px;
+        }
+        
         .file-upload {
             border: 2px dashed #fa709a;
             padding: 20px;
@@ -298,17 +332,170 @@
             font-size: 14px;
         }
         
-        @media (max-width: 768px) {
+        /* Responsive Design - Mobile First */
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                border-radius: 5px;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .header p {
+                font-size: 13px;
+            }
+            
+            .form-content {
+                padding: 20px 15px;
+            }
+            
+            .form-section {
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+            }
+            
+            .section-title {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            
             .form-row {
                 grid-template-columns: 1fr;
+                gap: 15px;
+                margin-bottom: 15px;
+            }
+            
+            label {
+                font-size: 13px;
+            }
+            
+            input[type="text"],
+            input[type="email"],
+            input[type="number"],
+            input[type="date"],
+            input[type="tel"],
+            select,
+            textarea {
+                padding: 10px;
+                font-size: 16px;
+            }
+            
+            textarea {
+                min-height: 80px;
             }
             
             .button-group {
-                flex-direction: column;
+                flex-direction: column-reverse;
+                gap: 10px;
             }
             
             button {
                 width: 100%;
+                padding: 14px 20px;
+                font-size: 16px;
+            }
+            
+            .note {
+                padding: 12px;
+            }
+            
+            .note-title {
+                font-size: 13px;
+            }
+            
+            .note-text {
+                font-size: 13px;
+            }
+        }
+        
+        /* Tablet */
+        @media (min-width: 577px) and (max-width: 992px) {
+            body {
+                padding: 15px;
+            }
+            
+            .container {
+                border-radius: 8px;
+            }
+            
+            .header {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .form-content {
+                padding: 25px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            
+            .button-group {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            button {
+                min-width: 150px;
+            }
+        }
+        
+        /* Desktop Grande */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1200px;
+            }
+            
+            .form-content {
+                padding: 40px 50px;
+            }
+            
+            .form-row {
+                gap: 25px;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            
+            .button-group {
+                display: none;
+            }
+            
+            .header {
+                background: #ff6b6b;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
         }
     </style>
@@ -336,22 +523,32 @@
                 <div class="form-section">
                     <h2 class="section-title">1. Identificación del Problema</h2>
                     
+                    <!-- ID oculto, solo visible al consultar la incidencia -->
+                    <input type="hidden" id="idIncidencia" name="idIncidencia">
+                    
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="idIncidencia">ID Incidencia <span class="required">*</span></label>
-                            <input type="text" id="idIncidencia" name="idIncidencia" placeholder="INC-2026-0001" readonly>
-                            <div class="help-text">Se genera automáticamente</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="fechaReporte">Fecha y Hora del Reporte <span class="required">*</span></label>
-                            <input type="datetime-local" id="fechaReporte" name="fechaReporte" required>
+                            <label for="fechaReporte">Fecha del Reporte <span class="required">*</span></label>
+                            <input type="date" id="fechaReporte" name="fechaReporte" required>
+                            <div class="help-text">Se registra automáticamente</div>
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="reportante">Nombre del Reportante <span class="required">*</span></label>
-                            <input type="text" id="reportante" name="reportante" placeholder="Nombre completo" required>
+                            <label for="nombre">Nombre(s) del Reportante <span class="required">*</span></label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidoPaterno">Apellido Paterno <span class="required">*</span></label>
+                            <input type="text" id="apellidoPaterno" name="apellidoPaterno" placeholder="Apellido paterno" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="apellidoMaterno">Apellido Materno <span class="required">*</span></label>
+                            <input type="text" id="apellidoMaterno" name="apellidoMaterno" placeholder="Apellido materno" required>
                         </div>
                         <div class="form-group">
                             <label for="area">Área/Departamento <span class="required">*</span></label>
@@ -364,9 +561,28 @@
                             <label for="email">Email de Contacto <span class="required">*</span></label>
                             <input type="email" id="email" name="email" placeholder="usuario@empresa.com" required>
                         </div>
+                    </div>
+                    
+                    <div class="form-row">
                         <div class="form-group">
-                            <label for="telefono">Teléfono de Contacto</label>
-                            <input type="tel" id="telefono" name="telefono" placeholder="Extensión o celular">
+                            <label for="tipoContacto">Tipo de Contacto</label>
+                            <select id="tipoContacto" name="tipoContacto">
+                                <option value="">-- Seleccionar --</option>
+                                <option value="TELEFONO">Teléfono</option>
+                                <option value="CELULAR">Celular</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="numeroContacto">Número de Contacto</label>
+                            <input type="tel" id="numeroContacto" name="numeroContacto" placeholder="Ej: 3124567890">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="extension">Extensión (Opcional)</label>
+                            <input type="text" id="extension" name="extension" placeholder="Ej: 1234">
+                            <div class="help-text">Solo si aplica</div>
                         </div>
                     </div>
                 </div>
@@ -378,23 +594,19 @@
                     <div class="form-row full">
                         <div class="form-group">
                             <label for="sistemaMod">Sistema con Problema <span class="required">*</span></label>
-                            <select id="sistemaMod" name="sistemaMod" required onchange="actualizarVersionYModulo()">
+                            <select id="sistemaMod" name="sistemaMod" required>
                                 <option value="">-- Seleccionar Sistema --</option>
-                                <option value="SIS001">Sistema de Gestión de Inventario (v1.2)</option>
-                                <option value="SIS002">Portal de Recursos Humanos (v2.1)</option>
-                                <option value="SIS003">Plataforma de Ventas (v3.0)</option>
-                                <option value="SIS004">Sistema de Contabilidad (v1.5)</option>
-                                <option value="SIS005">Aplicación de Logística (v2.3)</option>
+                                <option value="SIS001">Sistema de Gestión de Inventario</option>
+                                <option value="SIS002">Portal de Recursos Humanos</option>
+                                <option value="SIS003">Plataforma de Ventas</option>
+                                <option value="SIS004">Sistema de Contabilidad</option>
+                                <option value="SIS005">Aplicación de Logística</option>
                             </select>
+                            <div class="help-text">Solo se muestran sistemas a los que su área tiene acceso</div>
                         </div>
                     </div>
                     
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="version">Versión del Sistema <span class="required">*</span></label>
-                            <input type="text" id="version" name="version" placeholder="v1.2" readonly>
-                            <div class="help-text">Se llena automáticamente</div>
-                        </div>
+                    <div class="form-row full">
                         <div class="form-group">
                             <label for="modulo">Módulo Afectado <span class="required">*</span></label>
                             <select id="modulo" name="modulo" required>
@@ -453,8 +665,7 @@
                                     <input type="radio" name="urgencia" value="CRITICA" required onchange="actualizarSLA()">
                                     <div class="radio-item-content">
                                         <div class="radio-item-title">🔴 Crítica - Bloquea operación</div>
-                                        <div class="radio-item-desc">Sistema NO está disponible o funcionamiento crítico está afectado</div>
-                                        <span class="urgency-badge urgency-critica">SLA: 1h respuesta / 4h resolución</span>
+                                        <div class="radio-item-desc">Sistema NO está disponible o funcionamiento crítico está afectado. Requiere atención inmediata.</div>
                                     </div>
                                 </label>
                                 
@@ -462,8 +673,7 @@
                                     <input type="radio" name="urgencia" value="ALTA" required onchange="actualizarSLA()">
                                     <div class="radio-item-content">
                                         <div class="radio-item-title">🟠 Alta - Afecta funcionalidad importante</div>
-                                        <div class="radio-item-desc">Usuarios no pueden completar tareas importantes</div>
-                                        <span class="urgency-badge urgency-alta">SLA: 4h respuesta / 8h resolución</span>
+                                        <div class="radio-item-desc">Usuarios no pueden completar tareas importantes. Requiere atención prioritaria.</div>
                                     </div>
                                 </label>
                                 
@@ -471,8 +681,7 @@
                                     <input type="radio" name="urgencia" value="MEDIA" required onchange="actualizarSLA()">
                                     <div class="radio-item-content">
                                         <div class="radio-item-title">🟡 Media - Funcionalidad parcial</div>
-                                        <div class="radio-item-desc">Usuarios tienen forma alternativa de hacer su trabajo</div>
-                                        <span class="urgency-badge urgency-media">SLA: 8h respuesta / 16h resolución</span>
+                                        <div class="radio-item-desc">Usuarios tienen forma alternativa de hacer su trabajo. Puede programarse.</div>
                                     </div>
                                 </label>
                                 
@@ -480,8 +689,7 @@
                                     <input type="radio" name="urgencia" value="BAJA" required onchange="actualizarSLA()">
                                     <div class="radio-item-content">
                                         <div class="radio-item-title">🟢 Baja - Cosmético o mejora</div>
-                                        <div class="radio-item-desc">Problema menor que no impide trabajo, puede esperar</div>
-                                        <span class="urgency-badge urgency-baja">SLA: 24h respuesta / 48h resolución</span>
+                                        <div class="radio-item-desc">Problema menor que no impide trabajo, puede esperar.</div>
                                     </div>
                                 </label>
                             </div>
@@ -600,55 +808,52 @@
     </div>
     
     <script>
-        // Auto-generar ID de incidencia
+        // Auto-generar ID de incidencia (oculto)
         function generarIDIncidencia() {
             const hoy = new Date();
             const año = hoy.getFullYear();
             const numero = Math.floor(Math.random() * 9000) + 1000;
             document.getElementById('idIncidencia').value = `INC-${año}-${numero}`;
             
-            // Llenar fecha y hora actual
-            const ahora = new Date();
-            const offset = ahora.getTimezoneOffset() * 60000;
-            const fecha = new Date(ahora - offset).toISOString().slice(0, 16);
-            document.getElementById('fechaReporte').value = fecha;
+            // Llenar solo fecha (sin hora)
+            document.getElementById('fechaReporte').valueAsDate = hoy;
         }
         
-        // Actualizar versión según sistema
-        function actualizarVersionYModulo() {
-            const versiones = {
-                'SIS001': 'v1.2',
-                'SIS002': 'v2.1',
-                'SIS003': 'v3.0',
-                'SIS004': 'v1.5',
-                'SIS005': 'v2.3'
-            };
-            const sistema = document.getElementById('sistemaMod').value;
-            document.getElementById('version').value = versiones[sistema] || '';
-            document.getElementById('modulo').value = '';
-        }
+        // Actualizar versión según sistema (ya no se muestra en UI)
+        // function actualizarVersionYModulo() {
+        //     const versiones = {
+        //         'SIS001': 'v1.2',
+        //         'SIS002': 'v2.1',
+        //         'SIS003': 'v3.0',
+        //         'SIS004': 'v1.5',
+        //         'SIS005': 'v2.3'
+        //     };
+        //     const sistema = document.getElementById('sistemaMod').value;
+        //     document.getElementById('version').value = versiones[sistema] || '';
+        //     document.getElementById('modulo').value = '';
+        // }
         
-        // Mostrar SLA según urgencia
+        // Mostrar información de urgencia
         function actualizarSLA() {
             const urgencia = document.querySelector('input[name="urgencia"]:checked');
             if (!urgencia) return;
             
-            const slas = {
-                'CRITICA': '⏱️ SLA: 1 hora respuesta / 4 horas resolución',
-                'ALTA': '⏱️ SLA: 4 horas respuesta / 8 horas resolución',
-                'MEDIA': '⏱️ SLA: 8 horas respuesta / 16 horas resolución',
-                'BAJA': '⏱️ SLA: 24 horas respuesta / 48 horas resolución'
+            const mensajes = {
+                'CRITICA': '⚡ Se asignará automáticamente al equipo de soporte con prioridad inmediata',
+                'ALTA': '🔥 Se asignará automáticamente al equipo de soporte con alta prioridad',
+                'MEDIA': '🟡 Se asignará automáticamente al equipo de soporte',
+                'BAJA': '👍 Se registrará y asignará según disponibilidad del equipo'
             };
             
-            const sla = slas[urgencia.value];
+            const mensaje = mensajes[urgencia.value];
             const existente = document.getElementById('slaInfo');
             if (existente) existente.remove();
             
             const div = document.createElement('div');
             div.id = 'slaInfo';
             div.style.cssText = 'background: #e8f5e9; padding: 15px; margin: 15px 0; border-left: 4px solid #4caf50; border-radius: 5px;';
-            div.innerHTML = `<strong>${sla}</strong> - Será asignado automáticamente al equipo de soporte`;
-            document.querySelector('.form-section:nth-of-type(3)').appendChild(div);
+            div.innerHTML = `<strong>${mensaje}</strong>`;
+            document.querySelector('.form-section:nth-of-type(4)').appendChild(div);
         }
         
         window.addEventListener('load', generarIDIncidencia);

@@ -4,13 +4,17 @@
 
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
-| ID Modificación | Texto (Auto) | Sí | Generado: MOD-YYYY-NNNN |
-| Fecha de Solicitud | Fecha | Sí | Automática |
-| Sistema a Modificar | Lista desplegable | Sí | Sistema de Gestión de Inventario (v1.2), Portal RH (v2.1), Plataforma Ventas (v3.0), Sistema Contabilidad (v1.5), Aplicación Logística (v2.3) |
-| Versión Actual | Texto (Auto) | Sí | Se llena automáticamente según sistema |
-| Nombre del Solicitante | Texto | Sí | Nombre completo |
+| ID Modificación | Texto (Auto) | Sí | Generado: MOD-YYYY-NNNN (NO visible en formulario, solo al consultar) |
+| Fecha de Solicitud | Fecha | Sí | Automática (solo día, sin hora) |
+| Sistema a Modificar | Lista desplegable | Sí | Solo muestra sistemas a los que el área tiene acceso (sin mostrar versión) |
+| Nombre(s) del Solicitante | Texto | Sí | Nombre del solicitante |
+| Apellido Paterno | Texto | Sí | Apellido paterno del solicitante |
+| Apellido Materno | Texto | Sí | Apellido materno del solicitante |
 | Área/Departamento | Texto | Sí | Tu área |
 | Email de Contacto | Email | Sí | Correo institucional |
+| Tipo de Contacto | Lista | Sí | Teléfono o Celular |
+| Número de Contacto | Teléfono | Sí | Número telefónico |
+| Extensión | Texto | No | Solo si aplica |
 
 ## Descripción del Cambio
 
@@ -54,7 +58,6 @@
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
 | Ticket de Error Relacionado | Texto | No | Si es corrección, número de ticket |
-| Fecha Límite | Fecha | No | Cuándo se requiere el cambio |
 | Archivos Adjuntos | Upload | No | Screenshots, logs, videos |
 | Horario Preferido de Implementación | Texto | No | Para minimizar impacto operativo |
 
@@ -63,7 +66,8 @@
 | Campo | Tipo | Obligatorio | Descripción |
 |-------|------|-------------|-------------|
 | ¿Existe solución temporal? | Radio button | Sí | Sí, No |
-| Descripción del Workaround | Textarea | Condicional | Si existe, describir la solución temporal |
+| Descripción de la Solución Temporal | Textarea | Condicional | Si existe, describir cuál es la solución temporal |
+| ¿Cómo se utiliza? | Textarea | Condicional | Indicar los pasos o instrucciones para utilizar la solución temporal (ayuda a optimizar la modificación) |
 | Comentarios Adicionales | Textarea | No | Información complementaria |
 
 ---
