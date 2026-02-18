@@ -292,6 +292,43 @@
             color: #666;
         }
         
+        .nav-bar {
+            background: white;
+            border-radius: 10px;
+            padding: 15px 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-bar a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-bar a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-bar .nav-home {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-bar .nav-home:hover {
+            background: #5568d3;
+        }
+
         footer {
             text-align: center;
             color: white;
@@ -320,6 +357,16 @@
 </head>
 <body>
     <div class="container">
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <a href="../index.html" class="nav-home">🏠 Inicio</a>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="../Visualizacion-Formularios-Flujos.html">🔄 Flujos</a>
+                <a href="../Presentacion-Sistema-ISSEG.md">📊 Presentación</a>
+                <a href="../docmentacion/00-LEEME-PRIMERO.md">📚 Documentación</a>
+            </div>
+        </div>
+
         <!-- HEADER -->
         <div class="header">
             <h1>📋 Centro de Formularios</h1>

@@ -246,6 +246,43 @@
             margin-bottom: 40px;
         }
 
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 15px 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-bar a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-bar a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-bar .nav-home {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-bar .nav-home:hover {
+            background: #5568d3;
+        }
+
         header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
@@ -731,6 +768,16 @@
 </head>
 <body>
     <div class="container">
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <a href="index.html" class="nav-home">🏠 Inicio</a>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="formularios/INDEX.html">📝 Formularios</a>
+                <a href="Presentacion-Sistema-ISSEG.md">📊 Presentación</a>
+                <a href="docmentacion/00-LEEME-PRIMERO.md">📚 Documentación</a>
+            </div>
+        </div>
+
         <header>
             <h1>📋 Sistema ISSEG</h1>
             <p>Visualización de Formularios y Flujos de Trabajo</p>

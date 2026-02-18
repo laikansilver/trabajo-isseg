@@ -8,8 +8,23 @@
 
 ---
 
+## 🌐 Visualización Web
+
+**¡Nuevo!** Este repositorio ahora puede visualizarse como un sitio web interactivo:
+
+- 🔗 **Acceso Web:** Activa GitHub Pages para ver el sitio en `https://<tu-usuario>.github.io/trabajo-isseg/`
+- 📱 **Responsive:** Funciona en móviles, tablets y escritorio
+- 🎨 **Interfaz Moderna:** Navegación intuitiva con diseño profesional
+- 📋 **Formularios Interactivos:** Visualiza los 4 formularios del sistema
+- 🔄 **Diagramas Dinámicos:** Explora los flujos con Mermaid.js
+
+👉 **Ver guía completa:** [GUIA-WEB-SERVICE.md](GUIA-WEB-SERVICE.md)
+
+---
+
 ## 📖 Tabla de Contenidos
 
+- [Visualización Web](#-visualización-web)
 - [Acerca del Proyecto](#-acerca-del-proyecto)
 - [Razones del Proyecto](#-razones-del-proyecto)
 - [Estructura de Documentación](#-estructura-de-documentación)

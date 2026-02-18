@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión ISSEG - Documentación y Visualización</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 50px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .header .version {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        .intro {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .intro h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .intro p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .intro ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .intro li {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+        
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .card h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .card .button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .card .button:hover {
+            background: #5568d3;
+        }
+        
+        .footer {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .footer p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .features {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .features h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: start;
+            gap: 15px;
+        }
+        
+        .feature-icon {
+            font-size: 24px;
+            min-width: 30px;
+        }
+        
+        .feature-text h4 {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .feature-text p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📋 Sistema de Gestión ISSEG</h1>
+            <p class="subtitle">Sistema integral de gestión de solicitudes, modificaciones y problemas</p>
+            <span class="version">Versión 2.0 - Febrero 2026</span>
+        </div>
+        
+        <!-- Introducción -->
+        <div class="intro">
+            <h2>🎯 Acerca del Proyecto</h2>
+            <p>
+                El <strong>Sistema ISSEG</strong> es una plataforma centralizada diseñada para gestionar de manera eficiente 
+                todas las solicitudes relacionadas con sistemas informáticos de la organización.
+            </p>
+            <ul>
+                <li>✅ Solicitudes de nuevos sistemas</li>
+                <li>✅ Modificaciones a sistemas existentes</li>
+                <li>✅ Reportes de problemas e incidencias</li>
+                <li>✅ Seguimiento y aprobaciones</li>
+                <li>✅ Control de acceso por áreas</li>
+                <li>✅ Auditoría completa de operaciones</li>
+            </ul>
+        </div>
+        
+        <!-- Cards de navegación principal -->
+        <div class="cards-grid">
+            <a href="Visualizacion-Formularios-Flujos.html" class="card">
+                <div class="card-icon">🔄</div>
+                <h3>Visualización de Flujos</h3>
+                <p>Explora los diagramas interactivos que muestran el flujo completo del sistema, desde la autenticación hasta la creación de tickets.</p>
+                <span class="button">Ver Flujos →</span>
+            </a>
+            
+            <a href="formularios/INDEX.html" class="card">
+                <div class="card-icon">📝</div>
+                <h3>Centro de Formularios</h3>
+                <p>Accede a los 4 formularios especializados del sistema: Sistema Nuevo, Modificación, Requerimientos y Problemas.</p>
+                <span class="button">Ver Formularios →</span>
+            </a>
+            
+            <a href="Presentacion-Sistema-ISSEG.md" class="card">
+                <div class="card-icon">📊</div>
+                <h3>Presentación Ejecutiva</h3>
+                <p>Presentación completa del sistema con estadísticas, objetivos y justificación del proyecto.</p>
+                <span class="button">Ver Presentación →</span>
+            </a>
+            
+            <a href="docmentacion/00-LEEME-PRIMERO.md" class="card">
+                <div class="card-icon">📚</div>
+                <h3>Documentación Completa</h3>
+                <p>Accede a la documentación técnica detallada con 17 archivos y más de 35 diagramas Mermaid.</p>
+                <span class="button">Ver Documentación →</span>
+            </a>
+        </div>
+        
+        <!-- Características -->
+        <div class="features">
+            <h2>⚡ Características Principales</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🔐</div>
+                    <div class="feature-text">
+                        <h4>Control de Acceso Avanzado</h4>
+                        <p>Autenticación segura con control por áreas y roles granulares</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-text">
+                        <h4>Dashboard Ejecutivo</h4>
+                        <p>Vista consolidada con KPIs en tiempo real y alertas SLA</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📝</div>
+                    <div class="feature-text">
+                        <h4>Sistema de Formularios</h4>
+                        <p>4 formularios especializados con validaciones automáticas</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-text">
+                        <h4>Workflow Automatizado</h4>
+                        <p>Asignación y notificaciones automáticas con trazabilidad completa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Sistema ISSEG</strong> - Gestión Inteligente de Solicitudes</p>
+            <p>Documentación Completa v2.0 - Febrero 2026</p>
+        </div>
+    </div>
+</body>
+</html>
