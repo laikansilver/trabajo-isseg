@@ -27,7 +27,7 @@
    - Estrategias y metodologías
    - Recursos necesarios
    - Tiempos estimados
-   - Costos y ROI
+   - Estimaciones de esfuerzo y productividad
 
 5. **[05-Aplicacion-CMMI-Proyecto-ISSEG.md](05-Aplicacion-CMMI-Proyecto-ISSEG.md)**
    - Análisis del proyecto actual
@@ -47,6 +47,30 @@
    - Lecciones aprendidas
    - Errores comunes a evitar
    - Recomendaciones prácticas
+
+8. **[08-Guia-Completa-Implementacion-CMMI-ISSEG.md](08-Guia-Completa-Implementacion-CMMI-ISSEG.md)**
+   - Guía integral para ISSEG
+   - Enfoque por procesos CMMI Nivel 2
+   - Roles, actividades y entregables
+   - Métricas y seguimiento
+
+9. **[09-Plan-Integral-Problema-Solucion-Beneficios-SGSPCSI.md](09-Plan-Integral-Problema-Solucion-Beneficios-SGSPCSI.md)**
+   - Diagnóstico y problemática
+   - Solución SGSPCSI
+   - Beneficios cuantificados
+   - Plan de implementación
+
+10. **[10-Investigacion-Completa-Integral-SGSPCSI-CMMI.md](10-Investigacion-Completa-Integral-SGSPCSI-CMMI.md)**
+   - Documento integral (problema → solución → CMMI)
+   - Métricas de impacto y productividad
+   - Roadmap de implementación
+
+### 📄 PDFs Disponibles
+
+- **[08-Guia-Completa-Implementacion-CMMI-ISSEG.pdf](08-Guia-Completa-Implementacion-CMMI-ISSEG.pdf)**
+- **[Informe_CMMI.pdf](Informe_CMMI.pdf)**
+- **[Investigacion-Completa-Integral-SGSPCSI-CMMI.pdf](Investigacion-Completa-Integral-SGSPCSI-CMMI.pdf)**
+- **[Investigación sobre CMMI_ Funcionamiento y Aplicaciones.pdf](Investigación%20sobre%20CMMI_%20Funcionamiento%20y%20Aplicaciones.pdf)**
 
 ## 🎯 Objetivo de la Investigación
 
@@ -92,6 +116,6 @@ La implementación de CMMI permitirá:
 
 ---
 
-**Fecha de Creación**: 19 de febrero de 2026  
+**Fecha de Actualización**: 20 de febrero de 2026  
 **Autor**: Investigación para proyecto ISSEG  
-**Versión**: 1.0
+**Versión**: 1.1
