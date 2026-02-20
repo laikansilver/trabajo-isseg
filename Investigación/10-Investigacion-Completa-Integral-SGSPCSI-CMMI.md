@@ -119,11 +119,11 @@ COMPARATIVA:
 
 **Impacto por Tipo de Solicitud**:
 
-| Tipo | Actual | Target | Mejora |
-|------|--------|--------|--------|
-| Sistema Nuevo (Tipo A) | 30+ días | 3-5 días | 80% ↓ |
-| Modificación (Tipo B) | 14-21 días | 2-3 días | 85% ↓ |
-| Incidencia (Tipo C) | 7-10 días | 1-2 días | 75% ↓ |
+| Tipo de solicitud | Actual (dias) | Objetivo (dias) | Mejora |
+| :-- | --: | --: | --: |
+| Sistema Nuevo (Tipo A) | 30+ | 3-5 | 80% |
+| Modificacion (Tipo B) | 14-21 | 2-3 | 85% |
+| Incidencia (Tipo C) | 7-10 | 1-2 | 75% |
 
 **Impacto de Tiempos de Retraso**:
 - Si cada 10 días de retraso = 1 ticket que se entrega tarde
@@ -850,31 +850,26 @@ NIVEL 1 (Inicial): ← DONDE ESTÁ ISSEG HOY
 
 ### 3.2 Evaluación Actual de ISSEG vs CMMI Nivel 2
 
-```
-┌────────────────────────────────────────────────────┐
-│    ISSEG HOY: 47.5% HACIA NIVEL 2                  │
-└────────────────────────────────────────────────────┘
+**ISSEG hoy: 47.5% hacia Nivel 2**
 
-ÁREA DE PROCESO           ACTUAL    TARGET    GAP
-─────────────────────────────────────────────────────
-REQM (Requerimientos)       60%      85%     -25%
-CM (Configuración)           55%      85%     -30%
-PMC (Monitoreo)              50%      85%     -35%
-PP (Planificación)           45%      85%     -40%
-PPQA (Calidad)               40%      85%     -45%
-MA (Medición)                35%      85%     -50%
-─────────────────────────────────────────────────────
-PROMEDIO:                  47.5%      85%    -37.5%
+| Area de proceso | Actual | Objetivo | Gap |
+| :-- | --: | --: | --: |
+| REQM (Requerimientos) | 60% | 85% | -25% |
+| CM (Configuracion) | 55% | 85% | -30% |
+| PMC (Monitoreo) | 50% | 85% | -35% |
+| PP (Planificacion) | 45% | 85% | -40% |
+| PPQA (Calidad) | 40% | 85% | -45% |
+| MA (Medicion) | 35% | 85% | -50% |
+| **PROMEDIO** | **47.5%** | **85%** | **-37.5%** |
 
-TRADUCCIÓN:
-├─ REQM 60%: Sistema de solicitud capta bien, pero falta trazabilidad
-├─ CM 55%: Git está, pero no todo está en version control
-├─ PMC 50%: Dashboard existe, pero sin análisis de tendencias
-├─ PP 45%: Planificación mínima, muy reactivo
-├─ PPQA 40%: Testing ad-hoc, sin estándares
-├─ MA 35%: Casi no hay medición formal
-└─ CONCLUSIÓN: ISSEG necesita estructura, disciplina, sistema
-```
+**Traduccion:**
+- REQM 60%: Sistema de solicitud capta bien, pero falta trazabilidad
+- CM 55%: Git esta, pero no todo esta en control de versiones
+- PMC 50%: Dashboard existe, pero sin analisis de tendencias
+- PP 45%: Planificacion minima, muy reactivo
+- PPQA 40%: Testing ad-hoc, sin estandares
+- MA 35%: Casi no hay medicion formal
+- CONCLUSION: ISSEG necesita estructura, disciplina y sistema
 
 ### 3.3 Los 6 Procesos de CMMI Nivel 2 Explicados
 
