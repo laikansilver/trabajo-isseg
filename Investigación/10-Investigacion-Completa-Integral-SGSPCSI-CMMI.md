@@ -80,23 +80,23 @@ RESULTADO: 15-20% de solicitudes simplemente desaparecen
 DESGLOSE DEL LEAD TIME ACTUAL (10.5 DÍAS PROMEDIO):
 
 ┌──────────────────────────────────────────────────────┐
-│ Solicitud recibida por PM (vía telefónica, email)   │
+│ Solicitud recibida por PM (vía telefónica, email)  │
 └──────────────────────────────────────────────────────┘
               🔴 SIN ACCIÓN INMEDIATA (0.5-2 días)
                 (PM está en otras tareas)
                 
 ┌──────────────────────────────────────────────────────┐
-│ Aclaración de requerimientos                         │
-│ PM: "Necesito más info..."                           │
-│ Usuario: "Umm, déjame pensar..."                     │
-│ Ir y venir de mails/chats                            │
+│ Aclaración de requerimientos                        │
+│ PM: "Necesito más info..."                          │
+│ Usuario: "Umm, déjame pensar..."                    │
+│ Ir y venir de mails/chats                           │
 └──────────────────────────────────────────────────────┘
               🔴 CUELLO DE BOTELLA: 2-4 DÍAS
               
 ┌──────────────────────────────────────────────────────┐
-│ "Tech Lead, ¿Es viable esto?"                        │
-│ Tech Lead revisa, prepara memo mental                │
-│ Aprobación verbal o informal                         │
+│ "Tech Lead, ¿Es viable esto?"                       │
+│ Tech Lead revisa, prepara memo mental               │
+│ Aprobación verbal o informal                        │
 └──────────────────────────────────────────────────────┘
               🔴 FALTA DE FORMALISMO: 2-3 DÍAS
               
