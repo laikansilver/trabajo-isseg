@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISSEG - Sistema de Gestión de Solicitudes</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        window.mermaidModule = mermaid;
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#0a4878',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#052d50',
+                lineColor: '#0a4878',
+                secondaryColor: '#d4a017',
+                tertiaryColor: '#f8f9fa',
+                background: '#ffffff',
+                mainBkg: '#E8F4F8',
+                secondBkg: '#FFF9E6',
+                border1: '#0a4878',
+                border2: '#d4a017'
+            },
+            flowchart: {
+                curve: 'basis',
+                padding: 20
+            }
+        });
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a4878;
+            --primary-dark: #052d50;
+            --primary-light: #1a5f99;
+            --secondary: #d4a017;
+            --secondary-dark: #b8890d;
+            --danger: #d93025;
+            --warning: #f9ab00;
+            --success: #28a745;
+            --light: #f8f9fa;
+            --text: #333333;
+            --text-light: #666666;
+            --border: #dadce0;
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           LOGIN SCREEN
+        ============================================ */
+        #loginScreen {
+            display: flex;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #loginScreen::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            border-radius: 50%;
+        }
+
+        #loginScreen::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            border-radius: 50%;
+        }
+
+        .login-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-box {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .login-logo img {
+            max-width: 140px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+            transition: transform 0.3s;
+        }
+
+        .login-logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .login-box h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 35px;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 15px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(10, 72, 120, 0.1);
+            background: #fafbfc;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .btn-login:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(10, 72, 120, 0.4);
+        }
+
+        .login-info {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: #999;
+            text-align: center;
+        }
+
+        /* ============================================
+           MAIN APPLICATION
+        ============================================ */
+        #mainApp {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            flex-wrap: wrap;
+            gap: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .header-logo img {
+            max-width: 60px;
+            height: auto;
+            filter: drop-shadow(0 2px 6px rgba(255,255,255,0.3));
+            transition: transform 0.3s;
+        }
+
+        .header-logo img:hover {
+            transform: scale(1.08);
+        }
+
+        .header-title h1 {
+            font-size: 1.4rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .header-title p {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .user-info {
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        .user-info p {
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .user-info strong {
+            font-size: 1rem;
+        }
+
+        .btn-logout {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .btn-logout:hover {
+            background: rgba(255,255,255,0.35);
+            border-color: rgba(255,255,255,0.7);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* ============================================
+           NAVIGATION
+        ============================================ */
+        nav {
+            background: white;
+            border-bottom: 3px solid var(--border);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            box-shadow: 0 2px 8px var(--shadow);
+            position: sticky;
+            top: 72px;
+            z-index: 99;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        nav li {
+            flex: 0 0 auto;
+        }
+
+        nav a {
+            display: block;
+            padding: 16px 22px;
+            text-decoration: none;
+            color: var(--text);
+            border-bottom: 4px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--light);
+            transition: width 0.3s;
+            z-index: -1;
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        nav a:hover {
+            border-bottom-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        nav a.active {
+            background: var(--light);
+            border-bottom-color: var(--secondary);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* ============================================
+           CONTAINER & SECTIONS
+        ============================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 35px 25px;
+            flex: 1;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid var(--secondary);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            color: var(--primary-dark);
+            margin-top: 30px;
+            margin-bottom: 18px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* ============================================
+           FORMS
+        ============================================ */
+        .form-section {
+            background: white;
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px var(--shadow);
+            margin-bottom: 30px;
+            border-left: 6px solid var(--secondary);
+            transition: all 0.3s;
+        }
+
+        .form-section:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+            margin-bottom: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 14px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(10, 72, 120, 0.1);
+            background: #fafbfc;
+        }
+
+        .form-group small {
+            margin-top: 6px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+           BADGES
+        ============================================ */
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 6px var(--shadow);
+        }
+
+        .badge-primary {
+            background: linear-gradient(135deg, rgba(10, 72, 120, 0.15), rgba(10, 72, 120, 0.08));
+            color: var(--primary);
+            border: 2px solid rgba(10, 72, 120, 0.3);
+        }
+
+        .badge-success {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.15), rgba(40, 167, 69, 0.08));
+            color: var(--success);
+            border: 2px solid rgba(40, 167, 69, 0.3);
+        }
+
+        .badge-danger {
+            background: linear-gradient(135deg, rgba(217, 48, 37, 0.15), rgba(217, 48, 37, 0.08));
+            color: var(--danger);
+            border: 2px solid rgba(217, 48, 37, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* ============================================
+           BUTTONS
+        ============================================ */
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 13px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 3px 10px rgba(10, 72, 120, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(10, 72, 120, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-reset {
+            background: white;
+            color: var(--text);
+            padding: 13px 30px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 12px;
+            margin-bottom: 10px;
+        }
+
+        .btn-reset:hover {
+            border-color: var(--text);
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+
+        .btn-home {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .btn-home:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(10, 72, 120, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger) 0%, #b91c1c 100%);
+            box-shadow: 0 3px 10px rgba(217, 48, 37, 0.3);
+        }
+
+        .btn-danger:hover {
+            box-shadow: 0 6px 20px rgba(217, 48, 37, 0.4);
+        }
+
+        /* ============================================
+           DASHBOARD
+        ============================================ */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px var(--shadow);
+            border-left: 6px solid var(--primary);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--secondary) 0%, transparent 70%);
+            opacity: 0.12;
+            border-radius: 50%;
+            transition: all 0.4s;
+        }
+
+        .card:hover::before {
+            width: 180px;
+            height: 180px;
+            opacity: 0.18;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+            border-left-color: var(--secondary);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 18px;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================
+           DIAGRAM BOX
+        ============================================ */
+        .diagram-box {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px var(--shadow);
+            margin-bottom: 35px;
+            border: 3px solid var(--border);
+        }
+
+        .diagram-content {
+            background: #fafbfc;
+            padding: 25px;
+            border-radius: 8px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border: 2px solid var(--border);
+            min-height: 400px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        .diagram-controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .diagram-controls button {
+            padding: 10px 20px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .diagram-controls button:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .diagram-controls button.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ============================================
+           MESSAGES
+        ============================================ */
+        .success-message {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.12), rgba(40, 167, 69, 0.08));
+            border: 2px solid var(--success);
+            color: var(--success);
+            padding: 18px 22px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: none;
+            animation: slideDown 0.4s ease-out;
+            font-weight: 600;
+            box-shadow: 0 3px 12px rgba(40, 167, 69, 0.2);
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================
+           TABLES
+        ============================================ */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            box-shadow: 0 2px 8px var(--shadow);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 14px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        tr:hover {
+            background: var(--light);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ============================================
+           BREADCRUMB
+        ============================================ */
+        .breadcrumb {
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            padding: 12px 18px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px var(--shadow);
+        }
+
+        .breadcrumb a,
+        .breadcrumb span {
+            cursor: pointer;
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: var(--text);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+        ============================================ */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 25px 18px;
+            }
+
+            .form-section {
+                padding: 25px;
+            }
+
+            nav a {
+                padding: 14px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px 18px;
+            }
+
+            .header-left {
+                width: 100%;
+                gap: 14px;
+            }
+
+            .header-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            nav ul {
+                justify-content: space-between;
+            }
+
+            nav a {
+                padding: 12px 12px;
+                font-size: 0.8rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+                margin-top: 20px;
+            }
+
+            .btn-submit,
+            .btn-reset,
+            .btn-home {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+                margin-right: 8px;
+                margin-bottom: 10px;
+            }
+
+            .diagram-box {
+                padding: 20px;
+            }
+
+            .diagram-content {
+                padding: 15px;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 30px 20px;
+                border-radius: 12px;
+            }
+
+            .login-logo img {
+                max-width: 110px;
+            }
+
+            .login-box h1 {
+                font-size: 1.8rem;
+            }
+
+            .login-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 28px;
+            }
+
+            header {
+                padding: 12px 15px;
+            }
+
+            .header-logo img {
+                max-width: 48px;
+            }
+
+            .header-title h1 {
+                font-size: 1.1rem;
+            }
+
+            .header-title p {
+                font-size: 0.75rem;
+            }
+
+            .header-right {
+                font-size: 0.85rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                padding: 11px 10px;
+                font-size: 0.7rem;
+                flex: 1 1 auto;
+            }
+
+            .container {
+                padding: 15px 12px;
+            }
+
+            .form-section {
+                padding: 18px 15px;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+                margin-bottom: 18px;
+            }
+
+            h3 {
+                font-size: 1rem;
+                margin-top: 15px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 16px;
+            }
+
+            .btn-submit,
+            .btn-reset,
+            .btn-home {
+                width: 100%;
+                padding: 12px;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card-icon {
+                font-size: 2.5rem;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .breadcrumb {
+                font-size: 0.85rem;
+                margin-bottom: 15px;
+                padding: 10px 14px;
+            }
+
+            .breadcrumb a,
+            .breadcrumb span {
+                margin: 0 4px;
+            }
+
+            .diagram-content {
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================
+     LOGIN SCREEN
+============================================ -->
+<div id="loginScreen">
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-logo">
+                <img src="logo-isseg.png" alt="Logo ISSEG" onerror="this.style.display='none'">
+                <h1>ISSEG</h1>
+            </div>
+            <p class="login-subtitle">Sistema de Gestión de Solicitudes</p>
+            
+            <form onsubmit="loginUser(event)">
+                <div class="form-group">
+                    <label for="email">📧 Correo Electrónico</label>
+                    <input type="email" id="email" placeholder="usuario@isseg.gob.mx" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">🔒 Contraseña</label>
+                    <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn-login">Ingresar al Sistema</button>
+            </form>
+
+            <div class="login-info">
+                <p><strong>Modo Demo:</strong> Cualquier email y contraseña funcionan</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================
+     MAIN APPLICATION
+============================================ -->
+<div id="mainApp">
+    <!-- Header -->
+    <header>
+        <div class="header-left">
+            <div class="header-logo">
+                <img src="logo-isseg.png" alt="Logo ISSEG" onerror="this.style.display='none'">
+            </div>
+            <div class="header-title">
+                <h1>ISSEG</h1>
+                <p>Instituto de Seguridad Social del Estado de Guanajuato</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <p><strong id="userName">Usuario</strong></p>
+                <p id="userEmail">correo@isseg.gob.mx</p>
+            </div>
+            <button class="btn-logout" onclick="logout()">🚪 Cerrar Sesión</button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a class="nav-link active" onclick="showSection('dashboard')">📊 Dashboard</a></li>
+            <li><a class="nav-link" onclick="showSection('formulario-a')">📋 Nuevo Sistema</a></li>
+            <li><a class="nav-link" onclick="showSection('formulario-b')">🔧 Modificación</a></li>
+            <li><a class="nav-link" onclick="showSection('formulario-c')">📄 Requerimientos</a></li>
+            <li><a class="nav-link" onclick="showSection('formulario-urgencia')">🚨 Urgencia</a></li>
+            <li><a class="nav-link" onclick="showSection('diagrama')">🎨 Diagramas</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- ============================================
+             DASHBOARD
+        ============================================ -->
+        <section id="dashboard" class="section active">
+            <h2>📊 Dashboard Principal</h2>
+            <p style="margin-bottom: 30px; color: var(--text-light); font-size: 1.05rem;">Bienvenido al Sistema de Gestión de Solicitudes. Selecciona una opción para continuar:</p>
+
+            <div class="dashboard-grid">
+                <div class="card" onclick="showSection('formulario-a')">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">Solicitud de Nuevo Sistema</div>
+                    <div class="card-description">Proponer un sistema completamente nuevo para la institución</div>
+                </div>
+
+                <div class="card" onclick="showSection('formulario-b')">
+                    <div class="card-icon">🔧</div>
+                    <div class="card-title">Solicitud de Modificación</div>
+                    <div class="card-description">Cambios o mejoras a un sistema existente</div>
+                </div>
+
+                <div class="card" onclick="showSection('formulario-c')">
+                    <div class="card-icon">📄</div>
+                    <div class="card-title">Levantamiento de Requerimientos</div>
+                    <div class="card-description">Especificación técnica detallada de un proyecto aprobado</div>
+                </div>
+
+                <div class="card" onclick="showSection('formulario-urgencia')">
+                    <div class="card-icon">🚨</div>
+                    <div class="card-title">Reporte de Urgencia</div>
+                    <div class="card-description">Reportar fallas críticas que afectan operaciones</div>
+                </div>
+            </div>
+
+            <div class="diagram-box">
+                <h3>🎯 Flujo General del Sistema</h3>
+                <div class="diagram-content">
+                    <div class="mermaid">
+graph TD
+    A[🔐 Usuario Login] --> B{✓ Credenciales<br/>Válidas?}
+    B -->|Sí| C[✅ Cargar Permisos<br/>+ Área + Rol]
+    B -->|No| A
+    C --> D[📊 Dashboard Principal]
+    D --> E{Seleccionar<br/>Tipo}
+    
+    E -->|Nuevo Sistema| F[📋 Formulario A]
+    E -->|Modificación| G[🔧 Formulario B]
+    E -->|Requerimientos| H[📄 Formulario C]
+    E -->|Urgencia| I[🚨 Formulario Express]
+    
+    F --> J[💾 Guardar en BD]
+    G --> J
+    H --> J
+    I --> J
+    
+    J --> K[📧 Enviar Notificación]
+    K --> L[✅ Confirmación Usuario]
+    
+    style A fill:#E8F4F8,stroke:#0a4878,stroke-width:3px
+    style D fill:#FFF9E6,stroke:#d4a017,stroke-width:3px
+    style F fill:#E8F5E9,stroke:#28a745,stroke-width:2px
+    style G fill:#E3F2FD,stroke:#2196F3,stroke-width:2px
+    style H fill:#F3E5F5,stroke:#9C27B0,stroke-width:2px
+    style I fill:#FFEBEE,stroke:#d93025,stroke-width:3px
+    style J fill:#FFF3E0,stroke:#FF9800,stroke-width:2px
+    style K fill:#E0F2F1,stroke:#009688,stroke-width:2px
+    style L fill:#E8F5E9,stroke:#4CAF50,stroke-width:3px
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             FORMULARIO A: NUEVO SISTEMA
+        ============================================ -->
+        <section id="formulario-a" class="section">
+            <div class="breadcrumb">
+                <a onclick="showSection('dashboard')">📊 Dashboard</a>
+                <span>→</span>
+                <span>📋 Nuevo Sistema</span>
+            </div>
+            <h2>📋 Solicitud de Nuevo Sistema</h2>
+            <span class="badge badge-primary">ID Auto-generado: SN-YYYY-NNNN</span>
+
+            <div class="form-section">
+                <h3>📌 Información del Sistema</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre-sistema">Nombre del Sistema *</label>
+                        <input type="text" id="nombre-sistema" placeholder="Ej: Sistema de Control de Inventario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="area-a">Área Solicitante *</label>
+                        <select id="area-a" required>
+                            <option value="">-- Seleccione su área --</option>
+                            <option value="finanzas">Finanzas</option>
+                            <option value="rh">Recursos Humanos</option>
+                            <option value="prestaciones">Prestaciones</option>
+                            <option value="cobranza">Cobranza</option>
+                            <option value="sistemas">Sistemas</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="descripcion-a">Descripción General *</label>
+                        <textarea id="descripcion-a" placeholder="Describe brevemente qué hace el sistema..." required></textarea>
+                        <small>Explica de manera clara y concisa el propósito del sistema</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="justificacion-a">Justificación y Beneficios *</label>
+                        <textarea id="justificacion-a" placeholder="¿Por qué se necesita? ¿Qué beneficios traerá?" required></textarea>
+                        <small>Incluye el impacto esperado y mejoras en procesos</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="alcance-a">Alcance Preliminar *</label>
+                        <textarea id="alcance-a" placeholder="¿Qué debe hacer el sistema?" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="plataforma-a">Plataforma Propuesta *</label>
+                        <select id="plataforma-a" required>
+                            <option value="">-- Seleccione --</option>
+                            <option value="web">🌐 Aplicación Web</option>
+                            <option value="mobile">📱 Aplicación Móvil</option>
+                            <option value="desktop">💻 Software de Escritorio</option>
+                            <option value="api">🔌 API / Servicio</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="deadline-a">Fecha Deseada de Implementación *</label>
+                        <input type="date" id="deadline-a" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="presupuesto-a">Presupuesto Estimado (MXN)</label>
+                        <input type="number" id="presupuesto-a" placeholder="100,000" min="0" step="1000">
+                        <small>Opcional - Ingresa una estimación si la tienes</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>📎 Documentación</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Documentos de Referencia</label>
+                        <input type="file" id="docs-a" multiple accept=".pdf,.doc,.docx,.xls,.xlsx">
+                        <small>Archivos del proceso actual, ejemplos de reportes, diagramas, etc.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section" style="border-left-color: var(--secondary); background: linear-gradient(to right, rgba(212,160,23,0.05), white);">
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button type="button" class="btn-submit" onclick="submitForm('Formulario A')">✅ Enviar Solicitud</button>
+                    <button type="button" class="btn-reset" onclick="resetForm('formulario-a')">🔄 Limpiar Formulario</button>
+                    <button type="button" class="btn-home" onclick="showSection('dashboard')">← Dashboard</button>
+                </div>
+            </div>
+
+            <div class="success-message" id="success-a">✅ ¡Solicitud enviada correctamente! Se le notificará el estado por correo electrónico.</div>
+        </section>
+
+        <!-- ============================================
+             FORMULARIO B: MODIFICACIÓN
+        ============================================ -->
+        <section id="formulario-b" class="section">
+            <div class="breadcrumb">
+                <a onclick="showSection('dashboard')">📊 Dashboard</a>
+                <span>→</span>
+                <span>🔧 Modificación</span>
+            </div>
+            <h2>🔧 Solicitud de Modificación o Mejora</h2>
+            <span class="badge badge-primary">ID Auto-generado: MOD-YYYY-NNNN</span>
+
+            <div class="form-section">
+                <h3>🎯 Identificación del Sistema</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sistema-b">Sistema a Modificar *</label>
+                        <select id="sistema-b" required>
+                            <option value="">-- Seleccione --</option>
+                            <option value="pensiones">💰 Sistema de Pensiones</option>
+                            <option value="prestamos">🏦 Sistema de Préstamos</option>
+                            <option value="cobranza">💳 Sistema de Cobranza</option>
+                            <option value="nomina">💵 Sistema de Nómina</option>
+                            <option value="rh">👥 Sistema de Recursos Humanos</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo-cambio-b">Tipo de Cambio *</label>
+                        <select id="tipo-cambio-b" required>
+                            <option value="">-- Seleccione --</option>
+                            <option value="correctivo">🐛 Correctivo (Reparar error)</option>
+                            <option value="perfectivo">✨ Perfectivo (Mejorar funcionalidad)</option>
+                            <option value="adaptativo">🔄 Adaptativo (Cambio de entorno)</option>
+                            <option value="preventivo">🛡️ Preventivo (Evitar problemas)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="situacion-actual-b">Situación Actual *</label>
+                        <textarea id="situacion-actual-b" placeholder="Describe el problema o situación actual del sistema..." required></textarea>
+                        <small>Explica cómo funciona actualmente y cuál es el problema</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="situacion-deseada-b">Situación Deseada *</label>
+                        <textarea id="situacion-deseada-b" placeholder="Describe cómo debe funcionar después del cambio..." required></textarea>
+                        <small>Explica el resultado esperado después de la modificación</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="urgencia-b">Nivel de Urgencia *</label>
+                        <select id="urgencia-b" required>
+                            <option value="">-- Seleccione --</option>
+                            <option value="baja">🟢 Baja (Puede esperar)</option>
+                            <option value="media">🟡 Media (Importante)</option>
+                            <option value="alta">🟠 Alta (Prioritario)</option>
+                            <option value="critica">🔴 Crítica (Urgente)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="usuarios-afectados-b">Número de Usuarios Afectados</label>
+                        <input type="number" id="usuarios-afectados-b" placeholder="50" min="1">
+                        <small>Aproximado de usuarios que experimentan el problema</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section" style="border-left-color: var(--secondary); background: linear-gradient(to right, rgba(212,160,23,0.05), white);">
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button type="button" class="btn-submit" onclick="submitForm('Formulario B')">✅ Enviar Solicitud</button>
+                    <button type="button" class="btn-reset" onclick="resetForm('formulario-b')">🔄 Limpiar Formulario</button>
+                    <button type="button" class="btn-home" onclick="showSection('dashboard')">← Dashboard</button>
+                </div>
+            </div>
+
+            <div class="success-message" id="success-b">✅ ¡Solicitud de modificación enviada correctamente!</div>
+        </section>
+
+        <!-- ============================================
+             FORMULARIO C: REQUERIMIENTOS
+        ============================================ -->
+        <section id="formulario-c" class="section">
+            <div class="breadcrumb">
+                <a onclick="showSection('dashboard')">📊 Dashboard</a>
+                <span>→</span>
+                <span>📄 Requerimientos</span>
+            </div>
+            <h2>📄 Levantamiento de Requerimientos Técnicos</h2>
+            <span class="badge badge-success">✓ Solo para Solicitudes APROBADAS</span>
+
+            <div class="form-section">
+                <h3>📋 Contexto del Proyecto</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="proyecto-c">ID del Proyecto Aprobado *</label>
+                        <input type="text" id="proyecto-c" placeholder="SN-2026-0001" required>
+                        <small>Ingresa el ID de la solicitud previamente aprobada</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contexto-c">Contexto Actual *</label>
+                        <textarea id="contexto-c" placeholder="Describe cómo funciona actualmente el proceso o sistema..." required></textarea>
+                        <small>Explica la situación actual y el entorno de trabajo</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="problematica-c">Problemática a Resolver *</label>
+                        <textarea id="problematica-c" placeholder="¿Qué problemas específicos debe resolver el sistema?" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="incluye-c">¿Qué SÍ debe incluir el sistema? *</label>
+                        <textarea id="incluye-c" placeholder="• Funcionalidad 1&#10;• Funcionalidad 2&#10;• Funcionalidad 3" required></textarea>
+                        <small>Lista las funcionalidades que DEBE tener</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="excluye-c">¿Qué NO debe incluir el sistema? *</label>
+                        <textarea id="excluye-c" placeholder="• Exclusión 1&#10;• Exclusión 2" required></textarea>
+                        <small>Lista lo que está fuera del alcance</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>⚙️ Requerimientos Funcionales y No Funcionales</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="rf-c">Requerimientos Funcionales (RF) *</label>
+                        <textarea id="rf-c" placeholder="RF-001: El sistema debe permitir...&#10;RF-002: El sistema debe calcular...&#10;RF-003: El sistema debe generar..." required></textarea>
+                        <small>Describe QUÉ debe hacer el sistema (funcionalidades específicas)</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="rnf-c">Requerimientos No Funcionales (RNF) *</label>
+                        <textarea id="rnf-c" placeholder="• Rendimiento: Respuesta < 2 segundos&#10;• Seguridad: Encriptación de datos&#10;• Disponibilidad: 99.9% uptime&#10;• Escalabilidad: Soportar 10,000 usuarios" required></textarea>
+                        <small>Describe CÓMO debe funcionar (calidad, rendimiento, seguridad)</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="usuarios-c">Tipos de Usuarios y Roles *</label>
+                        <textarea id="usuarios-c" placeholder="• Administrador: Control total&#10;• Usuario Regular: Ver y crear&#10;• Consultor: Solo lectura" required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section" style="border-left-color: var(--secondary); background: linear-gradient(to right, rgba(212,160,23,0.05), white);">
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button type="button" class="btn-submit" onclick="submitForm('Formulario C')">✅ Guardar Requerimientos</button>
+                    <button type="button" class="btn-reset" onclick="resetForm('formulario-c')">🔄 Limpiar Formulario</button>
+                    <button type="button" class="btn-home" onclick="showSection('dashboard')">← Dashboard</button>
+                </div>
+            </div>
+
+            <div class="success-message" id="success-c">✅ ¡Requerimientos técnicos guardados correctamente!</div>
+        </section>
+
+        <!-- ============================================
+             FORMULARIO URGENCIA
+        ============================================ -->
+        <section id="formulario-urgencia" class="section">
+            <div class="breadcrumb">
+                <a onclick="showSection('dashboard')">📊 Dashboard</a>
+                <span>→</span>
+                <span>🚨 Urgencia</span>
+            </div>
+            <h2>🚨 Reporte de Urgencia / Falla Crítica</h2>
+            <span class="badge badge-danger">⚡ Respuesta Inmediata - SLA: ≤ 2 horas</span>
+
+            <div class="form-section" style="border-left-color: var(--danger);">
+                <h3>🔴 Identificación del Problema</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sistema-urgencia">Sistema Afectado *</label>
+                        <select id="sistema-urgencia" required>
+                            <option value="">-- Seleccione --</option>
+                            <option value="pensiones">💰 Sistema de Pensiones</option>
+                            <option value="prestamos">🏦 Sistema de Préstamos</option>
+                            <option value="cobranza">💳 Sistema de Cobranza</option>
+                            <option value="nomina">💵 Sistema de Nómina</option>
+                            <option value="rh">👥 Sistema de RRHH</option>
+                            <option value="portal">🌐 Portal Web ISSEG</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="severidad-urgencia">Severidad del Problema *</label>
+                        <select id="severidad-urgencia" required>
+                            <option value="">-- Seleccione --</option>
+                            <option value="critica">🔴 CRÍTICA (Sistema caído)</option>
+                            <option value="alta">🟠 ALTA (Funcionalidad principal afectada)</option>
+                            <option value="media">🟡 MEDIA (Funcionalidad secundaria afectada)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="descripcion-urgencia">Descripción del Problema *</label>
+                        <textarea id="descripcion-urgencia" placeholder="¿Qué está fallando exactamente? ¿Cuál es el error que aparece?" required></textarea>
+                        <small>Sé lo más específico posible con mensajes de error</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pasos-urgencia">Pasos para Reproducir el Error *</label>
+                        <textarea id="pasos-urgencia" placeholder="Paso 1: Ingresar al sistema&#10;Paso 2: Hacer clic en...&#10;Paso 3: Ingresar datos..." required></textarea>
+                        <small>Describe exactamente cómo ocurre el problema</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="usuarios-afectados-urgencia">Alcance del Impacto *</label>
+                        <select id="usuarios-afectados-urgencia" required>
+                            <option value="">-- Seleccione --</option>
+                            <option value="1-5">🟢 1-5 usuarios (Aislado)</option>
+                            <option value="5-20">🟡 5-20 usuarios (Limitado)</option>
+                            <option value="20-100">🟠 20-100 usuarios (Significativo)</option>
+                            <option value="todos">🔴 TODOS LOS USUARIOS (CRÍTICO)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="impacta-operacion">¿Detiene operaciones críticas?</label>
+                        <select id="impacta-operacion">
+                            <option value="">-- Seleccione --</option>
+                            <option value="si">🔴 SÍ - Operaciones detenidas</option>
+                            <option value="no">🟢 NO - Operaciones continúan</option>
+                            <option value="parcial">🟡 PARCIAL - Algunas afectadas</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section" style="border-left-color: #d93025; background: linear-gradient(to right, rgba(217,48,37,0.08), white);">
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button type="button" class="btn-submit btn-danger" onclick="submitForm('Formulario Urgencia')">⚡ Reportar Falla URGENTE</button>
+                    <button type="button" class="btn-reset" onclick="resetForm('formulario-urgencia')">🔄 Limpiar</button>
+                    <button type="button" class="btn-home" onclick="showSection('dashboard')">← Dashboard</button>
+                </div>
+            </div>
+
+            <div class="success-message" id="success-urgencia" style="background: linear-gradient(135deg, rgba(217,48,37,0.15), rgba(217,48,37,0.08)); border-color: #d93025; color: #d93025; font-weight: 700;">⚡ ¡FALLA REPORTADA! Un desarrollador será asignado en máximo 30 minutos.</div>
+        </section>
+
+        <!-- ============================================
+             DIAGRAMA
+        ============================================ -->
+        <section id="diagrama" class="section">
+            <div class="breadcrumb">
+                <a onclick="showSection('dashboard')">📊 Dashboard</a>
+                <span>→</span>
+                <span>🎨 Diagramas</span>
+            </div>
+            <h2>🎨 Diagramas Interactivos del Sistema</h2>
+
+            <div class="diagram-box">
+                <h3>🔄 Flujo de Trabajo Completo</h3>
+                <div class="diagram-controls">
+                    <button class="active" onclick="showDiagram('flujo-general')">Flujo General</button>
+                    <button onclick="showDiagram('flujo-aprobacion')">Proceso de Aprobación</button>
+                    <button onclick="showDiagram('permisos')">Matriz de Permisos</button>
+                </div>
+                <div class="diagram-content">
+                    <div class="mermaid" id="mermaid-flujo-general">
+graph TD
+    A[👤 Usuario] --> B{🔐 Login}
+    B -->|✅ Válido| C[📊 Dashboard]
+    B -->|❌ Inválido| A
+    
+    C --> D{Seleccionar<br/>Acción}
+    
+    D -->|📋 Nuevo| E[Formulario A<br/>Nuevo Sistema]
+    D -->|🔧 Modificar| F[Formulario B<br/>Modificación]
+    D -->|📄 Requerimientos| G[Formulario C<br/>Levantamiento]
+    D -->|🚨 Urgencia| H[Formulario Express<br/>Fallas Críticas]
+    
+    E --> I{Validar<br/>Formulario}
+    F --> I
+    G --> I
+    H --> I
+    
+    I -->|✅ Válido| J[💾 Guardar en BD]
+    I -->|❌ Error| K[⚠️ Mostrar Errores]
+    K --> D
+    
+    J --> L[📧 Enviar Notificación]
+    L --> M[✅ Confirmación al Usuario]
+    L --> N[👨‍💼 Notificar a Gestor]
+    
+    N --> O{ISSEG<br/>Revisa}
+    O -->|✅ Aprobado| P[🚀 Asignar Equipo]
+    O -->|❌ Rechazado| Q[❌ Notificar Rechazo]
+    
+    P --> R[💻 Desarrollo]
+    R --> S[✅ Sistema Listo]
+    
+    style A fill:#E8F4F8,stroke:#0a4878,stroke-width:3px
+    style B fill:#FFF9E6,stroke:#d4a017,stroke-width:3px
+    style C fill:#E8F5E9,stroke:#28a745,stroke-width:2px
+    style E fill:#E3F2FD,stroke:#2196F3,stroke-width:2px
+    style F fill:#F3E5F5,stroke:#9C27B0,stroke-width:2px
+    style G fill:#FFF3E0,stroke:#FF9800,stroke-width:2px
+    style H fill:#FFEBEE,stroke:#d93025,stroke-width:3px
+    style J fill:#E0F2F1,stroke:#009688,stroke-width:2px
+    style S fill:#C8E6C9,stroke:#4CAF50,stroke-width:4px
+                    </div>
+                    
+                    <div class="mermaid" id="mermaid-flujo-aprobacion" style="display:none;">
+graph LR
+    A[📝 Solicitud<br/>Recibida] --> B{Campos<br/>Completos?}
+    B -->|No| C[⚠️ Solicitar<br/>Información]
+    C --> A
+    B -->|Sí| D{Área<br/>Autorizada?}
+    D -->|No| E[❌ Rechazar<br/>Automático]
+    D -->|Sí| F[👨‍💼 Revisión<br/>ISSEG]
+    
+    F --> G{Decisión}
+    G -->|✅ Aprobar| H[📋 Solicitar<br/>Form C]
+    G -->|❌ Rechazar| I[📧 Notificar<br/>Motivo]
+    G -->|🔄 Más Info| J[📨 Solicitar<br/>Detalles]
+    
+    H --> K[👥 Asignar<br/>Recursos]
+    K --> L[📅 Establecer<br/>Timeline]
+    L --> M[🚀 Iniciar<br/>Desarrollo]
+    
+    J --> A
+    I --> N[❌ Cerrar<br/>Ticket]
+    
+    style A fill:#E3F2FD,stroke:#2196F3,stroke-width:2px
+    style F fill:#FFF9E6,stroke:#d4a017,stroke-width:3px
+    style H fill:#E8F5E9,stroke:#28a745,stroke-width:2px
+    style I fill:#FFEBEE,stroke:#d93025,stroke-width:2px
+    style M fill:#C8E6C9,stroke:#4CAF50,stroke-width:3px
+                    </div>
+                    
+                    <div class="mermaid" id="mermaid-permisos" style="display:none;">
+graph TD
+    subgraph ROL_LECTOR [👓 ROL: LECTOR]
+        L1[✅ Ver Solicitudes Propias]
+        L2[❌ Crear Solicitudes]
+        L3[❌ Aprobar]
+        L4[❌ Admin]
+    end
+    
+    subgraph ROL_USUARIO [👤 ROL: USUARIO]
+        U1[✅ Ver Propias]
+        U2[✅ Crear Solicitudes]
+        U3[✅ Editar Propias]
+        U4[❌ Aprobar]
+        U5[❌ Admin]
+    end
+    
+    subgraph ROL_CREADOR [✏️ ROL: CREADOR]
+        C1[✅ Ver Todas de Área]
+        C2[✅ Crear Solicitudes]
+        C3[✅ Editar de Área]
+        C4[❌ Aprobar]
+        C5[❌ Admin]
+    end
+    
+    subgraph ROL_APROBADOR [✅ ROL: APROBADOR]
+        A1[✅ Ver Todas]
+        A2[✅ Crear]
+        A3[✅ Editar]
+        A4[✅ Aprobar/Rechazar]
+        A5[✅ Ver Reportes Completos]
+        A6[❌ Admin Sistema]
+    end
+    
+    subgraph ROL_ADMIN [⚡ ROL: ADMINISTRADOR]
+        AD1[✅ Control Total]
+        AD2[✅ Gestionar Usuarios]
+        AD3[✅ Ver Auditoría]
+        AD4[✅ Configuración Sistema]
+    end
+    
+    style ROL_LECTOR fill:#E8F5E9,stroke:#4CAF50,stroke-width:2px
+    style ROL_USUARIO fill:#E3F2FD,stroke:#2196F3,stroke-width:2px
+    style ROL_CREADOR fill:#F3E5F5,stroke:#9C27B0,stroke-width:2px
+    style ROL_APROBADOR fill:#FFF9E6,stroke:#d4a017,stroke-width:3px
+    style ROL_ADMIN fill:#FFEBEE,stroke:#d93025,stroke-width:3px
+                    </div>
+                </div>
+            </div>
+
+            <div class="diagram-box">
+                <h3>📊 Tabla de Permisos por Rol</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Acción</th>
+                            <th>👓 Lector</th>
+                            <th>👤 Usuario</th>
+                            <th>✏️ Creador</th>
+                            <th>✅ Aprobador</th>
+                            <th>⚡ Admin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Ver solicitudes propias</strong></td>
+                            <td>✅ Sí</td>
+                            <td>✅ Sí</td>
+                            <td>✅ Sí</td>
+                            <td>✅ Sí</td>
+                            <td>✅ Sí</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ver todas solicitudes</strong></td>
+                            <td>❌ No</td>
+                            <td>❌ No</td>
+                            <td>⚠️ Solo área</td>
+                            <td>✅ Sí</td>
+                            <td>✅ Sí</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Crear solicitudes</strong></td>
+                            <td>❌ No</td>
+                            <td>✅ Sí</td>
+                            <td>✅ Sí</td>
+                            <td>✅ Sí</td>
+                            <td>✅ Sí</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Editar solicitudes</strong></td>
+                            <td>❌ No</td>
+                            <td>⚠️ Propias</td>
+                            <td>⚠️ De área</td>
+                            <td>✅ Todas</td>
+                            <td>✅ Todas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Aprobar/Rechazar</strong></td>
+                            <td>❌ No</td>
+                            <td>❌ No</td>
+                            <td>❌ No</td>
+                            <td>✅ Sí</td>
+                            <td>✅ Sí</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ver reportes</strong></td>
+                            <td>⚠️ Básico</td>
+                            <td>✅ Completo</td>
+                            <td>✅ Completo</td>
+                            <td>✅ Completo</td>
+                            <td>✅ + Auditoría</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gestionar usuarios</strong></td>
+                            <td>❌ No</td>
+                            <td>❌ No</td>
+                            <td>❌ No</td>
+                            <td>❌ No</td>
+                            <td>✅ Sí</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ver auditoría</strong></td>
+                            <td>❌ No</td>
+                            <td>❌ No</td>
+                            <td>❌ No</td>
+                            <td>❌ No</td>
+                            <td>✅ Sí</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <button type="button" class="btn-home" onclick="showSection('dashboard')">← Regresar al Dashboard</button>
+        </section>
+
+    </div>
+</div>
+
+<script>
+    // ============================================
+    // GLOBAL VARIABLES
+    // ============================================
+    let currentDiagram = 'flujo-general';
+
+    // ============================================
+    // LOGIN FUNCTION
+    // ============================================
+    function loginUser(event) {
+        event.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        
+        // Validación básica
+        if (!email || !password) {
+            alert('Por favor ingresa email y contraseña');
+            return;
+        }
+        
+        const name = email.split('@')[0];
+        
+        // Guardar en localStorage
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userName', name);
+        
+        // Ocultar login, mostrar app
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('mainApp').style.display = 'flex';
+        
+        // Actualizar info de usuario
+        document.getElementById('userName').textContent = name;
+        document.getElementById('userEmail').textContent = email;
+        
+        // Renderizar diagramas después del login
+        setTimeout(() => renderDiagrams(), 300);
+    }
+
+    // ============================================
+    // LOGOUT FUNCTION
+    // ============================================
+    function logout() {
+        if (confirm('¿Estás seguro de cerrar sesión?')) {
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            
+            document.getElementById('mainApp').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'flex';
+            
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            
+            // Resetear al dashboard
+            showSection('dashboard');
+        }
+    }
+
+    // ============================================
+    // SHOW SECTION
+    // ============================================
+    function showSection(sectionId) {
+        // Ocultar todas las secciones
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(sec => sec.classList.remove('active'));
+        
+        // Remover active de todos los nav-links
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => link.classList.remove('active'));
+        
+        // Mostrar sección seleccionada
+        const sectionElement = document.getElementById(sectionId);
+        if (sectionElement) {
+            sectionElement.classList.add('active');
+        }
+        
+        // Activar nav-link correspondiente
+        const activeLink = document.querySelector(`[onclick*="('${sectionId}')"]`);
+        if (activeLink && activeLink.classList.contains('nav-link')) {
+            activeLink.classList.add('active');
+        }
+        
+        // Scroll al inicio
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Si es la sección de diagramas, renderizar
+        if (sectionId === 'diagrama') {
+            setTimeout(() => renderDiagrams(), 100);
+        }
+    }
+
+    // ============================================
+    // SUBMIT FORM
+    // ============================================
+    function submitForm(formName) {
+        // Determinar qué success message mostrar
+        let successId;
+        if (formName.includes('A')) {
+            successId = 'success-a';
+        } else if (formName.includes('B')) {
+            successId = 'success-b';
+        } else if (formName.includes('C')) {
+            successId = 'success-c';
+        } else if (formName.includes('Urgencia')) {
+            successId = 'success-urgencia';
+        }
+        
+        // Mostrar mensaje de éxito
+        const successElement = document.getElementById(successId);
+        if (successElement) {
+            successElement.classList.add('show');
+            
+            // Ocultar después de 5 segundos
+            setTimeout(() => {
+                successElement.classList.remove('show');
+            }, 5000);
+        }
+        
+        console.log(`✅ ${formName} enviado correctamente`);
+    }
+
+    // ============================================
+    // RESET FORM
+    // ============================================
+    function resetForm(formId) {
+        if (confirm('¿Estás seguro de limpiar el formulario?')) {
+            const section = document.getElementById(formId);
+            if (section) {
+                const inputs = section.querySelectorAll('input, select, textarea');
+                inputs.forEach(input => {
+                    if (input.type === 'file') {
+                        input.value = '';
+                    } else if (input.type === 'checkbox' || input.type === 'radio') {
+                        input.checked = false;
+                    } else {
+                        input.value = '';
+                    }
+                });
+            }
+        }
+    }
+
+    // ============================================
+    // SHOW DIAGRAM
+    // ============================================
+    function showDiagram(diagramType) {
+        // Actualizar botones de controles
+        const buttons = document.querySelectorAll('.diagram-controls button');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Ocultar todos los diagramas
+        const diagrams = [
+            document.getElementById('mermaid-flujo-general'),
+            document.getElementById('mermaid-flujo-aprobacion'),
+            document.getElementById('mermaid-permisos')
+        ];
+        
+        diagrams.forEach(d => {
+            if (d) d.style.display = 'none';
+        });
+        
+        // Mostrar diagrama seleccionado
+        const selectedDiagram = document.getElementById(`mermaid-${diagramType}`);
+        if (selectedDiagram) {
+            selectedDiagram.style.display = 'block';
+            currentDiagram = diagramType;
+        }
+    }
+
+    // ============================================
+    // RENDER DIAGRAMS
+    // ============================================
+    async function renderDiagrams() {
+        if (window.mermaidModule) {
+            try {
+                const mermaidElements = document.querySelectorAll('.mermaid');
+                for (const element of mermaidElements) {
+                    if (element.textContent.trim() && !element.querySelector('svg')) {
+                        await window.mermaidModule.run({
+                            nodes: [element]
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Error rendering diagrams:', error);
+            }
+        }
+    }
+
+    // ============================================
+    // CHECK LOGIN ON PAGE LOAD
+    // ============================================
+    window.addEventListener('load', () => {
+        const userEmail = localStorage.getItem('userEmail');
+        const userName = localStorage.getItem('userName');
+        
+        if (userEmail) {
+            // Usuario ya está logueado
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('mainApp').style.display = 'flex';
+            document.getElementById('userName').textContent = userName || userEmail.split('@')[0];
+            document.getElementById('userEmail').textContent = userEmail;
+            
+            // Renderizar diagramas
+            setTimeout(() => renderDiagrams(), 500);
+        }
+    });
+
+    // ============================================
+    // RENDER DIAGRAMS ON LOAD
+    // ============================================
+    document.addEventListener('DOMContentLoaded', () => {
+        // Renderizar diagramas si el usuario ya está logueado
+        if (localStorage.getItem('userEmail')) {
+            setTimeout(() => renderDiagrams(), 1000);
+        }
+    });
+</script>
+
+</body>
+</html>

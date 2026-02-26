@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISSEG - Centro de Documentación Integrada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a5696;
+            --primary-dark: #0d2a47;
+            --secondary: #28a745;
+            --light: #f8f9fa;
+            --border: #dadce0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        header .subtitle {
+            background: rgba(26, 86, 150, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .document-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .document-card-header {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .document-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .document-card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .document-card-type {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 8px;
+            border-radius: 4px;
+            width: fit-content;
+        }
+
+        .document-card-body {
+            padding: 20px;
+        }
+
+        .document-card-body p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .features {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .features li {
+            padding: 8px 0;
+            color: #555;
+        }
+
+        .features li:before {
+            content: "✓ ";
+            color: var(--secondary);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .document-card-footer {
+            padding: 20px;
+            background: var(--light);
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .info-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .info-box h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            padding: 15px;
+            background: var(--light);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .info-item strong {
+            display: block;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: rgba(26, 86, 150, 0.15);
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 30px 20px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏛️ Centro de Documentación Integrada</h1>
+            <p>Sistema de Gestión de Solicitudes ISSEG</p>
+            <div class="subtitle">
+                <strong>Propuesta Integrada - Formularios, Procesos y Diagramas Unificados</strong><br>
+                <span style="opacity: 0.8;">Instituto de Seguridad Social del Estado de Guanajuato</span>
+            </div>
+        </header>
+
+        <!-- DOCUMENTOS PRINCIPALES -->
+        <section class="grid">
+            
+            <!-- DOC 1: PROPUESTA INTEGRADA INTERACTIVA -->
+            <div class="document-card">
+                <div class="document-card-header">
+                    <div class="document-icon">🚀</div>
+                    <div class="document-card-title">Propuesta Integrada</div>
+                    <div class="document-card-type">HTML Interactivo</div>
+                </div>
+                <div class="document-card-body">
+                    <p>Versión web completa e interactiva con navegación visual, mejorando la presentación y la experiencia del usuario.</p>
+                    <ul class="features">
+                        <li>Interfaz profesional y moderna</li>
+                        <li>Navegación interactiva por secciones</li>
+                        <li>Tablas comparativas mejoradas</li>
+                        <li>Diagramas de procesos visuales</li>
+                        <li>Responsive design (móvil + escritorio)</li>
+                    </ul>
+                </div>
+                <div class="document-card-footer">
+                    <a href="Sistema-ISSEG-Integrado.html" class="btn btn-primary" target="_blank">Abrir en Navegador</a>
+                    <button class="btn btn-secondary" onclick="copiarRuta('Sistema-ISSEG-Integrado.html')">Copiar Ruta</button>
+                </div>
+            </div>
+
+            <!-- DOC 2: PROPUESTA EN MARKDOWN -->
+            <div class="document-card">
+                <div class="document-card-header">
+                    <div class="document-icon">📄</div>
+                    <div class="document-card-title">Propuesta en Markdown</div>
+                    <div class="document-card-type">Formato Editable</div>
+                </div>
+                <div class="document-card-body">
+                    <p>Versión en Markdown (MD) ideal para edición, versionado en Git y consumo programático.</p>
+                    <ul class="features">
+                        <li>Formato estándar de documentación</li>
+                        <li>Fácil de editar y actualizar</li>
+                        <li>Compatible con Git/GitHub</li>
+                        <li>Índice automático de contenidos</li>
+                        <li>Tablas y listas estructuradas</li>
+                    </ul>
+                </div>
+                <div class="document-card-footer">
+                    <button class="btn btn-primary" onclick="descargarArchivo('SISTEMA-ISSEG-PROPUESTA-INTEGRADA.md')">Descargar</button>
+                    <button class="btn btn-secondary" onclick="copiarRuta('SISTEMA-ISSEG-PROPUESTA-INTEGRADA.md')">Copiar Ruta</button>
+                </div>
+            </div>
+
+            <!-- DOC 3: INDICE NAVEGABLE -->
+            <div class="document-card">
+                <div class="document-card-header">
+                    <div class="document-icon">📑</div>
+                    <div class="document-card-title">Centro de Documentación</div>
+                    <div class="document-card-type">Esta Página</div>
+                </div>
+                <div class="document-card-body">
+                    <p>Centro central de acceso rápido a todos los documentos e información del proyecto integrado.</p>
+                    <ul class="features">
+                        <li>Navegación centralizada</li>
+                        <li>Acceso rápido a recursos</li>
+                        <li>Información del proyecto</li>
+                        <li>Guía de uso</li>
+                        <li>Enlaces a documentación</li>
+                    </ul>
+                </div>
+                <div class="document-card-footer">
+                    <button class="btn btn-primary" onclick="location.reload()">Actualizar Página</button>
+                    <button class="btn btn-secondary" onclick="imprimirPagina()">Imprimir</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- INFORMACIÓN DEL PROYECTO -->
+        <section class="info-box">
+            <h2>📊 Resumen del Proyecto Integrado</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Nombre del Proyecto</strong>
+                    Sistema de Gestión de Solicitudes (SGS)
+                </div>
+                <div class="info-item">
+                    <strong>Institución</strong>
+                    ISSEG - Instituto de Seguridad Social del Estado de Guanajuato
+                </div>
+                <div class="info-item">
+                    <strong>Período</strong>
+                    Enero - Julio 2026 (7 meses)
+                </div>
+                <div class="info-item">
+                    <strong>Modalidad</strong>
+                    Residencia Profesional - Ciberseguridad
+                </div>
+                <div class="info-item">
+                    <strong>Versión</strong>
+                    3.0 INTEGRADA (Febrero 2026)
+                </div>
+                <div class="info-item">
+                    <strong>Estado</strong>
+                    ✅ Documentación Completada
+                </div>
+            </div>
+        </section>
+
+        <!-- QUÉ INCLUYE -->
+        <section class="info-box">
+            <h2>📦 ¿Qué Incluye Esta Propuesta Integrada?</h2>
+            
+            <h3 style="color: var(--primary); margin: 25px 0 15px 0; font-size: 1.2rem;">✅ Los 4 Formularios Completos</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Formulario A: Sistema Nuevo</strong>
+                    ID: SN-YYYY-NNNN | 11 campos | Requiere aprobación ISSEG
+                </div>
+                <div class="info-item">
+                    <strong>Formulario B: Modificación</strong>
+                    ID: MOD-YYYY-NNNN | 13 campos | Requiere aprobación ISSEG
+                </div>
+                <div class="info-item">
+                    <strong>Formulario C: Requerimientos</strong>
+                    ID: (Usa Form A) | 9 secciones | PM valida
+                </div>
+                <div class="info-item">
+                    <strong>Formulario Urgencia</strong>
+                    ID: INC-YYYY-NNNN | 14 campos | Respuesta inmediata
+                </div>
+            </div>
+
+            <h3 style="color: var(--primary); margin: 25px 0 15px 0; font-size: 1.2rem;">📊 Diagramas Implementados</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Autenticación y Control de Acceso:</strong> Flujo de login y validación de permisos</li>
+                <li><strong>Validación de Permisos por Área:</strong> RBAC (Role-Based Access Control) detallado</li>
+                <li><strong>Proceso Principal:</strong> Integración completa de todos los flujos</li>
+                <li><strong>Filtrado de Sistemas:</strong> Lógica de visualización por área</li>
+                <li><strong>Estructura de Control:</strong> Matriz de permisos por rol</li>
+                <li><strong>Estados del Ticket:</strong> Ciclo de vida completo de solicitud</li>
+                <li><strong>Base de Datos:</strong> Estructura de tablas y relaciones</li>
+                <li><strong>Análisis de Riscos:</strong> Identificación y mitigación</li>
+            </ul>
+
+            <h3 style="color: var(--primary); margin: 25px 0 15px 0; font-size: 1.2rem;">🔄 Procesos Integrados</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Ruta 1 - Nuevo Sistema:</strong> Desde solicitud hasta implementación (Formulario A → C)</li>
+                <li><strong>Ruta 2 - Modificaciones:</strong> Cambios y mejoras a sistemas existentes (Formulario B)</li>
+                <li><strong>Ruta 3 - Urgencias:</strong> Atención inmediata a fallas críticas (Ruta Express)</li>
+                <li><strong>Matriz de Decisión:</strong> Guía clara de cuál formulario usar</li>
+                <li><strong>Flujos Visualizados:</strong> Diagramas de cada proceso</li>
+            </ul>
+
+            <h3 style="color: var(--primary); margin: 25px 0 15px 0; font-size: 1.2rem;">🏗️ Arquitectura Técnica</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Stack Tecnológico:</strong> Angular + ASP.NET Core + SQL Server</li>
+                <li><strong>Tabla de Base de Datos:</strong> 9 tablas principales definidas</li>
+                <li><strong>Estructura de Seguridad:</strong> Autenticación, autorización, auditoría</li>
+                <li><strong>Escalabilidad:</strong> Preparado para cloud y on-premise</li>
+                <li><strong>Documentación Técnica:</strong> Especificación completa de implementación</li>
+            </ul>
+
+            <h3 style="color: var(--primary); margin: 25px 0 15px 0; font-size: 1.2rem;">📈 Análisis de Beneficios</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Impacto Cuantificable:</strong> Reducción de tiempos 75%, cero solicitudes perdidas</li>
+                <li><strong>Beneficios por Stakeholder:</strong> Usuarios, managers, desarrolladores, institución</li>
+                <li><strong>Métricas de Éxito:</strong> KPIs definidos para cada aspecto</li>
+                <li><strong>ROI Proyectado:</strong> Análisis de retorno de inversión</li>
+            </ul>
+
+            <h3 style="color: var(--primary); margin: 25px 0 15px 0; font-size: 1.2rem;">🚀 Plan de Implementación</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Fase 1 (Enero):</strong> Análisis y diseño completo</li>
+                <li><strong>Fase 2 (Feb-Mar):</strong> Desarrollo backend y frontend</li>
+                <li><strong>Fase 3 (Abr-May):</strong> Formularios, integraciones, reportes</li>
+                <li><strong>Fase 4 (Junio):</strong> Testing exhaustivo y optimización</li>
+                <li><strong>Fase 5 (Julio):</strong> Producción, capacitación, soporte</li>
+            </ul>
+        </section>
+
+        <!-- CÓMO USAR LA DOCUMENTACIÓN -->
+        <section class="info-box">
+            <h2>🎯 Cómo Usar Esta Documentación</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div style="padding: 20px; background: rgba(26, 86, 150, 0.05); border-radius: 8px;">
+                    <h3 style="color: var(--primary); margin-top: 0;">Para Ejecutivos/Directivos</h3>
+                    <p><strong>Abrir:</strong> Sistema-ISSEG-Integrado.html</p>
+                    <p>Navega a "Beneficios" para ver impacto empresarial y ROI. Las tablas comparativas muestran ventajas claras.</p>
+                </div>
+
+                <div style="padding: 20px; background: rgba(40, 167, 69, 0.05); border-radius: 8px;">
+                    <h3 style="color: var(--secondary); margin-top: 0;">Para Product Managers</h3>
+                    <p><strong>Abrir:</strong> SISTEMA-ISSEG-PROPUESTA-INTEGRADA.md</p>
+                    <p>Revisa "Los Cuatro Formularios" y "Procesos Integrados" para entender flujos y responsabilidades.</p>
+                </div>
+
+                <div style="padding: 20px; background: rgba(0, 0, 255, 0.05); border-radius: 8px;">
+                    <h3 style="color: #2196F3; margin-top: 0;">Para Equipos Técnicos</h3>
+                    <p><strong>Abrir:</strong> Sistema-ISSEG-Integrado.html</p>
+                    <p>Ve a "Arquitectura Técnica" y "Diagramas" para las especificaciones de desarrollo e implementación.</p>
+                </div>
+
+                <div style="padding: 20px; background: rgba(255, 152, 0, 0.05); border-radius: 8px;">
+                    <h3 style="color: #FF9800; margin-top: 0;">Para Usuarios Finales</h3>
+                    <p><strong>Abrir:</strong> Sistema-ISSEG-Integrado.html</p>
+                    <p>Mira "Los Cuatro Formularios" para ver qué forma debes llenar según tu necesidad.</p>
+                </div>
+
+                <div style="padding: 20px; background: rgba(233, 30, 99, 0.05); border-radius: 8px;">
+                    <h3 style="color: #E91E63; margin-top: 0;">Para Revisiones y Auditoría</h3>
+                    <p><strong>Descargar:</strong> SISTEMA-ISSEG-PROPUESTA-INTEGRADA.md</p>
+                    <p>Archivo individual para archivar, versionar en Git o compartir con auditoría externa.</p>
+                </div>
+
+                <div style="padding: 20px; background: rgba(156, 39, 176, 0.05); border-radius: 8px;">
+                    <h3 style="color: #9C27B0; margin-top: 0;">Para Capacitación</h3>
+                    <p><strong>Abrir:</strong> Sistema-ISSEG-Integrado.html</p>
+                    <p>Sección "Los Cuatro Formularios" contiene ejemplos, casos de uso y flujos paso a paso.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CARPETA GUARDARDAR -->
+        <section class="info-box">
+            <h2>📁 Ubicación de los Archivos</h2>
+            <div style="background: var(--light); padding: 15px; border-radius: 8px; font-family: monospace; word-break: break-all;">
+                <p><strong>Ruta:</strong> c:\Users\eduar\Documents\trabajo isseg\<span style="background: yellow; padding: 2px 6px;">conbinacion de proyecto</span>\</p>
+                <p style="margin-top: 10px;"><strong>Archivos creados:</strong></p>
+                <ul style="margin: 10px 0; padding-left: 20px; font-family: monospace;">
+                    <li>✅ Sistema-ISSEG-Integrado.html</li>
+                    <li>✅ SISTEMA-ISSEG-PROPUESTA-INTEGRADA.md</li>
+                    <li>✅ INDEX.html (esta página)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- MEJORAS IMPLEMENTADAS -->
+        <section class="info-box">
+            <h2>✨ Mejoras Implementadas en la Integración</h2>
+            
+            <h3 style="color: var(--primary); margin: 20px 0 15px 0;">Comparado con archivos originales:</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                <div style="padding: 15px; background: var(--light); border-radius: 8px; border-left: 4px solid var(--secondary);">
+                    <strong>✅ Presentación Visual</strong><br>
+                    Diseño profesional y moderno con navegación intuitiva
+                </div>
+                <div style="padding: 15px; background: var(--light); border-radius: 8px; border-left: 4px solid var(--secondary);">
+                    <strong>✅ Estructura Unificada</strong><br>
+                    Todos los formularios y diagramas en un solo documento
+                </div>
+                <div style="padding: 15px; background: var(--light); border-radius: 8px; border-left: 4px solid var(--secondary);">
+                    <strong>✅ Comparativas Mejores</strong><br>
+                    Tablas más claras para entender diferencias entre formularios
+                </div>
+                <div style="padding: 15px; background: var(--light); border-radius: 8px; border-left: 4px solid var(--secondary);">
+                    <strong>✅ Procesos Visualizados</strong><br>
+                    Diagramas mejorados con flujos claros y leyendas
+                </div>
+                <div style="padding: 15px; background: var(--light); border-radius: 8px; border-left: 4px solid var(--secondary);">
+                    <strong>✅ Acceso Responsive</strong><br>
+                    Compatible con móvil, tablet y escritorio
+                </div>
+                <div style="padding: 15px; background: var(--light); border-radius: 8px; border-left: 4px solid var(--secondary);">
+                    <strong>✅ Documentación Completa</strong><br>
+                    Incluye arquitectura técnica y especificaciones de BD
+                </div>
+                <div style="padding: 15px; background: var(--light); border-radius: 8px; border-left: 4px solid var(--secondary);">
+                    <strong>✅ Navegación Centralizada</strong><br>
+                    Esta página INDEX como punto de acceso único
+                </div>
+                <div style="padding: 15px; background: var(--light); border-radius: 8px; border-left: 4px solid var(--secondary);">
+                    <strong>✅ Múltiples Formatos</strong><br>
+                    HTML (web), Markdown (editable), e INDEX (navegación)
+                </div>
+                <div style="padding: 15px; background: var(--light); border-radius: 8px; border-left: 4px solid var(--secondary);">
+                    <strong>✅ Fácil Mantenimiento</strong><br>
+                    Versión MD editable para actualizaciones futuras
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÓXIMOS PASOS -->
+        <section class="info-box">
+            <h2>🚀 Próximos Pasos</h2>
+            <ol style="margin-left: 20px; line-height: 2;">
+                <li><strong>Validación:</strong> Revisar esta propuesta integrada con stakeholders clave</li>
+                <li><strong>Feedback:</strong> Incorporar comentarios y ajustes solicitados</li>
+                <li><strong>Aprobación Formal:</strong> Obtener firma de directivos/aprobadores</li>
+                <li><strong>Presentación:</strong> Compartir con todos los departamentos involucrados</li>
+                <li><strong>Capacitación:</strong> Entrenar a usuarios en uso de formularios</li>
+                <li><strong>Implementación:</strong> Iniciar Fase 1 de desarrollo en Enero 2026</li>
+            </ol>
+        </section>
+
+        <footer>
+            <h3>🏛️ Instituto de Seguridad Social del Estado de Guanajuato (ISSEG)</h3>
+            <p>Sistema de Gestión de Solicitudes - Propuesta Integrada Febrero 2026</p>
+            <p style="margin-top: 20px; opacity: 0.8;">© 2026 Todos los derechos reservados | Documentación Oficial del Proyecto</p>
+            <p style="margin-top: 10px; opacity: 0.6; font-size: 0.9rem;">Archivos generados: Sistema-ISSEG-Integrado.html | SISTEMA-ISSEG-PROPUESTA-INTEGRADA.md | INDEX.html</p>
+        </footer>
+    </div>
+
+    <script>
+        function copiarRuta(archivo) {
+            const ruta = 'conbinacion de proyecto\\' + archivo;
+            navigator.clipboard.writeText(ruta).then(() => {
+                alert('✅ Ruta copiada: ' + ruta);
+            }).catch(err => {
+                alert('Error: ' + err);
+            });
+        }
+
+        function descargarArchivo(archivo) {
+            // En navegador solo podemos sugerir, no descargamos realmente
+            alert('📥 Para descargar: \n\nRuta: conbinacion de proyecto\\' + archivo + '\n\nCopia la ruta y accede desde tu explorador de archivos.');
+        }
+
+        function imprimirPagina() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
