@@ -1,26 +1,30 @@
-# 📁 Estructura Reorganizada: Docker + Node.js
+# 📁 Estructura del Proyecto
 
-## ✅ Cambios Realizados
+## ✅ Organización de Carpetas
 
-Se ha reorganizado el proyecto en carpetas temáticas para mejor mantenibilidad:
+El proyecto está organizado en carpetas temáticas para mejor mantenibilidad:
 
 ```
 trabajo-isseg/
 │
-├── 📂 docker/                              ← Configuración Docker
-│   ├── Dockerfile
-│   ├── docker-compose.yml
-│   └── README.md
+├── 📂 server/                              ← Aplicación Node.js/Express
+│   ├── server.js                           (servidor principal)
+│   ├── package.json                        (dependencias)
+│   └── package-lock.json                   (lock file)
 │
-├── 📂 server/                              ← Aplicación Node.js
-│   ├── server.js
-│   ├── package.json
-│   └── package-lock.json
+├── 📂 conbinacion de proyecto/             ← Aplicación principal HTML
+│   ├── ISSEG-Sistema-Solicitudes-Mejorado.html
+│   ├── ISSEG-Sistema-Solicitudes.html
+│   └── ...
 │
-├── 📂 conbinacion de proyecto/
-├── 📂 formularios/
-├── 📂 diagramas/
-├── 📂 docmentacion/
+├── 📂 formularios/                         ← Formularios individuales
+├── 📂 diagramas/                           ← Diagramas Mermaid
+├── 📂 docmentacion/                        ← Documentación técnica
+├── 📂 .github/workflows/                   ← GitHub Actions (GitHub Pages)
+│
+├── CNAME                                   ← Configuración de dominio personalizado
+├── ESTRUCTURA-CARPETAS.md                  ← Este archivo
+├── GITHUB-PAGES-SETUP.md                   ← Configuración GitHub Pages
 └── ...
 ```
 
@@ -28,48 +32,17 @@ trabajo-isseg/
 
 ## 🚀 Cómo Ejecutar
 
-### Opción 1: Docker Compose (Recomendado)
-
-```bash
-# Navegar a la carpeta docker
-cd docker
-
-# Ejecutar con Docker Compose
-docker-compose up -d
-
-# Detener
-docker-compose down
-```
-
-**URL:** http://localhost:3000
-
----
-
-### Opción 2: Node.js Local
+### Ejecutar Servidor Node.js Localmente
 
 ```bash
 # Navegar a la carpeta server
 cd server
 
-# Instalar dependencias (si es primera vez)
+# Instalar dependencias (solo primera vez)
 npm install
 
 # Ejecutar servidor
 npm start
-```
-
-**URL:** http://localhost:3000
-
----
-
-### Opción 3: Docker Manual
-
-```bash
-# Desde la raíz del proyecto
-docker build -f docker/Dockerfile -t isseg-app .
-
-# Ejecutar
-docker run -p 3000:3000 isseg-app
 ```
 
 **URL:** http://localhost:3000
@@ -82,7 +55,6 @@ En la carpeta `server/`:
 
 ```bash
 npm start     # Inicia el servidor Express
-npm run dev   # Igual a npm start
 npm test      # Tests (no configurados aún)
 ```
 
@@ -90,11 +62,10 @@ npm test      # Tests (no configurados aún)
 
 ## 🔧 Variables de Entorno
 
-Se puede configurar:
+Se puede configurar el puerto:
 - `PORT` - Puerto por defecto es 3000
-- `NODE_ENV` - "production" en Docker, configurable localmente
 
-Ejemplo:
+Ejemplos:
 ```bash
 # En Windows PowerShell
 $env:PORT = 5000
@@ -121,72 +92,33 @@ Por lo tanto:
 
 ---
 
-## 🐳 Docker: Detalles Técnicos
+## 🌐 Despliegue a GitHub Pages
 
-### Contexto de Build
-- **Contexto:** Raíz del proyecto (`..` desde `/docker`)
-- **Dockerfile:** `./docker/Dockerfile`
-- **Volúmenes Montados:** Carpetas de contenido se actualizan en tiempo real
+El proyecto está configurado para desplegarse automáticamente en GitHub Pages:
 
-### Variables de Entorno en Docker
-```yaml
-NODE_ENV=production
-PORT=3000
-```
+- **Dominio:** `sgspcsi.isseg.com`
+- **Branch:** `main`
+- **Workflow:** `.github/workflows/deploy.yml`
 
-### Working Directory
-```
-/app/server ← Donde se ejecuta npm start
-```
+Ver [GITHUB-PAGES-SETUP.md](GITHUB-PAGES-SETUP.md) para detalles de configuración DNS.
 
 ---
 
-## ✅ Checklist de Migraciones
+## 📋 Resumen de Carpetas
 
-- ✅ Archivos movidos a `/docker`
-- ✅ Archivos movidos a `/server`
-- ✅ Paths actualizados en Dockerfile
-- ✅ Paths actualizados en docker-compose.yml
-- ✅ Paths actualizados en server.js
-- ✅ Git history limpio (commits con rename)
-- ✅ Push a GitHub completado
+| Carpeta | Contenido | Propósito |
+|---------|-----------|----------|
+| `/server` | Servidor Node.js | Servir aplicación localmente |
+| `/conbinacion de proyecto` | HTML principal | Aplicación web principal |
+| `/formularios` | Formularios HTML | Formularios individuales |
+| `/diagramas` | Diagramas Mermaid | Diagramas de flujo y proceso |
+| `/docmentacion` | Documentación técnica | Guías y especificaciones |
+| `/.github/workflows` | GitHub Actions | Despliegue automatizado |
 
 ---
 
 ## 🔗 Próximos Pasos
 
-1. Prueba Docker Compose: `cd docker && docker-compose up -d`
-2. Verifica que funcione: http://localhost:3000
-3. Revisa los logs: `docker-compose logs -f`
-4. Para detener: `docker-compose down`
-
----
-
-## 📞 Solucionar Problemas
-
-### "No such file or directory"
-- Verifica que estés en la carpeta correcta (`cd docker` o `cd server`)
-- Revisa que el Dockerfile exista en `docker/Dockerfile`
-
-### "Port 3000 already in use"
-```bash
-# Cambiar puerto
-docker-compose --file docker/docker-compose.yml -p 5000:3000 up
-```
-
-### "Module not found"
-```bash
-cd server
-npm install
-```
-
----
-
-## 📚 Referencia Rápida
-
-| Comando | Ubicación | Función |
-|---------|-----------|---------|
-| `docker-compose up` | `/docker` | Ejecutar todo con Docker |
-| `npm start` | `/server` | Ejecutar servidor localmente |
-| `npm install` | `/server` | Instalar dependencias |
-| `docker build` | Raíz + `/docker/Dockerfile` | Construir imagen |
+1. Ejecutar localmente: `cd server && npm install && npm start`
+2. Acceder a: http://localhost:3000
+3. Para despliegue en línea: Seguir pasos en [GITHUB-PAGES-SETUP.md](GITHUB-PAGES-SETUP.md)

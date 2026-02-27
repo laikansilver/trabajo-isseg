@@ -95,116 +95,19 @@ GitHub Pages:
 
 ---
 
-## 🐳 Opción Extra: Contenedor Docker (para Node.js/Express)
+## � Ejecución Local
 
-Si también quieres ejecutar un **contenedor local o en servidor**, usa Docker:
+Si necesitas ejecutar la aplicación Node.js localmente:
 
-### Requisitos:
-- Docker instalado: https://www.docker.com/products/docker-desktop
-
-### Pasos:
-
-#### 1. Construir imagen
 ```bash
-cd "C:\Users\eduar\Documents\trabajo isseg"
-docker build -t isseg-sistema .
-```
-
-#### 2. Ejecutar contenedor
-```bash
-docker run -p 3000:3000 isseg-sistema
-```
-
-O con Docker Compose:
-```bash
-docker-compose up -d
+cd server
+npm install
+npm start
 ```
 
 Accede a: `http://localhost:3000`
 
-### Parámetros Docker:
-- `PORT`: 3000
-- `NODE_ENV`: production
-- Volúmenes montados para actualización en tiempo real
-
----
-
-## 📊 Arquitectura de Despliegue
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Tu Dominio ISSEG                      │
-│            sgspcsi.isseg.com (subdominio)               │
-└────────────────┬────────────────────────────────────────┘
-                 │
-     ┌───────────┴───────────┐
-     │                       │
-┌────▼──────┐          ┌─────▼──────┐
-│ GitHub    │          │  Servidor  │
-│  Pages    │          │  Docker    │
-│ (Static)  │          │ (Dinámico) │
-└───────────┘          └────────────┘
-     ✅                      ✅
-   Contenido            Aplicación
-   Estático         Node.js/Express
-```
-
----
-
-## 🔐 Conexión DNS
-
-```
-Tu Proveedor DNS
-     ↓
-Registros:
-  - TXT: _github-pages-challenge... (para verificación)
-  - A o ALIAS: sgspcsi.isseg.com → GitHub Pages
-     ↓
-GitHub Pages
-     ↓
-https://sgspcsi.isseg.com ✅
-```
-
----
-
-## ✅ Checklist de Configuración
-
-- [ ] Crear registro TXT en DNS (verificación)
-- [ ] Esperar 15-30 minutos de propagación
-- [ ] Archivo CNAME creado ✅ (ya listo)
-- [ ] Workflow GitHub Actions configurado ✅ (ya listo)
-- [ ] Push a main branch
-- [ ] Verificar en Settings → Pages
-- [ ] Crear registros A/ALIAS en DNS
-- [ ] Esperar certificado HTTPS (puede tomar 24h)
-- [ ] Acceder a https://sgspcsi.isseg.com 🎉
-
----
-
-## 📞 Soporte y Troubleshooting
-
-### Si GitHub Pages no despliega:
-1. Verifica que el branch `main` existe
-2. Comprueba que `CNAME` está en la raíz
-3. Revisa el log en Actions → deploy
-
-### Si el dominio no resuelve:
-1. Verifica propagación DNS: https://dnschecker.org
-2. Busca el dominio: `nslookup sgspcsi.isseg.com`
-3. Espera más tiempo (hasta 24h)
-
-### Si HTTPS no funciona:
-1. GitHub lo genera automático (5-30 min)
-2. Verifica en Settings → Pages → "Enforce HTTPS"
-
----
-
-## 🔗 Enlaces Útiles
-
-- GitHub Pages Docs: https://docs.github.com/en/pages
-- Configurar dominio personalizado: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site
-- Propagación DNS: https://dnschecker.org
-- Let's Encrypt HTTPS: https://letsencrypt.org
+Para más detalles, ver [ESTRUCTURA-CARPETAS.md](ESTRUCTURA-CARPETAS.md)
 
 ---
 
