@@ -2,8 +2,10 @@
   "name": "trabajo-isseg",
   "version": "1.0.0",
   "description": "**Sistema integral de gestión de solicitudes, modificaciones y problemas** para sistemas informáticos institucionales.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -5,8 +5,8 @@ const os = require('os');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Servir archivos estáticos desde la raíz del proyecto
-app.use(express.static(path.join(__dirname)));
+// Servir archivos estáticos desde la raíz del proyecto (un nivel arriba)
+app.use(express.static(path.join(__dirname, '..')));
 
 // Redirigir la ruta raíz al archivo principal
 app.get('/', (req, res) => {
