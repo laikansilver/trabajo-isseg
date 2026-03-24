@@ -400,6 +400,15 @@
 
 ## Validaciones
 
+| **ID** | **Descripción** | **Acción** |
+| --- | --- | --- |
+| V5001 | Duplicidad de Colaborador | Antes de registrar, el sistema debe verificar que el correo institucional no esté ya asociado a un usuario activo. |
+| V5002 | Asignación de Área Obligatoria | No se puede guardar un colaborador sin haber seleccionado una de las áreas institucionales registradas. |
+| V5003 | Validación de Rol jerárquico | Si se asigna el rol de "Liderazgo Ejecutivo", el sistema debe validar que no existan más de 'N' usuarios con este privilegio según política. |
+| V5004 | Baja de Usuario con Tareas Activas | Si se intenta cambiar el estado de un desarrollador a "Inactivo", el sistema debe validar si tiene tickets o solicitudes en estado "En Proceso". |
+| V5005 | Integridad de Formato de Extensión | El campo de extensión debe validar un formato numérico de 4 a 5 dígitos (estándar ISSEG). |
+| V5006 | Cambio de Rol Crítico | Al cambiar un rol de "Solicitante" a "Desarrollador", se debe obligar a completar el perfil técnico. |
+
 ## Mensajes 
 
 | **ID** | **Descripción** | **Tipo de mensaje** |
@@ -443,3 +452,130 @@
 | M3003 | Se solicitó información adicional al solicitante | Confirmación |
 | M3004 | Error al procesar la solicitud | Error |
 | M3005 | No existen solicitudes pendientes de aprobación | Aviso |
+
+# Tablas generales
+
+## Excepciones (todas las pantallas)
+
+| **Pantalla** | **ID** | **Nombre** | **Acción** |
+| --- | --- | --- | --- |
+| Login | E0001 | Credenciales inválidas | Mostrar mensaje de error y permanecer en la pantalla de login |
+| Login | E0002 | Sesión expirada | Redirigir al usuario nuevamente a la pantalla de inicio de sesión |
+| Mis solicitudes – usuario | E1001 | Sesión expirada | Redirigir al usuario a la pantalla de inicio de sesión |
+| Mis solicitudes – usuario | E1002 | Error al consultar solicitudes | Mostrar mensaje de error y permitir intentar nuevamente |
+| Mis solicitudes – usuario | E1003 | Acceso no autorizado | Mostrar mensaje de acceso restringido |
+| Mis tareas- Dev | E0013 | Error al cargar solicitudes | Mostrar mensaje de error y permitir recargar la página |
+| Mis tareas- Dev | E0014 | Solicitud no encontrada | Mostrar mensaje indicando que la solicitud no está disponible |
+| Documentación dev | E2001 | Sesión expirada | Redirigir al usuario a la pantalla de inicio de sesión |
+| Documentación dev | E2002 | Error al cargar documentos | Mostrar mensaje de error e intentar recargar la información |
+| Documentación dev | E2003 | Acceso no autorizado | Mostrar mensaje indicando acceso restringido |
+| H Cliente | E0003 | Acceso a formulario no autorizado | Mostrar mensaje indicando que el formulario requiere aprobación |
+| H Cliente | E0004 | Error al cargar información | Mostrar mensaje de error y permitir recargar la página |
+| H dev | E0009 | Error al cargar tareas | Mostrar mensaje de error y permitir recargar la página |
+| H dev | E0010 | No hay tareas asignadas | Mostrar mensaje indicando que no existen tareas |
+| H Pm | E0007 | Error al cargar solicitudes | Mostrar mensaje de error y permitir recargar la página |
+| H Pm | E0008 | Acción no permitida | Mostrar mensaje indicando que la acción no está disponible |
+| Perfil de usuario | E0011 | Error al guardar cambios | Mostrar mensaje de error y solicitar reintentar |
+| Perfil de usuario | E0012 | Error al cargar imagen | Mostrar mensaje indicando que la imagen no es válida |
+| Deshboard Pm | E4001 | Error al cargar métricas | Mostrar mensaje de error y permitir recargar la información |
+| Deshboard Pm | E4002 | Sesión expirada | Redirigir al usuario a la pantalla de inicio de sesión |
+| Deshboard Pm | E4003 | Acceso no autorizado | Mostrar mensaje indicando que el usuario no tiene permisos |
+| Equipo pm | E5001 | Error al cargar información del equipo | Mostrar mensaje de error y permitir recargar |
+| Equipo pm | E5002 | Sesión expirada | Redirigir al usuario al inicio de sesión |
+| Equipo pm | E5003 | Acceso no autorizado | Mostrar mensaje indicando falta de permisos |
+| Aprobaciones pm | E3001 | Sesión expirada | Redirigir al usuario al inicio de sesión |
+| Aprobaciones pm | E3002 | Error al actualizar estado de solicitud | Mostrar mensaje de error y mantener estado anterior |
+| Aprobaciones pm | E3003 | Acceso no autorizado | Mostrar mensaje indicando que el usuario no tiene permisos |
+
+## Validaciones (todas las pantallas)
+
+| **Pantalla** | **ID** | **Descripción** | **Acción** |
+| --- | --- | --- | --- |
+| Login | V0001 | Correo institucional vacío | Mostrar mensaje M0001 |
+| Login | V0002 | Contraseña vacía | Mostrar mensaje M0002 |
+| Login | V0003 | Formato de correo inválido | Mostrar mensaje M0003 |
+| Login | V0004 | Credenciales incorrectas | Mostrar mensaje M0004 |
+| Mis solicitudes – usuario | V1001 | Campo de búsqueda vacío | Mostrar todas las solicitudes |
+| Mis solicitudes – usuario | V1002 | Filtro de estado seleccionado | Mostrar solo solicitudes con el estado seleccionado |
+| Mis solicitudes – usuario | V1003 | Filtro de tipo seleccionado | Mostrar solo solicitudes del tipo seleccionado |
+| Mis solicitudes – usuario | V1004 | Texto de búsqueda sin coincidencias | Mostrar mensaje M1002 |
+| Mis tareas- Dev | V0021 | Verificar rol desarrollador | Mostrar esta pantalla solo a usuarios con rol desarrollador |
+| Mis tareas- Dev | V0022 | Verificar existencia de solicitudes | Mostrar tabla o mensaje indicando que no hay registros |
+| Mis tareas- Dev | V0023 | Verificar filtros aplicados | Mostrar resultados correspondientes |
+| Documentación dev | V2001 | Campo de búsqueda vacío | Mostrar todos los documentos |
+| Documentación dev | V2002 | Filtro seleccionado | Mostrar únicamente documentos de la categoría seleccionada |
+| Documentación dev | V2003 | Búsqueda sin resultados | Mostrar mensaje M2002 |
+| H Cliente | V0005 | Validar sesión activa | Redirigir a pantalla de login si la sesión expiró |
+| H Cliente | V0006 | Verificar permisos del usuario | Mostrar opciones de navegación según rol |
+| H Cliente | V0007 | Verificar aprobación del proyecto | Habilitar formulario de requerimientos técnicos solo si fue aprobado |
+| H Cliente | V0008 | Verificar existencia de notificaciones | Mostrar lista de notificaciones o mensaje de ausencia |
+| H dev | V0015 | Verificar rol desarrollador | Mostrar esta pantalla solo a usuarios con rol desarrollador |
+| H dev | V0016 | Verificar existencia de tareas | Mostrar tablero o mensaje de ausencia |
+| H dev | V0017 | Verificar sesión activa | Redirigir a login si la sesión expiró |
+| H Pm | V0012 | Verificar rol Product Manager | Mostrar esta pantalla solo a usuarios con rol PM |
+| H Pm | V0013 | Verificar estado de solicitud | Solo permitir aprobar o rechazar solicitudes pendientes |
+| H Pm | V0014 | Verificar filtros aplicados | Mostrar resultados correspondientes |
+| Perfil de usuario | V0018 | Verificar formato de teléfono | Mostrar mensaje si el formato es incorrecto |
+| Perfil de usuario | V0019 | Verificar formato de imagen | Permitir solo formatos de imagen válidos |
+| Perfil de usuario | V0020 | Verificar sesión activa | Redirigir a login si la sesión expiró |
+| Deshboard Pm | V4001 | Cambio de periodo seleccionado | Actualizar automáticamente los gráficos |
+| Deshboard Pm | V4002 | Activación de comparación | Mostrar comparación entre periodos |
+| Deshboard Pm | V4003 | Sin datos disponibles | Mostrar mensaje informativo |
+| Equipo pm | V5001 | Duplicidad de Colaborador | Antes de registrar, el sistema debe verificar que el correo institucional no esté ya asociado a un usuario activo. |
+| Equipo pm | V5002 | Asignación de Área Obligatoria | No se puede guardar un colaborador sin haber seleccionado una de las áreas institucionales registradas. |
+| Equipo pm | V5003 | Validación de Rol jerárquico | Si se asigna el rol de "Liderazgo Ejecutivo", el sistema debe validar que no existan más de 'N' usuarios con este privilegio según política. |
+| Equipo pm | V5004 | Baja de Usuario con Tareas Activas | Si se intenta cambiar el estado de un desarrollador a "Inactivo", el sistema debe validar si tiene tickets o solicitudes en estado "En Proceso". |
+| Equipo pm | V5005 | Integridad de Formato de Extensión | El campo de extensión debe validar un formato numérico de 4 a 5 dígitos (estándar ISSEG). |
+| Equipo pm | V5006 | Cambio de Rol Crítico | Al cambiar un rol de "Solicitante" a "Desarrollador", se debe obligar a completar el perfil técnico. |
+| Aprobaciones pm | V3001 | Confirmación de rechazo | Mostrar ventana de confirmación antes de rechazar |
+| Aprobaciones pm | V3002 | Filtros aplicados | Mostrar solo solicitudes que coincidan con los filtros |
+| Aprobaciones pm | V3003 | Solicitud sin información suficiente | Mostrar mensaje solicitando información adicional |
+
+## Mensajes (todas las pantallas)
+
+| **Pantalla** | **ID** | **Descripción** | **Tipo de mensaje** |
+| --- | --- | --- | --- |
+| Login | M0001 | Debe ingresar su correo institucional | Advertencia |
+| Login | M0002 | Debe ingresar su contraseña | Advertencia |
+| Login | M0003 | El formato del correo electrónico no es válido | Advertencia |
+| Login | M0004 | Correo o contraseña incorrectos | Error |
+| Login | M0005 | Inicio de sesión exitoso | Confirmación |
+| Mis solicitudes – usuario | M1001 | No existen solicitudes registradas | Aviso |
+| Mis solicitudes – usuario | M1002 | No se encontraron resultados para la búsqueda realizada | Advertencia |
+| Mis solicitudes – usuario | M1003 | Error al cargar las solicitudes | Error |
+| Mis solicitudes – usuario | M1004 | Solicitudes cargadas correctamente | Confirmación |
+| Mis tareas- Dev | M0025 | No hay solicitudes registradas | Aviso |
+| Mis tareas- Dev | M0026 | Error al cargar las solicitudes | Error |
+| Mis tareas- Dev | M0027 | Información actualizada correctamente | Confirmación |
+| Documentación dev | M2001 | No hay documentos registrados en el repositorio | Aviso |
+| Documentación dev | M2002 | No se encontraron documentos que coincidan con la búsqueda | Advertencia |
+| Documentación dev | M2003 | Error al cargar la documentación | Error |
+| Documentación dev | M2004 | Documentos cargados correctamente | Confirmación |
+| H Cliente | M0006 | Bienvenido al portal de solicitudes | Aviso |
+| H Cliente | M0007 | Este formulario requiere aprobación previa | Advertencia |
+| H Cliente | M0008 | Sesión expirada, vuelva a iniciar sesión | Advertencia |
+| H Cliente | M0009 | Error al cargar información del sistema | Error |
+| H Cliente | M0010 | No tienes notificaciones nuevas | Aviso |
+| H dev | M0018 | No hay tareas asignadas actualmente | Aviso |
+| H dev | M0019 | Error al cargar las tareas | Error |
+| H dev | M0020 | Sesión expirada, vuelva a iniciar sesión | Advertencia |
+| H Pm | M0014 | Solicitud aprobada correctamente | Confirmación |
+| H Pm | M0015 | Solicitud rechazada correctamente | Confirmación |
+| H Pm | M0016 | Error al cargar las solicitudes | Error |
+| H Pm | M0017 | No hay solicitudes disponibles | Aviso |
+| Perfil de usuario | M0021 | Información actualizada correctamente | Confirmación |
+| Perfil de usuario | M0022 | No fue posible guardar los cambios | Error |
+| Perfil de usuario | M0023 | Formato de imagen no válido | Advertencia |
+| Perfil de usuario | M0024 | Sesión expirada, vuelva a iniciar sesión | Advertencia |
+| Deshboard Pm | M4001 | No existen datos disponibles para el periodo seleccionado | Aviso |
+| Deshboard Pm | M4002 | Error al cargar la información del dashboard | Error |
+| Deshboard Pm | M4003 | Reporte generado correctamente | Confirmación |
+| Equipo pm | M5001 | No existen miembros registrados en el equipo | Aviso |
+| Equipo pm | M5002 | Desarrollador asignado correctamente | Confirmación |
+| Equipo pm | M5003 | Error al cargar la información del equipo | Error |
+| Equipo pm | M5004 | El desarrollador seleccionado no tiene disponibilidad | Advertencia |
+| Aprobaciones pm | M3001 | Solicitud aprobada correctamente | Confirmación |
+| Aprobaciones pm | M3002 | Solicitud rechazada | Aviso |
+| Aprobaciones pm | M3003 | Se solicitó información adicional al solicitante | Confirmación |
+| Aprobaciones pm | M3004 | Error al procesar la solicitud | Error |
+| Aprobaciones pm | M3005 | No existen solicitudes pendientes de aprobación | Aviso |

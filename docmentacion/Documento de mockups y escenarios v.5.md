@@ -1,40 +1,40 @@
 Contenido
 
-Historial de versiones: 6
+Historial de versiones: 7
 
-A) Pantalla: Login 7
+A) Pantalla: Login 8
 
-1.- Bosquejo de pantalla: 7
+1.- Bosquejo de pantalla: 8
 
-2.- Escenario principal: 7
+2.- Escenario principal: 8
 
-3\. Escenarios alternos 8
+3\. Escenarios alternos 9
 
-Escenario alterno 1: Credenciales incorrectas 8
+Escenario alterno 1: Credenciales incorrectas 9
 
-Escenario alterno 2: Campos vacíos 8
+Escenario alterno 2: Campos vacíos 9
 
-Escenario alterno 3: Olvido de contraseña 8
+Escenario alterno 3: Olvido de contraseña 9
 
-Elementos de la pantalla: 8
+Elementos de la pantalla: 9
 
-Excepciones 9
+Excepciones 10
 
-Validaciones 9
+Validaciones 10
 
-Mensajes: 10
+Mensajes: 11
 
 B) Pantalla: Home de Usuario 11
 
-1.-Bosquejo de Pantalla 11
+1.-Bosquejo de Pantalla**:** 11
 
 2\. Escenarios 12
 
 Escenario 1 – Registrar una nueva solicitud 12
 
-Escenario 2 – Intentar acceder a Requerimientos Técnicos 12
+Escenario 2 – Intentar acceder a Requerimientos Técnicos 13
 
-Escenario 3 – Consultar Mis Solicitudes 12
+Escenario 3 – Consultar Mis Solicitudes 13
 
 Escenario 4 – Gestionar opciones de usuario 13
 
@@ -42,7 +42,7 @@ Escenario 5 – Consulta de notificaciones 13
 
 Elementos de la pantalla: 14
 
-Excepciones: 14
+Excepciones: 15
 
 Validaciones: 15
 
@@ -68,175 +68,225 @@ Excepciones: 19
 
 Validaciones: 19
 
-D) Pantalla: Home del Desarrollador 20
+Mensajes: 19
 
-1\. Bosquejo de pantalla 20
+D) Pantalla: Home del Desarrollador 19
 
-2\. Escenarios 21
+1\. Bosquejo de pantalla 19
 
-Escenario 1 – Visualizar el panel de desarrollo 21
+2.Escenarios 20
+
+Escenario 1 – Visualizar el panel de desarrollo 20
 
 Escenario 2 – Consultar tareas asignadas 21
 
-Escenario 3 – Revisar una tarea específica 22
+Escenario 3 – Revisar una tarea específica 21
 
 Escenario 4 – Consultar actividad reciente 22
 
 Escenario 5 – Consultar métricas personales 22
 
-Escenario 6 – Acceder a herramientas de desarrollo 23
+Escenario 6 – Acceder a herramientas de desarrollo 22
 
 Escenario 7 – Acceder al módulo de tareas 23
 
 Escenario 8 – Gestionar opciones de desarrollador 23
 
-Elementos de la pantalla: 24
+Elementos de la pantalla: 23
 
 Excepciones: 24
 
-Validaciones: 25
+Validaciones: 24
 
 Mensajes: 25
 
-E) Pantalla: Mis Tareas – Desarrollador 26
+E) Pantalla: Mis Tareas – Desarrollador 25
 
-1\. Bosquejo de pantalla 26
+1\. Bosquejo de pantalla 25
 
-2\. Escenarios 26
+ID 25
 
-Escenario 1 – Acceder al módulo Mis Tareas 26
+Tipo 25
 
-Escenario 2 – Consultar solicitudes asignadas 27
+Soluciones 25
 
-Escenario 3 – Filtrar solicitudes 27
+Área 25
+
+Prioridad 25
+
+Estado 25
+
+Fecha 25
+
+Acciones 25
+
+2.Escenarios 25
+
+Escenario 1 – Acceder al módulo Mis Tareas 25
+
+Escenario 2 – Consultar solicitudes asignadas 26
+
+Escenario 3 – Filtrar solicitudes 26
 
 Escenario 4 – Ver detalle de una solicitud 27
 
-Escenario 5 – Editar información de la solicitud 28
+Escenario 5 – Editar información de la solicitud 27
 
-Elementos de pantalla: 28
+Elementos de pantalla: 27
 
-Excepciones: 29
+Excepciones: 28
 
-Validaciones: 29
+Validaciones: 28
 
-Mensajes: 29
+Mensajes: 28
 
-F) Pantalla: Repositorio de Documentación 30
+F) Pantalla: Repositorio de Documentación 29
 
-1\. Bosquejo de pantalla 30
+1\. Bosquejo de pantalla 29
 
-2\. Escenario principal 30
+2.Escenario principal 29
 
-Escenario: Consulta de documentación 30
+Escenario: Consulta de documentación 29
 
-3\. Escenarios alternos 31
+3\. Escenarios alternos 30
 
-Escenario alterno 1: Búsqueda de documentos 31
+Escenario alterno 1: Búsqueda de documentos 30
 
-Escenario alterno 2: Filtrar por tipo de solicitud 31
+Escenario alterno 2: Filtrar por tipo de solicitud 30
 
-Escenario alterno 3: Repositorio vacío 31
+Escenario alterno 3: Repositorio vacío 30
+
+Elementos de la pantalla: 30
+
+Excepciones: 31
+
+Validaciones: 32
+
+Mensajes: 32
 
 G) Pantalla: Home del Product Manager 32
 
 1\. Bosquejo de pantalla 32
 
-2\. Escenarios 32
+2\. Escenarios 33
 
-Escenario 1 – Visualizar estado general de solicitudes 32
+Escenario 1 – Visualizar estado general de solicitudes 33
 
-Escenario 2 – Revisar solicitudes pendientes 33
+Escenario 2 – Revisar solicitudes pendientes 34
 
-Escenario 3 – Aprobar una solicitud 33
+Escenario 3 – Aprobar una solicitud 34
 
-Escenario 4 – Rechazar una solicitud 33
+Escenario 4 – Rechazar una solicitud 34
 
 Escenario 5 – Consultar detalle de una solicitud 34
 
-Escenario 6 – Filtrar solicitudes 34
+Escenario 6 – Filtrar solicitudes 35
 
-Escenario 7 – Consultar métricas del sistema 34
+Escenario 7 – Consultar métricas del sistema 35
 
 Elementos de la pantalla: 35
 
 Excepciones: 36
 
-Validaciones: 36
+Validaciones: 37
 
-Mensajes: 36
+Mensajes: 37
 
 H) Pantalla: Dashboard Ejecutivo 37
 
 1\. Bosquejo de pantalla 37
 
-2\. Escenario principal 37
+2.Escenario principal 38
 
-Escenario: Consulta de métricas del sistema 37
+Escenario: Consulta de métricas del sistema 38
 
-3\. Escenarios alternos 38
+3\. Escenarios alternos 39
 
-Escenario alterno 1: Cambio de periodo de visualización 38
+Escenario alterno 1: Cambio de periodo de visualización 39
 
-Escenario alterno 2: Comparar con periodo anterior 38
+Escenario alterno 2: Comparar con periodo anterior 39
 
-Escenario alterno 3: Descargar reportes 38
+Escenario alterno 3: Descargar reportes 39
 
-I) Pantalla: Gestión de Aprobaciones 39
+Elementos de la pantalla: 39
 
-1\. Bosquejo de pantalla 39
+Excepciones: 41
 
-2\. Escenario principal 40
+Validaciones: 41
 
-Escenario: Aprobación de solicitud 40
+Mensajes: 42
 
-3\. Escenarios alternos 40
+I) Pantalla: Gestión de Aprobaciones 42
 
-Escenario alterno 1: Rechazo de solicitud 40
+1\. Bosquejo de pantalla 42
 
-Escenario alterno 2: Solicitar información adicional 40
+2.Escenario principal 43
 
-Escenario alterno 3: Consultar detalle de solicitud 41
+Escenario: Aprobación de solicitud 43
 
-J) Pantalla: Gestión de Equipo 41
+3\. Escenarios alternos 44
 
-1\. Bosquejo de pantalla 41
+Escenario alterno 1: Rechazo de solicitud 44
 
-2\. Escenario principal 42
+Escenario alterno 2: Solicitar información adicional 44
 
-Escenario: Consulta del equipo de desarrollo 42
+Escenario alterno 3: Consultar detalle de solicitud 44
 
-3\. Escenarios alternos 43
+Elementos de la pantalla: 44
 
-Escenario alterno 1: Asignar solicitud a desarrollador 43
+Excepciones: 46
 
-Escenario alterno 2: Consultar perfil del desarrollador 43
+Validaciones: 46
 
-Escenario alterno 3: Filtrar miembros del equipo 43
+Mensajes: 46
 
-Escenario alterno 4: Consultar calendario de disponibilidad 43
+J) Pantalla: Gestión de Equipo 46
 
-K) Pantalla: Perfil de Usuario 44
+1\. Bosquejo de pantalla 46
 
-1\. Bosquejo de pantalla 44
+2\. Escenario principal 48
 
-2\. Escenarios 44
+Escenario: Consulta del equipo de desarrollo 48
 
-Escenario 1 – Acceder al perfil de usuario (desde cualquier rol) 44
+3\. Escenarios alternos 48
 
-Escenario 2 – Editar información personal 45
+Escenario alterno 1: Asignar solicitud a desarrollador 48
 
-Escenario 3 – Cambiar fotografía de perfil 45
+Escenario alterno 2: Consultar perfil del desarrollador 48
 
-Escenario 4 – Configurar preferencias del sistema 45
+Escenario alterno 3: Filtrar miembros del equipo 48
 
-Elementos de pantalla: 46
+Escenario alterno 4: Consultar calendario de disponibilidad 49
 
-Excepciones: 47
+Elementos de la pantalla: 49
 
-Validaciones: 47
+Excepciones: 51
 
-Mensajes: 47
+Validaciones: 51
+
+Mensajes: 51
+
+K) Pantalla: Perfil de Usuario 52
+
+1\. Bosquejo de pantalla 52
+
+2.Escenarios 52
+
+Escenario 1 – Acceder al perfil de usuario (desde cualquier rol) 52
+
+Escenario 2 – Editar información personal 53
+
+Escenario 3 – Cambiar fotografía de perfil 53
+
+Escenario 4 – Configurar preferencias del sistema 53
+
+Elementos de pantalla: 54
+
+Excepciones: 54
+
+Validaciones: 55
+
+Mensajes: 55
 
 # Historial de versiones:
 
@@ -337,32 +387,6 @@ Actor: Usuario del sistema (Usuario solicitante, Product Manager o Desarrollador
 | E003 | Checkbox “Recordarme” | Permite mantener la sesión iniciada en el dispositivo | Sí | No | Se activa solo si el usuario lo selecciona |
 | E004 | Botón “Acceder al sistema” | Envía las credenciales para su validación | No | Sí | Solo se habilita cuando los campos obligatorios están completos |
 | E005 | Enlace “¿Olvidaste tu contraseña?” | Redirige al proceso de recuperación de contraseña | No | No | Depende del sistema institucional |
-
-Excepciones**:**
-
-| **ID** | **Nombre** | **Acción** |
-| --- | --- | --- |
-| E0001 | Credenciales inválidas | Mostrar mensaje de error y permanecer en la pantalla de login |
-| E0002 | Sesión expirada | Redirigir al usuario nuevamente a la pantalla de inicio de sesión |
-
-Validaciones**:**
-
-| **ID** | **Descripción** | **Acción** |
-| --- | --- | --- |
-| V0001 | Correo institucional vacío | Mostrar mensaje M0001 |
-| V0002 | Contraseña vacía | Mostrar mensaje M0002 |
-| V0003 | Formato de correo inválido | Mostrar mensaje M0003 |
-| V0004 | Credenciales incorrectas | Mostrar mensaje M0004 |
-
-## Mensajes:
-
-| **ID** | **Descripción** | **Tipo de mensaje** |
-| --- | --- | --- |
-| M0001 | Debe ingresar su correo institucional | Advertencia |
-| M0002 | Debe ingresar su contraseña | Advertencia |
-| M0003 | El formato del correo electrónico no es válido | Advertencia |
-| M0004 | Correo o contraseña incorrectos | Error |
-| M0005 | Inicio de sesión exitoso | Confirmación |
 
 # B) Pantalla: Home de Usuario
 
@@ -532,31 +556,6 @@ El usuario puede consultar notificaciones relacionadas con sus solicitudes, como
 | E012 | Opción Mis Solicitudes | Redirige a la lista de solicitudes del usuario | No | No | Muestra historial de solicitudes |
 | E013 | Menú de usuario | Permite acceder a opciones de perfil o cerrar sesión | No | No | Solo disponible para usuarios autenticados |
 
-## Excepciones:
-
-| **ID** | **Nombre** | **Acción** |
-| --- | --- | --- |
-| E0003 | Acceso a formulario no autorizado | Mostrar mensaje indicando que el formulario requiere aprobación |
-| E0004 | Error al cargar información | Mostrar mensaje de error y permitir recargar la página |
-
-## Validaciones:
-
-| **ID** | **Descripción** | **Acción** |
-| --- | --- | --- |
-| V0005 | Validar sesión activa | Redirigir a pantalla de login si la sesión expiró |
-| V0006 | Verificar permisos del usuario | Mostrar opciones de navegación según rol |
-| V0007 | Verificar aprobación del proyecto | Habilitar formulario de requerimientos técnicos solo si fue aprobado |
-| V0008 | Verificar existencia de notificaciones | Mostrar lista de notificaciones o mensaje de ausencia |
-
-## Mensajes:
-
-| **ID** | **Descripción** | **Acción** |
-| --- | --- | --- |
-| V0005 | Validar sesión activa | Redirigir a pantalla de login si la sesión expiró |
-| V0006 | Verificar permisos del usuario | Mostrar opciones de navegación según rol |
-| V0007 | Verificar aprobación del proyecto | Habilitar formulario de requerimientos técnicos solo si fue aprobado |
-| V0008 | Verificar existencia de notificaciones | Mostrar lista de notificaciones o mensaje de ausencia |
-
 # C) Pantalla: Mis Solicitudes
 
 ## 1\. Bosquejo de pantalla
@@ -656,32 +655,6 @@ Mis solicitudes
 | E106 | Tarjeta de solicitud | Muestra información resumida de una solicitud | No | No | Cada solicitud se representa como una tarjeta |
 | E107 | Botón "Ver detalles" | Permite acceder a la pantalla de detalle de la solicitud | No | Sí | Redirige al detalle de la solicitud seleccionada |
 | E108 | Estado de solicitud | Indica el estado actual de la solicitud | No | No | Se muestra con una etiqueta de color según el estado |
-
-## Excepciones:
-
-| **ID** | **Nombre** | **Acción** |
-| --- | --- | --- |
-| E1001 | Sesión expirada | Redirigir al usuario a la pantalla de inicio de sesión |
-| E1002 | Error al consultar solicitudes | Mostrar mensaje de error y permitir intentar nuevamente |
-| E1003 | Acceso no autorizado | Mostrar mensaje de acceso restringido |
-
-## Validaciones:
-
-| **ID** | **Descripción** | **Acción** |
-| --- | --- | --- |
-| V1001 | Campo de búsqueda vacío | Mostrar todas las solicitudes |
-| V1002 | Filtro de estado seleccionado | Mostrar solo solicitudes con el estado seleccionado |
-| V1003 | Filtro de tipo seleccionado | Mostrar solo solicitudes del tipo seleccionado |
-| V1004 | Texto de búsqueda sin coincidencias | Mostrar mensaje M1002 |
-
-## Mensajes:
-
-| **ID** | **Descripción** | **Tipo de mensaje** |
-| --- | --- | --- |
-| M1001 | No existen solicitudes registradas | Aviso |
-| M1002 | No se encontraron resultados para la búsqueda realizada | Advertencia |
-| M1003 | Error al cargar las solicitudes | Error |
-| M1004 | Solicitudes cargadas correctamente | Confirmación |
 
 # D) Pantalla: Home del Desarrollador
 
@@ -919,29 +892,6 @@ El desarrollador puede identificar rápidamente el estado actual de cada tarea.
 | E049 | Botón gestionar tareas | Redirige al módulo completo de tareas | No | No | Disponible para desarrolladores |
 | E050 | Recursos y herramientas | Acceso a herramientas técnicas | No | No | Acceso a recursos del desarrollo |
 
-## Excepciones:
-
-| **ID** | **Nombre** | **Acción** |
-| --- | --- | --- |
-| E0009 | Error al cargar tareas | Mostrar mensaje de error y permitir recargar la página |
-| E0010 | No hay tareas asignadas | Mostrar mensaje indicando que no existen tareas |
-
-## Validaciones:
-
-| **ID** | **Descripción** | **Acción** |
-| --- | --- | --- |
-| V0015 | Verificar rol desarrollador | Mostrar esta pantalla solo a usuarios con rol desarrollador |
-| V0016 | Verificar existencia de tareas | Mostrar tablero o mensaje de ausencia |
-| V0017 | Verificar sesión activa | Redirigir a login si la sesión expiró |
-
-## Mensajes:
-
-| **ID** | **Descripción** | **Acción** |
-| --- | --- | --- |
-| V0015 | Verificar rol desarrollador | Mostrar esta pantalla solo a usuarios con rol desarrollador |
-| V0016 | Verificar existencia de tareas | Mostrar tablero o mensaje de ausencia |
-| V0017 | Verificar sesión activa | Redirigir a login si la sesión expiró |
-
 # E) Pantalla: Mis Tareas – Desarrollador
 
 ## 1\. Bosquejo de pantalla
@@ -1079,29 +1029,6 @@ El desarrollador puede visualizar todas las solicitudes relacionadas con su trab
 | E069 | Botón ver solicitud | Permite visualizar el detalle de la solicitud | No | No | Disponible para todas las solicitudes |
 | E070 | Panel detalle solicitud | Muestra información completa de la solicitud | No | No | Información generada por el sistema |
 
-## Excepciones:
-
-| **ID** | **Nombre** | **Acción** |
-| --- | --- | --- |
-| E0013 | Error al cargar solicitudes | Mostrar mensaje de error y permitir recargar la página |
-| E0014 | Solicitud no encontrada | Mostrar mensaje indicando que la solicitud no está disponible |
-
-## Validaciones:
-
-| **ID** | **Descripción** | **Acción** |
-| --- | --- | --- |
-| V0021 | Verificar rol desarrollador | Mostrar esta pantalla solo a usuarios con rol desarrollador |
-| V0022 | Verificar existencia de solicitudes | Mostrar tabla o mensaje indicando que no hay registros |
-| V0023 | Verificar filtros aplicados | Mostrar resultados correspondientes |
-
-## Mensajes:
-
-| **ID** | **Descripción** | **Tipo** |
-| --- | --- | --- |
-| M0025 | No hay solicitudes registradas | Aviso |
-| M0026 | Error al cargar las solicitudes | Error |
-| M0027 | Información actualizada correctamente | Confirmación |
-
 # F) Pantalla: Repositorio de Documentación
 
 ## 1\. Bosquejo de pantalla
@@ -1198,31 +1125,6 @@ Sistema de Gestión de Solicitudes
 | E206 | Tarjeta Solicitudes | Muestra el número de solicitudes asociadas a documentos | No | No | Se calcula automáticamente |
 | E207 | Tarjeta Tamaño Total | Muestra el tamaño total ocupado por los documentos | No | No | Se calcula automáticamente |
 | E208 | Lista de documentos | Muestra los documentos disponibles en el repositorio | No | No | Cada documento corresponde a una solicitud registrada |
-
-## Excepciones:
-
-| **ID** | **Nombre** | **Acción** |
-| --- | --- | --- |
-| E2001 | Sesión expirada | Redirigir al usuario a la pantalla de inicio de sesión |
-| E2002 | Error al cargar documentos | Mostrar mensaje de error e intentar recargar la información |
-| E2003 | Acceso no autorizado | Mostrar mensaje indicando acceso restringido |
-
-## Validaciones:
-
-| **ID** | **Descripción** | **Acción** |
-| --- | --- | --- |
-| V2001 | Campo de búsqueda vacío | Mostrar todos los documentos |
-| V2002 | Filtro seleccionado | Mostrar únicamente documentos de la categoría seleccionada |
-| V2003 | Búsqueda sin resultados | Mostrar mensaje M2002 |
-
-## Mensajes:
-
-| **ID** | **Descripción** | **Tipo de mensaje** |
-| --- | --- | --- |
-| M2001 | No hay documentos registrados en el repositorio | Aviso |
-| M2002 | No se encontraron documentos que coincidan con la búsqueda | Advertencia |
-| M2003 | Error al cargar la documentación | Error |
-| M2004 | Documentos cargados correctamente | Confirmación |
 
 # G) Pantalla: Home del Product Manager
 
@@ -1386,30 +1288,6 @@ El Product Manager obtiene una vista general del estado de las solicitudes del s
 | E039 | Botón Aprobar | Cambia estado de solicitud a aprobada | No | No | Solo solicitudes pendientes |
 | E040 | Botón Rechazar | Cambia estado de solicitud a rechazada | No | No | Solo solicitudes pendientes |
 
-## Excepciones:
-
-| **ID** | **Nombre** | **Acción** |
-| --- | --- | --- |
-| E0007 | Error al cargar solicitudes | Mostrar mensaje de error y permitir recargar la página |
-| E0008 | Acción no permitida | Mostrar mensaje indicando que la acción no está disponible |
-
-## Validaciones:
-
-| **ID** | **Descripción** | **Acción** |
-| --- | --- | --- |
-| V0012 | Verificar rol Product Manager | Mostrar esta pantalla solo a usuarios con rol PM |
-| V0013 | Verificar estado de solicitud | Solo permitir aprobar o rechazar solicitudes pendientes |
-| V0014 | Verificar filtros aplicados | Mostrar resultados correspondientes |
-
-## Mensajes:
-
-| **ID** | **Descripción** | **Tipo** |
-| --- | --- | --- |
-| M0014 | Solicitud aprobada correctamente | Confirmación |
-| M0015 | Solicitud rechazada correctamente | Confirmación |
-| M0016 | Error al cargar las solicitudes | Error |
-| M0017 | No hay solicitudes disponibles | Aviso |
-
 # H) Pantalla: Dashboard Ejecutivo
 
 ## 1\. Bosquejo de pantalla
@@ -1525,30 +1403,6 @@ Sistema de Gestión de Solicitudes
 | E411 | Sección equipo activo | Muestra desarrolladores y estado de disponibilidad | No | No | Información actualizada del equipo |
 | E412 | Sección actividad reciente | Muestra las últimas acciones registradas en el sistema | No | No | Se actualiza automáticamente |
 | E413 | Botón descargar gráficas | Permite exportar datos del dashboard | No | No | Genera archivo de reporte |
-
-## Excepciones:
-
-| **ID** | **Nombre** | **Acción** |
-| --- | --- | --- |
-| E4001 | Error al cargar métricas | Mostrar mensaje de error y permitir recargar la información |
-| E4002 | Sesión expirada | Redirigir al usuario a la pantalla de inicio de sesión |
-| E4003 | Acceso no autorizado | Mostrar mensaje indicando que el usuario no tiene permisos |
-
-## Validaciones:
-
-| **ID** | **Descripción** | **Acción** |
-| --- | --- | --- |
-| V4001 | Cambio de periodo seleccionado | Actualizar automáticamente los gráficos |
-| V4002 | Activación de comparación | Mostrar comparación entre periodos |
-| V4003 | Sin datos disponibles | Mostrar mensaje informativo |
-
-## Mensajes:
-
-| **ID** | **Descripción** | **Tipo de mensaje** |
-| --- | --- | --- |
-| M4001 | No existen datos disponibles para el periodo seleccionado | Aviso |
-| M4002 | Error al cargar la información del dashboard | Error |
-| M4003 | Reporte generado correctamente | Confirmación |
 
 # I) Pantalla: Gestión de Aprobaciones
 
@@ -1670,32 +1524,6 @@ Gestión de Equipo
 | E308 | Botón "Rechazar" | Permite rechazar la solicitud | No | Sí | Requiere confirmar la acción |
 | E309 | Botón "Solicitar información" | Permite solicitar aclaraciones al solicitante | No | No | Cambia estado a información requerida |
 | E310 | Botón "Ver detalles" | Permite acceder al detalle completo de la solicitud | No | No | Redirige a la pantalla de detalle |
-
-## Excepciones:
-
-| **ID** | **Nombre** | **Acción** |
-| --- | --- | --- |
-| E3001 | Sesión expirada | Redirigir al usuario al inicio de sesión |
-| E3002 | Error al actualizar estado de solicitud | Mostrar mensaje de error y mantener estado anterior |
-| E3003 | Acceso no autorizado | Mostrar mensaje indicando que el usuario no tiene permisos |
-
-## Validaciones:
-
-| **ID** | **Nombre** | **Acción** |
-| --- | --- | --- |
-| E3001 | Sesión expirada | Redirigir al usuario al inicio de sesión |
-| E3002 | Error al actualizar estado de solicitud | Mostrar mensaje de error y mantener estado anterior |
-| E3003 | Acceso no autorizado | Mostrar mensaje indicando que el usuario no tiene permisos |
-
-## Mensajes:
-
-| **ID** | **Descripción** | **Tipo de mensaje** |
-| --- | --- | --- |
-| M3001 | Solicitud aprobada correctamente | Confirmación |
-| M3002 | Solicitud rechazada | Aviso |
-| M3003 | Se solicitó información adicional al solicitante | Confirmación |
-| M3004 | Error al procesar la solicitud | Error |
-| M3005 | No existen solicitudes pendientes de aprobación | Aviso |
 
 # J) Pantalla: Gestión de Equipo
 
@@ -1862,25 +1690,6 @@ Disponibilidad, vacaciones y asignaciones del equipo
 | E514 | Calendario de disponibilidad | Muestra eventos de disponibilidad del equipo | No | No | Incluye asignaciones, vacaciones y incidencias |
 | E515 | Selector de vista del calendario | Permite cambiar entre vista mensual, semanal o lista | Sí | No | Solo afecta visualización |
 
-## Excepciones:
-
-| **ID** | **Nombre** | **Acción** |
-| --- | --- | --- |
-| E5001 | Error al cargar información del equipo | Mostrar mensaje de error y permitir recargar |
-| E5002 | Sesión expirada | Redirigir al usuario al inicio de sesión |
-| E5003 | Acceso no autorizado | Mostrar mensaje indicando falta de permisos |
-
-## Validaciones:
-
-## Mensajes:
-
-| **ID** | **Descripción** | **Tipo de mensaje** |
-| --- | --- | --- |
-| M5001 | No existen miembros registrados en el equipo | Aviso |
-| M5002 | Desarrollador asignado correctamente | Confirmación |
-| M5003 | Error al cargar la información del equipo | Error |
-| M5004 | El desarrollador seleccionado no tiene disponibilidad | Advertencia |
-
 # K) Pantalla: Perfil de Usuario
 
 ## 1\. Bosquejo de pantalla
@@ -1997,26 +1806,107 @@ La información del actor queda actualizada en el sistema.
 | E060 | Preferencia notificaciones push | Activa o desactiva notificaciones del sistema | Sí | No | Configuración del actor |
 | E061 | Preferencia modo oscuro | Cambia apariencia del sistema | Sí | No | Configuración visual |
 
-## Excepciones:
+# Excepciones
 
-| **ID** | **Nombre** | **Acción** |
-| --- | --- | --- |
-| E0011 | Error al guardar cambios | Mostrar mensaje de error y solicitar reintentar |
-| E0012 | Error al cargar imagen | Mostrar mensaje indicando que la imagen no es válida |
+| **Pantalla** | **ID** | **Nombre de Excepción** | **Acción del Sistema** |
+| --- | --- | --- | --- |
+| Login | E0001 | Credenciales inválidas | Mostrar error y permanecer en Login. |
+| Login | E0002 | Sesión expirada | Redirigir al Inicio de sesión. |
+| Home Cliente | E0003 | Acceso no autorizado | Mostrar mensaje de aprobación requerida. |
+| Home Cliente | E0004 | Error al cargar información | Mostrar error y permitir recargar página. |
+| Home PM | E0007 | Error al cargar solicitudes | Mostrar error y permitir recargar. |
+| Home PM | E0008 | Acción no permitida | Mostrar mensaje de acción no disponible. |
+| Home Dev | E0009 | Error al cargar tareas | Mostrar error y permitir recargar. |
+| Home Dev | E0010 | No hay tareas asignadas | Mostrar mensaje de ausencia de tareas. |
+| Perfil Usuario | E0011 | Error al guardar cambios | Mostrar error y solicitar reintento. |
+| Perfil Usuario | E0012 | Error al cargar imagen | Mostrar aviso de imagen no válida. |
+| Mis Tareas (Dev) | E0013 | Error al cargar solicitudes | Mostrar error y permitir recargar. |
+| Mis Tareas (Dev) | E0014 | Solicitud no encontrada | Mostrar aviso de solicitud no disponible. |
+| Mis Solicitudes | E1001 | Sesión expirada | Redirigir al Inicio de sesión. |
+| Mis Solicitudes | E1002 | Error al consultar | Mostrar error y permitir reintento. |
+| Mis Solicitudes | E1003 | Acceso no autorizado | Mostrar mensaje de acceso restringido. |
+| Documentación | E2001 | Sesión expirada | Redirigir al Inicio de sesión. |
+| Documentación | E2002 | Error al cargar documentos | Mostrar error e intentar recarga. |
+| Documentación | E2003 | Acceso no autorizado | Mostrar mensaje de acceso restringido. |
+| Aprobaciones PM | E3001 | Sesión expirada | Redirigir al Inicio de sesión. |
+| Aprobaciones PM | E3002 | Error en actualización | Mostrar error y mantener estado anterior. |
+| Aprobaciones PM | E3003 | Acceso no autorizado | Mostrar aviso de falta de permisos. |
+| Dashboard PM | E4001 | Error al cargar métricas | Mostrar error y permitir recargar. |
+| Dashboard PM | E4002 | Sesión expirada | Redirigir al Inicio de sesión. |
+| Dashboard PM | E4003 | Acceso no autorizado | Mostrar aviso de falta de permisos. |
+| Equipo PM | E5001 | Error carga de equipo | Mostrar error y permitir recargar. |
+| Equipo PM | E5002 | Sesión expirada | Redirigir al Inicio de sesión. |
+| Equipo PM | E5003 | Acceso no autorizado | Mostrar aviso de falta de permisos. |
 
-## Validaciones:
+# Validaciones
 
-| **ID** | **Descripción** | **Acción** |
-| --- | --- | --- |
-| V0018 | Verificar formato de teléfono | Mostrar mensaje si el formato es incorrecto |
-| V0019 | Verificar formato de imagen | Permitir solo formatos de imagen válidos |
-| V0020 | Verificar sesión activa | Redirigir a login si la sesión expiró |
+| **Pantalla** | **ID** | **Descripción de Validación** | **Acción / Regla de Negocio** |
+| --- | --- | --- | --- |
+| Login | V0001 | Correo institucional vacío | Mostrar mensaje M0001. |
+| Login | V0002 | Contraseña vacía | Mostrar mensaje M0002. |
+| Login | V0003 | Formato de correo inválido | Mostrar mensaje M0003. |
+| Login | V0004 | Credenciales incorrectas | Mostrar mensaje M0004. |
+| Home Cliente | V0005 | Validar sesión activa | Redirigir a Login si expiró. |
+| Home Cliente | V0006 | Verificar permisos | Mostrar opciones según rol asignado. |
+| Home Cliente | V0007 | Aprobación de proyecto | Habilitar formulario técnico solo si fue aprobado. |
+| Home Cliente | V0008 | Existencia notificaciones | Mostrar lista o mensaje de ausencia. |
+| Home PM | V0012 | Verificar rol PM | Mostrar pantalla solo a usuarios con rol PM. |
+| Home PM | V0013 | Verificar estado solicitud | Permitir acción solo en solicitudes "Pendientes". |
+| Home PM | V0014 | Filtros aplicados | Mostrar resultados según criterios. |
+| Home Dev | V0015 | Verificar rol Dev | Mostrar pantalla solo a usuarios con rol Dev. |
+| Home Dev | V0016 | Existencia de tareas | Mostrar tablero o mensaje de ausencia. |
+| Home Dev | V0017 | Validar sesión activa | Redirigir a Login si expiró. |
+| Perfil Usuario | V0018 | Formato de teléfono | Validar entrada numérica correcta. |
+| Perfil Usuario | V0019 | Formato de imagen | Permitir solo formatos de imagen válidos. |
+| Perfil Usuario | V0020 | Validar sesión activa | Redirigir a Login si expiró. |
+| Mis Tareas (Dev) | V0021 | Verificar rol Dev | Restringir acceso solo a desarrolladores. |
+| Mis Tareas (Dev) | V0022 | Existencia solicitudes | Mostrar tabla o mensaje de vacío. |
+| Mis Tareas (Dev) | V0023 | Filtros aplicados | Mostrar resultados correspondientes. |
+| Mis Solicitudes | V1001 | Búsqueda vacía | Mostrar todas las solicitudes del usuario. |
+| Mis Solicitudes | V1002 | Filtro de estado | Mostrar solicitudes con estado seleccionado. |
+| Mis Solicitudes | V1003 | Filtro de tipo | Mostrar solicitudes por categoría. |
+| Mis Solicitudes | V1004 | Sin coincidencias | Mostrar mensaje M1002. |
+| Documentación | V2001 | Búsqueda vacía | Mostrar todos los documentos disponibles. |
+| Documentación | V2002 | Filtro seleccionado | Mostrar documentos de la categoría elegida. |
+| Documentación | V2003 | Sin resultados | Mostrar mensaje M2002. |
+| Aprobaciones PM | V3001 | Confirmación rechazo | Solicitar confirmación antes de rechazar. |
+| Aprobaciones PM | V3002 | Filtros aplicados | Filtrar por tipo, prioridad o área. |
+| Aprobaciones PM | V3003 | Información insuficiente | Cambiar estado a "Información requerida". |
+| Dashboard PM | V4001 | Cambio de periodo | Actualizar gráficos automáticamente. |
+| Dashboard PM | V4002 | Activar comparación | Mostrar comparativa con periodo anterior. |
+| Dashboard PM | V4003 | Sin datos disponibles | Mostrar mensaje informativo M4001. |
+| Equipo PM | V5001 | Duplicidad Colaborador | Validar correo único antes de registrar. |
+| Equipo PM | V5002 | Área Obligatoria | No guardar sin asignar área institucional. |
+| Equipo PM | V5003 | Rol Jerárquico | Validar límites de usuarios con privilegios altos. |
+| Equipo PM | V5004 | Baja con Tareas | Validar que no tenga tickets en proceso antes de inactivar. |
+| Equipo PM | V5005 | Formato Extensión | Validar entrada de 4 a 5 dígitos. |
+| Equipo PM | V5006 | Cambio Rol Crítico | Obligar a completar perfil técnico al ser Dev. |
 
-## Mensajes:
+# Mensajes
 
-| **ID** | **Descripción** | **Tipo** |
-| --- | --- | --- |
-| M0021 | Información actualizada correctamente | Confirmación |
-| M0022 | No fue posible guardar los cambios | Error |
-| M0023 | Formato de imagen no válido | Advertencia |
-| M0024 | Sesión expirada, vuelva a iniciar sesión | Advertencia |
+| **Pantalla** | **ID** | **Mensaje al Usuario** | **Tipo** |
+| --- | --- | --- | --- |
+| Login | M0001 | Debe ingresar su correo institucional | Advertencia. |
+| Login | M0002 | Debe ingresar su contraseña | Advertencia. |
+| Login | M0003 | El formato del correo electrónico no es válido | Advertencia. |
+| Login | M0004 | Correo o contraseña incorrectos | Error. |
+| Login | M0005 | Inicio de sesión exitoso | Confirmación. |
+| Home Cliente | M0006 | Bienvenido al portal de solicitudes | Aviso. |
+| Home Cliente | M0007 | Este formulario requiere aprobación previa | Advertencia. |
+| Home Cliente | M0008 | Sesión expirada, vuelva a iniciar sesión | Advertencia. |
+| Home PM | M0014 | Solicitud aprobada correctamente | Confirmación. |
+| Home PM | M0015 | Solicitud rechazada correctamente | Confirmación. |
+| Home Dev | M0018 | No hay tareas asignadas actualmente | Aviso. |
+| Perfil Usuario | M0021 | Información actualizada correctamente | Confirmación. |
+| Perfil Usuario | M0022 | No fue posible guardar los cambios | Error. |
+| Mis Tareas (Dev) | M0025 | No hay solicitudes registradas | Aviso. |
+| Mis Solicitudes | M1001 | No existen solicitudes registradas | Aviso. |
+| Mis Solicitudes | M1002 | No se encontraron resultados para la búsqueda | Advertencia. |
+| Documentación | M2001 | No hay documentos en el repositorio | Aviso. |
+| Aprobaciones PM | M3001 | Solicitud aprobada correctamente | Confirmación. |
+| Aprobaciones PM | M3002 | Solicitud rechazada | Aviso. |
+| Aprobaciones PM | M3003 | Se solicitó información adicional al solicitante | Confirmación. |
+| Dashboard PM | M4001 | No existen datos para el periodo seleccionado | Aviso. |
+| Equipo PM | M5001 | No existen miembros registrados en el equipo | Aviso. |
+| Equipo PM | M5002 | Desarrollador asignado correctamente | Confirmación. |
+| Equipo PM | M5004 | El desarrollador no tiene disponibilidad | Advertencia. |
