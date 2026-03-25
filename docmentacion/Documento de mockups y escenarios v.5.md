@@ -1,292 +1,232 @@
 Contenido
 
-Historial de versiones: 7
+Historial de versiones: 6
 
-A) Pantalla: Login 8
+A) Pantalla: Login 7
 
-1.- Bosquejo de pantalla: 8
+1.- Bosquejo de pantalla: 7
 
-2.- Escenario principal: 8
+2.- Escenario principal: 7
 
-3\. Escenarios alternos 9
+3\. Escenarios alternos 8
 
-Escenario alterno 1: Credenciales incorrectas 9
+Escenario alterno 1: Credenciales incorrectas 8
 
-Escenario alterno 2: Campos vacíos 9
+Escenario alterno 2: Campos vacíos 8
 
-Escenario alterno 3: Olvido de contraseña 9
+Escenario alterno 3: Olvido de contraseña 8
 
-Elementos de la pantalla: 9
+Elementos de la pantalla: 8
 
-Excepciones 10
+B) Pantalla: Home de Usuario 9
 
-Validaciones 10
+1.-Bosquejo de Pantalla**:** 9
 
-Mensajes: 11
+2\. Escenarios 10
 
-B) Pantalla: Home de Usuario 11
+Escenario 1 – Registrar una nueva solicitud 10
 
-1.-Bosquejo de Pantalla**:** 11
+Escenario 2 – Intentar acceder a Requerimientos Técnicos 11
 
-2\. Escenarios 12
+Escenario 3 – Consultar Mis Solicitudes 11
 
-Escenario 1 – Registrar una nueva solicitud 12
+Escenario 4 – Gestionar opciones de usuario 11
 
-Escenario 2 – Intentar acceder a Requerimientos Técnicos 13
+Escenario 5 – Consulta de notificaciones 11
 
-Escenario 3 – Consultar Mis Solicitudes 13
+Elementos de la pantalla: 12
 
-Escenario 4 – Gestionar opciones de usuario 13
+C) Pantalla: Mis Solicitudes 13
 
-Escenario 5 – Consulta de notificaciones 13
+1\. Bosquejo de pantalla 13
 
-Elementos de la pantalla: 14
+2\. Escenario principal 15
 
-Excepciones: 15
+3\. Escenarios alternos 15
 
-Validaciones: 15
+Escenario alterno 1: Filtrar solicitudes 15
 
-Mensajes: 15
+Escenario alterno 2: Buscar solicitud 15
 
-C) Pantalla: Mis Solicitudes 16
+Escenario alterno 3: No existen solicitudes 15
 
-1\. Bosquejo de pantalla 16
+Elementos de la pantalla: 16
 
-2\. Escenario principal 17
+D) Pantalla: Home del Desarrollador 17
 
-3\. Escenarios alternos 17
+1\. Bosquejo de pantalla 17
 
-Escenario alterno 1: Filtrar solicitudes 17
+2.Escenarios 18
 
-Escenario alterno 2: Buscar solicitud 17
+Escenario 1 – Visualizar el panel de desarrollo 18
 
-Escenario alterno 3: No existen solicitudes 17
+Escenario 2 – Consultar tareas asignadas 18
 
-Elementos de la pantalla: 18
+Escenario 3 – Revisar una tarea específica 19
 
-Excepciones: 19
+Escenario 4 – Consultar actividad reciente 19
 
-Validaciones: 19
+Escenario 5 – Consultar métricas personales 19
 
-Mensajes: 19
+Escenario 6 – Acceder a herramientas de desarrollo 20
 
-D) Pantalla: Home del Desarrollador 19
+Escenario 7 – Acceder al módulo de tareas 20
 
-1\. Bosquejo de pantalla 19
+Escenario 8 – Gestionar opciones de desarrollador 20
 
-2.Escenarios 20
+Elementos de la pantalla: 21
 
-Escenario 1 – Visualizar el panel de desarrollo 20
+E) Pantalla: Mis Tareas – Desarrollador 21
 
-Escenario 2 – Consultar tareas asignadas 21
+1\. Bosquejo de pantalla 21
 
-Escenario 3 – Revisar una tarea específica 21
+ID 22
 
-Escenario 4 – Consultar actividad reciente 22
+Tipo 22
 
-Escenario 5 – Consultar métricas personales 22
+Soluciones 22
 
-Escenario 6 – Acceder a herramientas de desarrollo 22
+Área 22
 
-Escenario 7 – Acceder al módulo de tareas 23
+Prioridad 22
 
-Escenario 8 – Gestionar opciones de desarrollador 23
+Estado 22
 
-Elementos de la pantalla: 23
+Fecha 22
 
-Excepciones: 24
+Acciones 22
 
-Validaciones: 24
+2.Escenarios 22
 
-Mensajes: 25
+Escenario 1 – Acceder al módulo Mis Tareas 22
 
-E) Pantalla: Mis Tareas – Desarrollador 25
+Escenario 2 – Consultar solicitudes asignadas 22
+
+Escenario 3 – Filtrar solicitudes 23
+
+Escenario 4 – Ver detalle de una solicitud 23
+
+Escenario 5 – Editar información de la solicitud 23
+
+Elementos de pantalla: 24
+
+F) Pantalla: Repositorio de Documentación 25
 
 1\. Bosquejo de pantalla 25
 
-ID 25
+2.Escenario principal 25
 
-Tipo 25
+Escenario: Consulta de documentación 25
 
-Soluciones 25
+3\. Escenarios alternos 26
 
-Área 25
+Escenario alterno 1: Búsqueda de documentos 26
 
-Prioridad 25
+Escenario alterno 2: Filtrar por tipo de solicitud 26
 
-Estado 25
+Escenario alterno 3: Repositorio vacío 26
 
-Fecha 25
+Elementos de la pantalla: 26
 
-Acciones 25
+G) Pantalla: Home del Product Manager 27
 
-2.Escenarios 25
+1\. Bosquejo de pantalla 27
 
-Escenario 1 – Acceder al módulo Mis Tareas 25
+2\. Escenarios 28
 
-Escenario 2 – Consultar solicitudes asignadas 26
+Escenario 1 – Visualizar estado general de solicitudes 28
 
-Escenario 3 – Filtrar solicitudes 26
+Escenario 2 – Revisar solicitudes pendientes 29
 
-Escenario 4 – Ver detalle de una solicitud 27
+Escenario 3 – Aprobar una solicitud 29
 
-Escenario 5 – Editar información de la solicitud 27
+Escenario 4 – Rechazar una solicitud 29
 
-Elementos de pantalla: 27
+Escenario 5 – Consultar detalle de una solicitud 29
 
-Excepciones: 28
+Escenario 6 – Filtrar solicitudes 30
 
-Validaciones: 28
-
-Mensajes: 28
-
-F) Pantalla: Repositorio de Documentación 29
-
-1\. Bosquejo de pantalla 29
-
-2.Escenario principal 29
-
-Escenario: Consulta de documentación 29
-
-3\. Escenarios alternos 30
-
-Escenario alterno 1: Búsqueda de documentos 30
-
-Escenario alterno 2: Filtrar por tipo de solicitud 30
-
-Escenario alterno 3: Repositorio vacío 30
+Escenario 7 – Consultar métricas del sistema 30
 
 Elementos de la pantalla: 30
 
-Excepciones: 31
-
-Validaciones: 32
-
-Mensajes: 32
-
-G) Pantalla: Home del Product Manager 32
+H) Pantalla: Dashboard Ejecutivo 32
 
 1\. Bosquejo de pantalla 32
 
-2\. Escenarios 33
+2.Escenario principal 32
 
-Escenario 1 – Visualizar estado general de solicitudes 33
+Escenario: Consulta de métricas del sistema 32
 
-Escenario 2 – Revisar solicitudes pendientes 34
+3\. Escenarios alternos 33
 
-Escenario 3 – Aprobar una solicitud 34
+Escenario alterno 1: Cambio de periodo de visualización 33
 
-Escenario 4 – Rechazar una solicitud 34
+Escenario alterno 2: Comparar con periodo anterior 33
 
-Escenario 5 – Consultar detalle de una solicitud 34
+Escenario alterno 3: Descargar reportes 33
 
-Escenario 6 – Filtrar solicitudes 35
+Elementos de la pantalla: 33
 
-Escenario 7 – Consultar métricas del sistema 35
+I) Pantalla: Gestión de Aprobaciones 35
 
-Elementos de la pantalla: 35
+1\. Bosquejo de pantalla 35
 
-Excepciones: 36
+2.Escenario principal 36
 
-Validaciones: 37
+Escenario: Aprobación de solicitud 36
 
-Mensajes: 37
+3\. Escenarios alternos 37
 
-H) Pantalla: Dashboard Ejecutivo 37
+Escenario alterno 1: Rechazo de solicitud 37
 
-1\. Bosquejo de pantalla 37
+Escenario alterno 2: Solicitar información adicional 37
 
-2.Escenario principal 38
+Escenario alterno 3: Consultar detalle de solicitud 37
 
-Escenario: Consulta de métricas del sistema 38
+Elementos de la pantalla: 37
 
-3\. Escenarios alternos 39
+J) Pantalla: Gestión de Equipo 39
 
-Escenario alterno 1: Cambio de periodo de visualización 39
+1\. Bosquejo de pantalla 39
 
-Escenario alterno 2: Comparar con periodo anterior 39
+2\. Escenario principal 40
 
-Escenario alterno 3: Descargar reportes 39
+Escenario: Consulta del equipo de desarrollo 40
 
-Elementos de la pantalla: 39
+3\. Escenarios alternos 40
 
-Excepciones: 41
+Escenario alterno 1: Asignar solicitud a desarrollador 40
 
-Validaciones: 41
+Escenario alterno 2: Consultar perfil del desarrollador 41
 
-Mensajes: 42
+Escenario alterno 3: Filtrar miembros del equipo 41
 
-I) Pantalla: Gestión de Aprobaciones 42
+Escenario alterno 4: Consultar calendario de disponibilidad 41
 
-1\. Bosquejo de pantalla 42
+Elementos de la pantalla: 41
 
-2.Escenario principal 43
+K) Pantalla: Perfil de Usuario 43
 
-Escenario: Aprobación de solicitud 43
+1\. Bosquejo de pantalla 43
 
-3\. Escenarios alternos 44
+2.Escenarios 44
 
-Escenario alterno 1: Rechazo de solicitud 44
+Escenario 1 – Acceder al perfil de usuario (desde cualquier rol) 44
 
-Escenario alterno 2: Solicitar información adicional 44
+Escenario 2 – Editar información personal 44
 
-Escenario alterno 3: Consultar detalle de solicitud 44
+Escenario 3 – Cambiar fotografía de perfil 45
 
-Elementos de la pantalla: 44
+Escenario 4 – Configurar preferencias del sistema 45
 
-Excepciones: 46
+Elementos de pantalla: 46
 
-Validaciones: 46
+Excepciones 46
 
-Mensajes: 46
+Validaciones 47
 
-J) Pantalla: Gestión de Equipo 46
-
-1\. Bosquejo de pantalla 46
-
-2\. Escenario principal 48
-
-Escenario: Consulta del equipo de desarrollo 48
-
-3\. Escenarios alternos 48
-
-Escenario alterno 1: Asignar solicitud a desarrollador 48
-
-Escenario alterno 2: Consultar perfil del desarrollador 48
-
-Escenario alterno 3: Filtrar miembros del equipo 48
-
-Escenario alterno 4: Consultar calendario de disponibilidad 49
-
-Elementos de la pantalla: 49
-
-Excepciones: 51
-
-Validaciones: 51
-
-Mensajes: 51
-
-K) Pantalla: Perfil de Usuario 52
-
-1\. Bosquejo de pantalla 52
-
-2.Escenarios 52
-
-Escenario 1 – Acceder al perfil de usuario (desde cualquier rol) 52
-
-Escenario 2 – Editar información personal 53
-
-Escenario 3 – Cambiar fotografía de perfil 53
-
-Escenario 4 – Configurar preferencias del sistema 53
-
-Elementos de pantalla: 54
-
-Excepciones: 54
-
-Validaciones: 55
-
-Mensajes: 55
+Mensajes 49
 
 # Historial de versiones:
 
