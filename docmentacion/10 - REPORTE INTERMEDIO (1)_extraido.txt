@@ -1,0 +1,146 @@
+﻿INSTITUTO TECNOLÓGICO DE MORELIAINSTITUTO TECNOLÓGICO DE MORELIA
+INGENIERÍA EN SISTEMAS COMPUTACIONALESRESIDENCIAS PROFESIONALESINGENIERÍA EN SISTEMAS COMPUTACIONALESRESIDENCIAS PROFESIONALES
+Reporte IntermedioSemestre Enero-Junio 2026Reporte IntermedioSemestre Enero-Junio 2026
+PRESENTA:Jacqueline Hurtado Hernández Edwin Eduardo Mercado RuizNÚMERO DE CONTROL:14160249PRESENTA:Jacqueline Hurtado Hernández Edwin Eduardo Mercado RuizNÚMERO DE CONTROL:14160249
+ASESOR INTERNO:I.SC.Alma Lilia NuñezGonzalezASESOR EXTERNO:MTRA. Karla Teresa Arroyo Calero ASESOR INTERNO:I.SC.Alma Lilia NuñezGonzalezASESOR EXTERNO:MTRA. Karla Teresa Arroyo Calero 
+MORELIA, MICHOACÁN  26DE MARZO DE 2026
+Índice
+Justificación del proyecto
+Datos de la empresa
+Nombre de la empresa
+Misión y Visión
+Caracterización del área en que participó.
+Problemas resueltos.
+Alcances y limitaciones de las soluciones.
+Fundamento teórico.
+Procedimientos y descripción de las actividadesrealizadas.
+Resultados (planos, gráficas, prototipos,programas, etc.).
+Conclusiones y recomendaciones
+Referencias bibliográficas
+Cuadro de firmas
+Hoja de seguimiento 
+Justificación del proyecto
+La implementación delSistema de Gestión de Solicitudes de Proyectos de la Coordinación de Sistemas Institucionales (SGSPCSI)representa una evolución necesaria en la infraestructura digital del ISSEG. Actualmente, la gestión de requerimientos de software, que abarca desde el desarrollo de nuevos sistemas hasta la corrección de errores críticos, se realiza mediante procesos manuales y canales informales como el correo electrónico y documentos físicos. Esta situación justifica plenamente el desarrollo del proyecto, ya que permite transitar hacia una plataforma centralizada que garantiza la trazabilidad absoluta de cada folio generado y la persistencia de datos técnicos en un entorno controlado bajo arquitectura C# .NET y SQL Server.
+Las implicaciones de este sistema trascienden la digitalización de formatos, pues impactan directamente en la capacidad analítica de la Dirección de Tecnologías de Información (DTI). Al establecer un mecanismo formal de evaluación de viabilidad y registro de esfuerzo, el instituto adquiere la capacidad de generar métricas de rendimiento y detectar cuellos de botella operativos en tiempo real. Asimismo, la adopción de esta herramienta refuerza los protocolos de seguridad interna mediante la autenticación por usuario de dominio, asegurando que la gestión de la propiedad intelectual y los activos de software permanezcan protegidos dentro de la red institucional.
+La ejecución de este proyecto genera beneficios integrales para los diversos actores de la organización:
+La Coordinación de Sistemas Institucionales (CSI) obtendrá una herramienta de supervisión estratégica que permite una asignación más eficiente del personal.
+El personal desarrollador contará con un mecanismo estandarizado para documentar sus actividades y justificar objetivamente el tiempo invertido en cada requerimiento.
+Las áreas solicitantes del instituto experimentarán una reducción en la incertidumbre sobre el estatus de sus trámites, gracias a un canal oficial de seguimiento y consulta de avances.
+Se asegurará la conservación histórica de todas las modificaciones y mantenimientos realizados a los sistemas institucionales, facilitando auditorías y futuras mejoras.
+Datos de la empresa
+a.- Nombre de la empresa: Instituto de Seguridad Social de Estado de Guanajuato (ISSEG)
+b.- Misión y Visión
+Misión
+Garantizar el pago de las jubilaciones, pensiones y seguros, así como el otorgamiento de prestaciones, actuando con transparencia y estricto apego a la Ley de Seguridad Social del Estado de Guanajuato, con el fin de coadyuvar al bienestar de todos nuestros asegurados y sus familias.
+Visión
+Ser una Institución humanista, reconocida a nivel nacional como líder en materia de seguridad social, que cuente con un Fondo de Pensiones perenne, a través de la ejecución de un modelo de administración eficiente que contribuya, de esta forma, al bienestar familiar de nuestros asegurados.
+Caracterización del área en que participó.
+El proyecto de residencias profesionales se desarrolla dentro de la Coordinación de Sistemas Institucionales (CSI), la cual forma parte integral de la Dirección de Tecnologías de Información (DTI) del Instituto de Seguridad Social del Estado de Guanajuato. Esta área técnica es la responsable de gestionar el ciclo de vida completo de las soluciones tecnológicas que soportan la operación administrativa y de servicios del instituto.
+Dentro de la CSI, las actividades se centran en el análisis, diseño, desarrollo, implementación y mantenimiento de software institucional. El entorno de trabajo se caracteriza por la atención a múltiples solicitudes provenientes de diversas áreas del ISSEG, las cuales requieren desde el desarrollo de nuevos sistemas hasta la corrección de errores en plataformas existentes. El equipo opera bajo un esquema de colaboración técnica utilizando tecnologías modernas como Angular, C# .NET y SQL Server, asegurando que cada producto de software cumpla con los estándares de calidad y seguridad definidos por la dirección.
+Problemas resueltos.
+La Coordinación de Sistemas Institucionales (CSI) enfrentaba una serie de deficiencias operativas derivadas de la gestión manual de sus servicios. Con el desarrollo e implementación del SGSPCSI, se han resuelto los siguientes problemas identificados en el área:
+Pérdida de trazabilidad de las solicitudes: Se eliminará la dependencia de correos electrónicos y comunicación verbal que causaban el extravío de información sobre los requerimientos de los usuarios.
+Falta de un canal de recepción estandarizado: Se implementará una plataforma web centralizada que sustituye los documentos físicos por formularios digitales estructurados para el registro de solicitudes.
+Dificultad en la medición del esfuerzo técnico: Se resolverá la carencia de datos sobre el tiempo invertido por el equipo de desarrollo mediante la integración de un módulo de registro de actividades y bitácoras.
+Retrasos en la asignación de tareas: Se optimizará el flujo de trabajo del Product Manager, permitiendo una evaluación de viabilidad y asignación de desarrolladores de manera ágil y digital.
+Incertidumbre del usuario solicitante: Se solucionará la falta de información sobre el avance de los proyectos mediante la generación de folios únicos y un sistema de consulta de estatus en tiempo real.
+Gestión de incidencias críticas: Se establecerá un mecanismo diferenciado para el registro y atención de fallas urgentes, garantizando que los errores críticos reciban prioridad sobre los desarrollos de nuevos sistemas.
+Alcances y limitaciones de las soluciones.
+Alcances
+El desarrollo del sistema busca impactar positivamente en la operatividad de la Coordinación de Sistemas Institucionales mediante el cumplimiento de los siguientes objetivos y beneficios proyectados:
+Se pretende centralizar la información estableciendo un repositorio único en SQL Server para el registro de solicitudes, eliminando la dispersión de datos en canales informales.
+Se proyecta la implementación de un seguimiento detallado desde la recepción del requerimiento hasta el cierre del folio, permitiendo la consulta de estatus para identificar la trazabilidad del ciclo de vida de cada solicitud.
+Se planea habilitar el registro de esfuerzo técnico y actividades por parte de los desarrolladores para generar métricas precisas sobre la carga de trabajo y tener una medición de productividad.
+Se busca optimizar la toma de decisiones compartiendo al Product Manager herramientas digitales para evaluar la viabilidad técnica y priorizar la atención de incidencias críticas.
+Se tiene como alcance la integración de la autenticación mediante usuario de dominio para restringir el acceso exclusivamente al personal autorizado dentro de la red del ISSEG y mantener la seguridad Institucional.
+Limitaciones
+Se han identificado factores técnicos y operativos que delimitan el campo de acción de la solución tecnológica durante su desarrollo:
+El sistema estará diseñado para operar exclusivamente dentro de la infraestructura del ISSEG, por lo que su acceso externo no estará permitido. 
+Debido a la naturaleza de uso interno del desarrollo, la comunicación se realizará mediante el protocolo HTTP sin la implementación de certificados SSL/TLS (HTTPS).
+La solución se limitará estrictamente a la gestión de solicitudes de software, dejando fuera del alcance la gestión de hardware o soporte técnico de campo.
+El éxito del sistema estará sujeto a que los usuarios institucionales migren sus hábitos de comunicación actual hacia el uso del sistema una vez liberado.
+Fundamento teórico.
+El desarrollo del Sistema de Gestión de Solicitudes de Proyectos de la Coordinación de Sistemas Institucionales (SGSPCSI) se fundamenta en un marco normativo y técnico diseñado para garantizar la robustez, seguridad y escalabilidad de las soluciones tecnológicas dentro del ISSEG. A continuación, se describen los pilares que sustentan el proyecto:
+Estándares Institucionales de Desarrollo
+El proyecto se alinea estrictamente con los lineamientos definidos por la Coordinación de Sistemas Institucionales (CSI), los cuales dictan el uso de arquitecturas de software estandarizadas para facilitar el mantenimiento y la interoperabilidad. Esto incluye la adopción de una arquitectura cliente-servidor distribuida, donde la lógica de negocio se centraliza en una API para asegurar un control estricto sobre las reglas de operación y la integridad de los datos.
+Arquitectura de Software y Tecnologías Base
+Se fundamenta la solución en una arquitectura de tres capas, utilizando tecnologías que responden a las necesidades de alta disponibilidad del instituto:
+Capa de Presentación (Angular): Se utiliza este framework para la construcción de una interfaz de usuario dinámica y responsiva, permitiendo una interacción fluida y eficiente mediante el manejo de componentes modulares.
+Capa de Lógica de Negocio (C# .NET): Se implementa una API en .NET que actúa como el núcleo del sistema, gestionando las peticiones, la autenticación y las validaciones de seguridad bajo un entorno de ejecución de alto rendimiento.
+Capa de Persistencia (SQL Server): Se emplea este sistema de gestión de bases de datos relacionales para asegurar el almacenamiento estructurado, la consistencia de la información y la capacidad de realizar consultas históricas complejas.
+Protocolos de Seguridad y Comunicación
+El fundamento de seguridad se basa en el aprovechamiento de la infraestructura existente de la DTI. Se utiliza el mecanismo de autenticación por usuario de dominio para garantizar que el acceso esté vinculado a la identidad institucional del personal. En cuanto a la comunicación, se fundamenta el uso del protocolo HTTP para la transferencia de datos dentro de la red privada del instituto, cumpliendo con las políticas de despliegue para sistemas de uso interno que no requieren exposición hacia redes externas.
+Procedimientos y descripción de las actividades realizadas.
+A continuación, se describen de manera secuencial las acciones ejecutadas durante el primer periodo de residencias profesionales, detallando la metodología y herramientas empleadas para el avance del proyecto:
+Fase de Diagnóstico e Investigación (19 al 30 de enero de 2026)
+Configuración Tecnológica y Capacitación (26 - 30 de enero): Se realizó la investigación, documentación e instalación de los entornos de desarrollo para C# .NET, Angular y SQL Server. Se ejecutaron prácticas de programación bajo el patrón de repositorio y actividades de prueba propuestas por la Jefatura de Desarrollo para estandarizar los criterios de codificación.
+Fase de Diseño y Estructuración (02 al 20 de febrero de 2026)
+Propuestas de Flujo e Información (02 - 13 de febrero): Se elaboró el diagrama de flujo lógico del sistema y se definieron los campos de información necesarios para los formularios de solicitud. Se presentó el bosquejo inicial del proyecto para su validación técnica por parte de la Jefatura del área.
+Unificación y Corrección de Propuestas (16 - 20 de febrero): Se realizaron ajustes al bosquejo inicial y se unificaron las propuestas funcionales del proyecto para asegurar la coherencia entre el front-end y la lógica de negocio del back-end.
+Fase de Normatividad y Documentación Técnica (23 de febrero al 26 de marzo de 2026)
+Integración de Modelo CMMI (23 - 26 de febrero): Se realizó la investigación y elaboración de un producto entregable sobre el modelo CMMI, con el fin de implementar mejores prácticas de calidad y madurez en el desarrollo sin alterar la dinámica operativa institucional.
+Elaboración de la ERS y Prototipado (26 de febrero - 18 de marzo): Se trabajó en la redacción de la Especificación de Requisitos de Software (ERS), definiendo escenarios, elementos de pantalla y bosquejos de interfaz de usuario.
+Apoyo en Actividades Institucionales (19 - 20 de marzo): Se brindó soporte en tareas extraordinarias relacionadas con la gestión de CURP para los sistemas del instituto.
+Refinamiento de Documentación (20 - 26 de marzo): Se ejecutaron correcciones detalladas en la ERS y en los bosquejos de pantalla, asegurando que todos los requisitos funcionales y no funcionales cumplan con los estándares de seguridad y comunicación interna (HTTP y usuarios de dominio).
+Se registra un periodo vacacional del 26 de marzo al 06 de abril de 2026, tras el cual se reanudarán las actividades de desarrollo técnico.
+Resultados (planos, gráficas, prototipos, programas, etc.).
+Los productos detallados a continuación representan los avances tangibles logrados en la fase de análisis y diseño del proyecto SGSPCSI:
+Propuesta de Modelado de Procesos (13 de febrero de 2026): Diagramas de flujo que establecen la lógica de operación, el manejo de solicitudes urgentes y la interacción entre roles dentro del sistema.
+Análisis y Reporte de Calidad CMMI (26 de febrero de 2026): Documento de investigación que integra estándares internacionales de madurez y calidad en los procesos de desarrollo del área.
+Especificación de Requisitos de Software (26 de marzo de 2026): Documento técnico integral que define los requisitos funcionales, no funcionales, interfaces de comunicación e infraestructura necesaria para el desarrollo.
+Prototipos y Bosquejos de Interfaz (26 de marzo de 2026): Diseño visual de escenarios de pantalla, elementos de navegación y formularios de captura que conformarán el Front-end del sistema
+Conclusiones y recomendaciones
+Conclusiones
+Hasta el periodo actual de las residencias profesionales, se ha logrado completar satisfactoriamente la fase de análisis, diagnóstico y diseño lógico del sistema SGSPCSI. Se cuenta con una documentación técnica robusta que define con precisión los alcances funcionales y las restricciones tecnológicas bajo las cuales operará la plataforma en la red institucional del ISSEG. El avance obtenido permite asegurar que el proyecto se encuentra alineado con el cronograma establecido, habiendo superado la curva de aprendizaje de las tecnologías Angular y .NET mediante las actividades de capacitación inicial.
+Se estima que, al finalizar el periodo de residencias, se entregará una plataforma funcional que centralice la gestión de solicitudes, cumpliendo con los estándares de seguridad y trazabilidad requeridos por la Dirección de Tecnologías de Información. El desarrollo permitirá que el instituto transite de un esquema de gestión manual a uno digital, optimizando la toma de decisiones basada en métricas de esfuerzo real.
+Recomendaciones
+Adopción del Sistema: Se recomienda realizar sesiones de sensibilización con los usuarios solicitantes antes de la liberación final, con el objetivo de facilitar la transición hacia el nuevo formulario digital.
+Infraestructura de Red: Se sugiere validar con el área de redes la configuración de los puertos para el protocolo HTTP y la correcta vinculación de los usuarios de dominio antes de iniciar las pruebas integrales.
+Mantenimiento Preventivo: Se recomienda establecer un calendario de respaldos periódicos para la base de datos SQL Server desde el inicio de la puesta en marcha, garantizando la integridad histórica de la información.
+Escalabilidad: Se sugiere mantener la arquitectura modular definida en la documentación para permitir que, en etapas futuras, el sistema pueda integrarse con otros módulos de soporte técnico institucional.
+Referencias bibliográficas
+LIBRO:
+Se incluyen los siguientes datos:
+Apellido Paterno, Nombre del autor (Si son varios autores, solo colocar apellido paterno seguido de la inicial del nombre de cada autor)
+Año de publicación, entre paréntesis.
+Nombre del libro.
+Lugar de publicación
+Formato en que se encuentra el archivo electrónico, encerrado entre corchetes (solo en caso de libro electrónico)
+DOI, si es que cuenta con el (DOI, Digital ObjectIdentifier. Es un dígito permanente comúnmente utilizado para identificar documentos electrónicos)
+La leyenda “Disponible en:” seguida de la liga completa donde se encontró el artículo (solo en el caso de libros electrónicos).
+Ejemplos:
+Jiménez, José A. (2009) Matemáticas para la Computación. México, D.F.
+Pressman, Roger. (2002) Ingeniería de Software, Un enfoque práctico. Madrid, España. [PDF Portable DocumentFormat]. Disponible en: http://www.scribd.com/doc/7978336/Ingenieria-de-Software-Un-Enfoque-Practico-Pressman-5th-Ed.
+ARTÍCULO DE REVISTA IMPRESA:
+Se incluyen los siguientes datos:
+Apellido Paterno, Nombre del autor (Si son varios autores, solo colocar apellido paterno seguido de la inicial del nombre de cada autor.)
+Año de publicación, entre paréntesis.
+Nombre del artículo, como aparece en la publicación.
+Nombre de la revista donde se publicó el artículo.
+Número de la revista (consecutivo según el año)
+Rango de páginas en donde está contenido el artículo.
+Ejemplos:
+Zyda, Michael. (2009) Computer Science in the Conceptual Age. Communications of the ACM, 12, 66 – 72.
+Izadi, S., Hodges, S., Butler, A., West, D., Rrustemi, A., Molloy, M., & Buxton, W. (2009). ThinSight: A Thin Form-Factor Interactive Surface Technology. Communications of the ACM, 12, 90 – 98.
+ARTÍCULO DE REVISTA ELECTRÓNICA:
+Se incluyen los siguientes datos:
+Apellido Paterno, Nombre del autor (Si son varios autores, solo colocar apellido paterno seguido de la inicial del nombre de cada autor.)
+Año de publicación, entre paréntesis.
+Nombre del artículo, como aparece en la publicación.
+Nombre de la revista donde se publicó el artículo.
+Número de la revista (si es que lo hay)
+Rango de páginas en donde está contenido el artículo (si es que la revista o journal incluye varias páginas)
+DOI, si es que cuenta con el (DOI, Digital ObjectIdentifier. Es un dígito permanente comúnmente utilizado para identificar documentos electrónicos)
+La leyenda “Disponible en:” seguida de la liga completa donde se encontró el artículo.
+Ejemplo:
+Pensinger, Doug. (2010) Scientists Decode the Secrets of Olympic Skeleton Sliding. ACM News, Disponible en: http://cacm.acm.org/news/73558-scientists-decode-the-secrets-of-olympic-skeleton-sliding/fulltext.
+PÁGINA WEB:
+Se incluyen los siguientes datos:
+Apellido Paterno, nombre del autor. Si no tiene, se omite ésta información.
+Nombre del artículo, o título de la página web.
+Año de publicación, entre paréntesis. Si no tiene, se coloca entre paréntesis las letras n.d. (no date).
+La leyenda “Fecha de Consulta:” seguida de la fecha exacta en la que se consultó la página web.
+La leyenda “Disponible en:” seguida del link completo en donde se puede consultar la página web.
+Ejemplo:
+El verbo. (n.d) Fecha de Consulta: 18 de Febrero de 2010. Disponible en: http://roble.pntic.mec.es/~msanto1/lengua/verbo.htm
+Hoja de Visto Bueno por parte de los asesores
